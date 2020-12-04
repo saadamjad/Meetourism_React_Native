@@ -1,71 +1,21 @@
 const theme = {
-  primaryColor: '#e65100',
-  secondaryColor: '#f67c01',
-  bgColorWhite: '#FFFFFF',
-  chooseDateBG: '#f7f7f7',
-  headerColor: '#ff9700',
-
-  bordersColor: {
-    borderColor: '#a0a0a0',
-    lightBorder: '#e0e0e0',
-    orangeBorder: '#fd9800',
-    darkOrangeB: '#e65100',
-    lightYellow: '#f5e95b',
-    brownBorder: '#c28656',
+  primaryColor: '#352641',
+  secondaryColor: '#EC2027',
+  primaryColor1: '#8A56AC',
+  textColor: {
+    whiteColor: '#fff',
+    blackColor: '#0F0E0E',
+    lightWhiteColor: '#998FA2',
+    greyColor: '#817889',
   },
-
-  textColors: {
-    black: '#000000',
-    white: '#FFFFFF',
-    placeholder: '#777777',
-    gray: '#bcbcbc',
-    lightGray: '#c8c8c8',
-    darkGray: '#7d7d7d',
-    lightBlack: '#434343',
-    lightYellow: '#f59c27',
-    yellow: '#fa9600',
-    orange: '#ed5b10',
-  },
-
-  drawerColor: {
-    ThemeColor: '#ef6c00',
-    IconColor: '#ff9700',
-    backgroundWhiteColor: '#FFFFFF',
-  },
-
-  globalButtonColor: {
-    background: '#ff9700',
-    textWhite: '#FFFFFF',
-    textOrange: '#e65100',
-    borderOrange: '#e65100',
-  },
-
-  facebookButtonColor: {
-    background: '#3c5399',
-    textColor: '#f9ffff',
-  },
-
-  googleButtonColor: {
-    background: '#FFFFFF',
-    textColor: '#010000',
-  },
-
+  bgColor: '#F1F0F2',
   iconsColor: {
-    yellow: '#fe9601',
-    orange: '#ec6f09',
-    darkOrange: '#e65100',
-    gray: '#8b8b8b',
-    black: '#000000',
-    dark: '#202020',
-    placeholderIcon: '#777777',
-    white: '#FFFFFF',
-  },
+    color1: '#D47FA6',
+    color2: '#78849E',
+    color3: '#26E064',
+    color4: '#171111',
 
-  taskColors: {
-    circleLight: '#ffeb41',
-    circleDark: '#fa990a',
-    profileBG: '#ff9700',
-    makeOfferBG: '#e0e0e0',
+    oolor5: '#757575',
   },
 };
 
@@ -105,5 +55,76 @@ const butttonTheme = {
     },
   },
 };
+
+// const theme = {
+//   primaryColor: '#e65100',
+//   secondaryColor: '#f67c01',
+//   bgColorWhite: '#FFFFFF',
+//   chooseDateBG: '#f7f7f7',
+//   headerColor: '#ff9700',
+
+//   bordersColor: {
+//     borderColor: '#a0a0a0',
+//     lightBorder: '#e0e0e0',
+//     orangeBorder: '#fd9800',
+//     darkOrangeB: '#e65100',
+//     lightYellow: '#f5e95b',
+//     brownBorder: '#c28656',
+//   },
+
+//   textColors: {
+//     black: '#000000',
+//     white: '#FFFFFF',
+//     placeholder: '#777777',
+//     gray: '#bcbcbc',
+//     lightGray: '#c8c8c8',
+//     darkGray: '#7d7d7d',
+//     lightBlack: '#434343',
+//     lightYellow: '#f59c27',
+//     yellow: '#fa9600',
+//     orange: '#ed5b10',
+//   },
+
+//   drawerColor: {
+//     ThemeColor: '#ef6c00',
+//     IconColor: '#ff9700',
+//     backgroundWhiteColor: '#FFFFFF',
+//   },
+
+//   globalButtonColor: {
+//     background: '#ff9700',
+//     textWhite: '#FFFFFF',
+//     textOrange: '#e65100',
+//     borderOrange: '#e65100',
+//   },
+
+//   facebookButtonColor: {
+//     background: '#3c5399',
+//     textColor: '#f9ffff',
+//   },
+
+//   googleButtonColor: {
+//     background: '#FFFFFF',
+//     textColor: '#010000',
+//   },
+
+//   iconsColor: {
+//     yellow: '#fe9601',
+//     orange: '#ec6f09',
+//     darkOrange: '#e65100',
+//     gray: '#8b8b8b',
+//     black: '#000000',
+//     dark: '#202020',
+//     placeholderIcon: '#777777',
+//     white: '#FFFFFF',
+//   },
+
+//   taskColors: {
+//     circleLight: '#ffeb41',
+//     circleDark: '#fa990a',
+//     profileBG: '#ff9700',
+//     makeOfferBG: '#e0e0e0',
+//   },
+// };
 
 export {butttonTheme, theme};
