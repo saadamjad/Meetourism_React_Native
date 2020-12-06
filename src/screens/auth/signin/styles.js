@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 20,
   },
-  fullnametext: {color: theme.textColors.yellow},
+  // fullnametext: {color: theme.textColors.yellow},
   phonetext: {
     color: theme.textColors.lightYellow,
     marginTop: 20,
