@@ -15,46 +15,46 @@ const theme = {
     color3: '#26E064',
     color4: '#171111',
 
-    oolor5: '#757575',
+    color5: '#757575',
   },
 };
 
-const butttonTheme = {
-  background: {
-    buttonStyle: {
-      backgroundColor: theme.globalButtonColor.background,
-      width: 300,
-      height: 48,
-      borderRadius: 17,
-    },
-    titleStyle: {
-      color: theme.globalButtonColor.textWhite,
-      fontSize: 17,
-      fontFamily: 'Roboto-Bold',
-      // fontWeight: 'bold',
-      letterSpacing: 1,
-      lineHeight: 30,
-    },
-  },
-  border: {
-    buttonStyle: {
-      backgroundColor: 'transparent',
-      width: 120,
-      height: 45,
-      borderRadius: 0,
-      borderWidth: 0.5,
-      borderColor: theme.globalButtonColor.borderOrange,
-      borderRadius: 17,
-    },
-    titleStyle: {
-      color: theme.globalButtonColor.textOrange,
-      fontSize: 14,
-      fontWeight: 'bold',
-      letterSpacing: 1,
-      lineHeight: 21.94,
-    },
-  },
-};
+// const butttonTheme = {
+//   background: {
+//     buttonStyle: {
+//       backgroundColor: theme.globalButtonColor.background,
+//       width: 300,
+//       height: 48,
+//       borderRadius: 17,
+//     },
+//     titleStyle: {
+//       color: theme.globalButtonColor.textWhite,
+//       fontSize: 17,
+//       fontFamily: 'Roboto-Bold',
+//       // fontWeight: 'bold',
+//       letterSpacing: 1,
+//       lineHeight: 30,
+//     },
+//   },
+//   border: {
+//     buttonStyle: {
+//       backgroundColor: 'transparent',
+//       width: 120,
+//       height: 45,
+//       borderRadius: 0,
+//       borderWidth: 0.5,
+//       borderColor: theme.globalButtonColor.borderOrange,
+//       borderRadius: 17,
+//     },
+//     titleStyle: {
+//       color: theme.globalButtonColor.textOrange,
+//       fontSize: 14,
+//       fontWeight: 'bold',
+//       letterSpacing: 1,
+//       lineHeight: 21.94,
+//     },
+//   },
+// };
 
 // const theme = {
 //   primaryColor: '#e65100',
@@ -127,4 +127,4 @@ const butttonTheme = {
 //   },
 // };
 
-export {butttonTheme, theme};
+export {theme};
