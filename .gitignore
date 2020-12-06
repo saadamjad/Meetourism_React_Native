@@ -102,3 +102,19 @@ dist
 
 # TernJS port file
 .tern-port
+android/.gradle/6.2/executionHistory/executionHistory.bin
+android/.gradle/6.2/executionHistory/executionHistory.bin
+android/.gradle/6.2/executionHistory/executionHistory.lock
+*.bin
+*.lock
+*.bin
+*.bin
+*.lock
+*.bin
+*.lock
+*.bin
+*.lock
+*.bin
+*.bin
+*.lock
+*.bin
