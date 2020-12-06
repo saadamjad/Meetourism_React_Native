@@ -5,10 +5,12 @@ import 'react-native-gesture-handler';
 // import Toast from 'react-native-toast-message';
 import Tutorial from './src/screens/tutorial';
 import {View} from 'react-native';
+import SignIn from './src/screens/auth/signin';
 const App = (props) => {
   return (
     <View style={{flex: 1}}>
-      <Tutorial />
+      {/* <Tutorial /> */}
+      <SignIn />
     </View>
   );
 };

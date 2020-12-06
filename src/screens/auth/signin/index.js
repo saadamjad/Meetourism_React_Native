@@ -3,259 +3,246 @@ import {
   View,
   ScrollView,
   ImageBackground,
+  Dimensions,
   TouchableOpacity,
   Text,
   TextInput,
 } from 'react-native';
-import PhoneInput from 'react-native-phone-number-input';
 import {theme} from '../../../constants/theme';
-import GlobalButton from '../../../components/buttons/globalbutton';
-import FacebookButton from '../../../components/buttons/facebookbutton';
-import GmailButton from '../../../components/buttons/gmailbutton';
-import Header from '../../../components/header';
-import Toastmessage from '../../../components/toastmessage';
-import styles from './styles';
-let path = '../../../assets/images/bg6.png';
-
-const App = (props) => {
-  function _SignInB() {
-    if (value == '') {
-      Toastmessage('Please Fill Inputs', '', 'info');
-    } else if (value.length >= 1) {
-      props.navigation.navigate('drawer');
-    } else {
-      Toastmessage('You enter wrong details', '', 'error');
-    }
-  }
-
-  const [name, setname] = useState('');
-  function _SignUpB() {
-    // let dbName = 'Samad';
-    if (name == '' || value == '') {
-      Toastmessage('Please Fill Inputs', '', 'info');
-    } else if (name.length >= 1 && value.length >= 1) {
-      props.navigation.navigate('otp');
-    } else {
-      Toastmessage('You enter wrong details', '', 'error');
-    }
-  }
-
-  // ==============PhoneInputs==============
-  const [value, setValue] = useState('');
-  const [formattedValue, setFormattedValue] = useState('');
-  const [valid, setValid] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const [isClicked, setClicked] = useState(false);
-  const [color, setColor] = useState('');
-  const phoneInput = useRef();
-
-  const _CreateAccount = () => {
-    return (
-      <View style={styles.flexView}>
-        {/* ==========name and textinputname========= */}
+// import styles from './styles';
+import CustomView from '../../../components/customView';
+import {TabView, SceneMap} from 'react-native-tab-view';
+const SignIn = () => {
+  const [state, setState] = useState({
+    selectedIndex: 0,
+    activeInput: 3,
+    routes: [
+      {key: 'first', title: 'SignIn'},
+      {key: 'second', title: 'SignUp'},
+    ],
+  });
+  const signInRoute = () => (
+    <View style={{flex: 1}}>
+      <View style={{alignItems: 'center'}}>
+        {[
+          {
+            placeholder: 'Email',
+            isSecure: false,
+            keyboardType: 'email-address',
+          },
+          {placeholder: 'Password', isSecure: true, keyboardType: 'default'},
+        ].map((val, i) => (
+          <View
+            style={{
+              borderBottomColor:
+                state.activeInput == i
+                  ? theme.borderColor.activeBorderColor
+                  : theme.borderColor.inActiveBorderColor,
+              borderBottomWidth: state.activeInput == i ? 2 : 1,
+              width: '80%',
+              height: 40,
+              marginTop: 20,
+            }}>
+            <TextInput
+              style={{width: '100%', height: '100%', fontSize: 16}}
+              placeholder={val.placeholder}
+              onFocus={() => {
+                setState({...state, activeInput: i});
+              }}
+              onBlur={() => {
+                setState({...state, activeInput: 3});
+              }}
+              keyboardType={val.keyboardType}
+              secureTextEntry={val.isSecure}
+            />
+          </View>
+        ))}
+      </View>
+      <View
+        style={{
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          flex: 1,
+          paddingVertical: 40,
+        }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: theme.secondaryColor,
+            width: '80%',
+            height: 50,
+            borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            // backgroundColor: theme.secondaryColor,
+            width: '80%',
+            height: 50,
+            borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text
+            style={{
+              color: theme.textColor.blackColor,
+              fontSize: 12,
+              fontWeight: '500',
+            }}>
+            FORGOT PASSWORD
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+  const signUpRoute = () => (
+    <>
+      <View style={{alignItems: 'center'}}>
         <View
           style={{
-            ...styles.nameview,
-            borderColor: color
-              ? theme.bordersColor.darkOrangeB
-              : theme.bordersColor.borderColor,
+            backgroundColor: 'white',
+            width: '90%',
+            alignItems: 'center',
+            borderRadius: 40,
+            paddingVertical: 40,
           }}>
-          <Text style={styles.fullnametext}>Full Name</Text>
-          <TextInput
-            placeholder={'Abdul Samad'}
-            onChangeText={(nameText) => {
-              setname(nameText);
-            }}
-            onFocus={() => setColor(true)}
-            onBlur={() => setColor(false)}
-          />
-        </View>
-        <Text style={styles.phonetext}>Phone Number</Text>
-        {/* =========Number Input========= */}
-        <View style={styles.numberinputView}>
-          {showMessage && (
-            <View>
-              <Text>Value : {value}</Text>
-              <Text>Formatted Value : {formattedValue}</Text>
-              <Text>Valid : {valid ? 'true' : 'false'}</Text>
+          {[
+            {
+              placeholder: 'Name',
+              isSecure: false,
+              keyboardType: 'default',
+            },
+            {
+              placeholder: 'Email',
+              isSecure: false,
+              keyboardType: 'email-address',
+            },
+            {placeholder: 'Password', isSecure: true, keyboardType: 'default'},
+          ].map((val, i) => (
+            <View
+              style={{
+                borderBottomColor:
+                  state.activeInput == i
+                    ? theme.borderColor.activeBorderColor
+                    : theme.borderColor.inActiveBorderColor,
+                borderBottomWidth: state.activeInput == i ? 2 : 1,
+                width: '80%',
+                height: 40,
+                marginTop: i !== 0 && 20,
+              }}>
+              <TextInput
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  fontSize: 16,
+                }}
+                placeholder={val.placeholder}
+                onFocus={() => {
+                  setState({...state, activeInput: i});
+                }}
+                onBlur={() => {
+                  setState({...state, activeInput: 3});
+                }}
+                keyboardType={val.keyboardType}
+                secureTextEntry={val.isSecure}
+              />
             </View>
-          )}
-          <PhoneInput
-            defaultCode="PK"
-            onChangeText={(text) => {
-              setValue(text);
-            }}
-            value={value}
-            containerStyle={styles.containerstyle}
-            // textInputStyle={{}}
-            placeholder="Enter the Number"
-            textContainerStyle={{
-              ...styles.textcontainerstyle,
-              borderColor: color
-                ? theme.bordersColor.darkOrangeB
-                : theme.bordersColor.borderColor,
-            }}
-            codeTextStyle={styles.codetextstyle}
-          />
+          ))}
         </View>
-
-        {/* ==============Global Button============= */}
-
-        <View style={styles.globalbtview}>
-          <GlobalButton
-            title={'Sign Up'}
-            titleStyle={{fontSize: 13}}
-            onPress={() => _SignUpB()}
-          />
+        <View style={{flexDirection: 'row', marginTop: 20}}>
+          {[0, 1, 2].map((val, ind) => (
+            <View
+              style={{
+                height: 45,
+                width: 45,
+                borderRadius: 15,
+                borderWidth: 1,
+                borderColor: theme.secondaryColor,
+              }}></View>
+          ))}
         </View>
       </View>
-    );
-  };
-
-  // ================ Const SignIn =================
-  const _SignIn = () => {
-    return (
-      <View style={styles.viewcenter}>
-        <Text style={styles.signinphonetext}>Phone Number</Text>
-
-        {/* =========Number Input========= */}
-
-        <View style={styles.signinnumberinputView}>
-          {/* {showMessage && (
-            <View style={{}}>
-              <Text>Value : {value}</Text>
-              <Text>Formatted Value : {formattedValue}</Text>
-              <Text>Valid : {valid ? 'true' : 'false'}</Text>
-            </View>
-          )} */}
-          <PhoneInput
-            ref={phoneInput}
-            defaultValue={value}
-            defaultCode="DM"
-            onChangeText={(text) => {
-              setValue(text);
-            }}
-            onChangeFormattedText={(text) => {
-              setFormattedValue(text);
-            }}
-            withDarkTheme={false}
-            // withShadow
-            // autoFocus
-            containerStyle={styles.signincontainerstyle}
-            textContainerStyle={styles.signintextcontainer}
-            codeTextStyle={styles.signincodetext}></PhoneInput>
-        </View>
-        {/* ==============Global Button============= */}
-
-        <View style={styles.sigininbtview}>
-          <GlobalButton
-            title={'Sign In'}
-            titleStyle={{fontSize: 13}}
-            onPress={() => _SignInB()}
-          />
-
-          <Text style={styles.Ortext}>or</Text>
-
-          {/* ==========Social Buttons========== */}
-
-          <View style={styles.socialbtmainview}>
-            <GmailButton />
-            <FacebookButton />
-          </View>
-        </View>
-
-        {/* ==========Forgot Password========== */}
-
-        <View style={styles.forgotmainview}>
-          <Text style={styles.forgottext}>Forgot Password ?</Text>
-        </View>
+      <View
+        style={{
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          flex: 1,
+          // height: '50%',
+          paddingVertical: 40,
+        }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: theme.secondaryColor,
+            width: '80%',
+            height: 50,
+            borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+        </TouchableOpacity>
       </View>
-    );
-  };
-  // =======main=====
+    </>
+  );
+
+  const renderScene = SceneMap({
+    first: signInRoute,
+    second: signUpRoute,
+  });
   return (
-    <ImageBackground
-      source={require(path)}
-      style={styles.mainimgbdview}
-      resizeMode={'cover'}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <Header
-          text={true}
-          isTransparent={true}
-          //  isVisibleIcon={true}
-          // drawerIcon={true}
-        />
-        {/* ======signin and signup touch==== */}
-        <View style={styles.tapmainview}>
-          <View style={styles.taprowview}>
-            {/* =======tap Sign In===== */}
-            <TouchableOpacity
-              onPress={() => setClicked(true)}
-              style={{
-                ...styles.tapsigintouch,
-                borderColor: isClicked
-                  ? theme.bordersColor.orangeBorder
-                  : 'transparent',
-              }}>
-              <Text
+    <CustomView withBg={state.selectedIndex == 1} bg={theme.bgColor} scroll>
+      <TabView
+        navigationState={{index: state.selectedIndex, routes: state.routes}}
+        renderScene={renderScene}
+        renderTabBar={(props) => (
+          <View
+            style={{
+              width: '100%',
+              height: 150,
+              // backgroundColor: 'white',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            {['SIGN IN', 'SIGN UP'].map((val, i) => (
+              <TouchableOpacity
+                onPress={() => setState({...state, selectedIndex: i})}
                 style={{
-                  ...styles.tapsigintext,
-                  color: isClicked
-                    ? theme.textColors.lightBlack
-                    : theme.textColors.lightGray,
+                  backgroundColor:
+                    state.selectedIndex == i
+                      ? theme.secondaryColor
+                      : 'transparent',
+                  width: 90,
+                  marginLeft: i == 1 && 20,
+                  height: 33,
+                  borderRadius: 30,
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}>
-                Sign In
-              </Text>
-              <Text
-                style={{
-                  ...styles.sigintoaccounttext,
-                  color: isClicked
-                    ? theme.textColors.lightBlack
-                    : theme.textColors.lightGray,
-                }}>
-                To Account
-              </Text>
-            </TouchableOpacity>
-
-            {/* ==== tapSignUp==== */}
-
-            <TouchableOpacity
-              onPress={() => {
-                setClicked(false);
-                _CreateAccount(true);
-              }}
-              style={{
-                ...styles.tapsignuptouch,
-                borderColor: isClicked
-                  ? 'transparent'
-                  : theme.bordersColor.orangeBorder,
-              }}>
-              <Text
-                style={{
-                  ...styles.tapsignuptext,
-                  color: isClicked
-                    ? theme.textColors.lightGray
-                    : theme.textColors.lightBlack,
-                }}>
-                Sign Up
-              </Text>
-              <Text
-                style={{
-                  ...styles.signupcreateacc,
-                  color: isClicked
-                    ? theme.textColors.lightGray
-                    : theme.textColors.lightBlack,
-                }}>
-                Create Account
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    color:
+                      state.selectedIndex == i
+                        ? theme.textColor.whiteColor
+                        : theme.textColor.greyColor,
+                    fontSize: 12,
+                  }}>
+                  {val}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
-
-          {isClicked ? _SignIn() : _CreateAccount()}
-        </View>
-      </ScrollView>
-    </ImageBackground>
+        )}
+        onIndexChange={(ind) => {
+          setState({...state, selectedIndex: ind});
+        }}
+        initialLayout={{
+          width: Dimensions.get('window').width,
+        }}
+      />
+    </CustomView>
   );
 };
-
-export default App;
+export default SignIn;

@@ -17,6 +17,10 @@ const theme = {
 
     color5: '#757575',
   },
+  borderColor: {
+    activeBorderColor: '#352641',
+    inActiveBorderColor: '#DDDDDD',
+  },
 };
 
 // const butttonTheme = {
