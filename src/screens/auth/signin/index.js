@@ -130,7 +130,7 @@ const SignIn = () => {
                 borderBottomWidth: state.activeInput == i ? 2 : 1,
                 width: '80%',
                 height: 40,
-                marginTop: i !== 0 && 20,
+                // marginTop: i !== 0 && 20,
               }}>
               <TextInput
                 style={{
@@ -215,7 +215,7 @@ const SignIn = () => {
                       ? theme.secondaryColor
                       : 'transparent',
                   width: 90,
-                  marginLeft: i == 1 && 20,
+                  // marginLeft: i == 1 && 20,
                   height: 33,
                   borderRadius: 30,
                   alignItems: 'center',

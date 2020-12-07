@@ -1,0 +1,6 @@
+module Pods_Meetourism_MeetourismTests {
+  umbrella header "Pods-Meetourism-MeetourismTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
