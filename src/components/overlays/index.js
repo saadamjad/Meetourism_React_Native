@@ -19,9 +19,11 @@ const App = (props) => {
       <Button title="Open Overlay" onPress={toggleOverlay} />
 
       <Overlay
-        isVisible={props.visible}
-        onBackdropPress={props.onBackdropPress}>
-        <Text>Hello from Overlay!</Text>
+      // isVisible={props.visible}
+      // onBackdropPress={props.onBackdropPress}
+      >
+        {props.children}
+        {/* <Text>Hello from Overlay!</Text> */}
       </Overlay>
     </View>
   );
