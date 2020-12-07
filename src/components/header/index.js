@@ -3,8 +3,27 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {theme} from '../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const App = ({isTransparent, text, isVisibleIcon, drawerIcon, navigation}) => {
+// allPRops
+//   // textAlign={'flex-end'}
+//   leftArrow={true}
+//   text="sss"
+//   navigation={props.navigation}
+//   searchIcon={true}
+const App = (
+  {
+    isTransparent,
+    text,
+    textAlign,
+    leftArrow,
+    drawerIcon,
+    searchIcon,
+    navigation,
+    textColor,
+  },
+  props,
+) => {
   return (
     <View
       style={{
@@ -12,49 +31,54 @@ const App = ({isTransparent, text, isVisibleIcon, drawerIcon, navigation}) => {
         alignItems: 'center',
         width: '100%',
         flexDirection: 'row',
-        elevation: 5,
-        backgroundColor: isTransparent ? 'transparent' : theme.headerColor,
+        elevation: 0,
+        backgroundColor: isTransparent ? 'transparent' : 'white',
       }}>
-      {isVisibleIcon && (
+      {leftArrow && (
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={{
             width: '15%',
-            padding: 5,
+            // padding: 5,
+            // borderWidth: 1,
             alignItems: 'center',
             justifyContent: 'center',
             // backgroundColor: 'pink'
           }}>
-          <AntDesign
-            name="arrowleft"
-            size={20}
-            color={theme.iconsColor.white}
-          />
+          <Ionicons name="arrow-back" size={20} color={'#757575'} />
         </TouchableOpacity>
       )}
-      {drawerIcon && (
-        <TouchableOpacity
-          onPress={() => navigation.openDrawer()}
-          style={{
-            width: '15%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <FontAwesome name="bars" size={17} color={theme.iconsColor.white} />
-        </TouchableOpacity>
-      )}
-      <View style={{flex: 1}}>
+
+      <View
+        style={{
+          flex: 1,
+          // borderWidth: 1,
+
+          alignItems: textAlign ? textAlign : 'center',
+        }}>
         {text && (
           <Text
             style={{
               fontWeight: 'bold',
               fontSize: 20,
               letterSpacing: 0.5,
-              color: theme.textColors.white,
+
+              color: textColor ? textColor : '#ED1C24',
             }}>
             {text}
           </Text>
         )}
+      </View>
+      <View
+        style={{
+          width: '15%',
+          // borderWidth: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity>
+          {searchIcon && <Ionicons name="search" size={20} color={'#241332'} />}
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,9 +1,10 @@
 import React, {Component, useState, useEffect} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
-import {Icon} from 'native-base';
+// import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
+import Header from '../../components/header/longheader'
 
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
@@ -16,18 +17,20 @@ const Tutorial = (props) => {
         width: '100%',
         justifyContent: 'center',
       }}>
+     
       <View style={{width: '100%', height: 210, alignItems: 'flex-end'}}>
         <View
           style={{
             width: '80%',
+            borderWidth:1,
             backgroundColor: theme.primaryColor,
             // paddingVertical: 50,
             height: 180,
             justifyContent: 'center',
-            alignItems: 'center',
+            // alignItems: 'center',
             borderBottomLeftRadius: 100,
           }}>
-          <Text style={{color: 'white', fontSize: 34, fontWeight: '800'}}>
+          <Text style={{color: 'white', fontSize: 34, fontWeight: '800',textAlign:'center'}}>
             Welcome to Meetourism
           </Text>
         </View>
@@ -53,7 +56,9 @@ const Tutorial = (props) => {
         </TouchableOpacity>
       </View>
     </View>
-  );
+ 
+ 
+ );
   const secondSlide = () => (
     <View
       style={{
