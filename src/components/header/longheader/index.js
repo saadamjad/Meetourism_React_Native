@@ -30,20 +30,18 @@ const App = (props) => {
           width: '100%',
           flexDirection: 'row',
           elevation: 0,
-          backgroundColor: 'white',
+          backgroundColor: 'red',
         }}>
         {props.leftArrow && (
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={{
               width: '16%',
-              //   borderWidth: 1,
-              //   alignItems: 'center',
-              //   marginLeft: 15,
+
               paddingLeft: 20,
               justifyContent: 'center',
             }}>
-            <Ionicons name="arrow-back" size={20} color={'#757575'} />
+            <Ionicons name="arrow-back" size={20} color={'black'} />
           </TouchableOpacity>
         )}
         {props.drawerIcon && (
