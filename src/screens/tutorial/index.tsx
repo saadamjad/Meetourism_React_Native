@@ -4,7 +4,7 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
-import Header from '../../components/header/longheader'
+import Header from '../../components/header/longheader';
 
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
@@ -13,16 +13,15 @@ const Tutorial = (props) => {
     <View
       style={{
         height: '50%',
-        // backgroundColor: 'black',
+        // backgroundColor: 'black',  
         width: '100%',
         justifyContent: 'center',
       }}>
-     
       <View style={{width: '100%', height: 210, alignItems: 'flex-end'}}>
         <View
           style={{
             width: '80%',
-            borderWidth:1,
+            borderWidth: 1,
             backgroundColor: theme.primaryColor,
             // paddingVertical: 50,
             height: 180,
@@ -30,7 +29,13 @@ const Tutorial = (props) => {
             // alignItems: 'center',
             borderBottomLeftRadius: 100,
           }}>
-          <Text style={{color: 'white', fontSize: 34, fontWeight: '800',textAlign:'center'}}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 34,
+              fontWeight: '800',
+              textAlign: 'center',
+            }}>
             Welcome to Meetourism
           </Text>
         </View>
@@ -56,9 +61,7 @@ const Tutorial = (props) => {
         </TouchableOpacity>
       </View>
     </View>
- 
- 
- );
+  );
   const secondSlide = () => (
     <View
       style={{
@@ -74,7 +77,7 @@ const Tutorial = (props) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor: theme.secondaryColor,
             width: 160,
@@ -82,11 +85,12 @@ const Tutorial = (props) => {
             alignItems: 'center',
             height: 45,
             borderRadius: 30,
-          }}>
+          }}
+          onPress={() => props.navigation.navigate('signin')}>
           <Text style={{color: theme.textColor.whiteColor, fontSize: 20}}>
             Avail Offer
           </Text>
-        </View>
+        </TouchableOpacity>
         <View
           style={{
             width: 140,
@@ -103,7 +107,12 @@ const Tutorial = (props) => {
   );
 
   return (
-    <CustomView>
+    <CustomView
+      image={
+        state.selectedIndex == 0
+          ? require('../../assets/images/background.png')
+          : require('../../assets/images/burgerBackground.png')
+      }>
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <View
           style={{
