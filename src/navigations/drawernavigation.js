@@ -13,11 +13,14 @@ function MyDrawer(props) {
     <Drawer.Navigator
       drawerType="slide"
       // initialRouteName="Home"
-      drawerStyle={{backgroundColor: '#ef6c00'}}
-      // drawerContent={(props) => <DrawerContent {...props} />}
-    >
+      drawerStyle={{
+        backgroundColor: '#241332',
+        width: '100%',
+        justifyContent: 'center',
+      }}
+      drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
-        options={{headerShown: false}}
+        options={{headerShown: false, drawerLabel: false}}
         name="setting"
         component={Bottomtab}
       />

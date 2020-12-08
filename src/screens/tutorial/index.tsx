@@ -21,7 +21,7 @@ const Tutorial = (props) => {
         <View
           style={{
             width: '80%',
-            borderWidth: 1,
+            // borderWidth: 1,
             backgroundColor: theme.primaryColor,
             // paddingVertical: 50,
             height: 180,

@@ -24,6 +24,9 @@ import Setting from '../screens/setting';
 import Dashboard from '../screens/dashboard';
 import Chat from '../screens/chat/allmessages';
 import Alloffers from '../screens/alloffers';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,13 +35,60 @@ function MyDrawer(props) {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#e91e63',
-        // showLabel: false,
+        showLabel: false,
       }}>
-      <Tab.Screen name="setting" component={Setting} />
-      <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="Chat" component={Chat} />
-      <Tab.Screen name="Alloffers" component={Alloffers} />
-      {/* <Tab.Screen name="dashboard" component={dashboard} /> */}
+      <Tab.Screen
+        name="setting"
+        component={Setting}
+        options={{
+          // headerShown: false,
+          tabBarLabel: 'Find Plans',
+          tabBarIcon: ({color, size}) => (
+            <MaterialIcons name="local-offer" size={20} color={'#2E2323'} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          // headerShown: false,
+          tabBarLabel: 'Find Plans',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="account-multiple"
+              size={20}
+              color={'#2E2323'}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          // headerShown: false,
+          tabBarLabel: 'Find Plans',
+          tabBarIcon: ({color, size}) => (
+            <Entypo name="chat" size={20} color={'#2E2323'} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Alloffers"
+        component={Alloffers}
+        options={{
+          // headerShown: false,
+          tabBarLabel: 'Find Plans',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="account"
+              size={20}
+              color={'#2E2323'}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
