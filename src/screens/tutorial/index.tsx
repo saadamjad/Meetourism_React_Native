@@ -4,28 +4,24 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
-import Header from '../../components/header/longheader'
-import { TextInput } from 'react-native-gesture-handler';
+import Header from '../../components/header/longheader';
 
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
 
   const firstSlide = () => (
-
-
     <View
       style={{
         height: '50%',
-        // backgroundColor: 'black',
+        // backgroundColor: 'black',  
         width: '100%',
         justifyContent: 'center',
       }}>
-     
       <View style={{width: '100%', height: 210, alignItems: 'flex-end'}}>
         <View
           style={{
             width: '80%',
-            borderWidth:1,
+            borderWidth: 1,
             backgroundColor: theme.primaryColor,
             // paddingVertical: 50,
             height: 180,
@@ -33,16 +29,19 @@ const Tutorial = (props) => {
             // alignItems: 'center',
             borderBottomLeftRadius: 100,
           }}>
-          <Text style={{color: 'white', fontSize: 34, fontWeight: '800',textAlign:'center'}}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 34,
+              fontWeight: '800',
+              textAlign: 'center',
+            }}>
             Welcome to Meetourism
           </Text>
         </View>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => 
-            setState({...state, selectedIndex: 1})
-        
-        }
+          onPress={() => setState({...state, selectedIndex: 1})}
           style={{
             backgroundColor: theme.secondaryColor,
             width: '45%',
@@ -62,9 +61,7 @@ const Tutorial = (props) => {
         </TouchableOpacity>
       </View>
     </View>
- 
- 
- );
+  );
   const secondSlide = () => (
     <View
       style={{
@@ -89,11 +86,7 @@ const Tutorial = (props) => {
             height: 45,
             borderRadius: 30,
           }}
-        onPress={()=>
-          props.navigation.navigate('signin')
-
-        }
-          >
+          onPress={() => props.navigation.navigate('signin')}>
           <Text style={{color: theme.textColor.whiteColor, fontSize: 20}}>
             Avail Offer
           </Text>
@@ -114,7 +107,12 @@ const Tutorial = (props) => {
   );
 
   return (
-    <CustomView>
+    <CustomView
+      image={
+        state.selectedIndex == 0
+          ? require('../../assets/images/background.png')
+          : require('../../assets/images/burgerBackground.png')
+      }>
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <View
           style={{
