@@ -29,7 +29,11 @@ const Tab = createBottomTabNavigator();
 
 function MyDrawer(props) {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#e91e63',
+        // showLabel: false,
+      }}>
       <Tab.Screen name="setting" component={Setting} />
       <Tab.Screen name="Dashboard" component={Dashboard} />
       <Tab.Screen name="Chat" component={Chat} />
