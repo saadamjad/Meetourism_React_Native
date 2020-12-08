@@ -5,11 +5,14 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import Header from '../../components/header/longheader'
+import { TextInput } from 'react-native-gesture-handler';
 
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
 
   const firstSlide = () => (
+
+
     <View
       style={{
         height: '50%',

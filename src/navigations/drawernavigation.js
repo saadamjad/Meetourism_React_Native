@@ -20,6 +20,21 @@ function MyDrawer(props) {
         name="Home"
         component={DrawerContent}
       />
+      {/* <Drawer.Screen
+        options={{headerShown: false}}
+        name="Home"
+        component={DrawerContent}
+      />
+      <Drawer.Screen
+        options={{headerShown: false}}
+        name="Home"
+        component={DrawerContent}
+      />
+      <Drawer.Screen
+        options={{headerShown: false}}
+        name="Home"
+        component={DrawerContent}
+      /> */}
     </Drawer.Navigator>
   );
 }
