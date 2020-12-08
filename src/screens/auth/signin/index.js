@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  Image,
 } from 'react-native';
 import {theme} from '../../../constants/theme';
 // import styles from './styles';
@@ -131,6 +132,7 @@ const SignIn = (props) => {
                 borderBottomWidth: state.activeInput == i ? 2 : 1,
                 width: '80%',
                 height: 40,
+                marginTop: i !== 0 && 40,
                 // marginTop: i !== 0 && 20,
               }}>
               <TextInput
@@ -138,6 +140,7 @@ const SignIn = (props) => {
                   width: '100%',
                   height: '100%',
                   fontSize: 16,
+                  // marginTop
                 }}
                 placeholder={val.placeholder}
                 onFocus={() => {
@@ -153,16 +156,21 @@ const SignIn = (props) => {
           ))}
         </View>
         <View style={{flexDirection: 'row', marginTop: 20}}>
-          {[0, 1, 2].map((val, ind) => (
-            <View
+          {[
+            require('../../../assets/images/gmail.png'),
+            require('../../../assets/images/instagram.png'),
+            require('../../../assets/images/facebook.png'),
+          ].map((val, ind) => (
+            <Image resizeMode="contain" source={val} />
+          ))}
+          {/* <View
               style={{
                 height: 45,
                 width: 45,
                 borderRadius: 15,
                 borderWidth: 1,
                 borderColor: theme.secondaryColor,
-              }}></View>
-          ))}
+              }}></View> */}
         </View>
       </View>
       <View
