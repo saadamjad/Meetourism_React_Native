@@ -36,7 +36,10 @@ const Tutorial = (props) => {
         </View>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => setState({...state, selectedIndex: 1})}
+          onPress={() => 
+            setState({...state, selectedIndex: 1})
+        
+        }
           style={{
             backgroundColor: theme.secondaryColor,
             width: '45%',
@@ -74,7 +77,7 @@ const Tutorial = (props) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor: theme.secondaryColor,
             width: 160,
@@ -82,11 +85,16 @@ const Tutorial = (props) => {
             alignItems: 'center',
             height: 45,
             borderRadius: 30,
-          }}>
+          }}
+        onPress={()=>
+          props.navigation.navigate('signin')
+
+        }
+          >
           <Text style={{color: theme.textColor.whiteColor, fontSize: 20}}>
             Avail Offer
           </Text>
-        </View>
+        </TouchableOpacity>
         <View
           style={{
             width: 140,
