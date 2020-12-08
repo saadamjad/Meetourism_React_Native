@@ -1,16 +1,15 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import Longheader from '../../../components/header/longheader';
 
 const App = (props) => {
   return (
     <View
       style={{
-        height: 100,
-        width: '100%',
-        borderWidth: 1,
-        backgroundColor: 'blue',
+        flex: 1,
+        backgroundColor: '#241332',
       }}>
-      <Text> home 2 </Text>
+      <Longheader leftArrow={true} searchIcon={true} headerText="Profile" />
     </View>
   );
 };
