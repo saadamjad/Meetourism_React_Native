@@ -8,6 +8,7 @@ import signin from '../screens/auth/signin';
 // import splash from '../screens/tutorial'
 import drawer from '../navigations/drawernavigation';
 import splash from '../screens/tutorial';
+import bottomtab from '../navigations/bottomtab';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -49,15 +50,16 @@ function App() {
           component={Auth}
           options={{headerShown: false}}
         />
-        {/* <Stack.Screen
-          name="Homes"
-          component={Homes}
-          options={{headerShown: false}}
-        /> */}
+
         <Stack.Screen
           name="drawer"
           component={drawer}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="bottomtab"
+          component={bottomtab}
+          // options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
