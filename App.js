@@ -11,8 +11,8 @@ const App = (props) => {
     <>
       {/* <BGcustom /> */}
       {/* <SignIn /> */}
-      {/* <Stack navigation={props.navigation} /> */}
-      <Messages />
+      <Stack navigation={props.navigation} />
+      {/* <Messages /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
