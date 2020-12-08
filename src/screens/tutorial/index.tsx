@@ -13,7 +13,7 @@ const Tutorial = (props) => {
     <View
       style={{
         height: '50%',
-        // backgroundColor: 'black',
+        // backgroundColor: 'black',  
         width: '100%',
         justifyContent: 'center',
       }}>
