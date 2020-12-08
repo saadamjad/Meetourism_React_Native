@@ -5,14 +5,14 @@ import Stack from './src/navigations/stacknavigation';
 import Toast from 'react-native-toast-message';
 import Tutorial from './src/screens/tutorial';
 import SignIn from './src/screens/auth/signin';
-import Status from './src/screens/home/status';
+import Status from './src/screens/home/status/index';
 const App = (props) => {
   return (
     <>
       {/* <BGcustom /> */}
       {/* <SignIn /> */}
-      {/* <Stack navigation={props.navigation} /> */}
-      <Status />
+      <Stack navigation={props.navigation} />
+      {/* <Status /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );

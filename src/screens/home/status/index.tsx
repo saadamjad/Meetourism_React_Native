@@ -28,12 +28,13 @@ const Status = (props) => {
           <Image
             resizeMode="contain"
             source={require('../../../assets/images/logo.png')}
+            style={{height:150,width:150}}
+          
           />
         </View>
         <View
           style={{
             height: '50%',
-            // backgroundColor: 'white',
             width: '100%',
           }}>
           <TouchableOpacity
@@ -41,21 +42,23 @@ const Status = (props) => {
             style={{
               height: 150,
               backgroundColor: 'white',
-              elevation: 5,
+              // elevation: 5,
               borderTopLeftRadius: 100,
-              borderBottomLeftRadius: 100,
+              // borderBottomLeftRadius: 100,
               justifyContent: 'space-around',
               alignItems: 'center',
               borderBottomColor: 'lightgrey',
               borderLeftColor: 'lightgrey',
-              borderWidth: 1,
+              // borderWidth: 1,
               borderColor: 'transparent',
               zIndex: 3,
-            }}>
+            }}
+            onPress={()=>props.navigation.navigate('drawer')}
+            >
             <Text
               style={{
                 color: theme.secondaryColor,
-                fontSize: 22,
+                fontSize: 24,
                 fontWeight: '700',
               }}>
               Your Current Status?
@@ -79,14 +82,14 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={1}
             style={{
-              height: 170,
+              height: 150,
               backgroundColor: 'white',
-              elevation: 2,
+              // elevation: 2,
               //   borderTopLeftRadius: 100,
-              borderBottomLeftRadius: 100,
+              // borderBottomLeftRadius: 100,
               borderBottomColor: 'lightgrey',
               borderLeftColor: 'lightgrey',
-              borderWidth: 1,
+              // borderWidth: 1,
               borderColor: 'transparent',
               justifyContent: 'space-around',
               alignItems: 'center',
@@ -123,14 +126,14 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={1}
             style={{
-              height: 170,
+              height: 150,
               backgroundColor: 'white',
-              elevation: 2,
+              // elevation: 2,
               //   borderTopLeftRadius: 100,
-              borderBottomLeftRadius: 100,
+              // borderBottomLeftRadius: 100,
               borderBottomColor: 'lightgrey',
               borderLeftColor: 'lightgrey',
-              borderWidth: 1,
+              // borderWidth: 1,
               borderColor: 'transparent',
               justifyContent: 'space-around',
               alignItems: 'center',

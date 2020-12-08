@@ -75,7 +75,8 @@ const SignIn = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          onPress={() => props.navigation.navigate('drawer')}>
+          // onPress={() => props.navigation.navigate('drawer')}
+          onPress={() => props.navigation.navigate('Status')}>
           <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -132,7 +133,7 @@ const SignIn = (props) => {
                 borderBottomWidth: state.activeInput == i ? 2 : 1,
                 width: '80%',
                 height: 40,
-                marginTop: i !== 0 && 40,
+                marginTop: i !== 0 ? 40 : 0,
                 // marginTop: i !== 0 && 20,
               }}>
               <TextInput

@@ -22,7 +22,7 @@ const App = (props) => {
         height: 120,
         backgroundColor: props.backgroundColor
           ? props.backgroundColor
-          : 'purple',
+          : '#241332',
       }}>
       <View
         style={{
@@ -30,7 +30,7 @@ const App = (props) => {
           width: '100%',
           flexDirection: 'row',
           elevation: 0,
-          // backgroundColor: 'red',
+          backgroundColor: 'white',
         }}>
         {props.leftArrow && (
           <TouchableOpacity

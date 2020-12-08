@@ -24,21 +24,6 @@ function MyDrawer(props) {
         name="setting"
         component={Bottomtab}
       />
-      {/* <Drawer.Screen
-        options={{headerShown: false}}
-        name="Home"
-        component={DrawerContent}
-      />
-      <Drawer.Screen
-        options={{headerShown: false}}
-        name="Home"
-        component={DrawerContent}
-      />
-      <Drawer.Screen
-        options={{headerShown: false}}
-        name="Home"
-        component={DrawerContent}
-      /> */}
     </Drawer.Navigator>
   );
 }

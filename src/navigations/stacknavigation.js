@@ -9,6 +9,8 @@ import signin from '../screens/auth/signin';
 import drawer from '../navigations/drawernavigation';
 import splash from '../screens/tutorial';
 import bottomtab from '../navigations/bottomtab';
+import selectstatus from '../screens/home/status';
+import allchats from '../screens/chat/allmessages';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -29,17 +31,28 @@ function Auth() {
   );
 }
 
-// export function Homes() {
-//   return (
-//     <Stack.Navigator initialRouteName={'home'}>
-//       <Stack.Screen
-//         name="home"
-//         component={home}
-//         options={{headerShown: false}}
-//       />
-//     </Stack.Navigator>
-//   );
-// }
+export function Status() {
+  return (
+    <Stack.Navigator initialRouteName={'selectstatus'}>
+      <Stack.Screen
+        name="selectstatus"
+        component={selectstatus}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+export function Chat() {
+  return (
+    <Stack.Navigator initialRouteName={'selectstatus'}>
+      <Stack.Screen
+        name="allchats"
+        component={allchats}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   return (
@@ -59,7 +72,12 @@ function App() {
         <Stack.Screen
           name="bottomtab"
           component={bottomtab}
-          // options={{headerShown: false}}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Status"
+          component={Status}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
