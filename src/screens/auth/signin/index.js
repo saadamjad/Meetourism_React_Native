@@ -144,7 +144,7 @@ const SignIn = (props) => {
                   setState({...state, activeInput: i});
                 }}
                 onBlur={() => {
-                  setState({...state, activeInput: 3});
+                  setState({...state, activeInput: 4});
                 }}
                 keyboardType={val.keyboardType}
                 secureTextEntry={val.isSecure}
