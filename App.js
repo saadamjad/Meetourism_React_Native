@@ -1,6 +1,6 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-// import Stack from './src/navigations/stacknavigation';
+import Stack from './src/navigations/stacknavigation';
 // import BGcustom from './src/components/bgcustom';
 import Toast from 'react-native-toast-message';
 import Tutorial from './src/screens/tutorial';
@@ -9,8 +9,8 @@ const App = (props) => {
   return (
     <>
       {/* <BGcustom /> */}
-      <SignIn />
-      {/* <Stack navigation={props.navigation} /> */}
+      {/* <SignIn /> */}
+      <Stack navigation={props.navigation} />
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );

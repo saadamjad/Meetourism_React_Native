@@ -2,6 +2,8 @@ import React from 'react';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 // import home from '../screens/homes/home';
 import {Homes} from './stacknavigation';
+import DrawerContent from '../screens/customdrawer';
+// import DrawerContent from '../screens/';
 
 console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -11,11 +13,12 @@ function MyDrawer(props) {
     <Drawer.Navigator
       drawerType="slide"
       // initialRouteName="Home"
-      drawerStyle={{backgroundColor: '#ef6c00'}}>
+      drawerStyle={{backgroundColor: '#ef6c00'}}
+      drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
         options={{headerShown: false}}
         name="Home"
-        component={Homes}
+        component={DrawerContent}
       />
     </Drawer.Navigator>
   );
