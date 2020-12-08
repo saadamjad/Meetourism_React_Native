@@ -1,11 +1,12 @@
 import React from 'react';
-import {ScrollView, View, Text} from 'react-native';
+import {ScrollView, View, Text, ImageBackground} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {theme} from '../../constants/theme';
 
 const CustomView = (props) => {
   return (
-    <View
+    <ImageBackground
+      source={props.image ? props.image : ''}
       style={{
         flex: 1,
         backgroundColor: props.bg ? props.bg : 'orange',
@@ -54,7 +55,7 @@ const CustomView = (props) => {
           props.children
         )}
       </SafeAreaView>
-    </View>
+    </ImageBackground>
   );
 };
 export default CustomView;
