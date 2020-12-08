@@ -13,7 +13,7 @@ const Tutorial = (props) => {
     <View
       style={{
         height: '50%',
-        // backgroundColor: 'black',  
+        // backgroundColor: 'black',
         width: '100%',
         justifyContent: 'center',
       }}>
@@ -114,33 +114,49 @@ const Tutorial = (props) => {
           : require('../../assets/images/burgerBackground.png')
       }>
       <View style={{flex: 1, justifyContent: 'space-between'}}>
-        <View
-          style={{
-            height: 40,
-            width: '45%',
-            alignSelf: 'flex-end',
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingRight: 10,
-            justifyContent: 'space-between',
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            {[0, 1].map((val, i) => (
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 50,
-                  marginHorizontal: 2,
-                  backgroundColor:
-                    i == state.selectedIndex
-                      ? theme.textColor.whiteColor
-                      : theme.textColor.greyColor,
-                  opacity: i == state.selectedIndex ? 1 : 0.5,
-                }}></View>
-            ))}
+        <View style={{height: '50%', width: '100%', flexDirection: 'column'}}>
+          <View
+            style={{
+              height: 40,
+              width: '45%',
+              alignSelf: 'flex-end',
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingRight: 10,
+              justifyContent: 'space-between',
+            }}>
+            <View style={{flexDirection: 'row'}}>
+              {[0, 1].map((val, i) => (
+                <View
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 50,
+                    marginHorizontal: 2,
+                    backgroundColor:
+                      i == state.selectedIndex
+                        ? theme.textColor.whiteColor
+                        : theme.textColor.greyColor,
+                    opacity: i == state.selectedIndex ? 1 : 0.5,
+                  }}></View>
+              ))}
+            </View>
+            <Text style={{color: 'white'}}>SKIP</Text>
           </View>
-          <Text style={{color: 'white'}}>SKIP</Text>
+          {state.selectedIndex == 0 && (
+            <View
+              style={{
+                // height: '45%',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                resizeMode="contain"
+                source={require('../../assets/images/logo.png')}
+              />
+            </View>
+          )}
         </View>
         {state.selectedIndex == 0 ? firstSlide() : secondSlide()}
       </View>
