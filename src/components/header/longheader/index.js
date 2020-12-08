@@ -30,7 +30,7 @@ const App = (props) => {
           width: '100%',
           flexDirection: 'row',
           elevation: 0,
-          backgroundColor: 'red',
+          // backgroundColor: 'red',
         }}>
         {props.leftArrow && (
           <TouchableOpacity

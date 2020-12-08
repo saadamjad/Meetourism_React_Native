@@ -12,7 +12,7 @@ import {theme} from '../../../constants/theme';
 // import styles from './styles';
 import CustomView from '../../../components/customView';
 import {TabView, SceneMap} from 'react-native-tab-view';
-const SignIn = () => {
+const SignIn = (props) => {
   const [state, setState] = useState({
     selectedIndex: 0,
     activeInput: 3,
@@ -73,7 +73,8 @@ const SignIn = () => {
             borderRadius: 50,
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
+          }}
+          onPress={() => props.navigation.navigate('drawer')}>
           <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
         </TouchableOpacity>
         <TouchableOpacity
