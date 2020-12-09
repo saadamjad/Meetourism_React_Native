@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { theme } from '../../../constants/theme';
 
 // allPRops
 // leftArrow={true}
@@ -22,7 +23,8 @@ const App = (props) => {
         height: 120,
         backgroundColor: props.backgroundColor
           ? props.backgroundColor
-          : '#241332',
+          : theme.primaryColor,
+          zIndex: 999,
       }}>
       <View
         style={{

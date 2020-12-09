@@ -7,25 +7,15 @@ import {View, Text} from 'react-native';
 
 import {Button, Overlay} from 'react-native-elements';
 
-const App = (props) => {
-  const [visible, setVisible] = useState(false);
-
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
+const App = ({toggleOverlay, visible, children}) => {
   return (
-    <View>
-      <Button title="Open Overlay" onPress={toggleOverlay} />
-
-      <Overlay
-      // isVisible={props.visible}
-      // onBackdropPress={props.onBackdropPress}
-      >
-        {props.children}
-        {/* <Text>Hello from Overlay!</Text> */}
-      </Overlay>
-    </View>
+    <Overlay
+      isVisible={visible}
+      onBackdropPress={toggleOverlay}
+      overlayStyle={{borderRadius: 50, backgroundColor: 'transparent'}}>
+      {children}
+      {/* <Text>Hello from Overlay!</Text> */}
+    </Overlay>
   );
 };
 
