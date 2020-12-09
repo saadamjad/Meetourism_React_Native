@@ -4,7 +4,6 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 // import Style from './style';
 import CustomView from '../../../components/customView';
 import {theme} from '../../../constants/theme';
-import Header from '../../../components/header/longheader';
 import LongHeader from '../../../components/header/longheader';
 const Messages = (props) => {
   const [state, setState] = useState({
@@ -70,26 +69,24 @@ const Messages = (props) => {
         />
         {state.messages.map((val, i) => {
           let l = i - state.messages.length;
+          console.log("helo",i== state.messages.length-1)
           return (
             <View
               style={{
                 height: 300,
                 backgroundColor: theme.primaryColor,
-                // borderColor: 'orange',
-                // borderBottomWidth: 5,
+               
                 borderWidth: 0.2,
                 borderTopColor: 'transparent',
                 borderRightColor: 'transparent',
                 justifyContent: 'flex-end',
                 borderColor: theme.primaryColor1,
                 marginTop: -150,
-                borderBottomLeftRadius: 100,
+                borderBottomLeftRadius:  i== state.messages.length-1?0: 100,
                 zIndex: val.l,
                 overflow: 'hidden',
               }}>
-              <View
-                style={{
-                  // height: '50%',
+              <View style={{
                   flex: 0.55,
                   width: '100%',
                   flexDirection: 'row',
@@ -139,10 +136,8 @@ const Messages = (props) => {
                     height: '100%',
                     width: '30%',
                     justifyContent: 'center',
-                    // flexDirection: 'column',
                     alignItems: 'center',
                   }}>
-                  {/* <View style={{width: '60%'}}> */}
                   <Text style={{color: theme.textColor.whiteColor}}>
                     {val.date}
                   </Text>
@@ -150,20 +145,20 @@ const Messages = (props) => {
                     <View
                       style={{
                         backgroundColor: 'white',
-                        paddingVertical: 5,
-                        paddingHorizontal: 10,
-                        borderRadius: 50,
+                        justifyContent:'center',alignItems:'center',
+                     
+                        borderRadius: 25,
+                        height:25,width:25,marginTop:4
                       }}>
                       <Text
                         style={{
                           color: theme.primaryColor1,
-                          fontSize: 16,
+                          fontSize: 14,
                         }}>
                         {val.badge}
                       </Text>
                     </View>
                   )}
-                  {/* </View> */}
                 </View>
               </View>
             </View>

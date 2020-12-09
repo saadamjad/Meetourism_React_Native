@@ -9,7 +9,11 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#241332',
       }}>
-      <Longheader leftArrow={true} searchIcon={true} headerText="All Offers " />
+      <Longheader leftArrow={true} searchIcon={true} headerText="All Offers "
+      
+      navigation={props.navigation}
+     
+      />
     </View>
   );
 };

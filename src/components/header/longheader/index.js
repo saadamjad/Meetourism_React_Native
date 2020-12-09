@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { theme } from '../../../constants/theme';
+import {theme} from '../../../constants/theme';
 
 // allPRops
 // leftArrow={true}
@@ -24,7 +24,7 @@ const App = (props) => {
         backgroundColor: props.backgroundColor
           ? props.backgroundColor
           : theme.primaryColor,
-          zIndex: 999,
+        zIndex: 999,
       }}>
       <View
         style={{
@@ -36,7 +36,7 @@ const App = (props) => {
         }}>
         {props.leftArrow && (
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => props.navigation.goBack()}
             style={{
               width: '16%',
 

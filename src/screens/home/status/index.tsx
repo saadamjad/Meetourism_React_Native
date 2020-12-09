@@ -31,6 +31,7 @@ const Status = (props) => {
   const toggleOverlay1 = () => {
     if (state.selected !== 0.1) {
       setState({...state, visible: false, visible1: !state.visible1});
+      props.navigation.navigate('drawer')
     } else {
       alert('Please select one of them');
     }
