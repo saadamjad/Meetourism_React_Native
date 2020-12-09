@@ -228,7 +228,7 @@
             </Text>
           </View>
           <View
-          style={{flex:1,borderWidth:0,alignItems:'flex-end'}}
+          style={{flex:1,borderWidth:0,alignItems:'flex-end',paddingRight:10}}
           >
               <Image source={require('../../assets/icons/edit.png')}
         resizeMode="contain"

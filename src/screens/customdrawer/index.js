@@ -166,7 +166,8 @@ const DrawerContent = (props) => {
               (
                 <TouchableOpacity
                   onPress={() =>
-                    props.navigation.navigate(val.name ? val.name : '')
+                    // props.navigation.navigate(val.name ? val.name : '')
+                    props.navigation.closeDrawer()
                   }
                   style={{
                     flexDirection: 'row',

@@ -38,21 +38,26 @@ function MyDrawer(props) {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#e91e63',
+        inactiveTintColor: 'gray',
+        activeTintColor: 'black',
         showLabel: false,
-      }}>
+      }}
+      initialRouteName="Dashboard">
       <Tab.Screen
         name="alloffers"
         component={Alloffers}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} />
-            <Image
-              source={require('../assets/icons/path.png')}
-              style={{height: 18, width: 18}}
-              resizeMode="contain"
-            />
+            console.log('===========', color),
+            (
+              // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} />
+              <Image
+                source={require('../assets/icons/path.png')}
+                style={{height: 18, width: 18, tintColor: color}}
+                resizeMode="contain"
+              />
+            )
           ),
         }}
       />
@@ -65,7 +70,7 @@ function MyDrawer(props) {
             <MaterialCommunityIcons
               name="account-multiple"
               size={20}
-              color={'#2E2323'}
+              color={color}
             />
           ),
         }}
@@ -78,7 +83,7 @@ function MyDrawer(props) {
           tabBarIcon: ({color, size}) => (
             <Image
               source={require('../assets/icons/Chat.png')}
-              style={{height: 18, width: 18}}
+              style={{height: 18, width: 18, tintColor: color}}
               resizeMode="contain"
             />
           ),
@@ -90,11 +95,7 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="account"
-              size={20}
-              color={'#2E2323'}
-            />
+            <MaterialCommunityIcons name="account" size={20} color={color} />
           ),
         }}
       />
@@ -108,7 +109,7 @@ function MyDrawer(props) {
             // <Fontisto name="player-settings" size={20} color={'#2E2323'} />
             <Image
               source={require('../assets/icons/Setting.png')}
-              style={{height: 18, width: 18}}
+              style={{height: 18, width: 18, tintColor: color}}
               resizeMode="contain"
             />
           ),
