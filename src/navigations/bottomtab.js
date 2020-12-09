@@ -30,6 +30,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import {ImageBackground, Image} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +47,12 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="local-offer" size={20} color={'#2E2323'} />
+            // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} />
+            <Image
+              source={require('../assets/icons/path.png')}
+              style={{height: 18, width: 18}}
+              resizeMode="contain"
+            />
           ),
         }}
       />
@@ -70,7 +76,11 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <Entypo name="chat" size={20} color={'#2E2323'} />
+            <Image
+              source={require('../assets/icons/Chat.png')}
+              style={{height: 18, width: 18}}
+              resizeMode="contain"
+            />
           ),
         }}
       />
@@ -95,7 +105,12 @@ function MyDrawer(props) {
           headerShown: false,
           tabBarLabel: 'Find Plans',
           tabBarIcon: ({color, size}) => (
-            <Fontisto name="player-settings" size={20} color={'#2E2323'} />
+            // <Fontisto name="player-settings" size={20} color={'#2E2323'} />
+            <Image
+              source={require('../assets/icons/Setting.png')}
+              style={{height: 18, width: 18}}
+              resizeMode="contain"
+            />
           ),
         }}
       />
