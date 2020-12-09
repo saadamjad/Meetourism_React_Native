@@ -18,6 +18,7 @@ const CustomView = (props) => {
             contentContainerStyle={{
               flexGrow: 1,
               zIndex: 0,
+              backgroundColor: props.bg ? props.bg : 'orange',
             }}>
             {props.withBg ? (
               <>
