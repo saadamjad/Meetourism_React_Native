@@ -137,3 +137,17 @@ package-lock.json
 *.lock
 *.bin
 *.bin
+*.bin
+*.bin
+*.lock
+*.bin
+*.lock
+*.bin
+*.bin
+*.lock
+*.bin
+*.lock
+android/.gradle/buildOutputCleanup/outputFiles.bin
+*.lock
+*.bin
+*.bin
