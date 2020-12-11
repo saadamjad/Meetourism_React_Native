@@ -25,7 +25,6 @@ const DrawerContent = (props) => {
       }}>
       <View
         style={{
-          // borderWidth: 1,
           justifyContent: 'space-evenly',
           height: '26%',
         }}>
@@ -34,7 +33,6 @@ const DrawerContent = (props) => {
           style={{
             height: '100%',
             width: '100%',
-            // justifyContent: 'space-around',
           }}
           resizeMode="cover">
           <View
@@ -105,7 +103,7 @@ const DrawerContent = (props) => {
             },
             {
               title: 'Match',
-              name: 'OurProducts',
+              name: 'Match',
               type: 'Entypo',
               // icon: require('../assets/icons/70.png'),
               icon: require('../../assets/icons/userss.png'),
@@ -165,10 +163,7 @@ const DrawerContent = (props) => {
               console.log('loop', val),
               (
                 <TouchableOpacity
-                  onPress={() =>
-                    // props.navigation.navigate(val.name ? val.name : '')
-                    props.navigation.closeDrawer()
-                  }
+                  onPress={() => props.navigation.navigate('Match')}
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
