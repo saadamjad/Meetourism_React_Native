@@ -118,4 +118,5 @@ function MyDrawer(props) {
     </Tab.Navigator>
   );
 }
+
 export default MyDrawer;

@@ -4,9 +4,12 @@ import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {Homes} from './stacknavigation';
 import DrawerContent from '../screens/customdrawer';
 import Bottomtab from '../navigations/bottomtab';
+import Match from '../screens/matches';
+import {createStackNavigator} from '@react-navigation/stack';
 
 console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 function MyDrawer(props) {
   return (
@@ -24,7 +27,23 @@ function MyDrawer(props) {
         name="setting"
         component={Bottomtab}
       />
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="Match"
+        component={Matches}
+      />
     </Drawer.Navigator>
+  );
+}
+function Matches(props) {
+  return (
+    <Stack.Navigator initialRouteName={'Match'}>
+      <Stack.Screen
+        name="Match"
+        component={Match}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
   );
 }
 export default MyDrawer;
