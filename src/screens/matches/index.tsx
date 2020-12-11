@@ -81,7 +81,7 @@ const App = (props) => {
     offer.map((item,i)=>{
       return(
         <View
-      style={{flex:1,borderBottomWidth:1,borderColor:'white', backgroundColor:'#423050',justifyContent:'center'}}
+      style={{flex:1, paddingVertical:15, borderBottomWidth:1,borderColor:'white', backgroundColor:'#423050',justifyContent:'center'}}
       >
        
         <View
@@ -111,6 +111,7 @@ const App = (props) => {
          </View>
      <GlobalButton
      
+     onPress={()=>props.navigation.navigate('matchprofile')}
      width="60%"
      buttonText="Profile"
      height={45}
