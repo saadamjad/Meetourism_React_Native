@@ -5,7 +5,9 @@ import {Homes} from './stacknavigation';
 import DrawerContent from '../screens/customdrawer';
 import Bottomtab from '../navigations/bottomtab';
 import Match from '../screens/matches';
+import matchprofile from '../screens/matches/matchedprofile';
 import {createStackNavigator} from '@react-navigation/stack';
+import allchat from '../screens/chat/innerchat';
 
 console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -41,6 +43,16 @@ function Matches(props) {
       <Stack.Screen
         name="Match"
         component={Match}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="matchprofile"
+        component={matchprofile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="allchat"
+        component={allchat}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
