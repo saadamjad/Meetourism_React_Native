@@ -45,7 +45,7 @@ const App = (
             justifyContent: 'center',
             // backgroundColor: 'pink'
           }}>
-          <Ionicons name="arrow-back" size={20} color={'#757575'} />
+          <Ionicons name="arrow-back" size={20} color={'white'} />
         </TouchableOpacity>
       )}
 
