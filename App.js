@@ -11,6 +11,7 @@ import CreateOffer from './src/screens/alloffers/createOffer';
 import SelectOffer from './src/screens/alloffers/selectOffer';
 // import DetailOffer from './src/screens/alloffers/detailsOffer';
 import DetailOffer1 from './src/screens/alloffers/detailsOffer1';
+import History from './src/screens/alloffers/history';
 const App = (props) => {
   return (
     <>
@@ -20,8 +21,8 @@ const App = (props) => {
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}
       {/* <DetailOffer /> */}
-      <DetailOffer1 />
-      {/* <Status /> */}
+      {/* <DetailOffer1 /> */}
+      <History />{/* <Status /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
