@@ -8,13 +8,17 @@ import SignIn from './src/screens/auth/signin';
 import Status from './src/screens/home/status/index';
 import Profile from './src/screens/profile';
 import CreateOffer from './src/screens/alloffers/createOffer';
+import SelectOffer from './src/screens/alloffers/selectOffer';
+import DetailOffer from './src/screens/alloffers/detailsOffer';
 const App = (props) => {
   return (
     <>
       {/* <BGcustom /> */}
       {/* <Profile /> */}
       {/* <Stack navigation={props.navigation} /> */}
-      <CreateOffer />
+      {/* <CreateOffer /> */}
+      {/* <SelectOffer /> */}
+      <DetailOffer />
       {/* <Status /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
