@@ -9,7 +9,8 @@ import Status from './src/screens/home/status/index';
 import Profile from './src/screens/profile';
 import CreateOffer from './src/screens/alloffers/createOffer';
 import SelectOffer from './src/screens/alloffers/selectOffer';
-import DetailOffer from './src/screens/alloffers/detailsOffer';
+// import DetailOffer from './src/screens/alloffers/detailsOffer';
+import DetailOffer1 from './src/screens/alloffers/detailsOffer1';
 const App = (props) => {
   return (
     <>
@@ -18,7 +19,8 @@ const App = (props) => {
       {/* <Stack navigation={props.navigation} /> */}
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}
-      <DetailOffer />
+      {/* <DetailOffer /> */}
+      <DetailOffer1 />
       {/* <Status /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
