@@ -12,6 +12,9 @@ import SelectOffer from './src/screens/alloffers/selectOffer';
 // import DetailOffer from './src/screens/alloffers/detailsOffer';
 import DetailOffer1 from './src/screens/alloffers/detailsOffer1';
 import History from './src/screens/alloffers/history';
+import HoldOn from './src/screens/holdOn';
+import SelectPaymentMethod from './src/screens/selectPaymentMethod';
+import AddPayment from './src/screens/addPayment';
 const App = (props) => {
   return (
     <>
@@ -22,7 +25,10 @@ const App = (props) => {
       {/* <SelectOffer /> */}
       {/* <DetailOffer /> */}
       {/* <DetailOffer1 /> */}
-      <History />{/* <Status /> */}
+      {/* <HoldOn /> */}
+      {/* <SelectPaymentMethod /> */}
+      <AddPayment />
+      {/* <Status /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
