@@ -20,8 +20,12 @@ function GlobalButton(props) {
         height: props.height ? props.height : 50,
         alignSelf: 'center',
         borderWidth: 1,
-        borderColor: '#ED1C24',
-        shadowColor: '#ED1C24',
+        borderColor: props.backgroundColor
+          ? props.backgroundColor
+          : theme.secondaryColor,
+        shadowColor: props.backgroundColor
+          ? props.backgroundColor
+          : theme.secondaryColor,
         borderRadius: props.borderRadius ? props.borderRadius : 30,
       }}
       containerStyle={{
