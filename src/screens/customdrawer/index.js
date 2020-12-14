@@ -96,6 +96,12 @@ const DrawerContent = (props) => {
         {
           (array = [
             {
+              title: 'Admin screens',
+              name: 'adminscreens',
+              // icon: require('../assets/icons/64.png'),
+              icon: require('../../assets/icons/singleuser.png'),
+            },
+            {
               title: 'Home',
               name: 'HomeScreen',
               type: 'FontAwesome',
@@ -163,7 +169,7 @@ const DrawerContent = (props) => {
               console.log('loop', val),
               (
                 <TouchableOpacity
-                  onPress={() => props.navigation.navigate('Match')}
+                  onPress={() => props.navigation.navigate('adminscreens')}
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',

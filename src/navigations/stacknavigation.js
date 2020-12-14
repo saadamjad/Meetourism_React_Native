@@ -57,7 +57,7 @@ export function Chat() {
 function App() {
   return (
     <NavigationContainer headerMode="none" i>
-      <Stack.Navigator initialRouteName={'Auth'}>
+      <Stack.Navigator initialRouteName={'drawer'}>
         <Stack.Screen
           name="Auth"
           component={Auth}
