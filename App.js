@@ -16,6 +16,8 @@ import HoldOn from './src/screens/holdOn';
 import SelectPaymentMethod from './src/screens/selectPaymentMethod';
 import AddPayment from './src/screens/addPayment';
 import Notification from './src/screens/customdrawer/notification';
+import AllProfiles from './src/screens/customdrawer/allProfile';
+import Crushes from './src/screens/crushes';
 const App = (props) => {
   return (
     <>
@@ -30,7 +32,8 @@ const App = (props) => {
       {/* <SelectPaymentMethod /> */}
       {/* <AddPayment /> */}
       {/* <Status /> */}
-      <Notification />
+      {/* <AllProfiles /> */}
+      <Crushes />
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
