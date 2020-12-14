@@ -7,7 +7,7 @@ import CustomView from '../../../components/customView';
 import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
 
-function Successfull(props) {
+function DetailOffer(props) {
   return (
     <CustomView bg={'rgba(66,48,80, 0.6)'} scroll>
       <App leftArrow={true} navigation={props.navigation} isTransparent />
@@ -21,7 +21,7 @@ function Successfull(props) {
             paddingVertical: 50,
             alignItems: 'center',
           }}>
-          <TouchableOpacity
+          <TouchableOpacity 
             onPress={() => {
               props.navigation.goBack();
             }}
@@ -30,28 +30,47 @@ function Successfull(props) {
           </TouchableOpacity>
           <Text
             style={{
-              color: theme.textColor.blackColor,
+              color: theme.secondaryColor,
               paddingBottom: 25,
-              fontSize: 30,
+              fontSize: 24,
               fontWeight: '700',
             }}>
-            SAVE THE QR
+            Whopper Feast
           </Text>
           <View style={{width: '100%'}}>
+            <Text
+              style={{
+                color: theme.textColor.blackColor,
+                paddingBottom: 10,
+                fontSize: 16,
+                fontWeight: '500',
+              }}>
+              Description
+            </Text>
+            <Text
+              style={{
+                color: theme.textColor.greyColor,
+                paddingBottom: 25,
+                fontSize: 14,
+              }}>
+              10 Chicken Whopper and 10 Drink
+            </Text>
+            <View style={{width: '100%', alignItems: 'flex-end'}}>
+              <Text style={{color: theme.secondaryColor, fontWeight: '700'}}>
+                15.99$.only/-
+              </Text>
+            </View>
             <View
               style={{
                 width: '100%',
                 alignItems: 'center',
-                // marginTop: 80,
+                marginTop: 80,
               }}>
               <Image
                 resizeMode="contain"
-                source={require('../../../assets/images/qr.png')}
+                source={require('../../../assets/images/burgerDrink.png')}
               />
             </View>
-
-            <GlobalButton buttonText="Save Qr" height={40} width={'40%'} />
-
             <View
               style={{
                 width: '100%',
@@ -64,13 +83,10 @@ function Successfull(props) {
                 source={require('../../../assets/images/map.jpg')}
               />
             </View>
-            <View style={{marginTop: 20}}>
-              <GlobalButton buttonText="Main Menu" height={40} />
-            </View>
           </View>
         </View>
       </View>
     </CustomView>
   );
 }
-export default Successfull;
+export default DetailOffer;
