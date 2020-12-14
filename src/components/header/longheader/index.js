@@ -1,3 +1,4 @@
+import {Icon} from 'native-base';
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 // import {theme} from '../../constants/';
@@ -25,6 +26,7 @@ const App = (props) => {
           ? props.backgroundColor
           : theme.primaryColor,
         zIndex: 999,
+        
       }}>
       <View
         style={{
@@ -73,7 +75,11 @@ const App = (props) => {
 
           {props.filterIcon && (
             <TouchableOpacity style={{paddingRight: 25, borderWidth: 0}}>
-              <Ionicons name="live" size={20} color={'#241332'} />
+              <Icon
+                type="AntDesign"
+                name="filter"
+                style={{fontSize: 20, color: '#241332'}}
+              />
             </TouchableOpacity>
           )}
         </View>
