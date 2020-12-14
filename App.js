@@ -18,6 +18,7 @@ import AddPayment from './src/screens/addPayment';
 import Notification from './src/screens/customdrawer/notification';
 import AllProfiles from './src/screens/customdrawer/allProfile';
 import Crushes from './src/screens/crushes';
+import OfferUploaded from './src/screens/offerUploaded';
 const App = (props) => {
   return (
     <>
@@ -33,7 +34,8 @@ const App = (props) => {
       {/* <AddPayment /> */}
       {/* <Status /> */}
       {/* <AllProfiles /> */}
-      <Crushes />
+      {/* <Crushes /> */}
+      <OfferUploaded />
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
