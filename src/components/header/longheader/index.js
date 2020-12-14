@@ -20,7 +20,7 @@ const App = (props) => {
   return (
     <View
       style={{
-        height: 120,
+        height: props.height ? props.height : 120,
         backgroundColor: props.backgroundColor
           ? props.backgroundColor
           : theme.primaryColor,
@@ -83,7 +83,7 @@ const App = (props) => {
         style={{
           flex: 1,
           backgroundColor: 'white',
-          borderBottomLeftRadius: 150,
+          borderBottomLeftRadius: props.borderRadius ? props.borderRadius : 150,
           elevation: 0.4,
           alignItems: props.alignItemsText
             ? props.alignItemsText

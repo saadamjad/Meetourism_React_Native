@@ -8,6 +8,8 @@ import Match from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
 import {createStackNavigator} from '@react-navigation/stack';
 import allchat from '../screens/chat/innerchat';
+import dashborad from '../screens/dashboard';
+import {NavigationContainer} from '@react-navigation/native';
 
 console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -34,6 +36,11 @@ function MyDrawer(props) {
         name="Match"
         component={Matches}
       />
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="adminscreens"
+        component={adminscreens}
+      />
     </Drawer.Navigator>
   );
 }
@@ -53,6 +60,17 @@ function Matches(props) {
       <Stack.Screen
         name="allchat"
         component={allchat}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+function adminscreens(props) {
+  return (
+    <Stack.Navigator initialRouteName={'dashborad'}>
+      <Stack.Screen
+        name="dashborad"
+        component={dashborad}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
