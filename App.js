@@ -15,6 +15,7 @@ import History from './src/screens/alloffers/history';
 import HoldOn from './src/screens/holdOn';
 import SelectPaymentMethod from './src/screens/selectPaymentMethod';
 import AddPayment from './src/screens/addPayment';
+import Notification from './src/screens/customdrawer/notification';
 const App = (props) => {
   return (
     <>
@@ -27,8 +28,9 @@ const App = (props) => {
       {/* <DetailOffer1 /> */}
       {/* <HoldOn /> */}
       {/* <SelectPaymentMethod /> */}
-      <AddPayment />
+      {/* <AddPayment /> */}
       {/* <Status /> */}
+      <Notification />
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
