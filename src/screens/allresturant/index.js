@@ -183,8 +183,14 @@ const App = (props) => {
                     />
                   </View>
                 </View>
-                <Button buttonText="My Offer" />
-                <Button buttonText="Create new offer" />
+                <Button
+                  buttonText="My Offer"
+                  onPress={() => props.navigation.navigate('Selectoffer')}
+                />
+                <Button
+                  buttonText="Create new offer"
+                  onPress={() => props.navigation.navigate('createOffer')}
+                />
 
                 {/* ============issy upper yellow============== */}
               </View>

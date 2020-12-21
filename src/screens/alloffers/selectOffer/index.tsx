@@ -7,7 +7,6 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import Longheader from '../../../components/header/longheader';
@@ -35,6 +34,7 @@ function SelectOffer(props) {
           <TouchableOpacity
             onPress={() => {
               // navigate to screen there
+              props.navigation.navigate('');
             }}
             activeOpacity={1}
             style={{width: '100%', height: 280, marginVertical: 10}}>
