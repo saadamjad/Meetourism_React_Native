@@ -21,6 +21,8 @@ import Crushes from './src/screens/crushes';
 import OfferUploaded from './src/screens/offerUploaded';
 import Successfull from './src/screens/alloffers/detailsOffer';
 import LiveChat from './src/screens/livechat';
+import Allresturant from './src/screens/allresturant';
+
 const App = (props) => {
   return (
     <>
@@ -40,6 +42,7 @@ const App = (props) => {
       {/* <Crushes /> */}
       {/* <OfferUploaded /> */}
       {/* <Successfull /> */}
+      {/* <Allresturant /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
