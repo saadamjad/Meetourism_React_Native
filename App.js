@@ -20,12 +20,14 @@ import AllProfiles from './src/screens/customdrawer/allProfile';
 import Crushes from './src/screens/crushes';
 import OfferUploaded from './src/screens/offerUploaded';
 import Successfull from './src/screens/alloffers/detailsOffer';
+import LiveChat from './src/screens/livechat';
 const App = (props) => {
   return (
     <>
       {/* <BGcustom /> */}
       {/* <Profile /> */}
       {/* <Stack navigation={props.navigation} /> */}
+      <LiveChat />
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}
       {/* <DetailOffer /> */}
@@ -37,7 +39,7 @@ const App = (props) => {
       {/* <AllProfiles /> */}
       {/* <Crushes /> */}
       {/* <OfferUploaded /> */}
-      <Successfull />
+      {/* <Successfull /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
