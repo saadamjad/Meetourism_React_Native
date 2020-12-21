@@ -30,7 +30,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import allresturant from '../screens/allresturant';
+import Selectoffer from '../screens/alloffers/selectOffer';
+import createOffer from '../screens/alloffers/createOffer';
 import {ImageBackground, Image} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +49,8 @@ function MyDrawer(props) {
       initialRouteName="Dashboard">
       <Tab.Screen
         name="alloffers"
-        component={Alloffers}
+        // component={Alloffers}
+        component={AlloffersStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -118,5 +123,31 @@ function MyDrawer(props) {
     </Tab.Navigator>
   );
 }
-
+const offersStack = createStackNavigator();
+export function AlloffersStack() {
+  return (
+    <offersStack.Navigator initialRouteName={'selectstatus'}>
+      <offersStack.Screen
+        name="Alloffers"
+        component={allresturant}
+        options={{headerShown: false}}
+      />
+      <offersStack.Screen
+        name="Selectoffer"
+        component={Selectoffer}
+        options={{headerShown: false}}
+      />
+      <offersStack.Screen
+        name="createOffer"
+        component={createOffer}
+        options={{headerShown: false}}
+      />
+      {/* <offersStack.Screen
+        name="createOffer"
+        component={createOffer}
+        options={{headerShown: false}}
+      /> */}
+    </offersStack.Navigator>
+  );
+}
 export default MyDrawer;
