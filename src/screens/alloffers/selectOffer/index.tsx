@@ -16,7 +16,7 @@ function SelectOffer(props) {
   return (
     <CustomView bg={theme.textColor.whiteColor} scroll>
       <Longheader
-        headerText="SelectOffer"
+        headerText="Select Offer"
         filterIcon
         alignItemsText="center"
         backgroundColor={theme.textColor.whiteColor}
@@ -34,7 +34,7 @@ function SelectOffer(props) {
           <TouchableOpacity
             onPress={() => {
               // navigate to screen there
-              props.navigation.navigate('');
+              props.navigation.navigate('dealoffer1');
             }}
             activeOpacity={1}
             style={{width: '100%', height: 280, marginVertical: 10}}>
