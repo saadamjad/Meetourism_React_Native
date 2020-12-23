@@ -2,6 +2,7 @@ const theme = {
   primaryColor: '#352641',
   secondaryColor: '#EC2027',
   primaryColor1: '#8A56AC',
+  primaryColor2: '#5F4E6A',
   buttonGreyColor: '#9599B3',
   textColor: {
     whiteColor: '#fff',
