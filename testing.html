@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<script>
+	// let i = 0;
+	// let j = 1;
+    // let temp=0;
+    // let ans;
+    // let array = [-320,3,2,456,7];
+    // var  testinggg=0
+    //    let abc=Math.max(...array)
+    // console.log("abx ",abc)
+
+    // // return  Math.max(...array.filter(x=> x!==abc))
+    // testinggg  = Math.max(...array.filter(x => x !== abc))
+    //  console.log("tes",testinggg)
+  
+    // //  ans=array.push()
+    // // console.log("ans==",ans)
+    // // console.log("ans==",array)
+
+    function getSecondLargest() {
+    let nums = [-320,3,2,456,9,7];
+
+    let max = nums[0]
+    if (nums.length == 1) { return max } // break early for edge case of array length of 1
+    let second = nums[1] < max ? nums[1] : max
+    for (let i of nums) {
+        if (i > max) { 
+            second = max
+            max = i 
+        }
+        if (i > second && i <  max) { second = i }
+    }
+    console.log("sec",second)
+    // return second
+}
+getSecondLargest()
+ </script>
+
+</body>
+</html>

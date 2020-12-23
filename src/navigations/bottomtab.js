@@ -35,6 +35,11 @@ import Selectoffer from '../screens/alloffers/selectOffer';
 import createOffer from '../screens/alloffers/createOffer';
 import {ImageBackground, Image} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
+import dealoffer1 from '../screens/alloffers/detailsOffer1';
+import selectPaymentMethod from '../screens/selectPaymentMethod';
+import AddPayment from '../screens/addPayment';
+import PaymentDetails from '../screens/payment';
+import detailsoffer from '../screens/alloffers/detailsOffer';
 
 const Tab = createBottomTabNavigator();
 
@@ -142,11 +147,31 @@ export function AlloffersStack() {
         component={createOffer}
         options={{headerShown: false}}
       />
-      {/* <offersStack.Screen
-        name="createOffer"
-        component={createOffer}
+      <offersStack.Screen
+        name="dealoffer1"
+        component={dealoffer1}
         options={{headerShown: false}}
-      /> */}
+      />
+      <offersStack.Screen
+        name="payment"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+      <offersStack.Screen
+        name="selectPaymentmethod"
+        component={AddPayment}
+        options={{headerShown: false}}
+      />
+      <offersStack.Screen
+        name="PaymentDetails"
+        component={PaymentDetails}
+        options={{headerShown: false}}
+      />
+      <offersStack.Screen
+        name="detailsoffer"
+        component={detailsoffer}
+        options={{headerShown: false}}
+      />
     </offersStack.Navigator>
   );
 }

@@ -283,7 +283,11 @@ const Messages = (props) => {
           </View>
         </View>
         <View style={{flex: 0.4, borderWidth: 0, justifyContent: 'center'}}>
-          <Button buttonText={'Save'} width={'100%'} />
+          <Button
+            buttonText={'Save'}
+            width={'100%'}
+            onPress={() => props.navigation.navigate('detailsoffer')}
+          />
         </View>
       </View>
     </CustomView>
