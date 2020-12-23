@@ -6,46 +6,162 @@ import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import {GiftedChat} from 'react-native-gifted-chat';
 import LongHeader from '../../components/header/longheader';
+import {TextInput} from 'react-native';
+import {SafeAreaView} from 'react-native';
+import {Icon} from 'native-base';
 const Messages = (props) => {
-  const [messages, setMessages] = useState([]);
-  useEffect(() => {
-    setMessages([
+  const [state, setState] = useState({
+    messages: [
       {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
+        id: 0,
+        username: 'Max',
+        message: 'what is the best time to visit Rio de Janerio?',
       },
-    ]);
-  }, []);
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages),
-    );
-  }, []);
+      {
+        id: 1,
+        username: 'Lady in the Blue',
+        message:
+          'March is the one of the best months to visit Rio. you can enjoy the beach and many of the attractions.',
+      },
+    ],
+    message: '',
+  });
+
+  let id = 0;
   return (
-    <CustomView bg={theme.primaryColor} scroll>
-      <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
-        <LongHeader
-          navigation={props.navigation}
-          leftArrow={true}
-          searchIcon={true}
-          headerText="Chats"
-        />
-        <GiftedChat
-          messagesContainerStyle={{flex: 1}}
-          messages={messages}
-          onSend={(messages) => onSend(messages)}
-          user={{
-            _id: 1,
-          }}
-        />
+    <SafeAreaView style={{flex: 1}}>
+      <CustomView bg={theme.primaryColor} scroll>
+        <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
+          <LongHeader
+            navigation={props.navigation}
+            leftArrow={true}
+            searchIcon={true}
+            headerText="Chats"
+          />
+          <View style={{paddingTop: 20}}>
+            {state.messages.map((item, index) => (
+              <View
+                style={{
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: item.id == id ? 'flex-end' : 'flex-start',
+                  // paddingVertical: 10,
+                }}>
+                <View style={{paddingHorizontal: 10, paddingVertical: 10}}>
+                  <Text
+                    style={{
+                      color: theme.textColor.whiteColor,
+                      fontSize: 18,
+                      fontWeight: '600',
+                    }}>
+                    {item.username}
+                  </Text>
+                </View>
+                <View
+                  style={
+                    item.id == id
+                      ? {
+                          backgroundColor: theme.primaryColor2,
+                          paddingVertical: 15,
+                          width: '90%',
+                          borderTopLeftRadius: 50,
+                          borderBottomLeftRadius: 50,
+                          paddingHorizontal: 20,
+                        }
+                      : {
+                          backgroundColor: theme.primaryColor1,
+                          paddingVertical: 15,
+                          width: '90%',
+                          borderTopRightRadius: 50,
+                          borderBottomRightRadius: 50,
+                          paddingHorizontal: 20,
+                        }
+                  }>
+                  <Text style={{color: theme.textColor.whiteColor}}>
+                    {item.message}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    paddingHorizontal: 10,
+                    paddingVertical: 5,
+                    alignItems: item.id == id ? 'flex-end' : 'flex-start',
+                  }}>
+                  <Text
+                    style={{
+                      color: theme.textColor.whiteColor,
+                      fontSize: 14,
+                    }}>
+                    Wednesday Aug 19
+                  </Text>
+                  <Text
+                    style={{
+                      color: theme.textColor.whiteColor,
+                      fontSize: 14,
+                    }}>
+                    10:23 am
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </View>
+      </CustomView>
+      <View
+        style={{
+          height: 80,
+          backgroundColor: '#241332',
+          width: '100%',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          flexDirection: 'row',
+          // position: 'absolute',
+        }}>
+        <View>
+          <Image source={require('../../assets/images/emoji.png')} />
+        </View>
+        <View style={{width: '80%'}}>
+          <TextInput
+            multiline
+            style={{
+              width: '100%',
+              // height: '100%',
+              color: theme.textColor.whiteColor,
+            }}
+            value={state.message}
+            onChangeText={(text) => setState({...state, message: text})}
+          />
+        </View>
+        <View>
+          {state.message.length > 0 ? (
+            <TouchableOpacity
+              onPress={() => {
+                setState({
+                  ...state,
+                  message: '',
+                  messages: [
+                    ...state.messages,
+                    {
+                      id,
+                      username: 'Max',
+                      message: state.message,
+                    },
+                  ],
+                });
+                // refs.scrollView.scrollTo(0);
+              }}>
+              <Icon
+                style={{color: theme.textColor.whiteColor}}
+                name="send"
+                type="MaterialCommunityIcons"
+              />
+            </TouchableOpacity>
+          ) : (
+            <Image source={require('../../assets/images/mic.png')} />
+          )}
+        </View>
       </View>
-    </CustomView>
+    </SafeAreaView>
   );
 };
 
