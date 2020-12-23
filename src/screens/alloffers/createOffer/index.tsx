@@ -130,7 +130,14 @@ function CreateOffer(props) {
             backgroundColor: 'white',
             paddingVertical: 10,
           }}>
-          <GlobalButton height={40} width="100%" buttonText="Save & upload" />
+          <GlobalButton
+            height={40}
+            width="100%"
+            buttonText="Save & upload"
+            onPress={() =>
+              props.navigation.navigate('offerUploadedSuccessfully')
+            }
+          />
         </View>
       </View>
     </View>

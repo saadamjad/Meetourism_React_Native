@@ -38,9 +38,9 @@ function OfferUploaded(props) {
           Offer Successfully Uploaded
         </Text>
 
-        <GlobalButton buttonText="My Offer" height={40} />
+        {/* <GlobalButton buttonText="My Offer" height={40} />
         <GlobalButton buttonText="Create new offer" height={40} />
-        <GlobalButton buttonText="Dashboard" height={40} />
+        <GlobalButton buttonText="Dashboard" height={40} /> */}
       </View>
     </View>
     //   </CustomView>

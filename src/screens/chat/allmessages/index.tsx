@@ -69,24 +69,27 @@ const Messages = (props) => {
         />
         {state.messages.map((val, i) => {
           let l = i - state.messages.length;
-          console.log("helo",i== state.messages.length-1)
+          console.log('helo', i == state.messages.length - 1);
           return (
-            <View
+            <TouchableOpacity
               style={{
                 height: 300,
                 backgroundColor: theme.primaryColor,
-               
+
                 borderWidth: 0.2,
                 borderTopColor: 'transparent',
                 borderRightColor: 'transparent',
                 justifyContent: 'flex-end',
                 borderColor: theme.primaryColor1,
                 marginTop: -150,
-                borderBottomLeftRadius:  i== state.messages.length-1?0: 100,
+                borderBottomLeftRadius:
+                  i == state.messages.length - 1 ? 0 : 100,
                 zIndex: val.l,
                 overflow: 'hidden',
-              }}>
-              <View style={{
+              }}
+              onPress={() => props.navigation.navigate('innerchat')}>
+              <View
+                style={{
                   flex: 0.55,
                   width: '100%',
                   flexDirection: 'row',
@@ -103,14 +106,6 @@ const Messages = (props) => {
                     alignItems: 'center',
                   }}>
                   <View style={{width: '60%', alignItems: 'center'}}>
-                    {/* <View
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 100,
-                        // borderWidth: 1,
-                        backgroundColor: 'white',
-                      }}> */}
                     <Image
                       resizeMode="contain"
                       source={require('../../../assets/images/ava.png')}
@@ -145,10 +140,13 @@ const Messages = (props) => {
                     <View
                       style={{
                         backgroundColor: 'white',
-                        justifyContent:'center',alignItems:'center',
-                     
+                        justifyContent: 'center',
+                        alignItems: 'center',
+
                         borderRadius: 25,
-                        height:25,width:25,marginTop:4
+                        height: 25,
+                        width: 25,
+                        marginTop: 4,
                       }}>
                       <Text
                         style={{
@@ -161,7 +159,7 @@ const Messages = (props) => {
                   )}
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </View>

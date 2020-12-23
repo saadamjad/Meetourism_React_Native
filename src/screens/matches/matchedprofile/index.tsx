@@ -69,7 +69,7 @@ const Profile = (props) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
-              onPress={() => props.navigation.navigate('allchat')}>
+              onPress={() => props.navigation.navigate('innerchat')}>
               <Image
                 source={require('../../../assets/icons/Chat.png')}
                 style={{height: 20, width: 20, tintColor: 'gray'}}

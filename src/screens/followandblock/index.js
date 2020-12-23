@@ -15,6 +15,7 @@ import Header from '../../components/header';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TextInput} from 'react-native-gesture-handler';
 const Profile = (props) => {
+  // console.log('props',);
   return (
     <CustomView scroll>
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
@@ -75,21 +76,46 @@ const Profile = (props) => {
                 />
               </View>
             </View>
-            <View
-              style={{
-                // width: 100,
-                borderBottomLeftRadius: 20,
-                borderTopRightRadius: 20,
-                paddingHorizontal: 20,
-                elevation: 1,
 
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#8A56AC',
-                paddingVertical: 10,
-              }}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}> Block </Text>
-            </View>
+            {props.route?.params?.block ? (
+              <TouchableOpacity
+                style={{
+                  // width: 100,
+                  borderBottomLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  paddingHorizontal: 20,
+                  elevation: 1,
+
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#8A56AC',
+                  paddingVertical: 10,
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  {' '}
+                  Block{' '}
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  // width: 100,
+                  borderBottomLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  paddingHorizontal: 20,
+                  elevation: 1,
+
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#8A56AC',
+                  paddingVertical: 10,
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  {' '}
+                  Follow{' '}
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           <View
@@ -110,7 +136,7 @@ const Profile = (props) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
-              onPress={() => props.navigation.navigate('allchat')}>
+              onPress={() => props.navigation.navigate('innerchat')}>
               <Image
                 source={require('../../assets/icons/Chat.png')}
                 style={{height: 20, width: 20, tintColor: 'gray'}}
