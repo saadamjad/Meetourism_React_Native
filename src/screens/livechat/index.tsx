@@ -1,63 +1,32 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {Component, useState, useEffect, useCallback} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
+import {GiftedChat} from 'react-native-gifted-chat';
 import LongHeader from '../../components/header/longheader';
 const Messages = (props) => {
-  const [state, setState] = useState({
-    messages: [
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    setMessages([
       {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 8,
+        _id: 1,
+        text: 'Hello developer',
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'React Native',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
       },
-      {
-        name: 'Dina Meyer',
-        description: 'Hi everyone!',
-        date: '9 hrs',
-        badge: 7,
-        l: 7,
-      },
-      {
-        name: 'Stephen Moreau',
-        description: 'Check out this Meetup with',
-        date: 'Aug 19',
-        l: 6,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 5,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 4,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 3,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 2,
-      },
-    ],
-  });
+    ]);
+  }, []);
+  const onSend = useCallback((messages = []) => {
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages),
+    );
+  }, []);
   return (
     <CustomView bg={theme.primaryColor} scroll>
       <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
@@ -66,6 +35,14 @@ const Messages = (props) => {
           leftArrow={true}
           searchIcon={true}
           headerText="Chats"
+        />
+        <GiftedChat
+          messagesContainerStyle={{flex: 1}}
+          messages={messages}
+          onSend={(messages) => onSend(messages)}
+          user={{
+            _id: 1,
+          }}
         />
       </View>
     </CustomView>
