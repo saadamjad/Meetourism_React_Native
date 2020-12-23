@@ -28,7 +28,8 @@ const App = (props) => {
     <>
       {/* <BGcustom /> */}
       {/* <Profile /> */}
-      <Stack navigation={props.navigation} />
+      {/* <Stack navigation={props.navigation} /> */}
+      <LiveChat />
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}
       {/* <DetailOffer /> */}
@@ -40,6 +41,7 @@ const App = (props) => {
       {/* <AllProfiles /> */}
       {/* <Crushes /> */}
       {/* <OfferUploaded /> */}
+      {/* <Successfull /> */}
       {/* <Allresturant /> */}
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
