@@ -57,6 +57,10 @@ const App = (props) => {
       // image:'../src/asssets/icons/trolley.png',
     },
     {
+      name: 'Create Offers',
+      // image:'../src/asssets/icons/trolley.png',
+    },
+    {
       name: 'Notification',
       // image: '..,
     },
@@ -68,6 +72,7 @@ const App = (props) => {
       name: 'Setting',
       // image:'../src/asssets/icons/trolley.png',
     },
+
     {
       name: 'Log Out',
       // image:'../src/asssets/icons/trolley.png',
@@ -163,7 +168,19 @@ const App = (props) => {
     second: signUpRoute2,
     third: signUpRout3,
   });
+  const _HandleScreenNavigations = (i) => {
+    // props.navigation.navigate('Profile');
 
+    if (i == 0) {
+      props.navigation.navigate('allProfile');
+    } else if (i == 1) {
+      props.navigation.navigate('Alloffers');
+    } else if (i == 2) {
+      props.navigation.navigate('history');
+    } else if (i == 3) {
+      props.navigation.navigate('Notification');
+    }
+  };
   return (
     <CustomView scroll bg="white">
       <View
@@ -221,7 +238,8 @@ const App = (props) => {
                     paddingVertical: 30,
                     justifyContent: 'center',
                     alignItems: 'center',
-                  }}>
+                  }}
+                  onPress={() => _HandleScreenNavigations(i)}>
                   <AntDesign name="user" color="black" size={20} />
                   <Text style={{color: 'gray', fontSize: 12, marginTop: 5}}>
                     {item.name}

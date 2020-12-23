@@ -21,7 +21,7 @@ import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Setting from '../screens/setting';
-import Profile from '../screens/profile/home/home';
+// import Profile from '../screens/profile/home/home';
 
 import Dashboard from '../screens/dashboard';
 import Chat from '../screens/chat/allmessages';
@@ -40,6 +40,19 @@ import selectPaymentMethod from '../screens/selectPaymentMethod';
 import AddPayment from '../screens/addPayment';
 import PaymentDetails from '../screens/payment';
 import detailsoffer from '../screens/alloffers/detailsOffer';
+import Profile from '../screens/profile/home/home';
+import history from '../screens/alloffers/history';
+import offerUploadedSuccessfully from '../screens/offerUploaded';
+import profile from '../screens/profile';
+import allProfile from '../screens/customdrawer/allProfile';
+import followandBlock from '../screens/followandblock';
+import Notification from '../screens/customdrawer/notification';
+import innerchat from '../screens/livechat';
+import SeeYourMatch from '../screens/matches';
+import matchprofile from '../screens/matches/matchedprofile';
+import userhome from '../screens/customdrawer';
+import Cruhes from '../screens/crushes';
+import userProfile from '../screens/profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,7 +86,7 @@ function MyDrawer(props) {
       />
       <Tab.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={DashboardStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -87,7 +100,7 @@ function MyDrawer(props) {
       />
       <Tab.Screen
         name="Chat"
-        component={Chat}
+        component={ChatMainStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -101,7 +114,7 @@ function MyDrawer(props) {
       />
       <Tab.Screen
         name="profile"
-        component={Profile}
+        component={UserHomeMainStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -111,7 +124,7 @@ function MyDrawer(props) {
       />
       <Tab.Screen
         name="setting"
-        component={Setting}
+        component={CrushesMainStack}
         options={{
           headerShown: false,
           tabBarLabel: 'Find Plans',
@@ -126,6 +139,60 @@ function MyDrawer(props) {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+const CrushesStack = createStackNavigator();
+export function CrushesMainStack() {
+  return (
+    <CrushesStack.Navigator initialRouteName={'Cruhes'}>
+      <CrushesStack.Screen
+        name="Cruhes"
+        component={Cruhes}
+        options={{headerShown: false}}
+      />
+      <CrushesStack.Screen
+        name="followandBlock"
+        component={followandBlock}
+        options={{headerShown: false}}
+      />
+      <CrushesStack.Screen
+        name="innerchat"
+        component={innerchat}
+        options={{headerShown: false}}
+      />
+    </CrushesStack.Navigator>
+  );
+}
+
+const userhomeStack = createStackNavigator();
+export function UserHomeMainStack() {
+  return (
+    <userhomeStack.Navigator initialRouteName={'userhome'}>
+      <userhomeStack.Screen
+        name="userhome"
+        component={userhome}
+        options={{headerShown: false}}
+      />
+    </userhomeStack.Navigator>
+  );
+}
+
+const chatStack = createStackNavigator();
+export function ChatMainStack() {
+  return (
+    <chatStack.Navigator initialRouteName={'selectstatus'}>
+      <chatStack.Screen
+        name="Chat"
+        component={Chat}
+        options={{headerShown: false}}
+      />
+      <chatStack.Screen
+        name="innerchat"
+        component={innerchat}
+        options={{headerShown: false}}
+      />
+    </chatStack.Navigator>
   );
 }
 const offersStack = createStackNavigator();
@@ -175,4 +242,176 @@ export function AlloffersStack() {
     </offersStack.Navigator>
   );
 }
+const dashboardStack = createStackNavigator();
+export function DashboardStack() {
+  return (
+    <offersStack.Navigator initialRouteName={'Dashboard'}>
+      {/* //SEE matches */}
+      <dashboardStack.Screen
+        name="SeeYourMatch"
+        component={SeeYourMatch}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="matchprofile"
+        component={matchprofile}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="innerchat"
+        component={innerchat}
+        options={{headerShown: false}}
+      />
+      {/* //NOTIFICATION */}
+      <dashboardStack.Screen
+        name="Notification"
+        component={Notification}
+        options={{headerShown: false}}
+      />
+      {/* //ALL PROFILE STACK */}
+      <dashboardStack.Screen
+        name="allProfile"
+        component={allProfile}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="followandBlock"
+        component={followandBlock}
+        options={{headerShown: false}}
+      />
+      {/* offers and create offers */}
+      <dashboardStack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="history"
+        component={history}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="offerUploadedSuccessfully"
+        component={offerUploadedSuccessfully}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="Profile"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="Alloffers"
+        component={allresturant}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="userProfile"
+        component={userProfile}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="Selectoffer"
+        component={Selectoffer}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="createOffer"
+        component={createOffer}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="dealoffer1"
+        component={dealoffer1}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="payment"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="selectPaymentmethod"
+        component={AddPayment}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="PaymentDetails"
+        component={PaymentDetails}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="detailsoffer"
+        component={detailsoffer}
+        options={{headerShown: false}}
+      />
+    </offersStack.Navigator>
+  );
+}
+const profileStack = createStackNavigator();
+export function profileMainStack() {
+  return (
+    <profileStack.Navigator initialRouteName={'selectstatus'}>
+      <profileStack.Screen
+        name="Alloffers"
+        component={allresturant}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="Selectoffer"
+        component={Selectoffer}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="createOffer"
+        component={createOffer}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="dealoffer1"
+        component={dealoffer1}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="payment"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="selectPaymentmethod"
+        component={AddPayment}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="PaymentDetails"
+        component={PaymentDetails}
+        options={{headerShown: false}}
+      />
+      <profileStack.Screen
+        name="detailsoffer"
+        component={detailsoffer}
+        options={{headerShown: false}}
+      />
+    </profileStack.Navigator>
+  );
+}
+
+// const offers = createStackNavigator();
+// export function DashboardStack() {
+//   return (
+//     <offersStack.Navigator initialRouteName={'Profile'}>
+//       <dashStack.Screen
+//         name="Dashboard"
+//         component={Dashboard}
+//         options={{headerShown: false}}
+//       />
+//       <dashStack.Screen
+//         name="Profile"
+//         component={Profile}
+//         options={{headerShown: false}}
+//       />
+//     </offersStack.Navigator>
+//   );
+// }
+
 export default MyDrawer;

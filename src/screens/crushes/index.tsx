@@ -164,7 +164,10 @@ const Crushes = (props) => {
                         Edit
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.navigation.navigate('followandBlock')
+                      }>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,

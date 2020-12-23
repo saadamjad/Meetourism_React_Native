@@ -155,7 +155,8 @@ const AllProfiles = (props) => {
                       width: '80%',
                       alignSelf: 'center',
                     }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => props.navigation.navigate('')}>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
@@ -164,7 +165,9 @@ const AllProfiles = (props) => {
                         Edit
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      // onPress={() => props.navigation.navigate('SeeYourMatch')}>
+                      onPress={() => props.navigation.navigate('userProfile')}>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
@@ -173,7 +176,12 @@ const AllProfiles = (props) => {
                         View
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.navigation.navigate('followandBlock', {
+                          block: true,
+                        })
+                      }>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,

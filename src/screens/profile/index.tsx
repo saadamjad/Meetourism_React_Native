@@ -110,7 +110,11 @@ const Profile = (props) => {
                 See Your Matches
               </Text>
             </TouchableOpacity> */}
-            <GlobalButton  buttonText="See Your Matches" width="70%" />
+            <GlobalButton
+              buttonText="See Your Matches"
+              width="70%"
+              onPress={() => props.navigation.navigate('SeeYourMatch')}
+            />
           </View>
         </View>
       </View>
