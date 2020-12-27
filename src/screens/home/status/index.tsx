@@ -204,9 +204,10 @@ const Status = (props) => {
             paddingVertical: 40,
             borderRadius: 30,
             backgroundColor: 'white',
-            width: Dimensions.get('window').width / 1.2,
+            width: Dimensions.get('window').width / 1.1,
             justifyContent: 'center',
             alignItems: 'center',
+            elevation: 0,
           }}>
           <Text
             style={{

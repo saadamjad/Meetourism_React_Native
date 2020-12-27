@@ -21,12 +21,13 @@ function SelectOffer(props) {
         alignItemsText="center"
         backgroundColor={theme.textColor.whiteColor}
         leftArrow={true}
+        paddingLeft={10}
         navigation={props.navigation}
       />
       <View
         style={{
           flex: 1,
-          marginTop: 40,
+          // marginTop: 2,
           // justifyContent: 'center',
           alignItems: 'center',
         }}>
@@ -34,16 +35,16 @@ function SelectOffer(props) {
           <TouchableOpacity
             onPress={() => {
               // navigate to screen there
-              props.navigation.navigate('dealoffer1');
+              props.navigation.navigate('dealoffer');
             }}
             activeOpacity={1}
-            style={{width: '100%', height: 280, marginVertical: 10}}>
+            style={{width: '100%', height: 260, marginVertical: 10}}>
             <View
               style={{
                 height: '80%',
                 width: '90%',
-                borderTopRightRadius: 50,
-                borderBottomRightRadius: 50,
+                borderTopRightRadius: 80,
+                borderBottomRightRadius: 80,
                 justifyContent: 'flex-end',
                 overflow: 'hidden',
               }}>
@@ -63,13 +64,13 @@ function SelectOffer(props) {
                   }}>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Text
-                      style={{color: theme.textColor.whiteColor, fontSize: 18}}>
+                      style={{color: theme.textColor.whiteColor, fontSize: 14}}>
                       256
                     </Text>
                     <Icon
                       style={{
                         color: theme.textColor.whiteColor,
-                        fontSize: 22,
+                        fontSize: 18,
                         marginLeft: 10,
                       }}
                       type="MaterialIcons"
@@ -83,13 +84,13 @@ function SelectOffer(props) {
                       marginLeft: 20,
                     }}>
                     <Text
-                      style={{color: theme.textColor.whiteColor, fontSize: 18}}>
+                      style={{color: theme.textColor.whiteColor, fontSize: 14}}>
                       256
                     </Text>
                     <Icon
                       style={{
                         color: theme.textColor.whiteColor,
-                        fontSize: 22,
+                        fontSize: 18,
                         marginLeft: 10,
                       }}
                       type="AntDesign"

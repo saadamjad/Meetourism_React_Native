@@ -1,14 +1,14 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {Component, useState, useEffect, useRef} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import Header from '../../components/header/longheader';
-
+import AppIntroSlider from 'react-native-app-intro-slider';
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
-
+  let node = useRef();
   const firstSlide = () => (
     <View
       style={{
@@ -41,7 +41,11 @@ const Tutorial = (props) => {
         </View>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => setState({...state, selectedIndex: 1})}
+          // onPress={() => setState({...state, selectedIndex: 1})}
+          onPress={() => {
+            setState({...state, selectedIndex: 1});
+            node.goToSlide(1);
+          }}
           style={{
             backgroundColor: theme.secondaryColor,
             width: '45%',
@@ -87,7 +91,7 @@ const Tutorial = (props) => {
             borderRadius: 30,
           }}
           onPress={() => props.navigation.navigate('signin')}>
-          <Text style={{color: theme.textColor.whiteColor, fontSize: 20}}>
+          <Text style={{color: theme.textColor.whiteColor, fontSize: 22}}>
             Avail Offer
           </Text>
         </TouchableOpacity>
@@ -98,14 +102,16 @@ const Tutorial = (props) => {
             alignItems: 'center',
             height: 60,
           }}>
-          <Text style={{color: theme.textColor.whiteColor, fontSize: 13}}>
+          <Text style={{color: theme.textColor.whiteColor, fontSize: 12}}>
             Skip to Login
           </Text>
         </View>
       </View>
     </View>
   );
-
+  const _renderItem = ({item}) => {
+    return state.selectedIndex == 0 ? firstSlide() : secondSlide();
+  };
   return (
     <CustomView
       image={
@@ -141,7 +147,10 @@ const Tutorial = (props) => {
                   }}></View>
               ))}
             </View>
-            <Text style={{color: 'white'}}>SKIP</Text>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('signin')}>
+              <Text style={{color: 'white'}}>SKIP</Text>
+            </TouchableOpacity>
           </View>
           {state.selectedIndex == 0 && (
             <View
@@ -158,7 +167,20 @@ const Tutorial = (props) => {
             </View>
           )}
         </View>
-        {state.selectedIndex == 0 ? firstSlide() : secondSlide()}
+        <AppIntroSlider
+          renderItem={_renderItem}
+          ref={(ref) => (node = ref)}
+          data={[0, 1]}
+          onSlideChange={(i) => {
+            setState({...state, selectedIndex: i});
+          }}
+          // onDone={this._onDone}
+          dotStyle={{display: 'none'}}
+          activeDotStyle={{display: 'none'}}
+          showDoneButton={false}
+          showNextButton={false}
+        />
+        {/* {state.selectedIndex == 0 ? firstSlide() : secondSlide()} */}
       </View>
     </CustomView>
   );

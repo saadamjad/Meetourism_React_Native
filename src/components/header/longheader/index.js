@@ -26,7 +26,6 @@ const App = (props) => {
           ? props.backgroundColor
           : theme.primaryColor,
         zIndex: 999,
-        
       }}>
       <View
         style={{

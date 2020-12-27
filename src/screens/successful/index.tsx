@@ -2,12 +2,12 @@ import {Icon} from 'native-base';
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import GlobalButton from '../../../components/buttons/generalbutton';
-import CustomView from '../../../components/customView';
-import App from '../../../components/header';
-import {theme} from '../../../constants/theme';
+import GlobalButton from '../../components/buttons/generalbutton';
+import CustomView from '../../components/customView';
+import App from '../../components/header';
+import {theme} from '../../constants/theme';
 import Overlay from '../../components/overlays';
-function DetailOffer(props) {
+function Successful(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
     <CustomView bg={'rgba(66,48,80, 0.6)'} scroll>
@@ -69,7 +69,7 @@ function DetailOffer(props) {
               }}>
               <Image
                 resizeMode="contain"
-                source={require('../../../assets/images/burgerDrink.png')}
+                source={require('../../assets/images/burgerDrink.png')}
               />
             </View>
             <View
@@ -81,7 +81,22 @@ function DetailOffer(props) {
               <Image
                 resizeMode="cover"
                 style={{width: '100%', height: 200}}
-                source={require('../../../assets/images/map.jpg')}
+                source={require('../../assets/images/map.jpg')}
+              />
+            </View>
+            <View
+              style={{
+                width: '100%',
+                // height: 100
+                marginTop: 20,
+                flex: 0.2,
+                justifyContent: 'flex-end',
+                // backgroundColor: 'yellow',
+              }}>
+              <GlobalButton
+                buttonText="Pay the Offer"
+                height={40}
+                onPress={() => props.navigation.navigate('payment')}
               />
             </View>
           </View>
@@ -91,4 +106,4 @@ function DetailOffer(props) {
     // </Overlay>
   );
 }
-export default DetailOffer;
+export default Successful;

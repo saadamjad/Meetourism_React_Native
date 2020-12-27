@@ -12,7 +12,13 @@ function CreateOffer(props) {
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
     //   <CustomView bg={'rgba(66,48,80, 0.6)'} scroll>
     //     <App leftArrow={true} navigation={props.navigation} isTransparent />
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+      }}>
       <View
         style={{
           width: '90%',

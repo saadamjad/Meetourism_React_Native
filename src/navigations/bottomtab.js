@@ -37,6 +37,8 @@ import Cruhes from '../screens/crushes';
 import userProfile from '../screens/profile';
 
 import Home from '../screens/home';
+import DealOffer from '../screens/alloffers/detailsOffer';
+import Successful from '../screens/successful';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +50,7 @@ function MyDrawer(props) {
         activeTintColor: 'black',
         showLabel: false,
       }}
-      initialRouteName="Dashboard">
+      initialRouteName="DashboardStack">
       <Tab.Screen
         name="alloffers"
         // component={Alloffers}
@@ -69,7 +71,7 @@ function MyDrawer(props) {
         }}
       />
       <Tab.Screen
-        name="Dashboard"
+        name="DashboardStack"
         component={DashboardStack}
         options={{
           headerShown: false,
@@ -201,6 +203,16 @@ export function AlloffersStack() {
       <offersStack.Screen
         name="dealoffer1"
         component={dealoffer1}
+        options={{headerShown: false}}
+      />
+      {/* <offersStack.Screen
+        name="dealoffer"
+        component={DealOffer}
+        options={{headerShown: false}}
+      /> */}
+      <offersStack.Screen
+        name="dealoffer"
+        component={Successful}
         options={{headerShown: false}}
       />
       <offersStack.Screen
