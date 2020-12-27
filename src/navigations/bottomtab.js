@@ -1,21 +1,3 @@
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-// import Setting from '../screens/setting';
-// import dashboard from '../screens/dashboard';
-// // import setting from '../screens/profile/'
-// const Tab = createBottomTabNavigator();
-
-// function bottomtab() {
-//   return (
-//     <Tab.Navigator>
-//       <Tab.Screen name="setting" component={Setting} />
-//       {/* <Tab.Screen name="dashboard" component={dashboard} /> */}
-//     </Tab.Navigator>
-//   );
-// }
-
-// export default {bottomtab};
-
 import React from 'react';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -53,6 +35,8 @@ import matchprofile from '../screens/matches/matchedprofile';
 import userhome from '../screens/customdrawer';
 import Cruhes from '../screens/crushes';
 import userProfile from '../screens/profile';
+
+import Home from '../screens/home';
 
 const Tab = createBottomTabNavigator();
 
@@ -114,7 +98,7 @@ function MyDrawer(props) {
       />
       <Tab.Screen
         name="profile"
-        component={UserHomeMainStack}
+        component={CrushesMainStack}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -122,9 +106,9 @@ function MyDrawer(props) {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="setting"
-        component={CrushesMainStack}
+        component={null}
         options={{
           headerShown: false,
           tabBarLabel: 'Find Plans',
@@ -137,7 +121,7 @@ function MyDrawer(props) {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
@@ -245,11 +229,22 @@ export function AlloffersStack() {
 const dashboardStack = createStackNavigator();
 export function DashboardStack() {
   return (
-    <offersStack.Navigator initialRouteName={'Dashboard'}>
+    <offersStack.Navigator initialRouteName={'Home'}>
       {/* //SEE matches */}
       <dashboardStack.Screen
         name="SeeYourMatch"
         component={SeeYourMatch}
+        options={{headerShown: false}}
+      />
+      <dashboardStack.Screen
+        name="Chat"
+        component={Chat}
+        options={{headerShown: false}}
+      />
+
+      <dashboardStack.Screen
+        name="Home"
+        component={Home}
         options={{headerShown: false}}
       />
       <dashboardStack.Screen
@@ -280,11 +275,11 @@ export function DashboardStack() {
         options={{headerShown: false}}
       />
       {/* offers and create offers */}
-      <dashboardStack.Screen
+      {/* <dashboardStack.Screen
         name="Dashboard"
         component={Dashboard}
         options={{headerShown: false}}
-      />
+      /> */}
       <dashboardStack.Screen
         name="history"
         component={history}
@@ -395,23 +390,5 @@ export function profileMainStack() {
     </profileStack.Navigator>
   );
 }
-
-// const offers = createStackNavigator();
-// export function DashboardStack() {
-//   return (
-//     <offersStack.Navigator initialRouteName={'Profile'}>
-//       <dashStack.Screen
-//         name="Dashboard"
-//         component={Dashboard}
-//         options={{headerShown: false}}
-//       />
-//       <dashStack.Screen
-//         name="Profile"
-//         component={Profile}
-//         options={{headerShown: false}}
-//       />
-//     </offersStack.Navigator>
-//   );
-// }
 
 export default MyDrawer;

@@ -155,7 +155,7 @@ const Crushes = (props) => {
                       width: '80%',
                       alignSelf: 'center',
                     }}>
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
@@ -163,7 +163,7 @@ const Crushes = (props) => {
                         }}>
                         Edit
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                       onPress={() =>
                         props.navigation.navigate('followandBlock')
@@ -176,7 +176,12 @@ const Crushes = (props) => {
                         View
                       </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.navigation.navigate('followandBlock', {
+                          block: true,
+                        })
+                      }>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,

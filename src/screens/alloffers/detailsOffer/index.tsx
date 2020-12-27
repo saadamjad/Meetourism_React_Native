@@ -66,7 +66,11 @@ function Successfull(props) {
               />
             </View>
             <View style={{marginTop: 20}}>
-              <GlobalButton buttonText="Main Menu" height={40} />
+              <GlobalButton
+                buttonText="Main Menu"
+                height={40}
+                // onPress={()=>props.navigation.navigate()}
+              />
             </View>
           </View>
         </View>

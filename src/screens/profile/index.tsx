@@ -37,17 +37,23 @@ const Profile = (props) => {
             }}>
             Patrick Tulso
           </Text>
-          <View style={{width: '100%'}}>
-            <Text style={{fontSize: 18, paddingBottom: 10}}>Interests</Text>
+          <View style={{flex: 1, paddingHorizontal: 20, paddingVertical: 10}}>
+            <Text style={{fontSize: 15, color: 'black', marginVertical: 5}}>
+              Interests
+            </Text>
+
             <View
               style={{
                 width: '100%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
+
+                borderWidth: 0,
+                marginVertical: 5,
               }}>
               {['Fitness', 'Beauty', 'Dogs', 'Cats', 'Laundry'].map((val) => (
-                <Text style={{fontSize: 12}}>{val}</Text>
+                <Text style={{fontSize: 10, color: 'black'}}>{val}</Text>
               ))}
             </View>
             <View
@@ -56,7 +62,8 @@ const Profile = (props) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
-                marginTop: 15,
+                marginTop: 10,
+                // borderWidth: 1,
               }}>
               {[
                 {name: 'AGE', value: '17'},
@@ -64,11 +71,19 @@ const Profile = (props) => {
                 {name: 'City', value: 'XYZ'},
               ].map((val) => (
                 <View style={{width: '25%', alignItems: 'center'}}>
-                  <Text style={{fontSize: 20}}>{val.name}</Text>
-                  <Text style={{fontSize: 15, marginTop: 10}}>{val.value}</Text>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: '#998FA2',
+                      fontWeight: 'bold',
+                    }}>
+                    {val.name}
+                  </Text>
+                  <Text style={{fontSize: 13, marginTop: 10}}>{val.value}</Text>
                 </View>
               ))}
             </View>
+
             <View
               style={{
                 width: '100%',
@@ -83,33 +98,32 @@ const Profile = (props) => {
                 {name: 'EyeColor', value: 'Blue'},
               ].map((val) => (
                 <View style={{width: '25%', alignItems: 'center'}}>
-                  <Text style={{fontSize: 20}}>{val.name}</Text>
-                  <Text style={{fontSize: 15, marginTop: 10}}>{val.value}</Text>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: '#998FA2',
+                      fontWeight: 'bold',
+                    }}>
+                    {val.name}
+                  </Text>
+                  <Text style={{fontSize: 13, marginTop: 10}}>{val.value}</Text>
                 </View>
               ))}
             </View>
-            <Text style={{fontSize: 18, paddingVertical: 10}}>Description</Text>
-            <Text style={{lineHeight: 20}}>
+
+            <Text style={{fontSize: 15, paddingVertical: 10}}>Description</Text>
+            <Text style={{lineHeight: 20, color: 'gray', fontSize: 11}}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
               sodales pulvinar lectus eu consequat. Sed sagittis ex non purus
               porttitor, sit amet posuere justo ultrices.
             </Text>
             <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
             <SliderCom />
-            {/* <TouchableOpacity
-              style={{
-                width: '70%',
-                alignSelf: 'center',
-                height: 50,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 40,
-                backgroundColor: theme.secondaryColor,
-              }}>
-              <Text style={{color: theme.textColor.whiteColor}}>
-                See Your Matches
-              </Text>
-            </TouchableOpacity> */}
+            {/* <GlobalButton
+              buttonText="Dashboard"
+              width="70%"
+              onPress={() => props.navigation.navigate('drawer')}
+            /> */}
             <GlobalButton
               buttonText="See Your Matches"
               width="70%"

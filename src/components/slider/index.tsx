@@ -9,7 +9,7 @@ const SliderCom = (props) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text
             style={{
-              color: theme.textColor.blackColor,
+              color: props.color ? props.color : theme.textColor.blackColor,
               fontSize: 14,
               marginVertical: 10,
             }}>
@@ -18,7 +18,7 @@ const SliderCom = (props) => {
           </Text>
           <Text
             style={{
-              color: theme.textColor.blackColor,
+              color: props.color ? props.color : theme.textColor.blackColor,
               fontSize: 14,
               marginVertical: 10,
             }}>
@@ -42,7 +42,7 @@ const SliderCom = (props) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text
             style={{
-              color: theme.textColor.blackColor,
+              color: props.color ? props.color : theme.textColor.blackColor,
               fontSize: 14,
               marginVertical: 10,
             }}>
@@ -51,7 +51,7 @@ const SliderCom = (props) => {
           </Text>
           <Text
             style={{
-              color: theme.textColor.blackColor,
+              color: props.color ? props.color : theme.textColor.blackColor,
               fontSize: 14,
               marginVertical: 10,
             }}>

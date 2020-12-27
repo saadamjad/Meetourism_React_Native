@@ -95,12 +95,12 @@ const DrawerContent = (props) => {
       <View style={{flex: 1}}>
         {
           (array = [
-            {
-              title: 'Admin screens',
-              name: 'adminscreens',
-              // icon: require('../assets/icons/64.png'),
-              icon: require('../../assets/icons/singleuser.png'),
-            },
+            // {
+            //   title: 'Admin screens',
+            //   name: 'adminscreens',
+            //   // icon: require('../assets/icons/64.png'),
+            //   icon: require('../../assets/icons/singleuser.png'),
+            // },
             {
               title: 'Home',
               name: 'HomeScreen',

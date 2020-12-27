@@ -205,6 +205,11 @@ const Profile = (props) => {
               </Text>
               <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
               <SliderCom />
+              <GlobalButton
+                buttonText="Dashboard"
+                width="70%"
+                onPress={() => props.navigation.navigate('drawer')}
+              />
             </View>
           </View>
         </View>
