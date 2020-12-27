@@ -169,7 +169,7 @@ const DrawerContent = (props) => {
               console.log('loop', val),
               (
                 <TouchableOpacity
-                  onPress={() => props.navigation.navigate('adminscreens')}
+                  onPress={() => props.navigation.navigate('DashboardStack')}
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',

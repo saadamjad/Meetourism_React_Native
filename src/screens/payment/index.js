@@ -99,7 +99,7 @@ const Messages = (props) => {
                     color: 'white',
                     // height: 40,
                     padding: 0,
-                    fontSize: 16,
+                    fontSize: 12,
                     margin: 0,
                     paddingBottom: 0,
                   }}
@@ -112,14 +112,14 @@ const Messages = (props) => {
                   width: '30%',
                   borderColor: 'white',
                 }}>
-                <Text style={{color: '#817889'}}>Card Number </Text>
+                <Text style={{color: '#817889'}}>Expires </Text>
                 <TextInput
                   placeholder="MM/YY"
                   style={{
                     color: 'white',
                     // height: 40,
                     padding: 0,
-                    fontSize: 16,
+                    fontSize: 12,
                     margin: 0,
                     paddingBottom: 0,
                   }}
@@ -140,14 +140,14 @@ const Messages = (props) => {
                   width: '50%',
                   borderColor: 'white',
                 }}>
-                <Text style={{color: '#817889'}}> initialRouteName </Text>
+                <Text style={{color: '#817889'}}> Name </Text>
                 <TextInput
                   placeholder="JOHN DOE"
                   style={{
                     color: 'white',
                     // height: 40,
                     padding: 0,
-                    fontSize: 16,
+                    fontSize: 12,
                     margin: 0,
                     paddingBottom: 0,
                   }}
@@ -168,7 +168,7 @@ const Messages = (props) => {
                   style={{
                     color: 'white',
                     padding: 0,
-                    fontSize: 16,
+                    fontSize: 12,
                     margin: 0,
                     paddingBottom: 0,
                   }}
@@ -184,17 +184,9 @@ const Messages = (props) => {
                   label: 'USA',
                   value: 'usa',
                 },
-                {
-                  label: 'UK',
-                  value: 'uk',
-                },
-                {
-                  label: 'France',
-                  value: 'france',
-                },
               ]}
               placeholder="Country"
-              placeholderStyle={{colors: 'white'}}
+              placeholderStyle={{color: 'white'}}
               searchablePlaceholderTextColor="white"
               containerStyle={{height: 40, marginTop: 20, color: 'white'}}
               style={{
@@ -207,7 +199,7 @@ const Messages = (props) => {
                 justifyContent: 'flex-start',
                 color: 'white',
               }}
-              //   dropDownStyle={{color: 'white'}}
+              arrowColor={'white'}
               onChangeItem={(item) => console.log('items', item)}
             />
 
@@ -217,17 +209,10 @@ const Messages = (props) => {
                   label: 'USA',
                   value: 'usa',
                 },
-                {
-                  label: 'UK',
-                  value: 'uk',
-                },
-                {
-                  label: 'France',
-                  value: 'france',
-                },
               ]}
               placeholder="City"
-              placeholderStyle={{colors: 'white'}}
+              placeholderStyle={{color: 'white'}}
+              arrowColor={'white'}
               searchablePlaceholderTextColor="white"
               containerStyle={{
                 height: 40,
@@ -249,22 +234,15 @@ const Messages = (props) => {
             />
 
             <DropDownPicker
+              arrowColor={'white'}
               items={[
                 {
                   label: 'USA',
                   value: 'usa',
                 },
-                {
-                  label: 'UK',
-                  value: 'uk',
-                },
-                {
-                  label: 'France',
-                  value: 'france',
-                },
               ]}
               placeholder="Address"
-              placeholderStyle={{colors: 'white'}}
+              placeholderStyle={{color: 'white'}}
               searchablePlaceholderTextColor="white"
               containerStyle={{height: 40, marginTop: 20, color: 'white'}}
               style={{

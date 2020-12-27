@@ -7,10 +7,10 @@ import CustomView from '../../../components/customView';
 import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
 import Overlay from '../../../components/overlays';
-function Successfull(props) {
+function DealOffer(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
-    <CustomView bg={'rgba(66,48,80, 0.6)'} scroll>
+    <CustomView bg={'rgba(00,00,00, 0.6)'} scroll>
       <App leftArrow={true} navigation={props.navigation} isTransparent />
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View
@@ -33,7 +33,7 @@ function Successfull(props) {
             style={{
               color: theme.textColor.blackColor,
               paddingBottom: 25,
-              fontSize: 30,
+              fontSize: 25,
               fontWeight: '700',
             }}>
             SAVE THE QR
@@ -51,7 +51,7 @@ function Successfull(props) {
               />
             </View>
 
-            <GlobalButton buttonText="Save Qr" height={40} width={'40%'} />
+            <GlobalButton buttonText="Save QR" height={40} width={'50%'} />
 
             <View
               style={{
@@ -69,7 +69,7 @@ function Successfull(props) {
               <GlobalButton
                 buttonText="Main Menu"
                 height={40}
-                // onPress={()=>props.navigation.navigate()}
+                onPress={() => props.navigation.navigate('DashboardStack')}
               />
             </View>
           </View>
@@ -79,4 +79,4 @@ function Successfull(props) {
     // </Overlay>
   );
 }
-export default Successfull;
+export default DealOffer;

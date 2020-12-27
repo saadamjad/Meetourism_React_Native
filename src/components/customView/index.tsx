@@ -15,6 +15,7 @@ const CustomView = (props) => {
       <SafeAreaView style={{flex: 1, zIndex: 0}}>
         {props.scroll ? (
           <ScrollView
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               flexGrow: 1,
               zIndex: 0,

@@ -12,7 +12,14 @@ const App = ({toggleOverlay, visible, children}) => {
     <Overlay
       isVisible={visible}
       onBackdropPress={toggleOverlay}
-      overlayStyle={{borderRadius: 50, backgroundColor: 'transparent'}}>
+      overlayStyle={{
+        // borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+        width: '100%',
+        height: '100%',
+      }}>
       {children}
       {/* <Text>Hello from Overlay!</Text> */}
     </Overlay>

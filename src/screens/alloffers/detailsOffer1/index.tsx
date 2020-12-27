@@ -16,74 +16,79 @@ function DetailOffer1(props) {
         <View
           style={{
             width: '90%',
+            flex: 1,
             backgroundColor: 'white',
             paddingHorizontal: 20,
             borderRadius: 45,
             paddingVertical: 50,
             alignItems: 'center',
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              props.navigation.goBack();
-            }}
-            style={{position: 'absolute', right: 20, top: 10}}>
-            <Icon name="cross" type="Entypo" />
-          </TouchableOpacity>
-          <Text
-            style={{
-              color: theme.secondaryColor,
-              paddingBottom: 25,
-              fontSize: 24,
-              fontWeight: '700',
-            }}>
-            Whopper Feast
-          </Text>
-          <View style={{width: '100%'}}>
+          <View style={{flex: 0.8, alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.goBack();
+              }}
+              style={{position: 'absolute', right: 20, top: 10}}>
+              <Icon name="cross" type="Entypo" />
+            </TouchableOpacity>
             <Text
               style={{
-                color: theme.textColor.blackColor,
-                paddingBottom: 10,
-                fontSize: 16,
-                fontWeight: '500',
-              }}>
-              Description
-            </Text>
-            <Text
-              style={{
-                color: theme.textColor.greyColor,
+                color: theme.secondaryColor,
                 paddingBottom: 25,
-                fontSize: 14,
+                fontSize: 24,
+                fontWeight: '700',
               }}>
-              10 Chicken Whopper and 10 Drink
+              Whopper Feast
             </Text>
-            <View style={{width: '100%', alignItems: 'flex-end'}}>
-              <Text style={{color: theme.secondaryColor, fontWeight: '700'}}>
-                15.99$.only/-
+            <View style={{width: '100%'}}>
+              <Text
+                style={{
+                  color: theme.textColor.blackColor,
+                  paddingBottom: 10,
+                  fontSize: 16,
+                  fontWeight: '500',
+                }}>
+                Description
               </Text>
+              <Text
+                style={{
+                  color: theme.textColor.greyColor,
+                  paddingBottom: 25,
+                  fontSize: 14,
+                }}>
+                10 Chicken Whopper and 10 Drink
+              </Text>
+              <View style={{width: '100%', alignItems: 'flex-end'}}>
+                <Text style={{color: theme.secondaryColor, fontWeight: '700'}}>
+                  15.99$.only/-
+                </Text>
+              </View>
+              <View
+                style={{
+                  width: '100%',
+                  alignItems: 'center',
+                  marginTop: 40,
+                }}>
+                <Image
+                  resizeMode="contain"
+                  source={require('../../../assets/images/burgerDrink.png')}
+                />
+              </View>
             </View>
-            <View
-              style={{
-                width: '100%',
-                alignItems: 'center',
-                marginTop: 40,
-              }}>
-              <Image
-                resizeMode="contain"
-                source={require('../../../assets/images/burgerDrink.png')}
-              />
-            </View>
-            <View
-              style={{
-                width: '100%',
-                height: 300,
-                justifyContent: 'flex-end',
-              }}>
-              <GlobalButton
-                buttonText="Pay the Offer"
-                height={40}
-                onPress={() => props.navigation.navigate('payment')}
-              />
-            </View>
+          </View>
+          <View
+            style={{
+              width: '100%',
+              // height: 100
+              flex: 0.2,
+              justifyContent: 'flex-end',
+              // backgroundColor: 'yellow',
+            }}>
+            <GlobalButton
+              buttonText="Pay the Offer"
+              height={40}
+              onPress={() => props.navigation.navigate('payment')}
+            />
           </View>
         </View>
       </View>

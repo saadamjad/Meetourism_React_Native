@@ -13,7 +13,13 @@ function OfferUploaded(props) {
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
     //   <CustomView bg={'rgba(66,48,80, 0.6)'} scroll>
     //     <App leftArrow={true} navigation={props.navigation} isTransparent />
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(000,000,000, 0.7)',
+      }}>
       <View
         style={{
           width: '90%',
@@ -23,6 +29,7 @@ function OfferUploaded(props) {
           borderTopRightRadius: 100,
           borderBottomLeftRadius: 100,
           paddingVertical: 60,
+          elevation: 2,
           // alignItems: 'center',
         }}>
         <Text
@@ -44,11 +51,11 @@ function OfferUploaded(props) {
           onPress={() => props.navigation.navigate('Selectoffer')}
         />
         {/* <GlobalButton buttonText="Create new offer" height={40} /> */}
-        {/* <GlobalButton
+        <GlobalButton
           buttonText="Dashboard"
           height={40}
-          // onPress={() => props.navigation.navigate('Dashboard')}
-        /> */}
+          onPress={() => props.navigation.navigate('drawer')}
+        />
       </View>
     </View>
     //   </CustomView>

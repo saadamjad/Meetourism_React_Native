@@ -13,15 +13,22 @@ import {theme} from '../../../constants/theme';
 // import styles from './styles';
 import CustomView from '../../../components/customView';
 import {TabView, SceneMap} from 'react-native-tab-view';
+import HoldOn from '../../holdOn';
 const SignIn = (props) => {
   const [state, setState] = useState({
     selectedIndex: 0,
     activeInput: 3,
+    visible: false,
     routes: [
       {key: 'first', title: 'SignIn'},
       {key: 'second', title: 'SignUp'},
     ],
   });
+
+  const toggleOverlay = () => {
+    setState({...state, visible: !state.visible});
+  };
+
   const signInRoute = () => (
     <View style={{flex: 1}}>
       <View style={{alignItems: 'center'}}>
@@ -183,6 +190,7 @@ const SignIn = (props) => {
           paddingVertical: 40,
         }}>
         <TouchableOpacity
+          onPress={() => toggleOverlay()}
           style={{
             backgroundColor: theme.secondaryColor,
             width: '80%',
@@ -251,6 +259,11 @@ const SignIn = (props) => {
         initialLayout={{
           width: Dimensions.get('window').width,
         }}
+      />
+      <HoldOn
+        visible={state.visible}
+        navigation={props.navigation}
+        toggleOverlay={toggleOverlay}
       />
     </CustomView>
   );

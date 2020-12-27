@@ -16,6 +16,7 @@ function GlobalButton(props) {
           ? props.backgroundColor
           : theme.secondaryColor,
         marginVertical: props.marginVertical ? props.marginVertical : 5,
+        marginLeft: props.marginLeft ? props.marginLeft : 5,
         width: props.width ? props.width : '90%',
         height: props.height ? props.height : 50,
         alignSelf: 'center',

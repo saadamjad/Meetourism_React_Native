@@ -20,10 +20,10 @@ function SelectPaymentMethod(props) {
             backgroundColor: 'white',
             paddingHorizontal: 40,
             // borderRadius: 45,
-            borderTopRightRadius: 100,
-            borderBottomLeftRadius: 100,
-            borderTopLeftRadius: 100,
-            paddingVertical: 30,
+            borderTopRightRadius: 80,
+            borderBottomLeftRadius: 80,
+            borderTopLeftRadius: 80,
+            paddingVertical: 40,
             alignItems: 'center',
           }}>
           <Text
@@ -31,7 +31,7 @@ function SelectPaymentMethod(props) {
               color: theme.textColor.blackColor,
               paddingBottom: 20,
               paddingTop: 40,
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: '700',
             }}>
             Select Payment Method
@@ -40,7 +40,7 @@ function SelectPaymentMethod(props) {
             style={{
               flexDirection: 'row',
               width: '100%',
-              paddingBottom: 60,
+              paddingBottom: 30,
               justifyContent: 'space-around',
             }}>
             {[
@@ -49,10 +49,15 @@ function SelectPaymentMethod(props) {
               require('../../assets/images/visa.png'),
             ].map((val) => (
               <TouchableOpacity
+                style={{width: 100, height: 30}}
                 onPress={() =>
                   props.navigation.navigate('selectPaymentmethod')
                 }>
-                <Image resizeMode="contain" source={val} />
+                <Image
+                  style={{width: '100%', height: '100%'}}
+                  resizeMode="contain"
+                  source={val}
+                />
               </TouchableOpacity>
             ))}
           </View>
