@@ -69,11 +69,11 @@ const Profile = (props) => {
                   borderRadius: 30,
                   overflow: 'hidden',
                 }}>
-                <Image
+                {/* <Image
                   source={require('../../assets/icons/edit.png')}
                   style={{height: '100%', width: '100%'}}
                   resizeMode="contain"
-                />
+                /> */}
               </View>
             </View>
 
@@ -159,9 +159,9 @@ const Profile = (props) => {
                 style={{height: 20, width: 20, tintColor: 'purple'}}
                 resizeMode="contain"
               />
-              <Text style={{fontSize: 12, marginTop: 5}}>Gallery </Text>
+              <Text style={{fontSize: 12, marginTop: 5}}>Friends </Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 width: '33.33%',
                 borderWidth: 0,
@@ -174,7 +174,7 @@ const Profile = (props) => {
                 resizeMode="contain"
               />
               <Text style={{fontSize: 12, marginTop: 5}}>Follow </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           <View

@@ -22,6 +22,7 @@ import OfferUploaded from './src/screens/offerUploaded';
 import Successfull from './src/screens/alloffers/detailsOffer';
 import LiveChat from './src/screens/livechat';
 import Allresturant from './src/screens/allresturant';
+import Home from './src/screens/home';
 
 const App = (props) => {
   return (
@@ -29,7 +30,7 @@ const App = (props) => {
       {/* <BGcustom /> */}
       {/* <Profile /> */}
       <Stack navigation={props.navigation} />
-      {/* <LiveChat /> */}
+      {/* <Home /> */}
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}
       {/* <DetailOffer /> */}
