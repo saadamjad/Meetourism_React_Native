@@ -12,7 +12,11 @@ const CustomView = (props) => {
         backgroundColor: props.bg ? props.bg : 'orange',
         zIndex: 0,
       }}>
-      <SafeAreaView style={{flex: 1, zIndex: 0}}>
+      <SafeAreaView
+        style={{
+          flex: 1,
+          zIndex: 0,
+        }}>
         {props.scroll ? (
           <ScrollView
             showsVerticalScrollIndicator={false}

@@ -23,6 +23,7 @@ import Successfull from './src/screens/alloffers/detailsOffer';
 import LiveChat from './src/screens/livechat';
 import Allresturant from './src/screens/allresturant';
 import Home from './src/screens/home';
+import Search from './src/screens/search';
 
 const App = (props) => {
   return (

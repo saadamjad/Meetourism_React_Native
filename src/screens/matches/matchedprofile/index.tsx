@@ -21,7 +21,12 @@ const Profile = (props) => {
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
           source={require('../../../assets/images/profile.png')}>
-          <Header leftArrow={true} isTransparent={true} searchIcon={true} />
+          <Header
+            navigation={props.navigation}
+            leftArrow={true}
+            isTransparent={true}
+            searchIcon={true}
+          />
         </ImageBackground>
 
         <View
