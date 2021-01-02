@@ -67,7 +67,9 @@ const App = (props) => {
             justifyContent: 'center',
           }}>
           {props.searchIcon && (
-            <TouchableOpacity style={{paddingRight: 25, borderWidth: 0}}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('search')}
+              style={{paddingRight: 25, borderWidth: 0}}>
               <Ionicons name="search" size={20} color={'#241332'} />
             </TouchableOpacity>
           )}
