@@ -7,8 +7,9 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
 const App = (props) => {
   const [allStatus, setStatus] = useState([
@@ -17,30 +18,12 @@ const App = (props) => {
       image: require('../../assets/icons/row.png'),
     },
     {
-      name: 'user 1 ',
-      image: require('../../assets/icons/row.png'),
+      name: 'status ',
+      image: <FontAwesome name="user" size={20} color="black" />,
     },
     {
-      name: 'user 2 ',
-      image: require('../../assets/icons/row.png'),
-    },
-    {
-      name: 'user 3',
-      image: require('../../assets/icons/row.png'),
-    },
-    {
-      name: 'user 4',
-
-      image: require('../../assets/icons/row.png'),
-    },
-    {
-      name: 'user 5',
-
-      image: require('../../assets/icons/row.png'),
-    },
-    {
-      name: 'user 6',
-      image: require('../../assets/icons/row.png'),
+      name: 'Add more',
+      image: <Feather name="plus" size={20} color="gray" />,
     },
   ]);
   return (
@@ -63,79 +46,101 @@ const App = (props) => {
             resizeMode="cover">
             <View
               style={{
-                height: 100,
+                height: 125,
                 backgroundColor: 'white',
                 // borderWidth:1,
-                borderBottomLeftRadius: 90,
+                borderBottomLeftRadius: 85,
                 flexDirection: 'row',
                 overflow: 'hidden',
-                elevation: 1,
+                // elevation: 1,
+                // borderWidth: 1,
               }}>
               <TouchableOpacity
                 style={{
                   width: '20%',
                   paddingBottom: 20,
-                  borderWidth: 0,
+                  // borderWidth: 1,
                   height: '100%',
                   alignItems: 'center',
                   justifyContent: 'center',
-                }}>
+                }}
+                onPress={() => props.navigation.openDrawer()}>
                 <Image
                   source={require('../../assets/icons/drawer.png')}
                   style={{height: 30, width: 30, tintColor: '#ED1C24'}}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
-              <View
-                style={{
-                  flex: 1,
-                  borderWidth: 0,
-                  backgroundColor: 'white',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <ScrollView horizontal={true}>
-                  {allStatus.map((item, i) => {
-                    return (
-                      <View style={{alignItems: 'center'}}>
-                        <TouchableOpacity
-                          style={{
-                            height: 50,
-                            overflow: 'hidden',
-                            width: 50,
-                            borderWidth: 0,
-                            borderRadius: 50,
-                            marginHorizontal: 15,
-                          }}>
+              <View style={{flexDirection: 'row'}}>
+                {allStatus.map((item, i) => {
+                  return (
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        // borderWidth: 1,
+                        paddingHorizontal: 10,
+                        paddingTop: 20,
+                      }}>
+                      <TouchableOpacity
+                        style={{
+                          height: 50,
+                          overflow: 'hidden',
+                          width: 50,
+                          borderWidth: 0.6,
+                          borderRadius: 50,
+                          marginHorizontal: 15,
+                          borderColor: '#707070',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}>
+                        {i == 0 ? (
                           <Image
                             source={item.image}
                             style={{height: '100%', width: '100%'}}
                             resizeMode="contain"
                           />
+                        ) : (
+                          item.image
+                        )}
+                      </TouchableOpacity>
+                      <Text
+                        style={{color: '#707070', fontSize: 12, marginTop: 7}}>
+                        {item.name}
+                      </Text>
+                      {i == 1 ? (
+                        <TouchableOpacity>
+                          <MaterialIcons
+                            name="keyboard-arrow-down"
+                            size={25}
+                            color={'gray'}
+                          />
                         </TouchableOpacity>
-                        <Text style={{color: '#707070', fontSize: 12}}>
-                          {' '}
-                          {item.name}{' '}
-                        </Text>
-                      </View>
-                    );
-                  })}
-                </ScrollView>
+                      ) : null}
+                    </View>
+                  );
+                })}
               </View>
             </View>
 
             <View
               style={{
                 alignItems: 'flex-end',
-                borderWidth: 0,
                 flex: 1,
                 paddingLeft: 45,
                 paddingBottom: 20,
                 flexDirection: 'row',
               }}>
-              <View style={{borderWidth: 0, height: 50, flexDirection: 'row'}}>
+              <View
+                style={{
+                  height: 100,
+                  alignItems: 'flex-end',
+                  flexDirection: 'row',
+                }}>
                 <View style={{width: '75%', borderWidth: 0}}>
-                  <Text style={{fontSize: 13, color: 'white'}}> meetups </Text>
+                  <Text style={{fontSize: 13, color: 'white'}}>
+                    {' '}
+                    0 meetups{' '}
+                  </Text>
                   <Text style={{fontSize: 23, color: 'white'}}>
                     {' '}
                     Lady in the Blue{' '}
@@ -145,9 +150,10 @@ const App = (props) => {
                   style={{
                     width: '25%',
                     height: '100%',
-                    borderWidth: 0,
+                    paddingTop: 20,
+                    // borderWidth: 1,
                     justifyContent: 'center',
-                    alignItems: 'center',
+                    alignItems: 'flex-end',
                   }}>
                   <Image
                     source={require('../../assets/icons/edit.png')}
@@ -170,28 +176,37 @@ const App = (props) => {
               height: 120,
               borderWidth: 0,
               flexDirection: 'row',
-              borderBottomLeftRadius: 40,
+              borderBottomLeftRadius: 50,
               shadowColor: 'white',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
+
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
-
-              borderColor: 'white',
-              elevation: 1,
+              overflow: 'hidden',
+              borderColor: '#707070',
+              borderBottomWidth: 0.7,
+              borderLeftWidth: 0.7,
+              // elevation: 1,
             }}>
             <TouchableOpacity
               style={{
                 width: '50%',
-                borderWidth: 0,
+                // borderWidth: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
               onPress={() => props.navigation.navigate('Chat')}>
-              <Feather name="mail" size={40} color={'white'} />
-              <Text style={{color: 'white', fontSize: 12}}> Messages </Text>
+              <View
+                style={{
+                  borderRightWidth: 0.5,
+                  borderColor: '#707070',
+                  width: '100%',
+                  alignItems: 'center',
+                }}>
+                <Feather name="mail" size={40} color={'white'} />
+                <Text style={{color: 'white', fontSize: 12, marginTop: 5}}>
+                  Messages
+                </Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
@@ -207,7 +222,7 @@ const App = (props) => {
                 style={{height: 40, width: 40}}
                 resizeMode="contain"
               />
-              <Text style={{color: 'white', fontSize: 12}}>
+              <Text style={{color: 'white', fontSize: 12, marginTop: 5}}>
                 {' '}
                 Notofications{' '}
               </Text>
@@ -219,18 +234,14 @@ const App = (props) => {
               height: 120,
               borderWidth: 0,
               flexDirection: 'row',
-              borderBottomLeftRadius: 40,
-              shadowColor: 'white',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
+              borderBottomLeftRadius: 50,
+              overflow: 'hidden',
 
               borderColor: 'white',
-              elevation: 1,
               paddingTop: 20,
+              borderColor: '#707070',
+              borderBottomWidth: 0.7,
+              borderLeftWidth: 0.7,
               paddingLeft: 20,
             }}>
             <View>
@@ -253,13 +264,17 @@ const App = (props) => {
             </View>
           </View>
 
-          <View style={{paddingHorizontal: 10}}>
-            <Text style={{color: 'white', fontSize: 14, marginVertical: 10}}>
-              {' '}
-              Langauge{' '}
+          <View style={{paddingHorizontal: 15, marginVertical: 10}}>
+            <Text
+              style={{
+                color: 'white',
+                marginTop: 25,
+                fontSize: 14,
+              }}>
+              Langauge
             </Text>
 
-            <View>
+            <View style={{marginBottom: 20}}>
               <Slider color="white" />
             </View>
           </View>

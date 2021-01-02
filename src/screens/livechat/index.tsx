@@ -9,6 +9,8 @@ import LongHeader from '../../components/header/longheader';
 import {TextInput} from 'react-native';
 import {SafeAreaView} from 'react-native';
 import {Icon} from 'native-base';
+import Fontisto from 'react-native-vector-icons//Fontisto';
+import Feather from 'react-native-vector-icons//Feather';
 const Messages = (props) => {
   const [state, setState] = useState({
     messages: [
@@ -16,10 +18,14 @@ const Messages = (props) => {
         id: 0,
         username: 'Max',
         message: 'what is the best time to visit Rio de Janerio?',
+
+        image: require('../../assets/icons/row.png'),
       },
       {
         id: 1,
         username: 'Lady in the Blue',
+        image: require('../../assets/icons/row.png'),
+
         message:
           'March is the one of the best months to visit Rio. you can enjoy the beach and many of the attractions.',
       },
@@ -47,11 +53,34 @@ const Messages = (props) => {
                   alignItems: item.id == id ? 'flex-end' : 'flex-start',
                   // paddingVertical: 10,
                 }}>
-                <View style={{paddingHorizontal: 10, paddingVertical: 10}}>
+                <View
+                  style={{
+                    paddingHorizontal: 10,
+                    paddingVertical: 10,
+                    flexDirection: item.id == id ? 'row-reverse' : 'row',
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      borderWidth: 1,
+                      borderColor: 'pink',
+                      height: 35,
+                      width: 35,
+                      marginRight: 10,
+                      marginLeft: item.id == id ? 10 : 0,
+                      borderRadius: 35,
+                    }}>
+                    <Image
+                      source={item.image}
+                      style={{height: '100%', width: '100%'}}
+                      resizeMode="contain"
+                    />
+                  </View>
+
                   <Text
                     style={{
                       color: theme.textColor.whiteColor,
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: '600',
                     }}>
                     {item.username}
@@ -77,7 +106,8 @@ const Messages = (props) => {
                           paddingHorizontal: 20,
                         }
                   }>
-                  <Text style={{color: theme.textColor.whiteColor}}>
+                  <Text
+                    style={{color: theme.textColor.whiteColor, fontSize: 14}}>
                     {item.message}
                   </Text>
                 </View>
@@ -90,14 +120,14 @@ const Messages = (props) => {
                   <Text
                     style={{
                       color: theme.textColor.whiteColor,
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     Wednesday Aug 19
                   </Text>
                   <Text
                     style={{
                       color: theme.textColor.whiteColor,
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     10:23 am
                   </Text>
@@ -115,10 +145,12 @@ const Messages = (props) => {
           justifyContent: 'space-around',
           alignItems: 'center',
           flexDirection: 'row',
+          paddingHorizontal: 5,
           // position: 'absolute',
         }}>
         <View>
-          <Image source={require('../../assets/images/emoji.png')} />
+          <Fontisto name="smiley" size={20} color="white" />
+          {/* <Image source={require('../../assets/images/emoji.png')} /> */}
         </View>
         <View style={{width: '80%'}}>
           <TextInput
@@ -157,7 +189,7 @@ const Messages = (props) => {
               />
             </TouchableOpacity>
           ) : (
-            <Image source={require('../../assets/images/mic.png')} />
+            <Feather name="mic" size={20} color="white" />
           )}
         </View>
       </View>

@@ -31,10 +31,11 @@ const SliderCom = (props) => {
           onValueChange={(value) => console.log('value', value)}
           thumbStyle={{backgroundColor: '#D9B372'}}
           trackStyle={{
-            backgroundColor: theme.textColor.blackColor,
+            backgroundColor: 'white',
             borderRadius: 10,
           }}
-          thumbTintColor="#0000"
+          minimumTrackTintColor="#998FA2"
+          thumbTintColor="#fff"
         />
       </View>
 
@@ -46,7 +47,6 @@ const SliderCom = (props) => {
               fontSize: 14,
               marginVertical: 10,
             }}>
-            {' '}
             Russian{' '}
           </Text>
           <Text
@@ -70,11 +70,12 @@ const SliderCom = (props) => {
             borderRadius: 3,
           }}
           trackStyle={{
-            backgroundColor: theme.textColor.blackColor,
+            backgroundColor: 'white',
             borderRadius: 10,
           }}
           // style={{backgroundColor:'blue'}}
-          thumbTintColor="#0000"
+          minimumTrackTintColor="#998FA2"
+          // thumbStyle="red"
         />
       </View>
     </>
