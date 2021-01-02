@@ -108,6 +108,16 @@ function MyDrawer(props) {
           ),
         }}
       />
+      <Tab.Screen
+        name="setting"
+        component={CrushesMainStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({color, size}) => (
+            <MaterialIcons name="settings" size={20} color={color} />
+          ),
+        }}
+      />
       {/* <Tab.Screen
         name="setting"
         component={null}

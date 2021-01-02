@@ -84,7 +84,8 @@ const Notification = (props) => {
                     ? theme.primaryColor1
                     : theme.primaryColor,
 
-                borderWidth: 0.2,
+                borderRightWidth: 0,
+                borderWidth: 0.5,
                 borderTopColor: 'transparent',
                 borderRightColor: 'transparent',
                 justifyContent: 'flex-end',

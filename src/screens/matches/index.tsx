@@ -49,7 +49,11 @@ const App = (props) => {
         <ScrollView contentContainerStyle={{flexGrow: 1}} horizontal={true}>
           {offer.map((item, i) => {
             return (
-              <View style={{alignItems: 'center', marginHorizontal: 10}}>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate('detailoffer');
+                }}
+                style={{alignItems: 'center', marginHorizontal: 10}}>
                 <View
                   style={{
                     height: 55,
@@ -69,7 +73,7 @@ const App = (props) => {
                 <Text style={{fontSize: 10, color: '#0A0A0A', marginTop: 5}}>
                   Whopper Feast{' '}
                 </Text>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </ScrollView>
@@ -148,7 +152,8 @@ const App = (props) => {
                   buttonText="Profile"
                   height={45}
                 />
-                <View
+                <TouchableOpacity
+                  onPress={() => props.navigation.navigate('search')}
                   style={{
                     width: '60%',
                     alignItems: 'center',
@@ -158,7 +163,7 @@ const App = (props) => {
                     {' '}
                     Back to search
                   </Text>
-                </View>
+                </TouchableOpacity>
               </View>
             </View>
           );

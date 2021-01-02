@@ -21,6 +21,8 @@ const App = (
     searchIcon,
     navigation,
     textColor,
+    bgColor,
+    sColor,
   },
   props,
 ) => {
@@ -32,7 +34,11 @@ const App = (
         width: '100%',
         flexDirection: 'row',
         elevation: 0,
-        backgroundColor: isTransparent ? 'transparent' : 'white',
+        backgroundColor: isTransparent
+          ? 'transparent'
+          : bgColor
+          ? bgColor
+          : 'white',
       }}>
       {leftArrow && (
         <TouchableOpacity
@@ -45,7 +51,7 @@ const App = (
             justifyContent: 'center',
             // backgroundColor: 'pink'
           }}>
-          <Ionicons name="arrow-back" size={20} color={'white'} />
+          <Ionicons name="arrow-back" size={20} color={sColor || 'white'} />
         </TouchableOpacity>
       )}
 
@@ -76,8 +82,10 @@ const App = (
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <TouchableOpacity>
-          {searchIcon && <Ionicons name="search" size={20} color={'#241332'} />}
+        <TouchableOpacity onPress={() => navigation.navigate('search')}>
+          {searchIcon && (
+            <Ionicons name="search" size={20} color={sColor || '#241332'} />
+          )}
         </TouchableOpacity>
       </View>
     </View>
