@@ -33,6 +33,7 @@ import SeeYourMatch from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
 
 import userProfile from '../screens/profile';
+import Search from '../screens/search';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -200,6 +201,16 @@ function App() {
           options={{headerShown: false}}
         />
 
+        <Stack.Screen
+          name="search"
+          component={Search}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="detailoffer"
+          component={dealoffer1}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="drawer"
           component={drawer}

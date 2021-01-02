@@ -72,19 +72,23 @@ const Messages = (props) => {
           console.log('helo', i == state.messages.length - 1);
           return (
             <TouchableOpacity
+              activeOpacity={1}
               style={{
                 height: 300,
                 backgroundColor: theme.primaryColor,
 
-                borderWidth: 0.2,
-                borderTopColor: 'transparent',
-                borderRightColor: 'transparent',
                 justifyContent: 'flex-end',
                 borderColor: theme.primaryColor1,
                 marginTop: -150,
                 borderBottomLeftRadius:
                   i == state.messages.length - 1 ? 0 : 100,
                 zIndex: val.l,
+                borderRightWidth: 0,
+                borderWidth: 0.5,
+                // borderRightWidth: 0,
+                // borderTopColor: theme.primaryColor,
+                // borderRightColor: theme.primaryColor,
+                // borderLeftColor: theme.primaryColor,
                 overflow: 'hidden',
               }}
               onPress={() => props.navigation.navigate('innerchat')}>

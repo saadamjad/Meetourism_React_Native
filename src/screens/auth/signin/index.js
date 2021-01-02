@@ -141,14 +141,12 @@ const SignIn = (props) => {
                 width: '80%',
                 height: 40,
                 marginTop: i !== 0 ? 40 : 0,
-                // marginTop: i !== 0 && 20,
               }}>
               <TextInput
                 style={{
                   width: '100%',
                   height: '100%',
                   fontSize: 16,
-                  // marginTop
                 }}
                 placeholder={val.placeholder}
                 keyboardType={val.keyboardType}
