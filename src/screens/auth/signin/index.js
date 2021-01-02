@@ -54,12 +54,12 @@ const SignIn = (props) => {
             <TextInput
               style={{width: '100%', height: '100%', fontSize: 16}}
               placeholder={val.placeholder}
-              onFocus={() => {
-                setState({...state, activeInput: i});
-              }}
-              onBlur={() => {
-                setState({...state, activeInput: 3});
-              }}
+              // onFocus={() => {
+              //   setState({...state, activeInput: i});
+              // }}
+              // onBlur={() => {
+              //   setState({...state, activeInput: 3});
+              // }}
               keyboardType={val.keyboardType}
               secureTextEntry={val.isSecure}
             />
@@ -151,12 +151,6 @@ const SignIn = (props) => {
                   // marginTop
                 }}
                 placeholder={val.placeholder}
-                onFocus={() => {
-                  setState({...state, activeInput: i});
-                }}
-                onBlur={() => {
-                  setState({...state, activeInput: 4});
-                }}
                 keyboardType={val.keyboardType}
                 secureTextEntry={val.isSecure}
               />
