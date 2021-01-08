@@ -12,7 +12,10 @@ function AddPayment(props) {
   const [overlay, setOverlay] = useState(true);
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={overlay}>
-    <CustomView bg={'rgba(00,00,00, 0.6)'} scroll>
+    <CustomView
+      image={require('../../assets/images/home.png')}
+      bg={'rgba(00,00,00, 0.8)'}
+      scroll>
       <App leftArrow={true} navigation={props.navigation} isTransparent />
       <View
         style={{

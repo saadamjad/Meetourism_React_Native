@@ -38,11 +38,14 @@ const Status = (props) => {
     }
   };
   return (
-    <CustomView scroll image={require('../../../assets/images/background.png')}>
+    <CustomView
+      bg={'transparent'}
+      scroll
+      image={require('../../../assets/images/home.png')}>
       <View
         style={{
           flex: 1,
-          backgroundColor: 'rgba(rgba(255, 255, 255, 0.8))',
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
           justifyContent: 'space-between',
         }}>
         <View
