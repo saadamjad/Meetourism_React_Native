@@ -11,8 +11,10 @@ import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import Longheader from '../../../components/header/longheader';
 import {theme} from '../../../constants/theme';
+import Successful from '../../successful';
 
 function SelectOffer(props) {
+  const [state, setState] = useState(false);
   return (
     <CustomView bg={theme.textColor.whiteColor} scroll>
       <Longheader
@@ -35,7 +37,8 @@ function SelectOffer(props) {
           <TouchableOpacity
             onPress={() => {
               // navigate to screen there
-              props.navigation.navigate('dealoffer');
+              setState(true);
+              // props.navigation.navigate('dealoffer');
             }}
             activeOpacity={1}
             style={{width: '100%', height: 260, marginVertical: 10}}>
@@ -124,6 +127,14 @@ function SelectOffer(props) {
             </View>
           </TouchableOpacity>
         ))}
+        <Successful
+          visible={state}
+          toggle={() => setState(!state)}
+          func={() => {
+            setState(false);
+            props.navigation.navigate('payment');
+          }}
+        />
       </View>
     </CustomView>
   );

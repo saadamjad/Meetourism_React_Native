@@ -33,11 +33,11 @@ const Profile = (props) => {
               color: theme.secondaryColor,
               fontSize: 30,
               fontWeight: '700',
-              paddingBottom: 10,
+              paddingBottom: 5,
             }}>
             Patrick Tulso
           </Text>
-          <View style={{flex: 1, paddingHorizontal: 20, paddingVertical: 10}}>
+          <View style={{flex: 1, paddingHorizontal: 20, paddingVertical: 5}}>
             <Text style={{fontSize: 15, color: 'black', marginVertical: 5}}>
               Interests
             </Text>
@@ -117,7 +117,7 @@ const Profile = (props) => {
               sodales pulvinar lectus eu consequat. Sed sagittis ex non purus
               porttitor, sit amet posuere justo ultrices.
             </Text>
-            <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
+            <Text style={{fontSize: 18, paddingVertical: 5}}>Language</Text>
             <SliderCom />
             {/* <GlobalButton
               buttonText="Dashboard"

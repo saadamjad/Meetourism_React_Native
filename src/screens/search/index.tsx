@@ -32,15 +32,23 @@ function Search(props) {
         }}>
         <View
           style={{
-            // borderWidth: 1,
+            borderBottomWidth: 1,
             width: '90%',
-            borderRadius: 5,
-            elevation: 5,
+            // borderRadius: 5,
+            borderBottomColor: 'white',
+            // elevation: 5,
             flexDirection: 'row',
-            backgroundColor: theme.textColor.whiteColor,
+            // backgroundColor: theme.textColor.whiteColor,
           }}>
           <TextInput
-            style={{width: '90%', paddingLeft: 10}}
+            style={{
+              width: '90%',
+              paddingLeft: 10,
+              color: 'white',
+              fontSize: 18,
+            }}
+            value={state.search}
+            placeholderTextColor="white"
             onChangeText={(text) => {
               setState({...state, search: text});
             }}
@@ -52,11 +60,22 @@ function Search(props) {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Icon
-              name="search1"
-              type="AntDesign"
-              style={{fontSize: 18, color: theme.textColor.lightWhiteColor}}
-            />
+            {state.search.length >= 1 ? (
+              <TouchableOpacity
+                onPress={() => setState({...state, search: ''})}>
+                <Icon
+                  name="circle-with-cross"
+                  type="Entypo"
+                  style={{fontSize: 24, color: theme.textColor.lightWhiteColor}}
+                />
+              </TouchableOpacity>
+            ) : (
+              <Icon
+                name="search1"
+                type="AntDesign"
+                style={{fontSize: 18, color: theme.textColor.whiteColor}}
+              />
+            )}
           </View>
         </View>
         <View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 20}}>

@@ -11,7 +11,10 @@ function SelectPaymentMethod(props) {
   const [state, setState] = useState({selected: 0});
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
-    <CustomView bg={'rgba(66,48,80, 0.6)'} scroll>
+    <CustomView
+      image={require('../../assets/images/home.png')}
+      bg={'rgba(00,00,00, 0.8)'}
+      scroll>
       <App leftArrow={true} navigation={props.navigation} isTransparent />
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View

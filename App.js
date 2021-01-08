@@ -24,13 +24,15 @@ import LiveChat from './src/screens/livechat';
 import Allresturant from './src/screens/allresturant';
 import Home from './src/screens/home';
 import Search from './src/screens/search';
+import Location from './src/screens/location';
 
 const App = (props) => {
   return (
     <>
       {/* <BGcustom /> */}
       {/* <Profile /> */}
-      <Stack navigation={props.navigation} />
+      {/* <Stack navigation={props.navigation} /> */}
+      <Location />
       {/* <Home /> */}
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}

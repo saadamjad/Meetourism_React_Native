@@ -86,8 +86,8 @@ const App = (props) => {
               style={{
                 flex: 1,
                 paddingVertical: 15,
-                borderBottomWidth: 1,
-                borderColor: 'white',
+                borderBottomWidth: 1.5,
+                borderColor: '#707070',
                 backgroundColor: '#423050',
                 justifyContent: 'center',
               }}>
@@ -148,9 +148,9 @@ const App = (props) => {
                 </View>
                 <GlobalButton
                   onPress={() => props.navigation.navigate('matchprofile')}
-                  width="60%"
+                  width="48%"
                   buttonText="Profile"
-                  height={45}
+                  height={40}
                 />
                 <TouchableOpacity
                   onPress={() => props.navigation.navigate('search')}
@@ -159,7 +159,7 @@ const App = (props) => {
                     alignItems: 'center',
                     alignSelf: 'center',
                   }}>
-                  <Text style={{fontSize: 17, marginVertical: 5}}>
+                  <Text style={{fontSize: 15, marginVertical: 5}}>
                     {' '}
                     Back to search
                   </Text>
