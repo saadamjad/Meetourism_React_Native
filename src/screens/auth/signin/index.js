@@ -23,7 +23,7 @@ const SignIn = (props) => {
       {key: 'second', title: 'SignUp'},
     ],
   });
-  const [activeInput, setActiveInput] = useState(3);
+  const [activeInput, setActiveInput] = useState(0);
 
   const toggleOverlay = () => {
     setState({...state, visible: !state.visible});
@@ -52,13 +52,22 @@ const SignIn = (props) => {
               marginTop: 20,
             }}>
             <TextInput
-              style={{width: '100%', height: '100%', fontSize: 16}}
+              style={{
+                width: '100%',
+                height: '100%',
+                fontSize: 16,
+                // borderBottomWidth: 1,
+              }}
               placeholder={val.placeholder}
+              onFocus={() => {
+                setActiveInput(i);
+              }}
+              onBlur={() => (activeInput == i ? false : true)}
               // onFocus={() => {
               //   setActiveInput(i);
               //   // console.log('ttext', ttext);
               // }}
-              showSoftInputOnFocus={true}
+              // showSoftInputOnFocus={true}
               // autoFocus={ }
               // onBlur={() => {
               //   setState({...state, activeInput: 3});
@@ -100,9 +109,9 @@ const SignIn = (props) => {
           }}>
           <Text
             style={{
-              color: theme.textColor.blackColor,
+              color: '#352641',
               fontSize: 12,
-              fontWeight: '500',
+              fontWeight: 'bold',
             }}>
             FORGOT PASSWORD
           </Text>
@@ -120,6 +129,15 @@ const SignIn = (props) => {
             alignItems: 'center',
             borderRadius: 40,
             paddingVertical: 40,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+
+            elevation: 5,
           }}>
           {[
             {
@@ -158,13 +176,18 @@ const SignIn = (props) => {
             </View>
           ))}
         </View>
-        <View style={{flexDirection: 'row', marginTop: 20}}>
+        <View style={{flexDirection: 'row', marginTop: 20, borderWidth: 0}}>
           {[
             require('../../../assets/images/gmail.png'),
             require('../../../assets/images/instagram.png'),
             require('../../../assets/images/facebook.png'),
           ].map((val, ind) => (
-            <Image resizeMode="contain" source={val} />
+            <Image
+              resizeMode="contain"
+              source={val}
+              style={{height: 30, width: 30}}
+              resizeMode="contain"
+            />
           ))}
           {/* <View
               style={{

@@ -209,7 +209,7 @@ const Profile = (props) => {
                 porttitor, sit amet posuere justo ultrices.
               </Text>
               <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
-              <SliderCom />
+              <SliderCom trackStyle="black" />
               <GlobalButton
                 buttonText="Dashboard"
                 width="70%"

@@ -40,7 +40,7 @@ function HoldOn(props) {
                 fontSize: 24,
                 fontWeight: '700',
               }}>
-              Hold On!
+              Hold on!
             </Text>
             <Text
               style={{
@@ -57,6 +57,7 @@ function HoldOn(props) {
                 justifyContent: 'flex-end',
                 alignSelf: 'flex-end',
                 flexDirection: 'row',
+                // borderWidth: 1,
               }}>
               <GlobalButton
                 backgroundColor={theme.buttonGreyColor}
@@ -65,17 +66,19 @@ function HoldOn(props) {
                   props.toggleOverlay();
                   props.navigation.navigate('Status');
                 }}
-                height={50}
+                height={40}
                 width={80}
+                fontSize={13}
               />
               <GlobalButton
+                height={40}
                 width={80}
                 onPress={() => {
                   props.toggleOverlay();
                   props.navigation.navigate('Status');
                 }}
                 buttonText="YES"
-                height={50}
+                fontSize={13}
               />
             </View>
           </View>
