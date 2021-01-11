@@ -31,8 +31,8 @@ const App = (props) => {
     <>
       {/* <BGcustom /> */}
       {/* <Profile /> */}
-      {/* <Stack navigation={props.navigation} /> */}
-      <Location />
+      <Stack navigation={props.navigation} />
+      {/* <Location /> */}
       {/* <Home /> */}
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}
