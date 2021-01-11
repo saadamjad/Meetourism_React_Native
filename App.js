@@ -25,12 +25,16 @@ import Allresturant from './src/screens/allresturant';
 import Home from './src/screens/home';
 import Search from './src/screens/search';
 import Location from './src/screens/location';
+import Calendar from './src/screens/calendar';
 
 const App = (props) => {
   return (
     <>
       {/* <BGcustom /> */}
       {/* <Profile /> */}
+      {/* <Stack navigation={props.navigation} /> */}
+      {/* <Location /> */}
+      {/* <Calendar /> */}
       <Stack navigation={props.navigation} />
       {/* <Location /> */}
       {/* <Home /> */}
