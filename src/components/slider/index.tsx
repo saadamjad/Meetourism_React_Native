@@ -31,7 +31,8 @@ const SliderCom = (props) => {
           onValueChange={(value) => console.log('value', value)}
           thumbStyle={{backgroundColor: '#D9B372'}}
           trackStyle={{
-            backgroundColor: 'white',
+            backgroundColor: props.trackStyle ? props.trackStyle : 'white',
+
             borderRadius: 10,
           }}
           minimumTrackTintColor="#998FA2"
@@ -70,7 +71,7 @@ const SliderCom = (props) => {
             borderRadius: 3,
           }}
           trackStyle={{
-            backgroundColor: 'white',
+            backgroundColor: props.trackStyle ? props.trackStyle : 'white',
             borderRadius: 10,
           }}
           // style={{backgroundColor:'blue'}}

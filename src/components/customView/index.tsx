@@ -10,7 +10,7 @@ const CustomView = (props) => {
       style={{
         flex: 1,
         backgroundColor: props.bg ? props.bg : 'orange',
-        zIndex: 0,
+        // zIndex: 0,
       }}>
       <SafeAreaView
         style={{
