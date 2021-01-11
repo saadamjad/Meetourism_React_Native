@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect, useRef} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
-// import {Icon} from 'native-base';
+import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
@@ -12,57 +12,66 @@ const Tutorial = (props) => {
   const firstSlide = () => (
     <View
       style={{
-        height: '50%',
-        // backgroundColor: 'black',
+        // height: '50%',
+        flex: 1,
         width: '100%',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
+        paddingBottom: 30,
       }}>
-      <View style={{width: '100%', height: 210, alignItems: 'flex-end'}}>
-        <View
-          style={{
-            width: '80%',
-            // borderWidth: 1,
-            backgroundColor: theme.primaryColor,
-            // paddingVertical: 50,
-            height: 180,
-            justifyContent: 'center',
-            // alignItems: 'center',
-            borderBottomLeftRadius: 100,
-          }}>
-          <Text
+      <View style={{paddingVertical: 20}}>
+        <View style={{width: '100%', alignItems: 'flex-end'}}>
+          <View
             style={{
-              color: 'white',
-              fontSize: 34,
-              fontWeight: '800',
-              textAlign: 'center',
+              width: '75%',
+              backgroundColor: theme.primaryColor,
+              height: 160,
+              justifyContent: 'center',
+              borderBottomLeftRadius: 100,
+              paddingBottom: 20,
+              borderWidth: 1,
+              borderColor: theme.primaryColor,
             }}>
-            Welcome to Meetourism
-          </Text>
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 25,
+                fontWeight: 'bold',
+                textAlign: 'center',
+              }}>
+              Welcome to {'\n'} Meetourism
+            </Text>
+          </View>
+          <TouchableOpacity
+            activeOpacity={1}
+            // onPress={() => setState({...state, selectedIndex: 1})}
+            onPress={() => {
+              setState({...state, selectedIndex: 1});
+              node.goToSlide(1);
+            }}
+            style={{
+              backgroundColor: theme.secondaryColor,
+              width: '45%',
+              position: 'absolute',
+              height: 50,
+              bottom: -20,
+              borderTopLeftRadius: 30,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderBottomLeftRadius: 30,
+              flexDirection: 'row',
+              borderBottomWidth: 1,
+              borderColor: theme.secondaryColor,
+            }}>
+            <Text style={{color: 'white', fontWeight: '300', fontSize: 15}}>
+              GET STARTED
+            </Text>
+            <Icon
+              name="arrowright"
+              type="AntDesign"
+              style={{fontSize: 15, marginLeft: 10, color: 'white'}}
+            />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          activeOpacity={1}
-          // onPress={() => setState({...state, selectedIndex: 1})}
-          onPress={() => {
-            setState({...state, selectedIndex: 1});
-            node.goToSlide(1);
-          }}
-          style={{
-            backgroundColor: theme.secondaryColor,
-            width: '45%',
-            position: 'absolute',
-            height: 60,
-            bottom: 0,
-            borderTopLeftRadius: 30,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderBottomLeftRadius: 30,
-            flexDirection: 'row',
-          }}>
-          <Text style={{color: 'white', fontWeight: '300', fontSize: 18}}>
-            Get Started
-          </Text>
-          {/* <Icon name="arrowright" type="AntDesign" /> */}
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -118,7 +127,8 @@ const Tutorial = (props) => {
         state.selectedIndex == 0
           ? require('../../assets/images/background.png')
           : require('../../assets/images/burgerBackground.png')
-      }>
+      }
+      resizeMode="contain">
       <View style={{flex: 1, justifyContent: 'space-between'}}>
         <View style={{height: '50%', width: '100%', flexDirection: 'column'}}>
           <View
@@ -149,7 +159,7 @@ const Tutorial = (props) => {
             </View>
             <TouchableOpacity
               onPress={() => props.navigation.navigate('signin')}>
-              <Text style={{color: 'white'}}>SKIP</Text>
+              <Text style={{color: 'white', fontWeight: 'bold'}}>SKIP</Text>
             </TouchableOpacity>
           </View>
           {state.selectedIndex == 0 && (
@@ -159,11 +169,16 @@ const Tutorial = (props) => {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
+                borderEndWidth: 1,
+                // backgroundColor: 'red',
               }}>
-              <Image
-                resizeMode="contain"
-                source={require('../../assets/images/logo.png')}
-              />
+              <View style={{height: 150, borderWidth: 0, width: 150}}>
+                <Image
+                  source={require('../../assets/images/logo.png')}
+                  resizeMode="contain"
+                  style={{height: '100%', width: '100%'}}
+                />
+              </View>
             </View>
           )}
         </View>
