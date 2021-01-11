@@ -34,7 +34,9 @@ const App = (props) => {
       {/* <Profile /> */}
       {/* <Stack navigation={props.navigation} /> */}
       {/* <Location /> */}
-      <Calendar />
+      {/* <Calendar /> */}
+      <Stack navigation={props.navigation} />
+      {/* <Location /> */}
       {/* <Home /> */}
       {/* <CreateOffer /> */}
       {/* <SelectOffer /> */}

@@ -17,20 +17,20 @@ import HoldOn from '../../holdOn';
 const SignIn = (props) => {
   const [state, setState] = useState({
     selectedIndex: 0,
-    activeInput: 3,
     visible: false,
     routes: [
       {key: 'first', title: 'SignIn'},
       {key: 'second', title: 'SignUp'},
     ],
   });
+  const [activeInput, setActiveInput] = useState(3);
 
   const toggleOverlay = () => {
     setState({...state, visible: !state.visible});
   };
 
   const signInRoute = () => (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{alignItems: 'center'}}>
         {[
           {
@@ -43,10 +43,10 @@ const SignIn = (props) => {
           <View
             style={{
               borderBottomColor:
-                state.activeInput == i
+                activeInput == i
                   ? theme.borderColor.activeBorderColor
                   : theme.borderColor.inActiveBorderColor,
-              borderBottomWidth: state.activeInput == i ? 2 : 1,
+              borderBottomWidth: activeInput == i ? 2 : 1,
               width: '80%',
               height: 40,
               marginTop: 20,
@@ -55,8 +55,11 @@ const SignIn = (props) => {
               style={{width: '100%', height: '100%', fontSize: 16}}
               placeholder={val.placeholder}
               // onFocus={() => {
-              //   setState({...state, activeInput: i});
+              //   setActiveInput(i);
+              //   // console.log('ttext', ttext);
               // }}
+              showSoftInputOnFocus={true}
+              // autoFocus={ }
               // onBlur={() => {
               //   setState({...state, activeInput: 3});
               // }}
@@ -202,7 +205,7 @@ const SignIn = (props) => {
     second: signUpRoute,
   });
   return (
-    <CustomView withBg={state.selectedIndex == 1} bg={theme.bgColor} scroll>
+    <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
       <TabView
         navigationState={{index: state.selectedIndex, routes: state.routes}}
         renderScene={renderScene}
