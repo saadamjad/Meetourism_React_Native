@@ -1,19 +1,34 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 import GlobalButton from '../../components/buttons/generalbutton';
 import CustomView from '../../components/customView';
 import SliderCom from '../../components/slider';
 import {theme} from '../../constants/theme';
+import Header from '../../components/header';
 
 const Profile = (props) => {
   return (
     <CustomView scroll>
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
-        <Image
+        <ImageBackground
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
-          source={require('../../assets/images/profile.png')}
-        />
+          source={require('../../assets/images/profile.png')}>
+          <Header
+            navigation={props.navigation}
+            leftArrow={true}
+            isTransparent={true}
+            searchIcon={true}
+          />
+        </ImageBackground>
+
         <View
           style={{
             // height: '80%',

@@ -23,13 +23,14 @@ const App = (
     textColor,
     bgColor,
     sColor,
+    height,
   },
   props,
 ) => {
   return (
     <View
       style={{
-        height: 50,
+        height: height ? height : 50,
         alignItems: 'center',
         width: '100%',
         flexDirection: 'row',

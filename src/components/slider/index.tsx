@@ -68,7 +68,7 @@ const SliderCom = (props) => {
             backgroundColor: '#D9B372',
             height: 20,
             width: 20,
-            borderRadius: 3,
+            borderRadius: 10,
           }}
           trackStyle={{
             backgroundColor: props.trackStyle ? props.trackStyle : 'white',

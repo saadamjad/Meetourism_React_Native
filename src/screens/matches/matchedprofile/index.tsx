@@ -12,6 +12,8 @@ import CustomView from '../../../components/customView';
 import SliderCom from '../../../components/slider';
 import {theme} from '../../../constants/theme';
 import Header from '../../../components/header';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 
 const Profile = (props) => {
   return (
@@ -39,7 +41,7 @@ const Profile = (props) => {
             width: '100%',
             marginTop: -180,
             // borderTopLeftRadius: 40,
-            borderTopRightRadius: 80,
+            borderTopRightRadius: 70,
             // alignItems: 'center',
             paddingHorizontal: 20,
           }}>
@@ -76,7 +78,7 @@ const Profile = (props) => {
               }}
               onPress={() => props.navigation.navigate('innerchat')}>
               <Image
-                source={require('../../../assets/icons/Chat.png')}
+                source={require('../../../assets/images/path.png')}
                 style={{height: 20, width: 20, tintColor: 'gray'}}
                 resizeMode="contain"
               />
@@ -92,11 +94,12 @@ const Profile = (props) => {
 
               //  onPress={()=>props.navigation.navigate('allchat')}
             >
-              <Image
+              {/* <Image
                 source={require('../../../assets/icons/singleuser.png')}
                 style={{height: 20, width: 20, tintColor: 'purple'}}
                 resizeMode="contain"
-              />
+              /> */}
+              <Feather name="users" color="#8A56AC" size={20} />
               <Text style={{fontSize: 12, marginTop: 5}}>Gallery </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -106,11 +109,12 @@ const Profile = (props) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-              <Image
+              <FontAwesome name="user" color="#8A56AC" size={20} />
+              {/* <Image
                 source={require('../../../assets/icons/userss.png')}
                 style={{height: 20, width: 20, tintColor: 'purple'}}
                 resizeMode="contain"
-              />
+              /> */}
               <Text style={{fontSize: 12, marginTop: 5}}>Follow </Text>
             </TouchableOpacity>
           </View>
