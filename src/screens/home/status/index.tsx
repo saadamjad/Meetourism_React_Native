@@ -424,7 +424,7 @@ const Status = (props) => {
           <View
             style={{
               flex: 1,
-              // backgroundColor: 'rgba(255, 255, 255, 0.75)',
+              backgroundColor: 'rgba(000, 000, 000, 0.8)',
 
               // backgroundColor: 'red',
               width: '100%',
@@ -507,7 +507,12 @@ const Status = (props) => {
                           />
                         </View>
                       </View>
-                      <View style={{width: '70%', borderWidth: 0}}>
+                      <View
+                        style={{
+                          width: '70%',
+                          borderWidth: 0,
+                          paddingLeft: 10,
+                        }}>
                         <Text
                           style={{
                             color:
@@ -516,7 +521,7 @@ const Status = (props) => {
                               ],
                             fontWeight: '700',
                             // marginLeft: 30,
-                            fontSize: 22,
+                            fontSize: 20,
                             // width: '85%',
                           }}>
                           {val.name}

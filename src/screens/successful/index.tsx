@@ -21,7 +21,7 @@ function Successful(props) {
       isVisible={props.visible}
       onBackdropPress={() => props.toggle()}>
       <CustomView bg={'transparent'} scroll>
-        <App leftArrow={true} navigation={props.navigation} isTransparent />
+        <App navigation={props.navigation} isTransparent />
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <View
             style={{

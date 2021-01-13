@@ -34,8 +34,7 @@ const App = (props) => {
           // drawerIcon={true}
         />
         {/* ===========otp=========== */}
-        <View
-          style={styles.otpview}>
+        <View style={styles.otpview}>
           <OTPInputView
             style={{
               width: '80%',

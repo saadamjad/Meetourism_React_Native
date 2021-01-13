@@ -11,28 +11,38 @@ function DealOffer(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
     <CustomView bg={'rgba(00,00,00, 0.6)'} scroll>
-      <App leftArrow={true} navigation={props.navigation} isTransparent />
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <App navigation={props.navigation} isTransparent />
+      <View
+        style={{
+          // flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+
+          // height: '60%',
+          // backgroundColor: 'red',
+        }}>
         <View
           style={{
-            width: '90%',
+            width: '80%',
             backgroundColor: 'white',
             paddingHorizontal: 20,
-            borderRadius: 45,
+            borderRadius: 50,
+            borderBottomRightRadius: 0,
             paddingVertical: 50,
+            // height: '60%',
             alignItems: 'center',
           }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               props.navigation.goBack();
             }}
             style={{position: 'absolute', right: 20, top: 10}}>
             <Icon name="cross" type="Entypo" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Text
             style={{
               color: theme.textColor.blackColor,
-              paddingBottom: 25,
+              // paddingBottom: 10,
               fontSize: 25,
               fontWeight: '700',
             }}>
@@ -48,10 +58,11 @@ function DealOffer(props) {
               <Image
                 resizeMode="contain"
                 source={require('../../../assets/images/qr.png')}
+                style={{height: 150, width: 200}}
               />
             </View>
 
-            <GlobalButton buttonText="Save QR" height={40} width={'50%'} />
+            <GlobalButton buttonText="Save QR" height={34} width={'50%'} />
 
             <View
               style={{
@@ -60,8 +71,8 @@ function DealOffer(props) {
                 marginTop: 30,
               }}>
               <Image
-                resizeMode="cover"
-                style={{width: '100%', height: 200}}
+                resizeMode="contain"
+                style={{height: 150, width: 200}}
                 source={require('../../../assets/images/map.jpg')}
               />
             </View>

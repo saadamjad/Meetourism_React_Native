@@ -265,6 +265,7 @@ const Messages = (props) => {
             buttonText={'Save'}
             width={'100%'}
             onPress={() => props.navigation.navigate('detailsoffer')}
+            // onPress={() => props.navigation.navigate('selectPaymentMethodCards')}
           />
         </View>
       </View>
