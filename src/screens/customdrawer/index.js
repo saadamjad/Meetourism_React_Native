@@ -129,6 +129,13 @@ const DrawerContent = (props) => {
               // icon: require('../assets/icons/68.png'),
               icon: require('../../assets/icons/search.png'),
             },
+            {
+              title: 'Calender ',
+              name: 'calender',
+              type: 'FontAwesome5',
+              // icon: require('../assets/icons/68.png'),
+              icon: require('../../assets/icons/search.png'),
+            },
 
             {
               title: 'About us ',
@@ -169,7 +176,11 @@ const DrawerContent = (props) => {
               console.log('loop', val),
               (
                 <TouchableOpacity
-                  onPress={() => props.navigation.navigate('DashboardStack')}
+                  onPress={() =>
+                    i == 4
+                      ? props.navigation.navigate('Calender')
+                      : props.navigation.navigate('DashboardStack')
+                  }
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',

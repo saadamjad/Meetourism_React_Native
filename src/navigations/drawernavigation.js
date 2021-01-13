@@ -10,6 +10,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import allchat from '../screens/chat/innerchat';
 import dashborad from '../screens/dashboard';
 import {NavigationContainer} from '@react-navigation/native';
+import Calender from '../screens/calendar';
 
 console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -35,6 +36,11 @@ function MyDrawer(props) {
         options={{headerShown: false, drawerLabel: false}}
         name="Match"
         component={Matches}
+      />
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="Calender"
+        component={Calender}
       />
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}

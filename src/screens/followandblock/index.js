@@ -12,8 +12,9 @@ import CustomView from '../../components/customView';
 import SliderCom from '../../components/slider';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Header from '../../components/header';
+// import {TextInput} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {TextInput} from 'react-native-gesture-handler';
+import Entypo from 'react-native-vector-icons/Entypo';
 const Profile = (props) => {
   // console.log('props',);
   return (
@@ -23,7 +24,12 @@ const Profile = (props) => {
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
           source={require('../../assets/images/profile.png')}>
-          <Header leftArrow={true} isTransparent={true} searchIcon={true} />
+          <Header
+            leftArrow={true}
+            isTransparent={true}
+            searchIcon={true}
+            navigation={props.navigation}
+          />
         </ImageBackground>
 
         <View
@@ -138,8 +144,8 @@ const Profile = (props) => {
               }}
               onPress={() => props.navigation.navigate('innerchat')}>
               <Image
-                source={require('../../assets/icons/Chat.png')}
-                style={{height: 20, width: 20, tintColor: 'gray'}}
+                source={require('../../assets/images/path.png')}
+                style={{height: 20, width: 20, tintColor: 'purple'}}
                 resizeMode="contain"
               />
               <Text style={{fontSize: 12, marginTop: 5}}>Chat </Text>
@@ -161,20 +167,18 @@ const Profile = (props) => {
               />
               <Text style={{fontSize: 12, marginTop: 5}}>Friends </Text>
             </TouchableOpacity>
-            {/* <TouchableOpacity
+            <TouchableOpacity
               style={{
                 width: '33.33%',
-                borderWidth: 0,
+                // borderWidth: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
-              }}>
-              <Image
-                source={require('../../assets/icons/userss.png')}
-                style={{height: 20, width: 20, tintColor: 'purple'}}
-                resizeMode="contain"
-              />
+              }}
+              onPress={() => props.navigation.navigate('location')}>
+              <Entypo name="location" size={15} color={'purple'} />
+
               <Text style={{fontSize: 12, marginTop: 5}}>Follow </Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
 
           <View

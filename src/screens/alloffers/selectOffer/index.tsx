@@ -129,6 +129,7 @@ function SelectOffer(props) {
         ))}
         <Successful
           visible={state}
+          navigation={props.navigation}
           toggle={() => setState(!state)}
           func={() => {
             setState(false);

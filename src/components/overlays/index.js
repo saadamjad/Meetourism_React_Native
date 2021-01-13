@@ -18,6 +18,8 @@ const App = ({toggleOverlay, visible, children}) => {
         justifyContent: 'center',
         backgroundColor: 'transparent',
         width: '100%',
+        padding: 0,
+        margin: 0,
         height: '100%',
       }}>
       {children}

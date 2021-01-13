@@ -32,7 +32,10 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#352641',
       }}>
-      <ScrollView style={{flex: 1}} contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView
+        style={{flex: 1}}
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator={false}>
         <View
           style={{
             flex: 0.4,

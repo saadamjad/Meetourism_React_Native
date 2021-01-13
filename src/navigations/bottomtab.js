@@ -39,6 +39,7 @@ import userProfile from '../screens/profile';
 import Home from '../screens/home';
 import DealOffer from '../screens/alloffers/detailsOffer';
 import Successful from '../screens/successful';
+import location from '../screens/location';
 
 const Tab = createBottomTabNavigator();
 
@@ -155,6 +156,11 @@ export function CrushesMainStack() {
       <CrushesStack.Screen
         name="innerchat"
         component={innerchat}
+        options={{headerShown: false}}
+      />
+      <CrushesStack.Screen
+        name="location"
+        component={location}
         options={{headerShown: false}}
       />
     </CrushesStack.Navigator>

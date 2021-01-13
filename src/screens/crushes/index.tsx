@@ -74,7 +74,11 @@ const Crushes = (props) => {
           navigation={props.navigation}
           leftArrow={true}
           searchIcon={true}
-          // backgroundColor={theme.secondaryColor}
+          backgroundColor={
+            state.messages[0].selected
+              ? theme.primaryColor1
+              : theme.primaryColor
+          }
           headerText="Crushes"
         />
         {state.messages.map((val, i) => {
@@ -96,9 +100,10 @@ const Crushes = (props) => {
                 });
               }}
               style={{
-                height: val.selected ? 350 : 300,
-                backgroundColor:
-                  i == 1 ? theme.primaryColor1 : theme.primaryColor,
+                height: val.selected ? 320 : 300,
+                backgroundColor: val.selected
+                  ? theme.primaryColor1
+                  : theme.primaryColor,
 
                 borderRightWidth: 0,
                 borderWidth: 0.5,
@@ -119,6 +124,7 @@ const Crushes = (props) => {
                   alignSelf: 'flex-end',
                   justifyContent: 'center',
                   alignItems: 'space-around',
+                  // backgroundColor: 'red',
                 }}>
                 <View
                   style={{
@@ -129,7 +135,7 @@ const Crushes = (props) => {
                     alignItems: 'center',
                   }}>
                   <View style={{alignItems: 'center', width: '0%'}}>
-                    <View style={{height: 60, width: 60}}>
+                    <View style={{height: 40, width: 40}}>
                       <Image
                         style={{height: '100%', width: '100%'}}
                         resizeMode="cover"
@@ -142,6 +148,7 @@ const Crushes = (props) => {
                     <Text
                       style={{
                         color: theme.textColor.whiteColor,
+                        fontSize: 12,
                       }}>
                       {val.name}
                     </Text>
@@ -155,6 +162,7 @@ const Crushes = (props) => {
                       alignItems: 'center',
                       width: '80%',
                       alignSelf: 'center',
+                      // backgroundColor: 'red',
                     }}>
                     {/* <TouchableOpacity>
                       <Text
@@ -172,7 +180,7 @@ const Crushes = (props) => {
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
-                          fontSize: 20,
+                          fontSize: 16,
                         }}>
                         View
                       </Text>
@@ -186,7 +194,7 @@ const Crushes = (props) => {
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
-                          fontSize: 20,
+                          fontSize: 16,
                         }}>
                         Block
                       </Text>
