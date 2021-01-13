@@ -36,15 +36,19 @@ const App = (props) => {
       <Header
         leftArrow={true}
         searchIcon={true}
-        headerText="MATCHES"
+        // headerText="MATCHES"
+        height={40}
         navigation={props.navigation}
       />
       <View
         style={{
-          height: 100,
+          // height: 100,
           backgroundColor: 'white',
+          // paddingVertical: 7,
+          paddingBottom: 15,
           width: '100%',
           borderWidth: 0,
+          marginBottom: 2,
         }}>
         <ScrollView contentContainerStyle={{flexGrow: 1}} horizontal={true}>
           {offer.map((item, i) => {
@@ -70,8 +74,14 @@ const App = (props) => {
                     resizeMode="cover"
                   />
                 </View>
-                <Text style={{fontSize: 10, color: '#0A0A0A', marginTop: 5}}>
-                  Whopper Feast{' '}
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: '#0A0A0A',
+                    marginTop: 5,
+                    fontWeight: 'bold',
+                  }}>
+                  Whopper Feast
                 </Text>
               </TouchableOpacity>
             );
@@ -99,6 +109,15 @@ const App = (props) => {
                   backgroundColor: 'white',
                   paddingVertical: 10,
                   marginVertical: 10,
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+
+                  elevation: 5,
                 }}>
                 <Text
                   style={{
