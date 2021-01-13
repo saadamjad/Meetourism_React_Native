@@ -35,20 +35,20 @@ function Search(props) {
             borderBottomWidth: 1,
             width: '90%',
             // borderRadius: 5,
-            borderBottomColor: 'white',
+            borderBottomColor: 'black',
             // elevation: 5,
             flexDirection: 'row',
-            // backgroundColor: theme.textColor.whiteColor,
+            // backgroundColor: theme.textColor.blackColor,
           }}>
           <TextInput
             style={{
               width: '90%',
               paddingLeft: 10,
-              color: 'white',
+              color: 'black',
               fontSize: 18,
             }}
             value={state.search}
-            placeholderTextColor="white"
+            placeholderTextColor="black"
             onChangeText={(text) => {
               setState({...state, search: text});
             }}
@@ -66,14 +66,14 @@ function Search(props) {
                 <Icon
                   name="circle-with-cross"
                   type="Entypo"
-                  style={{fontSize: 24, color: theme.textColor.lightWhiteColor}}
+                  style={{fontSize: 24, color: 'black'}}
                 />
               </TouchableOpacity>
             ) : (
               <Icon
                 name="search1"
                 type="AntDesign"
-                style={{fontSize: 18, color: theme.textColor.whiteColor}}
+                style={{fontSize: 18, color: 'black'}}
               />
             )}
           </View>
