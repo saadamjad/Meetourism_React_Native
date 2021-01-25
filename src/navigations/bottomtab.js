@@ -40,6 +40,7 @@ import Home from '../screens/home';
 import DealOffer from '../screens/alloffers/detailsOffer';
 import Successful from '../screens/successful';
 import location from '../screens/location';
+import ChooseYourInterest from '../screens/home/status';
 
 const Tab = createBottomTabNavigator();
 
@@ -111,7 +112,7 @@ function MyDrawer(props) {
       />
       <Tab.Screen
         name="setting"
-        component={CrushesMainStack}
+        component={ChooseYourInterest}
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
@@ -166,6 +167,17 @@ export function CrushesMainStack() {
     </CrushesStack.Navigator>
   );
 }
+const interest = createStackNavigator();
+
+export function Interest() {
+  <interest.Navigator initialRouteName={'ChooseYourInterest'}>
+    <interest.Screen
+      name="ChooseYourInterest"
+      component={ChooseYourInterest}
+      options={{headerShown: false}}
+    />
+  </interest.Navigator>;
+}
 
 const userhomeStack = createStackNavigator();
 export function UserHomeMainStack() {
@@ -200,12 +212,14 @@ export function ChatMainStack() {
 const offersStack = createStackNavigator();
 export function AlloffersStack() {
   return (
-    <offersStack.Navigator initialRouteName={'selectstatus'}>
-      <offersStack.Screen
+    <offersStack.Navigator
+    // initialRouteName={'selectstatus'}
+    >
+      {/* <offersStack.Screen
         name="Alloffers"
         component={allresturant}
         options={{headerShown: false}}
-      />
+      /> */}
       <offersStack.Screen
         name="Selectoffer"
         component={Selectoffer}

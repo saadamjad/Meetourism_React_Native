@@ -104,17 +104,18 @@ const Tutorial = (props) => {
             Avail Offer
           </Text>
         </TouchableOpacity>
-        <View
+        <TouchableOpacity
           style={{
             width: 140,
             justifyContent: 'center',
             alignItems: 'center',
             height: 60,
-          }}>
+          }}
+          onPress={() => props.navigation.navigate('signin')}>
           <Text style={{color: theme.textColor.whiteColor, fontSize: 12}}>
             Skip to Login
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
