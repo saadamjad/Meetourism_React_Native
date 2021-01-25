@@ -225,9 +225,7 @@ const Status = (props) => {
           <View
             style={{
               paddingHorizontal: 40,
-              // marginVertical: 50,
 
-              // height: '60%',
               paddingVertical: 20,
               // marginTop: 20,
               borderRadius: 50,
@@ -420,6 +418,7 @@ const Status = (props) => {
             </TouchableOpacity>
           </View>
         </Overlay>
+
         <Overlay toggleOverlay={toggleOverlay1} visible={state.visible1}>
           <View
             style={{

@@ -37,7 +37,11 @@ const App = (props) => {
         }}>
         {props.leftArrow && (
           <TouchableOpacity
-            onPress={() => props.navigation.goBack()}
+            onPress={() => {
+              props.if
+                ? props.navigation.navigate('followandBlock')
+                : props.navigation.goBack();
+            }}
             style={{
               width: '16%',
 

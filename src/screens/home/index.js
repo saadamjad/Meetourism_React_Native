@@ -19,6 +19,7 @@ const App = (props) => {
     },
     {
       name: 'status ',
+      navigation: 'Status',
       image: <FontAwesome name="user" size={20} color="black" />,
     },
     {
@@ -95,7 +96,12 @@ const App = (props) => {
                           borderColor: '#707070',
                           alignItems: 'center',
                           justifyContent: 'center',
-                        }}>
+                        }}
+                        onPress={() =>
+                          props.navigation.navigate(
+                            i == 1 ? item.navigation : '',
+                          )
+                        }>
                         {i == 0 ? (
                           <Image
                             source={item.image}
@@ -206,7 +212,7 @@ const App = (props) => {
                   alignItems: 'center',
                 }}>
                 <Feather name="mail" size={40} color={'white'} />
-                <Text style={{color: 'white', fontSize: 12, marginTop: 5}}>
+                <Text style={{color: 'white', fontSize: 10, marginTop: 5}}>
                   Messages
                 </Text>
               </View>
@@ -225,9 +231,9 @@ const App = (props) => {
                 style={{height: 40, width: 40}}
                 resizeMode="contain"
               />
-              <Text style={{color: 'white', fontSize: 12, marginTop: 5}}>
+              <Text style={{color: 'white', fontSize: 10, marginTop: 5}}>
                 {' '}
-                Notofications{' '}
+                Notifications{' '}
               </Text>
             </TouchableOpacity>
           </View>

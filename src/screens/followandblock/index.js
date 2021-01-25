@@ -157,9 +157,11 @@ const Profile = (props) => {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
-
-              //  onPress={()=>props.navigation.navigate('allchat')}
-            >
+              onPress={() =>
+                props.navigation.navigate('Cruhes', {
+                  blockListNotOpen: true,
+                })
+              }>
               <Image
                 source={require('../../assets/icons/singleuser.png')}
                 style={{height: 20, width: 20, tintColor: 'purple'}}

@@ -71,6 +71,9 @@ const Crushes = (props) => {
     <CustomView bg={theme.primaryColor} scroll>
       <View style={{backgroundColor: 'white', flex: 1}}>
         <LongHeader
+          // !props?.route?.params?.blockListNotOpen
+          // followandBlock
+          if={props?.route?.params?.blockListNotOpen}
           navigation={props.navigation}
           leftArrow={true}
           searchIcon={true}
@@ -100,7 +103,11 @@ const Crushes = (props) => {
                 });
               }}
               style={{
-                height: val.selected ? 320 : 300,
+                height: props?.route?.params?.blockListNotOpen
+                  ? 300
+                  : val.selected
+                  ? 320
+                  : 300,
                 backgroundColor: val.selected
                   ? theme.primaryColor1
                   : theme.primaryColor,
@@ -154,17 +161,20 @@ const Crushes = (props) => {
                     </Text>
                   </View>
                 </View>
-                {val.selected && (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-around',
-                      alignItems: 'center',
-                      width: '80%',
-                      alignSelf: 'center',
-                      // backgroundColor: 'red',
-                    }}>
-                    {/* <TouchableOpacity>
+
+                {props?.route?.params?.blockListNotOpen
+                  ? null
+                  : val.selected && (
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-around',
+                          alignItems: 'center',
+                          width: '80%',
+                          alignSelf: 'center',
+                          // backgroundColor: 'red',
+                        }}>
+                        {/* <TouchableOpacity>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
@@ -173,35 +183,37 @@ const Crushes = (props) => {
                         Edit
                       </Text>
                     </TouchableOpacity> */}
-                    <TouchableOpacity
-                      onPress={() =>
-                        props.navigation.navigate('followandBlock')
-                      }>
-                      <Text
-                        style={{
-                          color: theme.textColor.whiteColor,
-                          fontSize: 16,
-                        }}>
-                        View
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() =>
-                        props.navigation.navigate('followandBlock', {
-                          block: true,
-                        })
-                      }>
-                      <Text
-                        style={{
-                          color: theme.textColor.whiteColor,
-                          fontSize: 16,
-                        }}>
-                        Block
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                )}
+                        <TouchableOpacity
+                          onPress={() =>
+                            props.navigation.navigate('followandBlock')
+                          }>
+                          <Text
+                            style={{
+                              color: theme.textColor.whiteColor,
+                              fontSize: 16,
+                            }}>
+                            View
+                          </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() =>
+                            props.navigation.navigate('followandBlock', {
+                              block: true,
+                            })
+                          }>
+                          <Text
+                            style={{
+                              color: theme.textColor.whiteColor,
+                              fontSize: 16,
+                            }}>
+                            Block
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
               </View>
+
+              {/* {console.log('====', props?.route?.params?.blockListNotOpen)} */}
             </TouchableOpacity>
           );
         })}
