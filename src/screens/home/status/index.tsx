@@ -29,6 +29,11 @@ const Status = (props) => {
       setState({...state, visible: !state.visible});
     }
   };
+  useEffect(() => {
+    if (props?.route?.params) {
+      setState({...state, visible: true});
+    }
+  }, []);
   const toggleOverlay1 = () => {
     if (state.selected !== 0.1) {
       setState({...state, visible: false, visible1: !state.visible1});

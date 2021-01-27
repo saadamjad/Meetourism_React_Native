@@ -80,7 +80,7 @@ function DealOffer(props) {
               <GlobalButton
                 buttonText="Main Menu"
                 height={40}
-                onPress={() => props.navigation.navigate('DashboardStack')}
+                onPress={() => props.navigation.navigate('setting')}
               />
             </View>
           </View>
