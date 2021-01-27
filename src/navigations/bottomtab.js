@@ -15,7 +15,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import allresturant from '../screens/allresturant';
 import Selectoffer from '../screens/alloffers/selectOffer';
 import createOffer from '../screens/alloffers/createOffer';
-import {ImageBackground, Image} from 'react-native';
+import {ImageBackground, Image, TouchableOpacity} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import dealoffer1 from '../screens/alloffers/detailsOffer1';
 import selectPaymentMethod from '../screens/selectPaymentMethod';
@@ -41,6 +41,7 @@ import DealOffer from '../screens/alloffers/detailsOffer';
 import Successful from '../screens/successful';
 import location from '../screens/location';
 import ChooseYourInterest from '../screens/home/status';
+// import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,12 +63,15 @@ function MyDrawer(props) {
           tabBarIcon: ({color, size}) => (
             console.log('===========', color),
             (
-              // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} />
-              <Image
-                source={require('../assets/icons/path.png')}
-                style={{height: 18, width: 18, tintColor: color}}
-                resizeMode="contain"
-              />
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('allofferflow')}>
+                {/* // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} /> */}
+                <Image
+                  source={require('../assets/icons/path.png')}
+                  style={{height: 18, width: 18, tintColor: color}}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
             )
           ),
         }}
