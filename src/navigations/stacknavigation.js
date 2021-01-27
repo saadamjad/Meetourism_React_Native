@@ -6,7 +6,7 @@ import signin from '../screens/auth/signin';
 
 import drawer from '../navigations/drawernavigation';
 import splash from '../screens/tutorial';
-import bottomtab from '../navigations/bottomtab';
+import bottomtab, {AlloffersStack} from '../navigations/bottomtab';
 import selectstatus from '../screens/home/status';
 import allchats from '../screens/chat/allmessages';
 import profilePreivew from '../screens/profile';
@@ -214,6 +214,11 @@ function App() {
         <Stack.Screen
           name="drawer"
           component={drawer}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="allofferflow"
+          component={AlloffersStack}
           options={{headerShown: false}}
         />
         <Stack.Screen
