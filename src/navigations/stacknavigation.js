@@ -6,8 +6,14 @@ import signin from '../screens/auth/signin';
 
 import drawer from '../navigations/drawernavigation';
 import splash from '../screens/tutorial';
-import bottomtab, {AlloffersStack} from '../navigations/bottomtab';
+import bottomtab, {
+  AlloffersStack,
+  ChatMainStack,
+  CrushesMainStack,
+  DashboardStack,
+} from '../navigations/bottomtab';
 import selectstatus from '../screens/home/status';
+import ChooseYourInterest from '../screens/home/status';
 import allchats from '../screens/chat/allmessages';
 import profilePreivew from '../screens/profile';
 
@@ -222,8 +228,28 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="Dashboardflow"
+          component={DashboardStack}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Chatflow"
+          component={ChatMainStack}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="profileflow"
+          component={CrushesMainStack}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="settingflow"
+          component={ChooseYourInterest}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="bottomtab"
-          component={bottomtab}
+          component={DashboardStack}
           options={{headerShown: false}}
         />
         <Stack.Screen

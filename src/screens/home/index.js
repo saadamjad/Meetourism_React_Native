@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
@@ -98,9 +99,8 @@ const App = (props) => {
                           justifyContent: 'center',
                         }}
                         onPress={() =>
-                          props.navigation.navigate(
-                            i == 1 ? item.navigation : '',
-                          )
+                          item.navigation &&
+                          props.navigation.navigate(item.navigation)
                         }>
                         {i == 0 ? (
                           <Image
@@ -289,6 +289,68 @@ const App = (props) => {
           </View>
         </View>
       </ScrollView>
+      <View
+        style={{
+          height: 60,
+          width: '100%',
+          backgroundColor: 'white',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}>
+        {[
+          {
+            navigateTo: 'allofferflow',
+            icons: (
+              <Image
+                source={require('../../assets/icons/path.png')}
+                style={{height: 18, width: 18, tintColor: 'gray'}}
+                resizeMode="contain"
+              />
+            ),
+          },
+          {
+            navigateTo: 'setting',
+            icons: (
+              <MaterialCommunityIcons
+                name="account-multiple"
+                size={20}
+                color={'gray'}
+              />
+            ),
+          },
+          {
+            navigateTo: 'Chatflow',
+            icons: (
+              <Image
+                source={require('../../assets/icons/Chat.png')}
+                style={{height: 18, width: 18, tintColor: 'gray'}}
+                resizeMode="contain"
+              />
+            ),
+          },
+          {
+            navigateTo: 'profileflow',
+            icons: (
+              <MaterialCommunityIcons name="account" size={20} color={'gray'} />
+            ),
+          },
+          {
+            navigateTo: 'settingflow',
+            icons: <MaterialIcons name="settings" size={20} color={'gray'} />,
+          },
+        ].map((val) => (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => props.navigation.navigate(val.navigateTo, true)}>
+            {val.icons}
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 };

@@ -116,7 +116,7 @@ const DrawerContent = (props) => {
             },
             {
               title: 'Events ',
-              name: 'Home',
+              name: 'Calender',
 
               type: 'Fontisto',
               // icon: require('../assets/icons/69.png'),
@@ -124,14 +124,14 @@ const DrawerContent = (props) => {
             },
             {
               title: 'Search Location ',
-              name: 'Home',
+              name: 'search',
               type: 'FontAwesome5',
               // icon: require('../assets/icons/68.png'),
               icon: require('../../assets/icons/search.png'),
             },
             {
               title: 'Calender ',
-              name: 'calender',
+              name: 'Calender',
               type: 'FontAwesome5',
               // icon: require('../assets/icons/68.png'),
               icon: require('../../assets/icons/search.png'),
@@ -154,7 +154,7 @@ const DrawerContent = (props) => {
             },
             {
               title: 'Offers',
-              name: 'Home',
+              name: 'offers',
               // icon: require('../assets/icons/65.png'),
               icon: require('../../assets/icons/offers.png'),
             },
@@ -167,7 +167,7 @@ const DrawerContent = (props) => {
 
             {
               title: 'Log Out',
-              name: 'Home',
+              name: 'Auth',
               // icon: require('../assets/icons/64.png'),
               icon: require('../../assets/icons/logout.png'),
             },
@@ -176,10 +176,12 @@ const DrawerContent = (props) => {
               console.log('loop', val),
               (
                 <TouchableOpacity
-                  onPress={() =>
-                    i == 4
-                      ? props.navigation.navigate('Calender')
-                      : props.navigation.navigate('DashboardStack')
+                  onPress={
+                    () => val.name && props.navigation.navigate(val.name)
+
+                    // i == 4
+                    //   ? props.navigation.navigate('name')
+                    //   : props.navigation.navigate('setting')
                   }
                   style={{
                     flexDirection: 'row',

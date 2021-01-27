@@ -158,7 +158,7 @@ const Profile = (props) => {
                 justifyContent: 'center',
               }}
               onPress={() =>
-                props.navigation.navigate('Cruhes', {
+                props.navigation.navigate('Friends', {
                   blockListNotOpen: true,
                 })
               }>

@@ -3,7 +3,10 @@ import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 // import home from '../screens/homes/home';
 import {Homes} from './stacknavigation';
 import DrawerContent from '../screens/customdrawer';
-import Bottomtab from '../navigations/bottomtab';
+import Bottomtab, {
+  AlloffersStack,
+  DashboardStack,
+} from '../navigations/bottomtab';
 import Match from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -11,6 +14,7 @@ import allchat from '../screens/chat/innerchat';
 import dashborad from '../screens/dashboard';
 import {NavigationContainer} from '@react-navigation/native';
 import Calender from '../screens/calendar';
+import Search from '../screens/search';
 
 console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -30,17 +34,28 @@ function MyDrawer(props) {
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
         name="setting"
-        component={Bottomtab}
+        component={DashboardStack}
       />
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
         name="Match"
         component={Matches}
       />
+
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
         name="Calender"
         component={Calender}
+      />
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="search"
+        component={Search}
+      />
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="offers"
+        component={AlloffersStack}
       />
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}

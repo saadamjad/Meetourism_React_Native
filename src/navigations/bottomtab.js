@@ -34,6 +34,7 @@ import SeeYourMatch from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
 import userhome from '../screens/customdrawer';
 import Cruhes from '../screens/crushes';
+import Friends from '../screens/friends';
 import userProfile from '../screens/profile';
 
 import Home from '../screens/home';
@@ -64,6 +65,11 @@ function MyDrawer(props) {
             console.log('===========', color),
             (
               <TouchableOpacity
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
                 onPress={() => props.navigation.navigate('allofferflow')}>
                 {/* // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} /> */}
                 <Image
@@ -82,11 +88,19 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="account-multiple"
-              size={20}
-              color={color}
-            />
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => props.navigation.navigate('Dashboardflow')}>
+              <MaterialCommunityIcons
+                name="account-multiple"
+                size={20}
+                color={color}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -96,11 +110,19 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <Image
-              source={require('../assets/icons/Chat.png')}
-              style={{height: 18, width: 18, tintColor: color}}
-              resizeMode="contain"
-            />
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => props.navigation.navigate('Chatflow')}>
+              <Image
+                source={require('../assets/icons/Chat.png')}
+                style={{height: 18, width: 18, tintColor: color}}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -110,7 +132,15 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="account" size={20} color={color} />
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => props.navigation.navigate('profileflow')}>
+              <MaterialCommunityIcons name="account" size={20} color={color} />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -120,7 +150,15 @@ function MyDrawer(props) {
         options={{
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="settings" size={20} color={color} />
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => props.navigation.navigate('settingflow')}>
+              <MaterialIcons name="settings" size={20} color={color} />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -151,6 +189,11 @@ export function CrushesMainStack() {
       <CrushesStack.Screen
         name="Cruhes"
         component={Cruhes}
+        options={{headerShown: false}}
+      />
+      <CrushesStack.Screen
+        name="Friends"
+        component={Friends}
         options={{headerShown: false}}
       />
       <CrushesStack.Screen
