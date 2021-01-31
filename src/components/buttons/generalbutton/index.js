@@ -12,6 +12,8 @@ function GlobalButton(props) {
     <Button
       title={props.buttonText ? props.buttonText : 'enter text '}
       buttonStyle={{
+        overflow: 'hidden',
+
         backgroundColor: props.backgroundColor
           ? props.backgroundColor
           : theme.secondaryColor,
@@ -31,6 +33,8 @@ function GlobalButton(props) {
       }}
       containerStyle={{
         justifyContent: 'center',
+        overflow: 'hidden',
+        height: props.height ? props.height : 50,
         // borderRadius: 20,
         borderRadius: props.borderRadius ? props.borderRadius : 30,
       }}
