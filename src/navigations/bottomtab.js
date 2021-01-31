@@ -44,143 +44,143 @@ import location from '../screens/location';
 import ChooseYourInterest from '../screens/home/status';
 // import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
-function MyDrawer(props) {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        inactiveTintColor: 'gray',
-        activeTintColor: 'black',
-        showLabel: false,
-      }}
-      initialRouteName="DashboardStack">
-      <Tab.Screen
-        name="alloffers"
-        // component={Alloffers}
-        component={AlloffersStack}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            console.log('===========', color),
-            (
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onPress={() => props.navigation.navigate('allofferflow')}>
-                {/* // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} /> */}
-                <Image
-                  source={require('../assets/icons/path.png')}
-                  style={{height: 18, width: 18, tintColor: color}}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            )
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="DashboardStack"
-        component={DashboardStack}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={() => props.navigation.navigate('Dashboardflow')}>
-              <MaterialCommunityIcons
-                name="account-multiple"
-                size={20}
-                color={color}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={ChatMainStack}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={() => props.navigation.navigate('Chatflow')}>
-              <Image
-                source={require('../assets/icons/Chat.png')}
-                style={{height: 18, width: 18, tintColor: color}}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="profile"
-        component={CrushesMainStack}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={() => props.navigation.navigate('profileflow')}>
-              <MaterialCommunityIcons name="account" size={20} color={color} />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="setting"
-        component={ChooseYourInterest}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({color, size}) => (
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={() => props.navigation.navigate('settingflow')}>
-              <MaterialIcons name="settings" size={20} color={color} />
-            </TouchableOpacity>
-          ),
-        }}
-      />
-      {/* <Tab.Screen
-        name="setting"
-        component={null}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Find Plans',
-          tabBarIcon: ({color, size}) => (
-            // <Fontisto name="player-settings" size={20} color={'#2E2323'} />
-            <Image
-              source={require('../assets/icons/Setting.png')}
-              style={{height: 18, width: 18, tintColor: color}}
-              resizeMode="contain"
-            />
-          ),
-        }}
-      /> */}
-    </Tab.Navigator>
-  );
-}
+// function MyDrawer(props) {
+//   return (
+//     <Tab.Navigator
+//       tabBarOptions={{
+//         inactiveTintColor: 'gray',
+//         activeTintColor: 'black',
+//         showLabel: false,
+//       }}
+//       initialRouteName="DashboardStack">
+//       <Tab.Screen
+//         name="alloffers"
+//         // component={Alloffers}
+//         component={AlloffersStack}
+//         options={{
+//           headerShown: false,
+//           tabBarIcon: ({color, size}) => (
+//             console.log('===========', color),
+//             (
+//               <TouchableOpacity
+//                 style={{
+//                   flex: 1,
+//                   justifyContent: 'center',
+//                   alignItems: 'center',
+//                 }}
+//                 onPress={() => props.navigation.navigate('allofferflow')}>
+//                 {/* // <MaterialIcons name="local-offer" size={20} color={'#2E2323'} /> */}
+//                 <Image
+//                   source={require('../assets/icons/path.png')}
+//                   style={{height: 18, width: 18, tintColor: color}}
+//                   resizeMode="contain"
+//                 />
+//               </TouchableOpacity>
+//             )
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="DashboardStack"
+//         component={DashboardStack}
+//         options={{
+//           headerShown: false,
+//           tabBarIcon: ({color, size}) => (
+//             <TouchableOpacity
+//               style={{
+//                 flex: 1,
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//               }}
+//               onPress={() => props.navigation.navigate('Dashboardflow')}>
+//               <MaterialCommunityIcons
+//                 name="account-multiple"
+//                 size={20}
+//                 color={color}
+//               />
+//             </TouchableOpacity>
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Chat"
+//         component={ChatMainStack}
+//         options={{
+//           headerShown: false,
+//           tabBarIcon: ({color, size}) => (
+//             <TouchableOpacity
+//               style={{
+//                 flex: 1,
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//               }}
+//               onPress={() => props.navigation.navigate('Chatflow')}>
+//               <Image
+//                 source={require('../assets/icons/Chat.png')}
+//                 style={{height: 18, width: 18, tintColor: color}}
+//                 resizeMode="contain"
+//               />
+//             </TouchableOpacity>
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="profile"
+//         component={CrushesMainStack}
+//         options={{
+//           headerShown: false,
+//           tabBarIcon: ({color, size}) => (
+//             <TouchableOpacity
+//               style={{
+//                 flex: 1,
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//               }}
+//               onPress={() => props.navigation.navigate('profileflow')}>
+//               <MaterialCommunityIcons name="account" size={20} color={color} />
+//             </TouchableOpacity>
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="setting"
+//         component={ChooseYourInterest}
+//         options={{
+//           headerShown: false,
+//           tabBarIcon: ({color, size}) => (
+//             <TouchableOpacity
+//               style={{
+//                 flex: 1,
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//               }}
+//               onPress={() => props.navigation.navigate('settingflow')}>
+//               <MaterialIcons name="settings" size={20} color={color} />
+//             </TouchableOpacity>
+//           ),
+//         }}
+//       />
+//       {/* <Tab.Screen
+//         name="setting"
+//         component={null}
+//         options={{
+//           headerShown: false,
+//           tabBarLabel: 'Find Plans',
+//           tabBarIcon: ({color, size}) => (
+//             // <Fontisto name="player-settings" size={20} color={'#2E2323'} />
+//             <Image
+//               source={require('../assets/icons/Setting.png')}
+//               style={{height: 18, width: 18, tintColor: color}}
+//               resizeMode="contain"
+//             />
+//           ),
+//         }}
+//       /> */}
+//     </Tab.Navigator>
+//   );
+// }
 
 const CrushesStack = createStackNavigator();
 export function CrushesMainStack() {
@@ -482,4 +482,4 @@ export function profileMainStack() {
   );
 }
 
-export default MyDrawer;
+// export default MyDrawer;

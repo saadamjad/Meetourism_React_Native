@@ -39,9 +39,14 @@ import innerchat from '../screens/livechat';
 import SeeYourMatch from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
 import SelectPaymentType from '../screens/selectpaymenttype';
+import location from '../screens/location';
+import chooseyourinterest from '../screens/chooseyourinterest';
+import yourinterests from '../screens/yourinterests';
 
 import userProfile from '../screens/profile';
 import Search from '../screens/search';
+import Successful from '../screens/successful';
+
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -61,23 +66,31 @@ function Auth() {
     </Stack.Navigator>
   );
 }
-function HomeStack() {
-  return (
-    <Stack.Navigator
 
-    // initialRouteName={'selectstatus'}
-    >
+export function Status() {
+  return (
+    <Stack.Navigator initialRouteName={'selectstatus'}>
+      <Stack.Screen
+        name="selectstatus"
+        component={selectstatus}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="chooseyourinterest"
+        component={chooseyourinterest}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="yourinterests"
+        component={yourinterests}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="profilePreivew"
         component={profilePreivew}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="SelectPaymentType"
-        component={SelectPaymentType}
-        options={{headerShown: false}}
-      />
-
       <Stack.Screen
         name="SeeYourMatch"
         component={SeeYourMatch}
@@ -88,6 +101,84 @@ function HomeStack() {
         component={matchprofile}
         options={{headerShown: false}}
       />
+    </Stack.Navigator>
+  );
+}
+
+function App() {
+  return (
+    <NavigationContainer headerMode="none">
+      <Stack.Navigator initialRouteName={'Auth'}>
+        <Stack.Screen
+          name="Auth"
+          component={Auth}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="drawer"
+          component={drawer}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ProfileStack"
+          component={ProfileStack}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="statusstack"
+          component={Status}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export function ProfileStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="detailoffer"
+        component={dealoffer1}
+        options={{headerShown: false}}
+      />
+
+      {/* //status */}
+      {/* <Stack.Screen
+        name="selectstatus"
+        component={selectstatus}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="chooseyourinterest"
+        component={chooseyourinterest}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="yourinterests"
+        component={yourinterests}
+        options={{headerShown: false}}
+      /> */}
+
+      <Stack.Screen
+        name="allchats"
+        component={allchats}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SelectPaymentType"
+        component={SelectPaymentType}
+        options={{headerShown: false}}
+      />
+
       <Stack.Screen
         name="innerchat"
         component={innerchat}
@@ -110,12 +201,22 @@ function HomeStack() {
         component={followandBlock}
         options={{headerShown: false}}
       />
-      {/* offers and create offers */}
+      <Stack.Screen
+        name="location"
+        component={location}
+        options={{headerShown: false}}
+      />
       {/* <Stack.Screen
-        name="Dashboard"
-        component={Dashboard}
+        name="chooseyourinterest"
+        component={chooseyourinterest}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="yourinterests"
+        component={yourinterests}
         options={{headerShown: false}}
       /> */}
+
       <Stack.Screen
         name="history"
         component={history}
@@ -176,100 +277,18 @@ function HomeStack() {
         component={detailsoffer}
         options={{headerShown: false}}
       />
-    </Stack.Navigator>
-  );
-}
-
-export function Status() {
-  return (
-    <Stack.Navigator initialRouteName={'selectstatus'}>
       <Stack.Screen
-        name="selectstatus"
-        component={selectstatus}
+        name="search"
+        component={Search}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="dealoffer"
+        component={Successful}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
-  );
-}
-export function Chat() {
-  return (
-    <Stack.Navigator initialRouteName={'selectstatus'}>
-      <Stack.Screen
-        name="allchats"
-        component={allchats}
-        options={{headerShown: false}}
-      />
-    </Stack.Navigator>
-  );
-}
-
-function App() {
-  return (
-    <NavigationContainer headerMode="none" i>
-      <Stack.Navigator initialRouteName={'Status'}>
-        <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="HomeStack"
-          component={HomeStack}
-          options={{headerShown: false}}
-        />
-
-        <Stack.Screen
-          name="search"
-          component={Search}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="detailoffer"
-          component={dealoffer1}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="drawer"
-          component={drawer}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="allofferflow"
-          component={AlloffersStack}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Dashboardflow"
-          component={DashboardStack}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Chatflow"
-          component={ChatMainStack}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="profileflow"
-          component={CrushesMainStack}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="settingflow"
-          component={ChooseYourInterest}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="bottomtab"
-          component={DashboardStack}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Status"
-          component={Status}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 

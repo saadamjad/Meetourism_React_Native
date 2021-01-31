@@ -1,12 +1,13 @@
 import React from 'react';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 // import home from '../screens/homes/home';
-import {Homes} from './stacknavigation';
+// import {Homes} from './stacknavigation';
 import DrawerContent from '../screens/customdrawer';
 import Bottomtab, {
   AlloffersStack,
   DashboardStack,
 } from '../navigations/bottomtab';
+import {ProfileStack} from './stacknavigation';
 import Match from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -15,8 +16,10 @@ import dashborad from '../screens/dashboard';
 import {NavigationContainer} from '@react-navigation/native';
 import Calender from '../screens/calendar';
 import Search from '../screens/search';
+import profilePreivew from '../screens/profile';
+import Home from '../screens/home';
 
-console.log('App====', Homes);
+// console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -33,8 +36,21 @@ function MyDrawer(props) {
       drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
-        name="setting"
-        component={DashboardStack}
+        name="profilestack"
+        component={ProfileStack}
+      />
+
+      {/* <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+        drawerLabel={false}
+      /> */}
+
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="Calender"
+        component={Calender}
       />
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
@@ -44,19 +60,14 @@ function MyDrawer(props) {
 
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
-        name="Calender"
-        component={Calender}
-      />
-      <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
         name="search"
         component={Search}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
         name="offers"
         component={AlloffersStack}
-      />
+      /> */}
       <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
         name="adminscreens"

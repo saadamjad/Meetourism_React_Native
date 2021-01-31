@@ -11,22 +11,19 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //   text="sss"
 //   navigation={props.navigation}
 //   searchIcon={true}
-const App = (
-  {
-    isTransparent,
-    text,
-    textAlign,
-    leftArrow,
-    drawerIcon,
-    searchIcon,
-    navigation,
-    textColor,
-    bgColor,
-    sColor,
-    height,
-  },
-  props,
-) => {
+const App = ({
+  isTransparent,
+  text,
+  textAlign,
+  leftArrow,
+  drawerIcon,
+  searchIcon,
+  navigation,
+  textColor,
+  bgColor,
+  sColor,
+  height,
+}) => {
   return (
     <View
       style={{

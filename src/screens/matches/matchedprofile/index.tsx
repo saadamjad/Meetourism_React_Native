@@ -245,11 +245,12 @@ const Profile = (props) => {
               </Text>
               <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
               <SliderCom trackStyle="black" />
+              {console.log('--------', props.navigation)}
               {buttonHide || userType == '2' ? null : (
                 <GlobalButton
                   buttonText="Dashboard"
                   width="70%"
-                  onPress={() => props.navigation.navigate('drawer')}
+                  onPress={() => props.navigation.replace('drawer')}
                 />
               )}
             </View>
