@@ -6,20 +6,12 @@ import signin from '../screens/auth/signin';
 
 import drawer from '../navigations/drawernavigation';
 import splash from '../screens/tutorial';
-import bottomtab, {
-  AlloffersStack,
-  ChatMainStack,
-  CrushesMainStack,
-  DashboardStack,
-} from '../navigations/bottomtab';
+
 import selectstatus from '../screens/home/status';
 import ChooseYourInterest from '../screens/home/status';
 import allchats from '../screens/chat/allmessages';
 import profilePreivew from '../screens/profile';
 import Home from '../screens/home';
-
-// import Dashboard from '../screens/dashboard';
-// import Chat from '../screens/chat/allmessages';
 
 import allresturant from '../screens/allresturant';
 import Selectoffer from '../screens/alloffers/selectOffer';
@@ -46,6 +38,7 @@ import yourinterests from '../screens/yourinterests';
 import userProfile from '../screens/profile';
 import Search from '../screens/search';
 import Successful from '../screens/successful';
+import Cruhes from '../screens/crushes';
 
 const Stack = createStackNavigator();
 
@@ -138,7 +131,7 @@ function App() {
 
 export function ProfileStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName={'Home'}>
       <Stack.Screen
         name="Home"
         component={Home}
@@ -146,27 +139,25 @@ export function ProfileStack() {
       />
 
       <Stack.Screen
+        name="SeeYourMatch"
+        component={SeeYourMatch}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Cruhes"
+        component={Cruhes}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="matchprofile"
+        component={matchprofile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="detailoffer"
         component={dealoffer1}
         options={{headerShown: false}}
       />
-
-      {/* //status */}
-      {/* <Stack.Screen
-        name="selectstatus"
-        component={selectstatus}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="chooseyourinterest"
-        component={chooseyourinterest}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="yourinterests"
-        component={yourinterests}
-        options={{headerShown: false}}
-      /> */}
 
       <Stack.Screen
         name="allchats"

@@ -10,113 +10,109 @@ import {Overlay} from 'react-native-elements';
 // import Overlay from '../../components/overlays';
 function Successful(props) {
   return (
-    <Overlay
-      style={{flex: 1}}
-      overlayStyle={{
-        flex: 1,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(66,48,80, 1)',
-      }}
-      isVisible={props.visible}
-      onBackdropPress={() => props.toggle()}>
-      <CustomView bg={'transparent'} scroll>
-        <App navigation={props.navigation} isTransparent />
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    // <Overlay
+    //   style={{flex: 1}}
+    //   overlayStyle={{
+    //     flex: 1,
+    //     width: '100%',
+    //     height: '100%',
+    //     backgroundColor: 'rgba(66,48,80, 1)',
+    //   }}
+    //   isVisible={props.visible}
+    //   onBackdropPress={() => props.toggle()}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View
+        style={{
+          width: '90%',
+          backgroundColor: 'white',
+          paddingHorizontal: 20,
+          borderRadius: 45,
+          paddingVertical: 50,
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.goBack();
+          }}
+          style={{position: 'absolute', right: 20, top: 10}}>
+          <Icon name="cross" type="Entypo" />
+        </TouchableOpacity>
+        <Text
+          style={{
+            color: theme.secondaryColor,
+            paddingBottom: 25,
+            fontSize: 24,
+            fontWeight: '700',
+          }}>
+          Whopper Feast
+        </Text>
+        <View style={{width: '100%'}}>
+          <Text
+            style={{
+              color: theme.textColor.blackColor,
+              paddingBottom: 10,
+              fontSize: 16,
+              fontWeight: '500',
+            }}>
+            Description
+          </Text>
+          <Text
+            style={{
+              color: theme.textColor.greyColor,
+              paddingBottom: 25,
+              fontSize: 14,
+            }}>
+            10 Chicken Whopper and 10 Drink
+          </Text>
+          <View style={{width: '100%', alignItems: 'flex-end', paddingTop: 15}}>
+            <Text style={{color: theme.secondaryColor, fontWeight: '700'}}>
+              15.99$.only/-
+            </Text>
+          </View>
           <View
             style={{
-              width: '90%',
-              backgroundColor: 'white',
-              paddingHorizontal: 20,
-              borderRadius: 45,
-              paddingVertical: 50,
+              width: '100%',
               alignItems: 'center',
+              marginTop: 60,
             }}>
-            <TouchableOpacity
+            <Image
+              resizeMode="contain"
+              source={require('../../assets/images/burgerDrink.png')}
+            />
+          </View>
+          <View
+            style={{
+              width: '100%',
+              alignItems: 'center',
+              marginTop: 30,
+            }}>
+            <Image
+              resizeMode="cover"
+              style={{width: '100%', height: 200}}
+              source={require('../../assets/images/map.jpg')}
+            />
+          </View>
+          <View
+            style={{
+              width: '100%',
+              // height: 100
+              marginTop: 20,
+              flex: 0.2,
+              justifyContent: 'flex-end',
+              // backgroundColor: 'yellow',
+            }}>
+            <GlobalButton
+              buttonText="Pay the Offer"
+              height={40}
               onPress={() => {
-                props.navigation.goBack();
+                props.func();
               }}
-              style={{position: 'absolute', right: 20, top: 10}}>
-              <Icon name="cross" type="Entypo" />
-            </TouchableOpacity>
-            <Text
-              style={{
-                color: theme.secondaryColor,
-                paddingBottom: 25,
-                fontSize: 24,
-                fontWeight: '700',
-              }}>
-              Whopper Feast
-            </Text>
-            <View style={{width: '100%'}}>
-              <Text
-                style={{
-                  color: theme.textColor.blackColor,
-                  paddingBottom: 10,
-                  fontSize: 16,
-                  fontWeight: '500',
-                }}>
-                Description
-              </Text>
-              <Text
-                style={{
-                  color: theme.textColor.greyColor,
-                  paddingBottom: 25,
-                  fontSize: 14,
-                }}>
-                10 Chicken Whopper and 10 Drink
-              </Text>
-              <View
-                style={{width: '100%', alignItems: 'flex-end', paddingTop: 15}}>
-                <Text style={{color: theme.secondaryColor, fontWeight: '700'}}>
-                  15.99$.only/-
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  alignItems: 'center',
-                  marginTop: 60,
-                }}>
-                <Image
-                  resizeMode="contain"
-                  source={require('../../assets/images/burgerDrink.png')}
-                />
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  alignItems: 'center',
-                  marginTop: 30,
-                }}>
-                <Image
-                  resizeMode="cover"
-                  style={{width: '100%', height: 200}}
-                  source={require('../../assets/images/map.jpg')}
-                />
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  // height: 100
-                  marginTop: 20,
-                  flex: 0.2,
-                  justifyContent: 'flex-end',
-                  // backgroundColor: 'yellow',
-                }}>
-                <GlobalButton
-                  buttonText="Pay the Offer"
-                  height={40}
-                  onPress={() => {
-                    props.func();
-                  }}
-                />
-              </View>
-            </View>
+            />
           </View>
         </View>
-      </CustomView>
-    </Overlay>
+      </View>
+    </View>
+    // </Overlay>
   );
 }
 export default Successful;

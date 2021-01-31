@@ -6,6 +6,8 @@ import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
+import Longheader from '../../../components/header/longheader';
+
 import Overlay from '../../../components/overlays';
 function DetailOffer1(props) {
   return (
