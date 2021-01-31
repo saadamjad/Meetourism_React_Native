@@ -6,8 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import {Value} from 'react-native-reanimated';
-import Entypo from 'react-native-vector-icons/Entypo';
+
 const DrawerContent = (props) => {
   let array;
   return (

@@ -7,6 +7,7 @@ import {
   Dimensions,
   TextInput,
   AsyncStorage,
+  ImageBackground,
 } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
@@ -47,15 +48,15 @@ const Status = (props) => {
     //   setState({...state, visible: !state.visible});
     // }
   };
-  useEffect(() => {
-    console.log(
-      '==================================================================',
-    );
+  // useEffect(() => {
+  //   console.log(
+  //     '==================================================================',
+  //   );
 
-    if (props?.route?.params || props?.route?.params) {
-      setState({...state, visible: true, settingStatus: true});
-    }
-  }, []);
+  //   if (props?.route?.params || props?.route?.params) {
+  //     setState({...state, visible: true, settingStatus: true});
+  //   }
+  // }, []);
 
   const _UserType = async (i) => {
     let number = JSON.stringify(i);
@@ -81,112 +82,107 @@ const Status = (props) => {
   };
   return (
     <>
-      <CustomView
-        bg={'transparent'}
-        scroll
-        image={require('../../../assets/images/home.png')}>
-        <View style={{flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.75)'}}>
+      <ImageBackground
+        source={require('../../../assets/images/home.png')}
+        style={{height: '100%', width: '100%'}}>
+        <View
+          style={{
+            flex: 0.4,
+
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'white',
+            opacity: 0.8,
+          }}>
           <View
             style={{
-              height: '40%',
-              // flex: 0.5,
+              height: 150,
+              width: 150,
               // borderWidth: 1,
-              // backgroundColor: 'white',
-              width: '100%',
-              justifyContent: 'center',
               alignItems: 'center',
+              justifyContent: 'center',
             }}>
-            <View
-              style={{
-                height: 150,
-                width: 150,
-                // borderWidth: 1,
-                alignItems: 'center',
-                // zIndex: -5000,
-                justifyContent: 'center',
-              }}>
-              <Image
-                resizeMode="contain"
-                source={require('../../../assets/images/logo.png')}
-                style={{height: 120, width: 130}}
-              />
-            </View>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              // height: '60%',
-              width: '100%',
-              // backgroundColor
-              borderTopLeftRadius: 60,
-              overflow: 'hidden',
-              backgroundColor: 'white',
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-
-              elevation: 2,
-            }}>
-            <Text
-              style={{
-                color: theme.secondaryColor,
-                fontSize: 24,
-                textAlign: 'center',
-                fontWeight: '700',
-              }}>
-              Your Current Status?
-            </Text>
-            {allStatus.map((item, i) => {
-              console.log('item,', i);
-              return (
-                <TouchableOpacity
-                  activeOpacity={1}
-                  style={{
-                    height: 100,
-                    backgroundColor: 'white',
-                    // borderTopLeftRadius: 80,
-                    justifyContent: 'space-around',
-                    borderBottomLeftRadius: 60,
-                    // elevation: 1,
-
-                    alignItems: 'center',
-
-                    borderBottomWidth: 1,
-                    borderWidth: 1,
-                    borderLeftWidth: 1,
-                    borderColor: '#D3D3D3',
-                    // borderColor: 'transparent',
-                  }}
-                  onPress={() => toggleOverlay(i)}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      // borderWidth: 1,
-                    }}>
-                    <Icon
-                      style={{fontSize: 18}}
-                      type="FontAwesome5"
-                      name="user-alt"
-                    />
-                    <Text
-                      style={{
-                        color: theme.textColor.blackColor,
-                        fontSize: 18,
-                        marginLeft: 5,
-                      }}>
-                      {/* Single */}
-                      {item.name}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
+            <Image
+              resizeMode="contain"
+              source={require('../../../assets/images/logo.png')}
+              style={{height: 120, width: 130}}
+            />
           </View>
         </View>
-      </CustomView>
+        <View
+          style={{
+            flex: 0.6,
+            width: '100%',
+            paddingVertical: 5,
+            borderTopLeftRadius: 60,
+            overflow: 'hidden',
+            backgroundColor: 'white',
+            justifyContent: 'space-between',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+
+            elevation: 2,
+          }}>
+          <Text
+            style={{
+              color: theme.secondaryColor,
+              fontSize: 24,
+              paddingVertical: 20,
+              textAlign: 'center',
+              fontWeight: '700',
+            }}>
+            Your Current Status?
+          </Text>
+
+          {allStatus.map((item, i) => {
+            // console.log('item,', i);
+            return (
+              <TouchableOpacity
+                activeOpacity={1}
+                style={{
+                  height: 100,
+                  backgroundColor: 'white',
+                  justifyContent: 'center',
+                  // borderWidth: 1,
+                  borderBottomLeftRadius: 60,
+
+                  alignItems: 'center',
+
+                  borderBottomWidth: 1,
+                  // borderWidth: 1,
+                  borderLeftWidth: 1,
+                  borderColor: '#D3D3D3',
+                }}
+                onPress={() => toggleOverlay(i)}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    // borderWidth: 1,
+                  }}>
+                  <Icon
+                    style={{fontSize: 18}}
+                    type="FontAwesome5"
+                    name="user-alt"
+                  />
+                  <Text
+                    style={{
+                      color: theme.textColor.blackColor,
+                      fontSize: 18,
+                      marginLeft: 5,
+                    }}>
+                    {item.name}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </ImageBackground>
     </>
   );
 };
