@@ -1,12 +1,8 @@
 import React from 'react';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
-// import home from '../screens/homes/home';
-// import {Homes} from './stacknavigation';
+
 import DrawerContent from '../screens/customdrawer';
-import Bottomtab, {
-  AlloffersStack,
-  DashboardStack,
-} from '../navigations/bottomtab';
+
 import {ProfileStack} from './stacknavigation';
 import Match from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';

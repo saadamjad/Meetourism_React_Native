@@ -95,7 +95,10 @@ const SignIn = (props) => {
             alignItems: 'center',
           }}
           // onPress={() => props.navigation.navigate('drawer')}
-          onPress={() => props.navigation.navigate('Status')}>
+          onPress={() =>
+            // props.navigation.navigate('Status')}
+            props.navigation.replace('drawer')
+          }>
           <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
         </TouchableOpacity>
         <TouchableOpacity

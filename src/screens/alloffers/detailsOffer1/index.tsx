@@ -1,14 +1,11 @@
 import {Icon} from 'native-base';
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
 import Longheader from '../../../components/header/longheader';
-
-import Overlay from '../../../components/overlays';
 function DetailOffer1(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
