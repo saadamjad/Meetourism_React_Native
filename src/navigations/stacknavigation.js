@@ -16,6 +16,7 @@ import selectstatus from '../screens/home/status';
 import ChooseYourInterest from '../screens/home/status';
 import allchats from '../screens/chat/allmessages';
 import profilePreivew from '../screens/profile';
+import Home from '../screens/home';
 
 // import Dashboard from '../screens/dashboard';
 // import Chat from '../screens/chat/allmessages';
@@ -37,6 +38,7 @@ import Notification from '../screens/customdrawer/notification';
 import innerchat from '../screens/livechat';
 import SeeYourMatch from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
+import SelectPaymentType from '../screens/selectpaymenttype';
 
 import userProfile from '../screens/profile';
 import Search from '../screens/search';
@@ -61,12 +63,21 @@ function Auth() {
 }
 function HomeStack() {
   return (
-    <Stack.Navigator initialRouteName={'selectstatus'}>
+    <Stack.Navigator
+
+    // initialRouteName={'selectstatus'}
+    >
       <Stack.Screen
         name="profilePreivew"
         component={profilePreivew}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="SelectPaymentType"
+        component={SelectPaymentType}
+        options={{headerShown: false}}
+      />
+
       <Stack.Screen
         name="SeeYourMatch"
         component={SeeYourMatch}

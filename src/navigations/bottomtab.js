@@ -185,7 +185,9 @@ function MyDrawer(props) {
 const CrushesStack = createStackNavigator();
 export function CrushesMainStack() {
   return (
-    <CrushesStack.Navigator initialRouteName={'Cruhes'}>
+    <CrushesStack.Navigator
+      // initialRouteName={'Cruhes'}
+      initialRouteName={'followandBlock'}>
       <CrushesStack.Screen
         name="Cruhes"
         component={Cruhes}

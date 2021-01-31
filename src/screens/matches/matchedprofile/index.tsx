@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  AsyncStorage,
 } from 'react-native';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
@@ -16,6 +17,37 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
 const Profile = (props) => {
+  const [buttonHide, setButtonHide] = useState(false);
+  const [userType, setUserType] = useState('0');
+
+  useEffect(() => {
+    _GetUserType();
+
+    console.log(
+      '==================================================================',
+    );
+    // console.log('props?.route?.params?.dashboard', props?.route);
+
+    if (props?.route?.params) {
+      console.log('andr agyaa ha ', props?.route?.params);
+      setButtonHide(true);
+    }
+  }, []);
+
+  const _GetUserType = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userType');
+      if (value !== null) {
+        // We have data!!
+        setUserType(value);
+
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
   return (
     <CustomView scroll>
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
@@ -213,11 +245,13 @@ const Profile = (props) => {
               </Text>
               <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
               <SliderCom trackStyle="black" />
-              <GlobalButton
-                buttonText="Dashboard"
-                width="70%"
-                onPress={() => props.navigation.navigate('drawer')}
-              />
+              {buttonHide || userType == '2' ? null : (
+                <GlobalButton
+                  buttonText="Dashboard"
+                  width="70%"
+                  onPress={() => props.navigation.navigate('drawer')}
+                />
+              )}
             </View>
           </View>
         </View>

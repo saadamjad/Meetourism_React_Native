@@ -6,6 +6,7 @@ import {
   Text,
   Dimensions,
   TextInput,
+  AsyncStorage,
 } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
@@ -21,6 +22,7 @@ const Status = (props) => {
     visible: false,
     visible1: false,
     selected: 0.1,
+    settingStatus: false,
   });
   const toggleOverlay = () => {
     if (!state.visible == false) {
@@ -30,15 +32,31 @@ const Status = (props) => {
     }
   };
   useEffect(() => {
-    if (props?.route?.params) {
-      setState({...state, visible: true});
+    console.log(
+      '==================================================================',
+    );
+
+    if (props?.route?.params || props?.route?.params) {
+      setState({...state, visible: true, settingStatus: true});
     }
   }, []);
+
+  const _UserType = async () => {
+    try {
+      await AsyncStorage.setItem('userType', '2');
+    } catch (error) {
+      // Error saving data
+    }
+  };
+
   const toggleOverlay1 = () => {
     if (state.selected !== 0.1) {
+      _UserType();
       setState({...state, visible: false, visible1: !state.visible1});
       // props.navigation.navigate('drawer')
-      props.navigation.navigate('HomeStack');
+      state.settingStatus
+        ? props.navigation.navigate('profilePreivew')
+        : props.navigation.navigate('HomeStack');
     } else {
       alert('Please select one of them');
     }
@@ -111,7 +129,8 @@ const Status = (props) => {
               borderColor: '#D3D3D3',
               // borderColor: 'transparent',
             }}
-            onPress={() => toggleOverlay()}>
+            // onPress={() => toggleOverlay()}
+          >
             <Text
               style={{
                 color: theme.secondaryColor,
@@ -194,7 +213,8 @@ const Status = (props) => {
 
               zIndex: 3,
             }}
-            onPress={() => toggleOverlay()}>
+            // onPress={() => toggleOverlay()}
+          >
             <Icon style={{fontSize: 18}} type="FontAwesome5" name="user-alt" />
             <Text
               style={{

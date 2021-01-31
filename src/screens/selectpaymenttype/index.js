@@ -11,10 +11,10 @@ import {
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
-import {TextInput} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Feather';
-import DropDownPicker from 'react-native-dropdown-picker';
-import Button from '../../components/buttons/generalbutton';
+// import {TextInput} from 'react-native-gesture-handler';
+// import Icon from 'react-native-vector-icons/Feather';
+// import DropDownPicker from 'react-native-dropdown-picker';
+// import Button from '../../components/buttons/generalbutton';
 import {Item} from 'native-base';
 const Messages = (props) => {
   const [state, setState] = useState({
@@ -85,27 +85,40 @@ const Messages = (props) => {
       <LongHeader
         navigation={props.navigation}
         leftArrow={true}
-        searchIcon={true}
+        // searchIcon={true}
         headerText="Select Payment Account"
       />
       <View style={{flex: 1}}>
         {cards.map((item, i) => {
           return (
-            <View
+            <TouchableOpacity
               key={i}
               style={{
                 width: '100%',
+                backgroundColor: 'white',
                 marginVertical: 20,
                 paddingVertical: 10,
                 backgroundColor: 'white',
                 height: 160,
-              }}>
-              <Image
-                source={item.image}
-                style={{height: '100%', width: '100%'}}
-                resizeMode="contain"
-              />
-            </View>
+              }}
+              onPress={() => props.navigation.navigate('PaymentDetails')}
+              activeOpacity={1}>
+              <View
+                style={{
+                  // height: 100,
+                  backgroundColor: 'white',
+                  width: '60%',
+                  alignSelf: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image
+                  source={item.image}
+                  style={{height: '100%', width: '100%'}}
+                  resizeMode="cover"
+                />
+              </View>
+            </TouchableOpacity>
           );
         })}
       </View>

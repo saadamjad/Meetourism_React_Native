@@ -6,14 +6,34 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  AsyncStorage,
 } from 'react-native';
 import GlobalButton from '../../components/buttons/generalbutton';
 import CustomView from '../../components/customView';
 import SliderCom from '../../components/slider';
 import {theme} from '../../constants/theme';
 import Header from '../../components/header';
+// import { useFocusEffect } from '@react-navigation/native';
 
 const Profile = (props) => {
+  const [userType, setUserType] = useState('0');
+  useEffect(() => {
+    _GetUserType();
+  }, []);
+
+  const _GetUserType = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userType');
+      if (value !== null) {
+        // We have data!!
+        setUserType(value);
+
+        console.log(value);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
   return (
     <CustomView scroll>
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
@@ -139,11 +159,19 @@ const Profile = (props) => {
               width="70%"
               onPress={() => props.navigation.navigate('drawer')}
             /> */}
-            <GlobalButton
-              buttonText="See Your Matches"
-              width="70%"
-              onPress={() => props.navigation.navigate('SeeYourMatch')}
-            />
+            {userType == '2' ? (
+              <GlobalButton
+                buttonText="Dashboard "
+                width="70%"
+                onPress={() => props.navigation.navigate('drawer')}
+              />
+            ) : (
+              <GlobalButton
+                buttonText="See Your Matches"
+                width="70%"
+                onPress={() => props.navigation.navigate('SeeYourMatch')}
+              />
+            )}
           </View>
         </View>
       </View>

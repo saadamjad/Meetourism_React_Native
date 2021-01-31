@@ -310,7 +310,8 @@ const App = (props) => {
             ),
           },
           {
-            navigateTo: 'setting',
+            navigateTo: 'SeeYourMatch',
+            dashboard: false,
             icons: (
               <MaterialCommunityIcons
                 name="account-multiple"
@@ -346,7 +347,12 @@ const App = (props) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onPress={() => props.navigation.navigate(val.navigateTo, true)}>
+            onPress={() =>
+              props.navigation.navigate(val.navigateTo, true, {
+                settingStatus: true,
+                dashboard: false,
+              })
+            }>
             {val.icons}
           </TouchableOpacity>
         ))}

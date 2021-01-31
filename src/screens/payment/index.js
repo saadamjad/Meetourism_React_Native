@@ -260,13 +260,21 @@ const Messages = (props) => {
             />
           </View>
         </View>
-        <View style={{flex: 0.4, borderWidth: 0, justifyContent: 'center'}}>
-          <Button
-            buttonText={'Save'}
-            width={'100%'}
-            onPress={() => props.navigation.navigate('detailsoffer')}
-            // onPress={() => props.navigation.navigate('selectPaymentMethodCards')}
-          />
+        <View
+          style={{
+            flex: 0.4,
+            borderWidth: 0,
+            justifyContent: 'center',
+            overflow: 'hidden',
+          }}>
+          <View style={{overflow: 'hidden'}}>
+            <Button
+              buttonText={'Save'}
+              width={'100%'}
+              onPress={() => props.navigation.navigate('detailsoffer')}
+              // onPress={() => props.navigation.navigate('selectPaymentMethodCards')}
+            />
+          </View>
         </View>
       </View>
     </CustomView>

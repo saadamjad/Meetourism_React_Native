@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../components/header';
 import GlobalButton from '../../components/buttons/generalbutton';
 
 const App = (props) => {
+  const [buttonHide, setButtonHide] = useState(false);
   const [offer, setOffers] = useState([
     {
       image: '../../assets/images/burgerBackground.png',
@@ -27,6 +28,18 @@ const App = (props) => {
       offerName: 'whoper Feast',
     },
   ]);
+
+  useEffect(() => {
+    console.log(
+      '==================================================================',
+    );
+    // console.log('props?.route?.params?.dashboard', props?.route);
+
+    if (props?.route?.params) {
+      console.log('andr agyaa ha ', props?.route?.params);
+      setButtonHide(true);
+    }
+  }, []);
   return (
     <View
       style={{
@@ -165,12 +178,31 @@ const App = (props) => {
                     ullamco laboris ...{' '}
                   </Text>
                 </View>
-                <GlobalButton
-                  onPress={() => props.navigation.navigate('matchprofile')}
-                  width="48%"
-                  buttonText="Profile"
-                  height={40}
-                />
+
+                {buttonHide ? (
+                  <View style={{overflow: 'hidden'}}>
+                    <GlobalButton
+                      onPress={() =>
+                        props.navigation.navigate('matchprofile', {
+                          buttonHide: true,
+                        })
+                      }
+                      width="48%"
+                      buttonText="Profile"
+                      height={40}
+                    />
+                  </View>
+                ) : (
+                  <View style={{overflow: 'hidden'}}>
+                    <GlobalButton
+                      onPress={() => props.navigation.navigate('matchprofile')}
+                      width="48%"
+                      buttonText="Profile"
+                      height={40}
+                    />
+                  </View>
+                )}
+
                 <TouchableOpacity
                   onPress={() => props.navigation.navigate('search')}
                   style={{

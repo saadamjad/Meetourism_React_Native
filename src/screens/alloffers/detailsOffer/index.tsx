@@ -76,11 +76,11 @@ function DealOffer(props) {
                 source={require('../../../assets/images/map.jpg')}
               />
             </View>
-            <View style={{marginTop: 20}}>
+            <View style={{marginTop: 20, overflow: 'hidden'}}>
               <GlobalButton
                 buttonText="Main Menu"
                 height={40}
-                onPress={() => props.navigation.navigate('setting')}
+                onPress={() => props.navigation.navigate('drawer')}
               />
             </View>
           </View>
