@@ -46,63 +46,64 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#241332',
       }}>
-      <Header
-        leftArrow={true}
-        searchIcon={true}
-        // headerText="MATCHES"
-        height={40}
-        navigation={props.navigation}
-      />
-      <View
-        style={{
-          // height: 100,
-          backgroundColor: 'white',
-          // paddingVertical: 7,
-          paddingBottom: 15,
-          width: '100%',
-          borderWidth: 0,
-          marginBottom: 2,
-        }}>
-        <ScrollView contentContainerStyle={{flexGrow: 1}} horizontal={true}>
-          {offer.map((item, i) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate('detailoffer');
-                }}
-                style={{alignItems: 'center', marginHorizontal: 10}}>
-                <View
-                  style={{
-                    height: 55,
-                    width: 85,
-                    borderRadius: 40,
-                    borderWidth: 1,
-                    overflow: 'hidden',
-                    borderColor: 'red',
-                    backgroundColor: 'white',
-                  }}>
-                  <Image
-                    source={require('../../assets/images/burgerBackground.png')}
-                    style={{height: '100%', width: '100%'}}
-                    resizeMode="cover"
-                  />
-                </View>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: '#0A0A0A',
-                    marginTop: 5,
-                    fontWeight: 'bold',
-                  }}>
-                  Whopper Feast
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-      </View>
-
       <ScrollView>
+        <Header
+          leftArrow={true}
+          searchIcon={true}
+          sColor={'black'}
+          // headerText="MATCHES"
+          height={40}
+          navigation={props.navigation}
+        />
+        <View
+          style={{
+            // height: 100,
+            backgroundColor: 'white',
+            // paddingVertical: 7,
+            paddingBottom: 15,
+            width: '100%',
+            borderWidth: 0,
+            marginBottom: 2,
+          }}>
+          <ScrollView contentContainerStyle={{flexGrow: 1}} horizontal={true}>
+            {offer.map((item, i) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate('detailoffer');
+                  }}
+                  style={{alignItems: 'center', marginHorizontal: 10}}>
+                  <View
+                    style={{
+                      height: 55,
+                      width: 85,
+                      borderRadius: 40,
+                      borderWidth: 1,
+                      overflow: 'hidden',
+                      borderColor: 'red',
+                      backgroundColor: 'white',
+                    }}>
+                    <Image
+                      source={require('../../assets/images/burgerBackground.png')}
+                      style={{height: '100%', width: '100%'}}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: '#0A0A0A',
+                      marginTop: 5,
+                      fontWeight: 'bold',
+                    }}>
+                    Whopper Feast
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
+        </View>
+
         {offer.map((item, i) => {
           return (
             <View
