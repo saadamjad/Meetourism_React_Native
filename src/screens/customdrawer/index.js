@@ -103,8 +103,8 @@ const DrawerContent = (props) => {
             // },
             {
               title: 'Home',
-              // name: 'HomeScreen',
-              name: props.navigation.closeDrawer(),
+              name: 'Home',
+              // name: props.navigation.closeDrawer(),
               type: 'FontAwesome',
               icon: require('../../assets/icons/home.png'),
             },
@@ -139,14 +139,6 @@ const DrawerContent = (props) => {
             },
 
             {
-              title: 'About us ',
-              name: 'visitwebsite',
-
-              type: 'FontAwesome',
-              // icon: require('../assets/icons/67.png'),
-              icon: require('../../assets/icons/info.png'),
-            },
-            {
               title: 'Search for Date',
               name: 'search',
 
@@ -156,17 +148,25 @@ const DrawerContent = (props) => {
             },
             {
               title: 'Offers',
-              name: 'offers',
+              name: 'Selectoffer',
               // icon: require('../assets/icons/65.png'),
               icon: require('../../assets/icons/offers.png'),
             },
             {
               title: 'Contact Us',
-              name: 'Home',
+              // name: 'Home',
               // icon: require('../assets/icons/64.png'),
               icon: require('../../assets/icons/singleuser.png'),
             },
 
+            {
+              title: 'About us ',
+              // name: 'visitwebsite',
+
+              type: 'FontAwesome',
+              // icon: require('../assets/icons/67.png'),
+              icon: require('../../assets/icons/info.png'),
+            },
             {
               title: 'Log Out',
               name: 'Auth',

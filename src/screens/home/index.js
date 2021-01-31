@@ -20,7 +20,7 @@ const App = (props) => {
     },
     {
       name: 'status ',
-      navigation: 'Status',
+      navigation: 'statusstack',
       image: <FontAwesome name="user" size={20} color="black" />,
     },
     {
@@ -300,7 +300,7 @@ const App = (props) => {
         }}>
         {[
           {
-            navigateTo: 'dealoffer1',
+            navigateTo: 'Selectoffer',
             icons: (
               <Image
                 source={require('../../assets/icons/path.png')}
@@ -331,7 +331,7 @@ const App = (props) => {
             ),
           },
           {
-            navigateTo: 'followandBlock',
+            navigateTo: 'Cruhes',
             icons: (
               <MaterialCommunityIcons name="account" size={20} color={'gray'} />
             ),
