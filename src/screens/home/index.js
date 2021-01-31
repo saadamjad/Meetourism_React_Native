@@ -300,7 +300,7 @@ const App = (props) => {
         }}>
         {[
           {
-            navigateTo: 'allofferflow',
+            navigateTo: 'dealoffer1',
             icons: (
               <Image
                 source={require('../../assets/icons/path.png')}
@@ -321,7 +321,7 @@ const App = (props) => {
             ),
           },
           {
-            navigateTo: 'Chatflow',
+            navigateTo: 'allchats',
             icons: (
               <Image
                 source={require('../../assets/icons/Chat.png')}
@@ -331,13 +331,13 @@ const App = (props) => {
             ),
           },
           {
-            navigateTo: 'profileflow',
+            navigateTo: 'followandBlock',
             icons: (
               <MaterialCommunityIcons name="account" size={20} color={'gray'} />
             ),
           },
           {
-            navigateTo: 'settingflow',
+            navigateTo: 'statusstack',
             icons: <MaterialIcons name="settings" size={20} color={'gray'} />,
           },
         ].map((val) => (

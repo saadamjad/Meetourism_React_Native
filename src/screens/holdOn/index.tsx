@@ -64,7 +64,7 @@ function HoldOn(props) {
                 buttonText="SKIP"
                 onPress={() => {
                   props.toggleOverlay();
-                  props.navigation.navigate('drawer');
+                  // props.navigation.navigate('drawer');
                 }}
                 height={40}
                 width={80}
@@ -75,7 +75,7 @@ function HoldOn(props) {
                 width={80}
                 onPress={() => {
                   props.toggleOverlay();
-                  props.navigation.navigate('Status');
+                  props.navigation.navigate('statusstack');
                 }}
                 buttonText="YES"
                 fontSize={13}

@@ -104,7 +104,7 @@ const DrawerContent = (props) => {
             {
               title: 'Home',
               // name: 'HomeScreen',
-              name: 'drawer',
+              name: props.navigation.closeDrawer(),
               type: 'FontAwesome',
               icon: require('../../assets/icons/home.png'),
             },

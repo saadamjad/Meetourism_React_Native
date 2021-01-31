@@ -8,67 +8,6 @@ import LongHeader from '../../components/header/longheader';
 import {Item, Icon} from 'native-base';
 import {SwipeablePanel} from 'rn-swipeable-panel';
 const Location = (props) => {
-  const [state, setState] = useState({
-    messages: [
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Offer updated successfull',
-        date: '9 hrs',
-        badge: 5,
-        l: 8,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Password is successfully updated.',
-        date: '9 hrs',
-        badge: 7,
-        l: 7,
-      },
-      {
-        name: 'Stephen Moreau',
-        selected: false,
-        description:
-          'Everyday English-French-Spanish: Conversation and Fun-Joe!',
-        date: 'Aug 19',
-        l: 6,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 5,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 4,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 3,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 2,
-      },
-    ],
-  });
-
   const [panelProps, setPanelProps] = useState({
     fullWidth: true,
     openLarge: true,
@@ -224,6 +163,8 @@ const Location = (props) => {
         fullWidth
         isActive={isPanelActive}
         openLarge={true}
+        closeOnTouchOutside={true}
+        onClose={() => setIsPanelActive(false)}
         style={{
           backgroundColor: theme.primaryColor,
           height: '70%',

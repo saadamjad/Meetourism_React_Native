@@ -80,7 +80,7 @@ function DealOffer(props) {
               <GlobalButton
                 buttonText="Main Menu"
                 height={40}
-                onPress={() => props.navigation.navigate('drawer')}
+                onPress={() => props.navigation.navigate('Home')}
               />
             </View>
           </View>
