@@ -103,7 +103,8 @@ const DrawerContent = (props) => {
             // },
             {
               title: 'Home',
-              name: 'HomeScreen',
+              // name: 'HomeScreen',
+              name: 'drawer',
               type: 'FontAwesome',
               icon: require('../../assets/icons/home.png'),
             },
@@ -147,7 +148,8 @@ const DrawerContent = (props) => {
             },
             {
               title: 'Search for Date',
-              name: 'Home',
+              name: 'search',
+
               type: 'Entypo',
               // icon: require('../assets/icons/66.png'),
               icon: require('../../assets/icons/search.png'),

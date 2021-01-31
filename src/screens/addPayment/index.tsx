@@ -69,7 +69,8 @@ function AddPayment(props) {
                     borderWidth: 0.5,
                   }}
                   onPress={() => {
-                    props.navigation.navigate('PaymentDetails');
+                    // props.navigation.navigate('PaymentDetails');
+                    props.navigation.navigate('SelectPaymentType');
                   }}>
                   <View
                     style={{

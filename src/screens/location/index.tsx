@@ -223,12 +223,11 @@ const Location = (props) => {
       <SwipeablePanel
         fullWidth
         isActive={isPanelActive}
-        openLarge={false}
+        openLarge={true}
         style={{
           backgroundColor: theme.primaryColor,
           height: '70%',
         }}>
-        {/* <View style={{height: '100%', backgroundColor: 'red'}}></View> */}
         <_hello />
       </SwipeablePanel>
     </CustomView>

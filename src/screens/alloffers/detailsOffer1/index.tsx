@@ -116,6 +116,7 @@ function DetailOffer1(props) {
             flex: 1,
 
             justifyContent: 'flex-end',
+            paddingBottom: 20,
             // backgroundColor: 'yellow',
           }}>
           <GlobalButton
@@ -124,14 +125,14 @@ function DetailOffer1(props) {
             width={190}
             onPress={() => props.navigation.navigate('payment')}
           />
-          <GlobalButton
+          {/* <GlobalButton
             buttonText="cancel"
             titleStyle={'black'}
             backgroundColor={'white'}
             height={50}
             width={190}
             onPress={() => props.CloseOverlay()}
-          />
+          /> */}
         </View>
       </View>
     </CustomView>
