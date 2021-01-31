@@ -21,7 +21,7 @@ import selectPaymentMethod from '../screens/selectPaymentMethod';
 import AddPayment from '../screens/addPayment';
 import PaymentDetails from '../screens/payment';
 import detailsoffer from '../screens/alloffers/detailsOffer';
-import Profile from '../screens/profile/home/home';
+// import Profile from '../screens/profile/home/home';
 import history from '../screens/alloffers/history';
 import offerUploadedSuccessfully from '../screens/offerUploaded';
 import allProfile from '../screens/customdrawer/allProfile';
@@ -218,11 +218,11 @@ export function ProfileStack() {
         component={offerUploadedSuccessfully}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Profile"
         component={Profile}
         options={{headerShown: false}}
-      />
+      /> */}
       <Stack.Screen
         name="Alloffers"
         component={allresturant}

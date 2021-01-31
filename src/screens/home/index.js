@@ -203,7 +203,7 @@ const App = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              onPress={() => props.navigation.navigate('Chat')}>
+              onPress={() => props.navigation.navigate('innerchat')}>
               <View
                 style={{
                   borderRightWidth: 0.5,
@@ -292,11 +292,11 @@ const App = (props) => {
       <View
         style={{
           height: 60,
+          // borderWidth: 1,
           width: '100%',
           backgroundColor: 'white',
           flexDirection: 'row',
           justifyContent: 'space-around',
-          alignItems: 'center',
         }}>
         {[
           {
@@ -343,16 +343,21 @@ const App = (props) => {
         ].map((val) => (
           <TouchableOpacity
             style={{
-              flex: 1,
+              // flex: 1,
+              width: '20%',
               justifyContent: 'center',
               alignItems: 'center',
+              // backgroundColor: 'red',
+
+              padding: 10,
             }}
             onPress={() =>
               props.navigation.navigate(val.navigateTo, true, {
                 settingStatus: true,
                 dashboard: false,
               })
-            }>
+            }
+            activeOpacity={1}>
             {val.icons}
           </TouchableOpacity>
         ))}

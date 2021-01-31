@@ -6,6 +6,7 @@ import {
   Text,
   Dimensions,
   TextInput,
+  ScrollView,
   AsyncStorage,
 } from 'react-native';
 // import {Icon} from 'native-base';
@@ -13,6 +14,7 @@ import {
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import {Icon} from 'native-base';
+import GlobalButton from '../../components/buttons/generalbutton';
 // import Overlay from '../../../components/overlays';
 // import {ScrollView} from 'react-native-gesture-handler';
 // import Header from '../../../components/header/longheader';
@@ -66,23 +68,19 @@ const Status = (props) => {
   };
 
   return (
-    <>
-      <CustomView
-        bg={'transparent'}
-        scroll
-        image={require('../../assets/images/home.png')}>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <View style={{flex: 1, backgroundColor: '#241332'}}>
         <View
           style={{
-            flex: 1,
-            backgroundColor: 'black',
-            alignItems: 'center',
-            justifyContent: 'center',
+            // flex: 0.1,
+            backgroundColor: '#241332',
+            paddingVertical: 10,
+            paddingLeft: 20,
           }}>
           <TouchableOpacity
             style={{
               borderWidth: 0,
-              paddingHorizontal: 15,
-              paddingVertical: 10,
+
               alignSelf: 'flex-start',
             }}
             onPress={() => props.navigation.goBack()}>
@@ -92,24 +90,32 @@ const Status = (props) => {
               style={{color: 'white', fontSize: 17}}
             />
           </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            paddingBottom: 20,
+            // borderWidth: 1,
+            backgroundColor: '#241332',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
           <View
             style={{
-              paddingHorizontal: 40,
-
-              paddingVertical: 20,
-              // marginTop: 20,
-              borderRadius: 50,
+              width: '90%',
+              borderRadius: 40,
               backgroundColor: 'white',
-              width: Dimensions.get('window').width / 1.2,
-              justifyContent: 'center',
+              overflow: 'hidden',
+              height: '100%',
               alignItems: 'center',
-              //   elevation: 0,
+              justifyContent: 'center',
             }}>
             <Text
               style={{
                 color: theme.secondaryColor,
                 fontSize: 24,
                 fontWeight: '700',
+                paddingVertical: 10,
               }}>
               Subscribe
             </Text>
@@ -117,7 +123,7 @@ const Status = (props) => {
               style={{
                 flexDirection: 'row',
                 width: '100%',
-                marginTop: 20,
+
                 justifyContent: 'center',
                 // alignItems: 'space-around',
               }}>
@@ -128,7 +134,6 @@ const Status = (props) => {
                     marginLeft: 5,
                     height: 40,
                     borderRadius: 40,
-                    // borderWidth: 1,
                   }}
                   resizeMode="contain"
                   source={require('../../assets/images/girl.png')}
@@ -143,12 +148,21 @@ const Status = (props) => {
                   backgroundColor: '#998FA2',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  // borderWidth: 1,
                 }}>
                 <Icon style={{fontSize: 20}} type="AntDesign" name="plus" />
               </View>
             </View>
-            <View style={{width: '100%', paddingVertical: 20}}>
+            <View
+              style={{
+                width: '100%',
+                paddingVertical: 5,
+                backgroundColor: 'white',
+                overflow: 'hidden',
+                // borderWidth: 1,
+                justifyContent: 'space-evenly',
+                flex: 1,
+                paddingHorizontal: 20,
+              }}>
               <TextInput
                 style={{
                   width: '100%',
@@ -164,7 +178,7 @@ const Status = (props) => {
                   width: '100%',
                   borderBottomWidth: 1,
                   height: 40,
-                  marginTop: 20,
+
                   borderColor: theme.borderColor.inActiveBorderColor,
                 }}
                 placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -175,7 +189,7 @@ const Status = (props) => {
                   width: '100%',
                   borderBottomWidth: 1,
                   height: 40,
-                  marginTop: 20,
+
                   borderColor: theme.borderColor.inActiveBorderColor,
                 }}
                 placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -186,7 +200,7 @@ const Status = (props) => {
                   width: '100%',
                   borderBottomWidth: 1,
                   height: 40,
-                  marginTop: 20,
+
                   borderColor: theme.borderColor.inActiveBorderColor,
                 }}
                 placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -197,7 +211,7 @@ const Status = (props) => {
                   width: '100%',
                   borderBottomWidth: 1,
                   height: 40,
-                  marginTop: 20,
+
                   borderColor: theme.borderColor.inActiveBorderColor,
                 }}
                 placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -208,7 +222,7 @@ const Status = (props) => {
                   width: '100%',
                   borderBottomWidth: 1,
                   height: 40,
-                  marginTop: 20,
+
                   borderColor: theme.borderColor.inActiveBorderColor,
                 }}
                 placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -219,7 +233,7 @@ const Status = (props) => {
                   width: '100%',
                   borderBottomWidth: 1,
                   height: 40,
-                  marginTop: 20,
+
                   borderColor: theme.borderColor.inActiveBorderColor,
                 }}
                 multiline={true}
@@ -229,14 +243,15 @@ const Status = (props) => {
               <View
                 style={{
                   flexDirection: 'row',
-                  justifyContent: 'space-around',
+                  justifyContent: 'space-between',
+                  // borderWidth: 1,
                 }}>
                 <TextInput
                   style={{
-                    width: '20%',
+                    // width: '20%',
                     borderBottomWidth: 1,
                     height: 40,
-                    marginTop: 20,
+
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -244,10 +259,10 @@ const Status = (props) => {
                 />
                 <TextInput
                   style={{
-                    width: '20%',
+                    // width: '20%',
                     borderBottomWidth: 1,
                     height: 40,
-                    marginTop: 20,
+
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
@@ -255,33 +270,28 @@ const Status = (props) => {
                 />
                 <TextInput
                   style={{
-                    width: '20%',
+                    // width: '20%',
                     borderBottomWidth: 1,
                     height: 40,
-                    marginTop: 20,
+
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="EyeColor"
                 />
               </View>
+
+              <View style={{overflow: 'hidden'}}>
+                <GlobalButton
+                  buttonText="Choose Your Interest"
+                  onPress={() => props.navigation.navigate('yourinterests')}
+                />
+              </View>
             </View>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('yourinterests')}
-              style={{
-                backgroundColor: theme.secondaryColor,
-                paddingVertical: 10,
-                paddingHorizontal: 10,
-                borderRadius: 30,
-              }}>
-              <Text style={{color: theme.textColor.whiteColor}}>
-                Choose Your Interest
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
-      </CustomView>
-    </>
+      </View>
+    </ScrollView>
   );
 };
 

@@ -12,6 +12,8 @@ import {
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
+import GlobalButton from '../../components/buttons/generalbutton';
+
 import {Icon} from 'native-base';
 // import Overlay from '../../../components/overlays';
 // import {ScrollView} from 'react-native-gesture-handler';
@@ -129,7 +131,7 @@ const Status = (props) => {
                     fontWeight: '700',
                     marginTop: 50,
                   }}>
-                  Your Interests
+                  Your Interestss
                 </Text>
                 <View
                   style={{
@@ -230,22 +232,12 @@ const Status = (props) => {
                 </View>
               </View>
             </View>
-            <View>
-              <TouchableOpacity
+
+            <View style={{overflow: 'hidden', marginTop: 20}}>
+              <GlobalButton
+                buttonText="Done"
                 onPress={() => props.navigation.navigate('profilePreivew')}
-                style={{
-                  backgroundColor: theme.secondaryColor,
-                  paddingVertical: 8,
-                  paddingHorizontal: 10,
-                  alignSelf: 'center',
-                  marginTop: 30,
-                  width: 170,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 30,
-                }}>
-                <Text style={{color: theme.textColor.whiteColor}}>Done</Text>
-              </TouchableOpacity>
+              />
             </View>
           </View>
         </View>
