@@ -124,7 +124,7 @@ const Profile = (props) => {
                 justifyContent: 'center',
               }}
               //  onPress={()=>props.navigation.navigate('allchat')}
-              onPress={() => alert('yahn screen ayegi')}>
+              onPress={() => alert('In process ')}>
               {/* <Image
                 source={require('../../../assets/icons/singleuser.png')}
                 style={{height: 20, width: 20, tintColor: 'purple'}}

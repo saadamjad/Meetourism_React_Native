@@ -19,6 +19,7 @@ import {Icon} from 'native-base';
 // import {ScrollView} from 'react-native-gesture-handler';
 // import Header from '../../../components/header/longheader';
 // import LongHeader from '../../../components/header/longheader';
+let statusValue = 0;
 const Status = (props) => {
   const [state, setState] = useState({
     visible: false,
@@ -40,7 +41,6 @@ const Status = (props) => {
   ]);
   const toggleOverlay = (i) => {
     console.log(typeof i);
-    _UserType(i);
     if (!state.visible == false) {
       setState({...state, visible: !state.visible, visible1: true});
     } else {
@@ -48,23 +48,18 @@ const Status = (props) => {
     }
   };
   useEffect(() => {
-    console.log(
-      '==================================================================',
-    );
+    _UserType();
+    console.log('===');
 
     if (props?.route?.params || props?.route?.params) {
       setState({...state, visible: true, settingStatus: true});
     }
   }, []);
 
-  const _UserType = async (i) => {
-    let number = JSON.stringify(i);
-    console.log('number beta', typeof number);
-    try {
-      await AsyncStorage.setItem('userType', number);
-    } catch (error) {
-      // Error saving data
-    }
+  const _UserType = async () => {
+    let value = await AsyncStorage.getItem('userStatus');
+    console.log(value);
+    statusValue = value;
   };
 
   return (
@@ -236,7 +231,22 @@ const Status = (props) => {
             <View style={{overflow: 'hidden', marginTop: 20}}>
               <GlobalButton
                 buttonText="Done"
-                onPress={() => props.navigation.navigate('profilePreivew')}
+                onPress={() => {
+                  console.log(statusValue);
+
+                  if (statusValue == 0) {
+                    alert('user');
+                    props.navigation.navigate('profilePreivew');
+                  } else if (statusValue == 1) {
+                    alert('relationship');
+                    props.navigation.navigate('userProfile', {
+                      status: 1,
+                    });
+                  } else if (statusValue == 2) {
+                    alert('partner');
+                  }
+                  // props.navigation.navigate('profilePreivew');
+                }}
               />
             </View>
           </View>

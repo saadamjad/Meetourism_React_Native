@@ -78,7 +78,7 @@ const Friends = (props) => {
           leftArrow={true}
           searchIcon={true}
           backgroundColor={theme.primaryColor}
-          headerText="Crushes"
+          headerText="Friends"
         />
         {state.messages.map((val, i) => {
           let l = i - state.messages.length;

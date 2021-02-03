@@ -43,10 +43,15 @@ function AddPayment(props) {
               // justifyContent: 'space-around',
             }}>
             {[
-              {name: 'Add Account', description: 'Create new account'},
+              {
+                name: 'Add Account',
+                description: 'Create new account',
+                navigateTo: 'PaymentDetails',
+              },
               {
                 name: 'Select Account',
                 description: 'Pay through Selected Account',
+                navigateTo: 'SelectPaymentType',
               },
             ].map((val, i) => (
               <View
@@ -70,7 +75,7 @@ function AddPayment(props) {
                   }}
                   onPress={() => {
                     // props.navigation.navigate('PaymentDetails');
-                    props.navigation.navigate('SelectPaymentType');
+                    props.navigation.navigate(val.navigateTo);
                   }}>
                   <View
                     style={{
