@@ -29,19 +29,24 @@ const Status = (props) => {
   const [allStatus, setAllStatus] = useState([
     {
       name: 'single',
+      navigateTo: 'chooseyourinterest',
     },
     {
       name: 'In a relationship',
+      navigateTo: 'chooseyourinterest',
     },
     {
       name: 'partner',
+      navigateTo: '',
     },
   ]);
-  const toggleOverlay = (i) => {
-    console.log('0', i);
+  const toggleOverlay = (i, item) => {
+    console.log('0', item);
     console.log(typeof i);
     _UserType(i);
-    props.navigation.navigate('chooseyourinterest');
+    if (i != 2) {
+      props.navigation.navigate('chooseyourinterest');
+    }
 
     // if (!state.visible == false) {
     //   setState({...state, visible: !state.visible, visible1: true});
@@ -158,7 +163,7 @@ const Status = (props) => {
                   borderLeftWidth: 1,
                   borderColor: '#D3D3D3',
                 }}
-                onPress={() => toggleOverlay(i)}>
+                onPress={() => toggleOverlay(i, item)}>
                 <View
                   style={{
                     flexDirection: 'row',
