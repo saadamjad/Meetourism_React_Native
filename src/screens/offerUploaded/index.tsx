@@ -53,7 +53,7 @@ function OfferUploaded(props) {
             height={40}
             onPress={() => props.navigation.navigate('Selectoffer')}
           />
-          {/* <GlobalButton buttonText="Create new offer" height={40} /> */}
+          <GlobalButton buttonText="Create new offer" height={40} />
           <GlobalButton
             buttonText="Dashboard"
             height={40}

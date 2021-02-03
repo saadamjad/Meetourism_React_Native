@@ -235,17 +235,18 @@ const Status = (props) => {
                   console.log(statusValue);
 
                   if (statusValue == 0) {
-                    alert('user');
+                    // alert('user');
                     props.navigation.navigate('profilePreivew');
                   } else if (statusValue == 1) {
-                    alert('relationship');
+                    // alert('relationship');
                     props.navigation.navigate('userProfile', {
                       status: 1,
                     });
                   } else if (statusValue == 2) {
-                    alert('partner');
+                    // alert('partner');
+
+                    props.navigation.navigate('PartnerStack');
                   }
-                  // props.navigation.navigate('profilePreivew');
                 }}
               />
             </View>

@@ -185,7 +185,7 @@ const App = (props) => {
                 </View>
                 <Button
                   buttonText="My Offer"
-                  onPress={() => props.navigation.navigate('Selectoffer')}
+                  onPress={() => props.navigation.navigate('SelectOffer')}
                 />
                 <Button
                   buttonText="Create new offer"

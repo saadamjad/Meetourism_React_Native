@@ -41,6 +41,11 @@ import Successful from '../screens/successful';
 import Cruhes from '../screens/crushes';
 import Friends from '../screens/friends';
 
+// ALL PARTNERS SCREENS
+import Hillviewresturant from '../screens/allresturant';
+import Createoffer from '../screens/alloffers/createOffer';
+import PartnerHome from '../screens/partnerhome';
+import SelectOffer from '../screens/alloffers/selectOffer';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -130,6 +135,11 @@ function App() {
           component={userProfile}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="PartnerStack"
+          component={PartnerStack}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -176,16 +186,16 @@ export function ProfileStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="innerchat"
+        component={innerchat}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="SelectPaymentType"
         component={SelectPaymentType}
         options={{headerShown: false}}
       />
 
-      <Stack.Screen
-        name="innerchat"
-        component={innerchat}
-        options={{headerShown: false}}
-      />
       {/* //NOTIFICATION */}
       <Stack.Screen
         name="Notification"
@@ -294,4 +304,45 @@ export function ProfileStack() {
   );
 }
 
+export function PartnerStack() {
+  return (
+    <Stack.Navigator initialRouteName={'Hillviewresturant'}>
+      <Stack.Screen
+        name="Hillviewresturant"
+        component={Hillviewresturant}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="partnerhome"
+        component={PartnerHome}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SelectOffer"
+        component={SelectOffer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="allchats"
+        component={allchats}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="innerchat"
+        component={innerchat}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="createOffer"
+        component={createOffer}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
 export default App;
