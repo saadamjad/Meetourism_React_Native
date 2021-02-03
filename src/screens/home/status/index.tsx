@@ -38,6 +38,7 @@ const Status = (props) => {
     },
   ]);
   const toggleOverlay = (i) => {
+    console.log('0', i);
     console.log(typeof i);
     _UserType(i);
     props.navigation.navigate('chooseyourinterest');
@@ -62,7 +63,7 @@ const Status = (props) => {
     let number = JSON.stringify(i);
     console.log('number beta', typeof number);
     try {
-      await AsyncStorage.setItem('userType', number);
+      await AsyncStorage.setItem('userStatus', number);
     } catch (error) {
       // Error saving data
     }

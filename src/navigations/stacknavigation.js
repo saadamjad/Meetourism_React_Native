@@ -39,6 +39,7 @@ import userProfile from '../screens/profile';
 import Search from '../screens/search';
 import Successful from '../screens/successful';
 import Cruhes from '../screens/crushes';
+import Friends from '../screens/friends';
 
 const Stack = createStackNavigator();
 
@@ -124,6 +125,11 @@ function App() {
           component={Status}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="userProfile"
+          component={userProfile}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -135,6 +141,11 @@ export function ProfileStack() {
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Friends"
+        component={Friends}
         options={{headerShown: false}}
       />
 

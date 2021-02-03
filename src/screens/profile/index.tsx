@@ -159,7 +159,10 @@ const Profile = (props) => {
               width="70%"
               onPress={() => props.navigation.navigate('drawer')}
             /> */}
-            {userType == '2' ? (
+
+            {/* {console.log('===props', props.route.params.status==1)} */}
+
+            {userType == '2' || props?.route?.params?.status == 1 ? (
               <GlobalButton
                 buttonText="Dashboard "
                 width="70%"
