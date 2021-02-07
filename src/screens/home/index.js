@@ -352,11 +352,27 @@ const App = (props) => {
               padding: 10,
             }}
             onPress={() =>
-              props.navigation.navigate(val.navigateTo, true, {
+              props.navigation.navigate(val.navigateTo, {
+                screen: 'chooseyourinterest',
+
                 settingStatus: true,
                 dashboard: false,
               })
             }
+            // onPress={() =>
+            //   props.navigation.navigate('statusstack', {
+            //     screen: 'chooseyourinterest',
+            //     settingStatus: true,
+            //     dashboard: false,
+            //   })
+            // }
+            // onPress={() =>
+            //   props.navigation.navigate('statusstack', true, {
+            //     screen: 'matchprofile',
+            //     settingStatus: true,
+            //     dashboard: false,
+            //   })
+            // }
             activeOpacity={1}>
             {val.icons}
           </TouchableOpacity>
