@@ -46,6 +46,8 @@ const Status = (props) => {
     _UserType(i);
     if (i != 2) {
       props.navigation.navigate('chooseyourinterest');
+    } else {
+      props.navigation.navigate('chooseyourinterest');
     }
 
     // if (!state.visible == false) {

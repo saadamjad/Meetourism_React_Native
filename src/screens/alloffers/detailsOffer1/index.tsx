@@ -1,12 +1,30 @@
 import {Icon} from 'native-base';
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  AsyncStorage,
+} from 'react-native';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
 import Longheader from '../../../components/header';
+let statusValue = 0;
+
 function DetailOffer1(props) {
+  const [statusValue, setStatusValue] = useState(0);
+  useEffect(() => {
+    _UserType();
+  }, []);
+  const _UserType = async () => {
+    let value = await AsyncStorage.getItem('userStatus');
+    setStatusValue(value);
+  };
+
   return (
     <View
       style={{
@@ -94,20 +112,22 @@ function DetailOffer1(props) {
             />
           </View>
         </View>
-        <View
-          style={{
-            flex: 1,
-            // borderWidth: 1,
-            justifyContent: 'flex-end',
-            paddingBottom: 30,
-          }}>
-          <GlobalButton
-            buttonText="Pay the Offer"
-            height={50}
-            width="66%"
-            onPress={() => props.navigation.navigate('payment')}
-          />
-        </View>
+        {statusValue == 2 ? null : (
+          <View
+            style={{
+              flex: 1,
+              // borderWidth: 1,
+              justifyContent: 'flex-end',
+              paddingBottom: 30,
+            }}>
+            <GlobalButton
+              buttonText="Pay the Offer"
+              height={50}
+              width="66%"
+              onPress={() => props.navigation.navigate('payment')}
+            />
+          </View>
+        )}
       </View>
     </View>
   );

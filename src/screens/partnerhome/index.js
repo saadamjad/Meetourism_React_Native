@@ -148,7 +148,7 @@ const App = (props) => {
                 <View style={{width: '75%', borderWidth: 0}}>
                   <Text style={{fontSize: 13, color: 'white'}}>
                     {' '}
-                    0 meetups{' '}
+                    0 meetups PARTNET{' '}
                   </Text>
                   <Text style={{fontSize: 23, color: 'white'}}>
                     {' '}
