@@ -46,6 +46,8 @@ import Hillviewresturant from '../screens/allresturant';
 import Createoffer from '../screens/alloffers/createOffer';
 import PartnerHome from '../screens/partnerhome';
 import SelectOffer from '../screens/alloffers/selectOffer';
+import Createnewoffer from '../screens/alloffers/createnewoffer';
+import confirmedoffers from '../screens/alloffers/confirmations';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -107,7 +109,7 @@ export function Status() {
 function App() {
   return (
     <NavigationContainer headerMode="none">
-      <Stack.Navigator initialRouteName={'Auth'}>
+      <Stack.Navigator initialRouteName={'statusstack'}>
         <Stack.Screen
           name="Auth"
           component={Auth}
@@ -310,6 +312,16 @@ export function PartnerStack() {
       <Stack.Screen
         name="Hillviewresturant"
         component={Hillviewresturant}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="createnewoffer"
+        component={Createnewoffer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="confirmedoffers"
+        component={confirmedoffers}
         options={{headerShown: false}}
       />
       <Stack.Screen

@@ -15,16 +15,22 @@ import Slider from '../../../src/components/slider';
 const App = (props) => {
   const [allStatus, setStatus] = useState([
     {
-      name: 'you',
+      name: 'YOU',
       image: require('../../assets/icons/row.png'),
     },
     {
-      name: 'status ',
-      navigation: 'statusstack',
+      name: 'My offers ',
+      navigation: 'SelectOffer',
       image: <FontAwesome name="user" size={20} color="black" />,
     },
     {
-      name: 'Add more',
+      name: 'Create New Offers',
+      navigation: 'createnewoffer',
+      image: <Feather name="plus" size={20} color="gray" />,
+    },
+    {
+      name: 'Logout',
+      navigation: 'Auth',
       image: <Feather name="plus" size={20} color="gray" />,
     },
   ]);
@@ -51,7 +57,7 @@ const App = (props) => {
             resizeMode="cover">
             <View
               style={{
-                height: 125,
+                // height: 125,
                 backgroundColor: 'white',
                 // borderWidth:1,
                 borderBottomLeftRadius: 85,
@@ -60,31 +66,21 @@ const App = (props) => {
                 // elevation: 1,
                 // borderWidth: 1,
               }}>
-              <TouchableOpacity
+              <View
                 style={{
-                  width: '20%',
-                  paddingBottom: 20,
+                  flexDirection: 'row',
                   // borderWidth: 1,
-                  height: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={() => props.navigation.openDrawer()}>
-                <Image
-                  source={require('../../assets/icons/drawer.png')}
-                  style={{height: 30, width: 30, tintColor: '#ED1C24'}}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-              <View style={{flexDirection: 'row'}}>
+                  justifyContent: 'space-between',
+                  // alignItems: '',
+                  paddingHorizontal: 10,
+                }}>
                 {allStatus.map((item, i) => {
                   return (
                     <View
                       style={{
                         alignItems: 'center',
-                        // borderWidth: 1,
-                        paddingHorizontal: 10,
                         paddingTop: 20,
+                        width: '25%',
                       }}>
                       <TouchableOpacity
                         style={{
@@ -113,13 +109,19 @@ const App = (props) => {
                         )}
                       </TouchableOpacity>
                       <Text
-                        style={{color: '#707070', fontSize: 12, marginTop: 7}}>
+                        style={{
+                          color: '#707070',
+                          fontSize: 11,
+                          marginTop: 7,
+                          textAlign: 'center',
+                          fontWeight: 'bold',
+                        }}>
                         {item.name}
                       </Text>
                       {i == 1 ? (
                         <TouchableOpacity>
                           <MaterialIcons
-                            name="keyboard-arrow-down"
+                            // name="keyboard-arrow-down"
                             size={25}
                             color={'gray'}
                           />
@@ -145,16 +147,27 @@ const App = (props) => {
                   alignItems: 'flex-end',
                   flexDirection: 'row',
                 }}>
-                <View style={{width: '75%', borderWidth: 0}}>
-                  <Text style={{fontSize: 13, color: 'white'}}>
-                    {' '}
-                    0 meetups PARTNET{' '}
+                <View
+                  style={{width: '80%', borderWidth: 0, flexDirection: 'row'}}>
+                  <Text
+                    style={{fontSize: 23, color: 'white', fontWeight: 'bold'}}>
+                    Hill View Resturant
                   </Text>
-                  <Text style={{fontSize: 23, color: 'white'}}>
-                    {' '}
-                    Lady in the Blue{' '}
-                  </Text>
+                  <View
+                    style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
+                    <Image
+                      source={require('../../assets/icons/edit.png')}
+                      resizeMode="contain"
+                      style={{
+                        height: 30,
+                        width: 30,
+                        borderWidth: 0,
+                        borderRadius: 30,
+                      }}
+                    />
+                  </View>
                 </View>
+
                 <View
                   style={{
                     width: '25%',
@@ -163,18 +176,7 @@ const App = (props) => {
                     // borderWidth: 1,
                     justifyContent: 'center',
                     alignItems: 'flex-end',
-                  }}>
-                  <Image
-                    source={require('../../assets/icons/edit.png')}
-                    resizeMode="contain"
-                    style={{
-                      height: 30,
-                      width: 30,
-                      borderWidth: 0,
-                      borderRadius: 30,
-                    }}
-                  />
-                </View>
+                  }}></View>
               </View>
             </View>
           </ImageBackground>
@@ -203,7 +205,7 @@ const App = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              onPress={() => props.navigation.navigate('innerchat')}>
+              onPress={() => props.navigation.navigate('allchats')}>
               <View
                 style={{
                   borderRightWidth: 0.5,
@@ -260,7 +262,7 @@ const App = (props) => {
               </Text>
             </View>
             <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
-              <Image
+              {/* <Image
                 source={require('../../assets/icons/edit.png')}
                 resizeMode="contain"
                 style={{
@@ -269,22 +271,7 @@ const App = (props) => {
                   borderWidth: 0,
                   borderRadius: 30,
                 }}
-              />
-            </View>
-          </View>
-
-          <View style={{paddingHorizontal: 15, marginVertical: 10}}>
-            <Text
-              style={{
-                color: 'white',
-                marginTop: 25,
-                fontSize: 14,
-              }}>
-              Langauge
-            </Text>
-
-            <View style={{marginBottom: 20}}>
-              <Slider color="white" />
+              /> */}
             </View>
           </View>
         </View>
@@ -300,7 +287,7 @@ const App = (props) => {
         }}>
         {[
           {
-            navigateTo: 'Selectoffer',
+            navigateTo: 'SelectOffer',
             icons: (
               <Image
                 source={require('../../assets/icons/path.png')}
@@ -309,17 +296,17 @@ const App = (props) => {
               />
             ),
           },
-          {
-            navigateTo: 'SeeYourMatch',
-            dashboard: false,
-            icons: (
-              <MaterialCommunityIcons
-                name="account-multiple"
-                size={20}
-                color={'gray'}
-              />
-            ),
-          },
+          // {
+          //   navigateTo: 'SeeYourMatch',
+          //   dashboard: false,
+          //   icons: (
+          //     <MaterialCommunityIcons
+          //       name="account-multiple"
+          //       size={20}
+          //       color={'gray'}
+          //     />
+          //   ),
+          // },
           {
             navigateTo: 'allchats',
             icons: (
@@ -331,7 +318,7 @@ const App = (props) => {
             ),
           },
           {
-            navigateTo: 'Cruhes',
+            navigateTo: 'partnerhome',
             icons: (
               <MaterialCommunityIcons name="account" size={20} color={'gray'} />
             ),
@@ -352,7 +339,9 @@ const App = (props) => {
               padding: 10,
             }}
             onPress={() =>
-              props.navigation.navigate(val.navigateTo, true, {
+              props.navigation.navigate(val.navigateTo, {
+                screen: 'chooseyourinterest',
+
                 settingStatus: true,
                 dashboard: false,
               })

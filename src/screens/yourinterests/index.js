@@ -126,7 +126,7 @@ const Status = (props) => {
                     fontWeight: '700',
                     marginTop: 50,
                   }}>
-                  Your Interestss
+                  Your Interests
                 </Text>
                 <View
                   style={{

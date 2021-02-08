@@ -203,7 +203,7 @@ const App = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              onPress={() => props.navigation.navigate('innerchat')}>
+              onPress={() => props.navigation.navigate('allchats')}>
               <View
                 style={{
                   borderRightWidth: 0.5,
