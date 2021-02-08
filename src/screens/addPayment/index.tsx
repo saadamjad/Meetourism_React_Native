@@ -54,13 +54,18 @@ function AddPayment(props) {
                 navigateTo: 'SelectPaymentType',
               },
             ].map((val, i) => (
-              <View
+              <TouchableOpacity
                 style={{
                   flexDirection: 'row',
                   width: '100%',
                   alignItems: 'center',
                   paddingVertical: 20,
-                }}>
+                }}
+                onPress={() => {
+                  // props.navigation.navigate('PaymentDetails');
+                  props.navigation.navigate(val.navigateTo);
+                }}
+                activeOpacity={0.8}>
                 <TouchableOpacity
                   // onPress={() => setState({...state, selected: i})}
                   style={{
@@ -101,7 +106,7 @@ function AddPayment(props) {
                     {val.description}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         </View>

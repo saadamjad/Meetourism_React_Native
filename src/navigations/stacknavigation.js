@@ -109,7 +109,7 @@ export function Status() {
 function App() {
   return (
     <NavigationContainer headerMode="none">
-      <Stack.Navigator initialRouteName={'statusstack'}>
+      <Stack.Navigator initialRouteName={'Auth'}>
         <Stack.Screen
           name="Auth"
           component={Auth}
