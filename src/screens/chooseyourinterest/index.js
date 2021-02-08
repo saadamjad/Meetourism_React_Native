@@ -281,7 +281,7 @@ const Status = (props) => {
                 />
               </View>
 
-              <View style={{overflow: 'hidden'}}>
+              <View style={{overflow: 'hidden', marginVertical: 5}}>
                 <GlobalButton
                   buttonText="Choose Your Interest"
                   onPress={() => props.navigation.navigate('yourinterests')}

@@ -21,8 +21,11 @@ function DetailOffer1(props) {
     _UserType();
   }, []);
   const _UserType = async () => {
-    let value = await AsyncStorage.getItem('userStatus');
-    setStatusValue(value);
+    console.log('===');
+    AsyncStorage.getItem('userStatus').then((res) => {
+      console.log('==res', res);
+      setStatusValue(res);
+    });
   };
 
   return (
@@ -112,22 +115,30 @@ function DetailOffer1(props) {
             />
           </View>
         </View>
-        {statusValue == 2 ? null : (
-          <View
-            style={{
-              flex: 1,
-              // borderWidth: 1,
-              justifyContent: 'flex-end',
-              paddingBottom: 30,
-            }}>
+        <View
+          style={{
+            flex: 1,
+            // borderWidth: 1,
+            justifyContent: 'flex-end',
+            paddingBottom: 30,
+          }}>
+          {statusValue == 2 ? (
+            <View style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
+              <Image
+                source={require('../../../assets/images/map.jpg')}
+                style={{height: '100%', width: '100%'}}
+                resizeMode="contain"
+              />
+            </View>
+          ) : (
             <GlobalButton
               buttonText="Pay the Offer"
               height={50}
               width="66%"
               onPress={() => props.navigation.navigate('payment')}
             />
-          </View>
-        )}
+          )}
+        </View>
       </View>
     </View>
   );
