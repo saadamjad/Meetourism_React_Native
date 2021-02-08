@@ -19,7 +19,7 @@ const App = (props) => {
       image: require('../../assets/icons/row.png'),
     },
     {
-      name: 'status ',
+      name: 'status',
       navigation: 'statusstack',
       image: <FontAwesome name="user" size={20} color="black" />,
     },
