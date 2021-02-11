@@ -91,6 +91,7 @@ const Tutorial = (props) => {
           justifyContent: 'center',
         }}>
         <TouchableOpacity
+          activeOpacity={0.75}
           style={{
             backgroundColor: theme.secondaryColor,
             width: 160,
@@ -105,6 +106,7 @@ const Tutorial = (props) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          activeOpacity={0.75}
           style={{
             width: 140,
             justifyContent: 'center',
@@ -159,6 +161,7 @@ const Tutorial = (props) => {
               ))}
             </View>
             <TouchableOpacity
+              activeOpacity={0.75}
               onPress={() => props.navigation.navigate('signin')}>
               <Text style={{color: 'white', fontWeight: 'bold'}}>SKIP</Text>
             </TouchableOpacity>

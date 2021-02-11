@@ -29,205 +29,215 @@ const App = (props) => {
   ];
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#423050'}}>
-      <ImageBackground
-        source={require('../../assets/images/home.png')}
-        style={{height: '100%', width: '100%'}}>
-        <View
-          style={{
-            backgroundColor: 'rgba(00,00,00, 0.8)',
-            flex: 1,
-            // paddingVertical: 20,
-          }}>
-          <Header
-            isTransparent={true}
-            leftArrow={true}
-            navigation={props.navigation}
-          />
-          {Food.map((item, i) => {
-            return (
-              <View
-                style={{
-                  flex: 1,
-                  borderWidth: 0.5,
-                  // borderColor: 'gray',
-                  // elevation: 1,
-                  backgroundColor: 'red',
-                  overflow: 'hidden',
-                  width: '90%',
-                  alignSelf: 'center',
-                  borderRadius: 40,
-                  // alignItems: 'center',
-                  marginVertical: 15,
-                  backgroundColor: 'white',
-                }}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}} style={{flex: 1}}>
+        <ImageBackground
+          source={require('../../assets/images/statusbg.png')}
+          style={{height: '100%', width: '100%'}}>
+          <View
+            style={{
+              backgroundColor: 'rgba(00,00,00, 0.8)',
+              flex: 1,
+              // paddingVertical: 20,
+            }}>
+            <Header
+              isTransparent={true}
+              leftArrow={true}
+              navigation={props.navigation}
+            />
+            {Food.map((item, i) => {
+              return (
                 <View
                   style={{
-                    flex: 0.25,
-                    // borderWidth: 1,
+                    flex: 1,
+                    borderWidth: 0.5,
+                    // borderColor: 'gray',
+                    // elevation: 1,
+                    backgroundColor: 'red',
                     overflow: 'hidden',
+                    width: '90%',
+                    alignSelf: 'center',
+                    borderRadius: 40,
+                    // alignItems: 'center',
+                    marginVertical: 15,
                     backgroundColor: 'white',
                   }}>
                   <View
                     style={{
-                      height: '100%',
-                      width: '100%',
-                      //  : 30,
+                      height: 120,
+                      // borderWidth: 1,
                       overflow: 'hidden',
-                      // borderWidth: 1,
-                      borderBottomLeftRadius: 30,
-                      borderBottomRightRadius: 30,
-                      justifyContent: 'flex-start',
-                    }}>
-                    <Image
-                      source={require('../../../src/assets/images/r3.png')}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                      }}
-                      resizeMode="cover"
-                    />
-                  </View>
-                </View>
-                <View
-                  style={{flex: 0.75, borderWidth: 0, paddingHorizontal: 12}}>
-                  <View
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      paddingVertical: 5,
-                    }}>
-                    <Text
-                      style={{fontSize: 20, color: 'red', fontWeight: 'bold'}}>
-                      Hill View Resturant
-                    </Text>
-                  </View>
-                  <Text style={{fontSize: 18, color: 'black'}}>Interests</Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      flexWrap: 'wrap',
-                      marginVertical: 10,
-                    }}>
-                    {item.allinterests.map((item, i) => {
-                      return (
-                        <View
-                          style={{
-                            width: '20%',
-                            paddingVertical: 10,
-
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}>
-                          <Text style={{fontSize: 10}}> {item} </Text>
-                        </View>
-                      );
-                    })}
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      // borderWidth: 1,
-                      marginVertical: 5,
+                      backgroundColor: 'white',
                     }}>
                     <View
                       style={{
-                        width: '50%',
-                        alignItems: 'flex-start',
-
-                        justifyContent: 'center',
+                        flex: 1,
+                        width: '100%',
+                        //  : 30,
+                        overflow: 'hidden',
+                        // borderWidth: 1,
+                        borderBottomLeftRadius: 30,
+                        borderBottomRightRadius: 30,
+                        justifyContent: 'flex-start',
                       }}>
-                      <Text style={{fontSize: 18}}>Contact </Text>
-                      <Text style={{fontSize: 15, marginVertical: 5}}>
-                        ********
+                      <Image
+                        source={require('../../../src/assets/images/r3.png')}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                        }}
+                        resizeMode="cover"
+                      />
+                    </View>
+                  </View>
+                  <View
+                    style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingVertical: 5,
+                      }}>
+                      <Text
+                        style={{
+                          fontSize: 20,
+                          color: 'red',
+                          fontWeight: 'bold',
+                        }}>
+                        Hill View Resturant
+                      </Text>
+                    </View>
+                    <Text style={{fontSize: 18, color: 'black'}}>
+                      Interests
+                    </Text>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        marginVertical: 10,
+                      }}>
+                      {item.allinterests.map((item, i) => {
+                        return (
+                          <View
+                            style={{
+                              width: '20%',
+                              paddingVertical: 10,
+
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}>
+                            <Text style={{fontSize: 10}}> {item} </Text>
+                          </View>
+                        );
+                      })}
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        // borderWidth: 1,
+                        marginVertical: 5,
+                      }}>
+                      <View
+                        style={{
+                          width: '50%',
+                          alignItems: 'flex-start',
+
+                          justifyContent: 'center',
+                        }}>
+                        <Text style={{fontSize: 18}}>Contact </Text>
+                        <Text style={{fontSize: 15, marginVertical: 5}}>
+                          ********
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          width: '50%',
+                          alignItems: 'flex-start',
+                          justifyContent: 'center',
+                        }}>
+                        <Text style={{fontSize: 18}}>City </Text>
+                        <Text style={{fontSize: 15, marginVertical: 5}}>
+                          xyz
+                        </Text>
+                      </View>
+                    </View>
+
+                    <Text style={{fontSize: 14}}>Description </Text>
+                    <View style={{marginVertical: 10}}>
+                      <Text style={{fontSize: 10, lineHeight: 15}}>
+                        {item.Idetail}
                       </Text>
                     </View>
                     <View
                       style={{
-                        width: '50%',
-                        alignItems: 'flex-start',
+                        flexDirection: 'row',
+                        alignItems: 'center',
                         justifyContent: 'center',
+                        marginVertical: 10,
                       }}>
-                      <Text style={{fontSize: 18}}>City </Text>
-                      <Text style={{fontSize: 15, marginVertical: 5}}>xyz</Text>
-                    </View>
-                  </View>
+                      <View
+                        style={{
+                          height: 70,
+                          width: 75,
+                          elevation: 1,
 
-                  <Text style={{fontSize: 14}}>Description </Text>
-                  <View style={{marginVertical: 10}}>
-                    <Text style={{fontSize: 10, lineHeight: 15}}>
-                      {item.Idetail}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginVertical: 10,
-                    }}>
-                    <View
-                      style={{
-                        height: 70,
-                        width: 75,
-                        elevation: 1,
-
-                        marginHorizontal: 10,
-                      }}>
-                      <Image
-                        source={require('../../assets/images/r1.png')}
-                        style={{height: '100%', width: '100%'}}
-                        resizeMode="cover"
-                      />
+                          marginHorizontal: 10,
+                        }}>
+                        <Image
+                          source={require('../../assets/images/r1.png')}
+                          style={{height: '100%', width: '100%'}}
+                          resizeMode="cover"
+                        />
+                      </View>
+                      <View
+                        style={{
+                          height: 70,
+                          width: 75,
+                          elevation: 1,
+                          marginHorizontal: 10,
+                        }}>
+                        <Image
+                          source={require('../../assets/images/r1.png')}
+                          style={{height: '100%', width: '100%'}}
+                          resizeMode="cover"
+                        />
+                      </View>
                     </View>
                     <View
                       style={{
-                        height: 70,
-                        width: 75,
-                        elevation: 1,
-                        marginHorizontal: 10,
+                        overflow: 'hidden',
+                        // width: '70%',
+                        marginVertical: 5,
                       }}>
-                      <Image
-                        source={require('../../assets/images/r1.png')}
-                        style={{height: '100%', width: '100%'}}
-                        resizeMode="cover"
+                      <Button
+                        buttonText="My Offer"
+                        width={'80%'}
+                        height={40}
+                        onPress={() => props.navigation.navigate('SelectOffer')}
                       />
                     </View>
-                  </View>
-                  <View
-                    style={{
-                      overflow: 'hidden',
-                      // width: '70%',
-                      marginVertical: 5,
-                    }}>
-                    <Button
-                      buttonText="My Offer"
-                      width={'80%'}
-                      height={40}
-                      onPress={() => props.navigation.navigate('SelectOffer')}
-                    />
-                  </View>
 
-                  <View
-                    style={{
-                      overflow: 'hidden',
-                      // width: '70%',
-                      marginVertical: 5,
-                    }}>
-                    <Button
-                      buttonText="Create new offer"
-                      width={'80%'}
-                      height={40}
-                      onPress={() =>
-                        props.navigation.navigate('createnewoffer')
-                      }
-                    />
+                    <View
+                      style={{
+                        overflow: 'hidden',
+                        // width: '70%',
+                        marginVertical: 5,
+                      }}>
+                      <Button
+                        buttonText="Create new offer"
+                        width={'80%'}
+                        height={40}
+                        onPress={() =>
+                          props.navigation.navigate('createnewoffer')
+                        }
+                      />
+                    </View>
                   </View>
                 </View>
-              </View>
-            );
-          })}
-        </View>
-      </ImageBackground>
+              );
+            })}
+          </View>
+        </ImageBackground>
+      </ScrollView>
     </SafeAreaView>
   );
 };

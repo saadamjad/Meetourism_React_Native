@@ -48,6 +48,7 @@ import PartnerHome from '../screens/partnerhome';
 import SelectOffer from '../screens/alloffers/selectOffer';
 import Createnewoffer from '../screens/alloffers/createnewoffer';
 import confirmedoffers from '../screens/alloffers/confirmations';
+import Gallery from '../components/gallery';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -74,6 +75,11 @@ export function Status() {
       <Stack.Screen
         name="selectstatus"
         component={selectstatus}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Gallery"
+        component={Gallery}
         options={{headerShown: false}}
       />
 
@@ -153,6 +159,11 @@ export function ProfileStack() {
       <Stack.Screen
         name="Home"
         component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Gallery"
+        component={Gallery}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -312,6 +323,11 @@ export function PartnerStack() {
       <Stack.Screen
         name="Hillviewresturant"
         component={Hillviewresturant}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Gallery"
+        component={Gallery}
         options={{headerShown: false}}
       />
       <Stack.Screen

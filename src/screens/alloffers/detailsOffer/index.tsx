@@ -10,7 +10,10 @@ import Overlay from '../../../components/overlays';
 function DealOffer(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
-    <CustomView bg={'rgba(00,00,00, 0.6)'} scroll>
+    <CustomView
+      image={require('../../../assets/images/statusbg.png')}
+      bg={'rgba(00,00,00, 0.6)'}
+      scroll>
       <App navigation={props.navigation} isTransparent />
       <View
         style={{
@@ -27,6 +30,7 @@ function DealOffer(props) {
             backgroundColor: 'white',
             paddingHorizontal: 20,
             borderRadius: 50,
+            elevation: 5,
             borderBottomRightRadius: 0,
             paddingVertical: 50,
             // height: '60%',

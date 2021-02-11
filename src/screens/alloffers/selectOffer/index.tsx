@@ -18,11 +18,14 @@ function SelectOffer(props) {
   const [state, setState] = useState(false);
   const [overlay, setOverlay] = useState(true);
   return state ? (
-    <LatestOffer navigation={props.navigation} />
+    <LatestOffer
+      navigation={props.navigation}
+      _onPress={() => setState(false)}
+    />
   ) : (
     <CustomView bg={theme.textColor.whiteColor} scroll>
       <Longheader
-        headerText="Select Offerr"
+        headerText="Select Offer"
         filterIcon
         alignItemsText="center"
         backgroundColor={theme.textColor.whiteColor}

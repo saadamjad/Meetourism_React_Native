@@ -20,11 +20,11 @@ function CreateOffer(props) {
       }}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageBackground
-          source={require('../../../assets/images/home.png')}
+          source={require('../../../assets/images/statusbg.png')}
           style={{height: '100%', width: '100%'}}>
           <View
             style={{
-              backgroundColor: 'rgba(00,00,00, 0.8)',
+              backgroundColor: 'rgba(00,00,00, 0.7)',
               alignItems: 'center',
               justifyContent: 'center',
               flex: 1,

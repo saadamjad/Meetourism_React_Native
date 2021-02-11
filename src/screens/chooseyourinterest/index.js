@@ -15,6 +15,7 @@ import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import {Icon} from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
+import {ImageBackground} from 'react-native';
 // import Overlay from '../../../components/overlays';
 // import {ScrollView} from 'react-native-gesture-handler';
 // import Header from '../../../components/header/longheader';
@@ -69,228 +70,234 @@ const Status = (props) => {
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
-      <View style={{flex: 1, backgroundColor: '#241332'}}>
-        <View
-          style={{
-            // flex: 0.1,
-            backgroundColor: '#241332',
-            paddingVertical: 10,
-            paddingLeft: 20,
-          }}>
-          <TouchableOpacity
-            style={{
-              borderWidth: 0,
-
-              alignSelf: 'flex-start',
-            }}
-            onPress={() => props.navigation.goBack()}>
-            <Icon
-              type="AntDesign"
-              name="arrowleft"
-              style={{color: 'white', fontSize: 17}}
-            />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            paddingBottom: 20,
-            // borderWidth: 1,
-            backgroundColor: '#241332',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
+      <ImageBackground
+        source={require('../../assets/images/statusbg.png')}
+        style={{height: '100%', width: '100%'}}
+        resizeMode="cover">
+        <View style={{flex: 1, backgroundColor: 'rgba(00,00,00,0.8)'}}>
           <View
             style={{
-              width: '90%',
-              borderRadius: 40,
-              backgroundColor: 'white',
-              overflow: 'hidden',
-              height: '100%',
-              alignItems: 'center',
-              justifyContent: 'center',
+              // flex: 0.1,
+              // backgroundColor: '#241332',
+              paddingVertical: 10,
+              paddingLeft: 20,
             }}>
-            <Text
+            <TouchableOpacity
               style={{
-                color: theme.secondaryColor,
-                fontSize: 24,
-                fontWeight: '700',
-                paddingVertical: 10,
-              }}>
-              Subscribe
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
+                borderWidth: 0,
 
-                justifyContent: 'center',
-                // alignItems: 'space-around',
-              }}>
-              {[0, 1, 2, 3].map((val) => (
-                <Image
-                  style={{
-                    width: 40,
-                    marginLeft: 5,
-                    height: 40,
-                    borderRadius: 40,
-                  }}
-                  resizeMode="contain"
-                  source={require('../../assets/images/girl.png')}
-                />
-              ))}
-              <View
-                style={{
-                  marginLeft: 5,
-                  width: 40,
-                  height: 40,
-                  borderRadius: 40,
-                  backgroundColor: '#998FA2',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Icon style={{fontSize: 20}} type="AntDesign" name="plus" />
-              </View>
-            </View>
+                alignSelf: 'flex-start',
+              }}
+              onPress={() => props.navigation.goBack()}>
+              <Icon
+                type="AntDesign"
+                name="arrowleft"
+                style={{color: 'white', fontSize: 17}}
+              />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              paddingBottom: 20,
+              // borderWidth: 1,
+              // backgroundColor: '#241332',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
             <View
               style={{
-                width: '100%',
-                paddingVertical: 5,
+                width: '90%',
+                borderRadius: 40,
                 backgroundColor: 'white',
                 overflow: 'hidden',
-                // borderWidth: 1,
-                justifyContent: 'space-evenly',
-                flex: 1,
-                paddingHorizontal: 20,
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+                elevation: 10,
               }}>
-              <TextInput
+              <Text
                 style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="First Name"
-              />
-              <TextInput
-                style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="Last Name"
-              />
-              <TextInput
-                style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="Email"
-              />
-              <TextInput
-                style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="Contact"
-              />
-              <TextInput
-                style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="Age"
-              />
-              <TextInput
-                style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="City"
-              />
-              <TextInput
-                style={{
-                  width: '100%',
-                  borderBottomWidth: 1,
-                  height: 40,
-
-                  borderColor: theme.borderColor.inActiveBorderColor,
-                }}
-                multiline={true}
-                placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                placeholder="Description 100 words Max"
-              />
+                  color: theme.secondaryColor,
+                  fontSize: 24,
+                  fontWeight: '700',
+                  paddingVertical: 10,
+                }}>
+                Subscribe
+              </Text>
               <View
                 style={{
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  width: '100%',
+
+                  justifyContent: 'center',
+                  // alignItems: 'space-around',
+                }}>
+                {[0, 1, 2, 3].map((val) => (
+                  <Image
+                    style={{
+                      width: 40,
+                      marginLeft: 5,
+                      height: 40,
+                      borderRadius: 40,
+                    }}
+                    resizeMode="contain"
+                    source={require('../../assets/images/girl.png')}
+                  />
+                ))}
+                <View
+                  style={{
+                    marginLeft: 5,
+                    width: 40,
+                    height: 40,
+                    borderRadius: 40,
+                    backgroundColor: '#998FA2',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Icon style={{fontSize: 20}} type="AntDesign" name="plus" />
+                </View>
+              </View>
+              <View
+                style={{
+                  width: '100%',
+                  paddingVertical: 5,
+                  backgroundColor: 'white',
+                  overflow: 'hidden',
                   // borderWidth: 1,
+                  justifyContent: 'space-evenly',
+                  flex: 1,
+                  paddingHorizontal: 20,
                 }}>
                 <TextInput
                   style={{
-                    // width: '20%',
+                    width: '100%',
                     borderBottomWidth: 1,
                     height: 40,
-
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                  placeholder="Height"
+                  placeholder="First Name"
                 />
                 <TextInput
                   style={{
-                    // width: '20%',
+                    width: '100%',
                     borderBottomWidth: 1,
                     height: 40,
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                  placeholder="Shape"
+                  placeholder="Last Name"
                 />
                 <TextInput
                   style={{
-                    // width: '20%',
+                    width: '100%',
                     borderBottomWidth: 1,
                     height: 40,
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                  placeholder="EyeColor"
+                  placeholder="Email"
                 />
-              </View>
+                <TextInput
+                  style={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    height: 40,
 
-              <View style={{overflow: 'hidden', marginVertical: 5}}>
-                <GlobalButton
-                  buttonText="Choose Your Interest"
-                  onPress={() => props.navigation.navigate('yourinterests')}
+                    borderColor: theme.borderColor.inActiveBorderColor,
+                  }}
+                  placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                  placeholder="Contact"
                 />
+                <TextInput
+                  style={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    height: 40,
+
+                    borderColor: theme.borderColor.inActiveBorderColor,
+                  }}
+                  placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                  placeholder="Age"
+                />
+                <TextInput
+                  style={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    height: 40,
+
+                    borderColor: theme.borderColor.inActiveBorderColor,
+                  }}
+                  placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                  placeholder="City"
+                />
+                <TextInput
+                  style={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    height: 40,
+
+                    borderColor: theme.borderColor.inActiveBorderColor,
+                  }}
+                  multiline={true}
+                  placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                  placeholder="Description 100 words Max"
+                />
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    // borderWidth: 1,
+                  }}>
+                  <TextInput
+                    style={{
+                      // width: '20%',
+                      borderBottomWidth: 1,
+                      height: 40,
+
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}
+                    placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                    placeholder="Height"
+                  />
+                  <TextInput
+                    style={{
+                      // width: '20%',
+                      borderBottomWidth: 1,
+                      height: 40,
+
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}
+                    placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                    placeholder="Shape"
+                  />
+                  <TextInput
+                    style={{
+                      // width: '20%',
+                      borderBottomWidth: 1,
+                      height: 40,
+
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}
+                    placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                    placeholder="EyeColor"
+                  />
+                </View>
+
+                <View style={{overflow: 'hidden', marginVertical: 5}}>
+                  <GlobalButton
+                    buttonText="Choose Your Interest"
+                    onPress={() => props.navigation.navigate('yourinterests')}
+                  />
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
+      </ImageBackground>
     </ScrollView>
   );
 };

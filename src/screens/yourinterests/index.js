@@ -7,6 +7,7 @@ import {
   Dimensions,
   TextInput,
   AsyncStorage,
+  ImageBackground,
 } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
@@ -64,52 +65,58 @@ const Status = (props) => {
 
   return (
     <>
-      <CustomView
-        bg={'transparent'}
-        scroll
-        image={require('../../assets/images/home.png')}>
-        <View
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'rgba(000, 000, 000, 0.9)',
+
+          // backgroundColor: 'red',
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <ImageBackground
+          source={require('../../assets/images/statusbg.png')}
           style={{
-            flex: 1,
-            backgroundColor: 'black',
-            alignItems: 'center',
-            justifyContent: 'center',
+            height: '100%',
+            width: '100%',
           }}>
-          <TouchableOpacity
-            style={{
-              borderWidth: 0,
-              paddingHorizontal: 15,
-              paddingVertical: 10,
-              alignSelf: 'flex-start',
-            }}
-            onPress={() =>
-              //   setState({...state, visible: !state.visible, visible1: false})
-              props.navigation.goBack()
-            }>
-            <Icon
-              type="AntDesign"
-              name="arrowleft"
-              style={{color: 'white', fontSize: 17}}
-            />
-          </TouchableOpacity>
           <View
             style={{
               flex: 1,
-              backgroundColor: 'rgba(000, 000, 000, 0.8)',
-
-              // backgroundColor: 'red',
               width: '100%',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: 0,
-              padding: 0,
+              backgroundColor: 'rgba(000, 000, 000, 0.7)',
             }}>
+            <View style={{width: '100%', paddingLeft: 20, paddingBottom: 30}}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={{
+                  // borderWidth: 1,
+
+                  paddingHorizontal: 12,
+                  // paddingVertical: 10,
+                  alignSelf: 'flex-start',
+                }}
+                onPress={() =>
+                  //   setState({...state, visible: !state.visible, visible1: false})
+                  props.navigation.goBack()
+                }>
+                <Icon
+                  type="AntDesign"
+                  name="arrowleft"
+                  style={{color: 'white', fontSize: 20}}
+                />
+              </TouchableOpacity>
+            </View>
             <View
               style={{
                 width: Dimensions.get('window').width / 1.2,
                 // justifyContent: 'center',
                 borderRadius: 40,
                 backgroundColor: 'white',
+                elevation: 2,
                 alignItems: 'center',
                 overflow: 'hidden',
               }}>
@@ -228,31 +235,42 @@ const Status = (props) => {
               </View>
             </View>
 
-            <View style={{overflow: 'hidden', marginTop: 20}}>
-              <GlobalButton
-                buttonText="Done"
-                onPress={() => {
-                  console.log(statusValue);
+            <TouchableOpacity
+              activeOpacity={0.75}
+              onPress={() => {
+                console.log(statusValue);
 
-                  if (statusValue == 0) {
-                    // alert('user');
-                    props.navigation.navigate('profilePreivew');
-                  } else if (statusValue == 1) {
-                    // alert('relationship');
-                    props.navigation.navigate('userProfile', {
-                      status: 1,
-                    });
-                  } else if (statusValue == 2) {
-                    // alert('partner');
+                if (statusValue == 0) {
+                  // alert('user');
+                  props.navigation.navigate('profilePreivew');
+                } else if (statusValue == 1) {
+                  // alert('relationship');
+                  props.navigation.navigate('userProfile', {
+                    status: 1,
+                  });
+                } else if (statusValue == 2) {
+                  // alert('partner');
 
-                    props.navigation.navigate('PartnerStack');
-                  }
-                }}
-              />
-            </View>
+                  props.navigation.navigate('PartnerStack');
+                }
+              }}
+              style={{
+                height: 40,
+                marginVertical: 20,
+                overflow: 'hidden',
+                backgroundColor: theme.secondaryColor,
+                elevation: 2,
+                width: '50%',
+                borderRadius: 30,
+                alignSelf: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{fontSize: 15, color: 'white'}}> Done</Text>
+            </TouchableOpacity>
           </View>
-        </View>
-      </CustomView>
+        </ImageBackground>
+      </View>
     </>
   );
 };

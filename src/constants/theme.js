@@ -1,7 +1,7 @@
 const theme = {
-  primaryColor: '#352641',
+  primaryColor: '#241332',
   secondaryColor: '#EC2027',
-  primaryColor1: '#8A56AC',
+  primaryColor1: '#423050',
   primaryColor2: '#5F4E6A',
   buttonGreyColor: '#9599B3',
   textColor: {

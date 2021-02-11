@@ -48,7 +48,7 @@ const App = (props) => {
               paddingLeft: 20,
               justifyContent: 'center',
             }}>
-            <Ionicons name="arrow-back" size={20} color={'black'} />
+            <Ionicons name="arrow-back" size={20} color={'#423050'} />
           </TouchableOpacity>
         )}
         {props.drawerIcon && (
@@ -105,6 +105,7 @@ const App = (props) => {
           style={{
             color: 'red',
             // marginBottom: 5,
+            fontWeight: 'bold',
             fontSize: props.fontSize ? props.fontSize : 25,
           }}>
           {props.headerText ? props.headerText : 'enter text'}

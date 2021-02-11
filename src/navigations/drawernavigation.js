@@ -14,6 +14,7 @@ import Calender from '../screens/calendar';
 import Search from '../screens/search';
 import profilePreivew from '../screens/profile';
 import Home from '../screens/home';
+import {theme} from '../constants/theme';
 
 // console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -25,7 +26,7 @@ function MyDrawer(props) {
       drawerType="slide"
       // initialRouteName="Home"
       drawerStyle={{
-        backgroundColor: '#241332',
+        backgroundColor: theme.primaryColor,
         width: '100%',
         justifyContent: 'center',
       }}

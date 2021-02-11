@@ -15,7 +15,7 @@ import {theme} from '../../../constants/theme';
 import Header from '../../../components/header';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-
+import Gallery from '../../../components/gallery';
 const Profile = (props) => {
   const [buttonHide, setButtonHide] = useState(false);
   const [userType, setUserType] = useState('0');
@@ -47,6 +47,10 @@ const Profile = (props) => {
       // Error retrieving data
     }
   };
+  const _Gallery = () => {
+    // return <Gallery />;
+    props.navigation.navigate('Gallery');
+  };
 
   return (
     <CustomView scroll>
@@ -59,7 +63,7 @@ const Profile = (props) => {
             navigation={props.navigation}
             leftArrow={true}
             isTransparent={true}
-            searchIcon={true}
+            // searchIcon={true}
           />
         </ImageBackground>
 
@@ -86,10 +90,10 @@ const Profile = (props) => {
             }}>
             Peter
           </Text>
-          <Text style={{fontSize: 15, color: '#998FA2'}}>
+          <Text style={{fontSize: 15, color: '#9E94A6'}}>
             San Francisco, CA
           </Text>
-          <Text style={{fontSize: 13, color: '#998FA2'}}>20 years</Text>
+          <Text style={{fontSize: 13, color: '#9E94A6'}}>20 years</Text>
           <View
             style={{
               width: '100%',
@@ -98,10 +102,12 @@ const Profile = (props) => {
               height: 100,
               alignSelf: 'center',
               borderRadius: 40,
+              elevation: 1,
               marginVertical: 10,
               backgroundColor: 'white',
             }}>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
                 width: '33.33%',
                 borderWidth: 0,
@@ -111,12 +117,15 @@ const Profile = (props) => {
               onPress={() => props.navigation.navigate('innerchat')}>
               <Image
                 source={require('../../../assets/images/path.png')}
-                style={{height: 20, width: 20, tintColor: 'gray'}}
+                style={{height: 20, width: 20, tintColor: '#9E94A6'}}
                 resizeMode="contain"
               />
-              <Text style={{fontSize: 12, marginTop: 5}}>Chat </Text>
+              <Text style={{fontSize: 12, marginTop: 7, color: '#8F989D'}}>
+                Chat{' '}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
                 width: '33.33%',
                 borderWidth: 0,
@@ -124,16 +133,23 @@ const Profile = (props) => {
                 justifyContent: 'center',
               }}
               //  onPress={()=>props.navigation.navigate('allchat')}
-              onPress={() => alert('In process ')}>
+              onPress={() =>
+                // alert('In process ')
+                // <Gallery />
+                _Gallery()
+              }>
               {/* <Image
                 source={require('../../../assets/icons/singleuser.png')}
                 style={{height: 20, width: 20, tintColor: 'purple'}}
                 resizeMode="contain"
               /> */}
               <Feather name="users" color="#8A56AC" size={20} />
-              <Text style={{fontSize: 12, marginTop: 5}}>Gallery </Text>
+              <Text style={{fontSize: 12, marginTop: 7, color: '#8F989D'}}>
+                Gallery{' '}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               style={{
                 width: '33.33%',
                 borderWidth: 0,
@@ -146,7 +162,9 @@ const Profile = (props) => {
                 style={{height: 20, width: 20, tintColor: 'purple'}}
                 resizeMode="contain"
               /> */}
-              <Text style={{fontSize: 12, marginTop: 5}}>Follow </Text>
+              <Text style={{fontSize: 12, marginTop: 7, color: '#8F989D'}}>
+                Follow{' '}
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -154,7 +172,8 @@ const Profile = (props) => {
             style={{
               width: '100%',
               overflow: 'hidden',
-              borderRadius: 40,
+              borderRadius: 20,
+              elevation: 1,
               marginVertical: 10,
               backgroundColor: 'white',
             }}>
