@@ -12,14 +12,14 @@ function CreateOffer(props) {
   const [offerPosted, setOfferPosted] = useState(false);
   return (
     <ImageBackground
-      source={require('../../../assets/images/home.png')}
+      source={require('../../../assets/images/notificationbg.png')}
       style={{height: '100%', width: '100%'}}>
       <View
         style={{
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'rgba(000000,000000,000000, 0.8)',
+          // backgroundColor: 'rgba(000000,000000,000000, 0.6)',
         }}>
         <View
           style={{

@@ -75,7 +75,7 @@ const DrawerContent = (props) => {
               paddingLeft: 40,
               marginVertical: 5,
             }}>
-            <Text style={{color: 'white', fontSize: 18}}>
+            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
               {' '}
               Lady in the Blue
             </Text>
@@ -84,10 +84,7 @@ const DrawerContent = (props) => {
             style={{
               paddingLeft: 40,
             }}>
-            <Text style={{color: '#0000005D', fontSize: 15}}>
-              {' '}
-              @LadyintheBlue
-            </Text>
+            <Text style={{color: 'white', fontSize: 12}}> @LadyintheBlue</Text>
           </View>
         </ImageBackground>
       </View>

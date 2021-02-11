@@ -91,7 +91,7 @@ const Status = (props) => {
   return (
     <>
       <ImageBackground
-        source={require('../../../assets/images/home.png')}
+        source={require('../../../assets/images/statusbg.png')}
         style={{height: '100%', width: '100%'}}>
         <View
           style={{
@@ -100,8 +100,8 @@ const Status = (props) => {
             width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'white',
-            opacity: 0.8,
+            // backgroundColor: 'white',
+            // opacity: 0.8,
           }}>
           <View
             style={{

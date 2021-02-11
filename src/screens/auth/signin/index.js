@@ -98,7 +98,8 @@ const SignIn = (props) => {
           onPress={() =>
             // props.navigation.navigate('Status')}
             props.navigation.replace('drawer')
-          }>
+          }
+          activeOpacity={0.75}>
           <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -109,7 +110,8 @@ const SignIn = (props) => {
             borderRadius: 50,
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
+          }}
+          activeOpacity={0.7}>
           <Text
             style={{
               color: '#352641',
@@ -211,6 +213,7 @@ const SignIn = (props) => {
           paddingVertical: 40,
         }}>
         <TouchableOpacity
+          activeOpacity={0.75}
           onPress={() => toggleOverlay()}
           style={{
             backgroundColor: theme.secondaryColor,
@@ -248,12 +251,14 @@ const SignIn = (props) => {
             {['SIGN IN', 'SIGN UP'].map((val, i) => (
               <TouchableOpacity
                 onPress={() => setState({...state, selectedIndex: i})}
+                activeOpacity={0.7}
                 style={{
                   backgroundColor:
-                    state.selectedIndex == i
-                      ? theme.secondaryColor
-                      : 'transparent',
+                    state.selectedIndex == i ? theme.secondaryColor : 'white',
                   width: 90,
+                  // borderWidth: 0.5,
+                  // borderColor: 'gray',
+                  elevation: state.selectedIndex == i ? 0 : 1,
                   // marginLeft: i == 1 && 20,
                   height: 33,
                   borderRadius: 30,

@@ -12,7 +12,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
+import {theme} from '../../constants/theme';
 const App = (props) => {
+  const [select, setSelected] = useState(3);
+
   const [allStatus, setStatus] = useState([
     {
       name: 'you',
@@ -25,14 +28,14 @@ const App = (props) => {
     },
     {
       name: 'Add more',
-      image: <Feather name="plus" size={20} color="gray" />,
+      image: <Feather name="plus" size={20} color="black" />,
     },
   ]);
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#352641',
+        backgroundColor: theme.primaryColor,
       }}>
       <ScrollView
         style={{flex: 1}}
@@ -41,8 +44,8 @@ const App = (props) => {
         <View
           style={{
             flex: 0.4,
-            borderWidth: 1,
-            borderBottomLeftRadius: 80,
+            // borderWidth: 1,
+            borderBottomLeftRadius: 75,
             overflow: 'hidden',
           }}>
           <ImageBackground
@@ -53,7 +56,8 @@ const App = (props) => {
               style={{
                 height: 125,
                 backgroundColor: 'white',
-                // borderWidth:1,
+                // borderWidth: 1,
+                elevation: 1,
                 borderBottomLeftRadius: 85,
                 flexDirection: 'row',
                 overflow: 'hidden',
@@ -94,7 +98,9 @@ const App = (props) => {
                           borderWidth: 0.6,
                           borderRadius: 50,
                           marginHorizontal: 15,
-                          borderColor: '#707070',
+
+                          borderColor: '#AAB1B5',
+
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
@@ -113,7 +119,11 @@ const App = (props) => {
                         )}
                       </TouchableOpacity>
                       <Text
-                        style={{color: '#707070', fontSize: 12, marginTop: 7}}>
+                        style={{
+                          color: '#8F989D',
+                          fontSize: 12,
+                          marginTop: 7,
+                        }}>
                         {item.name}
                       </Text>
                       {i == 1 ? (
@@ -121,7 +131,7 @@ const App = (props) => {
                           <MaterialIcons
                             name="keyboard-arrow-down"
                             size={25}
-                            color={'gray'}
+                            color={'#AAB1B5'}
                           />
                         </TouchableOpacity>
                       ) : null}
@@ -133,48 +143,43 @@ const App = (props) => {
 
             <View
               style={{
+                height: 120,
+                paddingVertical: 20,
+                // borderWidth: 1,
                 alignItems: 'flex-end',
-                flex: 1,
-                paddingLeft: 45,
-                paddingBottom: 20,
                 flexDirection: 'row',
+                paddingHorizontal: 25,
               }}>
+              <View style={{width: '75%', borderWidth: 0}}>
+                <Text
+                  style={{fontSize: 10, color: 'white', fontWeight: 'bold'}}>
+                  {' '}
+                  0 meetups{' '}
+                </Text>
+                <Text
+                  style={{fontSize: 23, color: 'white', fontWeight: 'bold'}}>
+                  {' '}
+                  Lady in the Blue{' '}
+                </Text>
+              </View>
               <View
                 style={{
-                  height: 100,
+                  width: '25%',
+                  height: '100%',
+                  paddingTop: 20,
+                  justifyContent: 'center',
                   alignItems: 'flex-end',
-                  flexDirection: 'row',
                 }}>
-                <View style={{width: '75%', borderWidth: 0}}>
-                  <Text style={{fontSize: 13, color: 'white'}}>
-                    {' '}
-                    0 meetups{' '}
-                  </Text>
-                  <Text style={{fontSize: 23, color: 'white'}}>
-                    {' '}
-                    Lady in the Blue{' '}
-                  </Text>
-                </View>
-                <View
+                <Image
+                  source={require('../../assets/icons/edit.png')}
+                  resizeMode="contain"
                   style={{
-                    width: '25%',
-                    height: '100%',
-                    paddingTop: 20,
-                    // borderWidth: 1,
-                    justifyContent: 'center',
-                    alignItems: 'flex-end',
-                  }}>
-                  <Image
-                    source={require('../../assets/icons/edit.png')}
-                    resizeMode="contain"
-                    style={{
-                      height: 30,
-                      width: 30,
-                      borderWidth: 0,
-                      borderRadius: 30,
-                    }}
-                  />
-                </View>
+                    height: 30,
+                    width: 30,
+                    borderWidth: 0,
+                    borderRadius: 30,
+                  }}
+                />
               </View>
             </View>
           </ImageBackground>
@@ -191,9 +196,9 @@ const App = (props) => {
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
               overflow: 'hidden',
-              borderColor: '#707070',
-              borderBottomWidth: 0.7,
-              borderLeftWidth: 0.7,
+              borderColor: theme.primaryColor1,
+              borderBottomWidth: 1,
+              borderLeftWidth: 1,
               // elevation: 1,
             }}>
             <TouchableOpacity
@@ -206,8 +211,9 @@ const App = (props) => {
               onPress={() => props.navigation.navigate('allchats')}>
               <View
                 style={{
-                  borderRightWidth: 0.5,
-                  borderColor: '#707070',
+                  borderRightWidth: 1,
+                  borderColor: theme.primaryColor1,
+
                   width: '100%',
                   alignItems: 'center',
                 }}>
@@ -248,9 +254,9 @@ const App = (props) => {
 
               borderColor: 'white',
               paddingTop: 20,
-              borderColor: '#707070',
-              borderBottomWidth: 0.7,
-              borderLeftWidth: 0.7,
+              borderColor: theme.primaryColor1,
+              borderBottomWidth: 1,
+              borderLeftWidth: 1,
               paddingLeft: 20,
             }}>
             <View>
@@ -259,7 +265,13 @@ const App = (props) => {
                 Tell us about you!!
               </Text>
             </View>
-            <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
+            <View
+              style={{
+                flex: 1,
+                borderWidth: 0,
+                alignItems: 'flex-end',
+                paddingRight: 20,
+              }}>
               <Image
                 source={require('../../assets/icons/edit.png')}
                 resizeMode="contain"
@@ -301,46 +313,74 @@ const App = (props) => {
         {[
           {
             navigateTo: 'Selectoffer',
+            color: 'black',
+
             icons: (
               <Image
                 source={require('../../assets/icons/path.png')}
-                style={{height: 18, width: 18, tintColor: 'gray'}}
+                style={{
+                  height: 18,
+                  width: 18,
+                  tintColor: select == 0 ? 'black' : 'black',
+                }}
                 resizeMode="contain"
               />
             ),
           },
           {
             navigateTo: 'SeeYourMatch',
+            color: 'black',
+
             dashboard: false,
             icons: (
               <MaterialCommunityIcons
                 name="account-multiple"
                 size={20}
-                color={'gray'}
+                color={select == 1 ? 'black' : 'black'}
               />
             ),
           },
           {
             navigateTo: 'allchats',
+            color: 'black',
+
             icons: (
               <Image
                 source={require('../../assets/icons/Chat.png')}
-                style={{height: 18, width: 18, tintColor: 'gray'}}
+                style={{
+                  height: 18,
+                  width: 18,
+                  tintColor: select == 2 ? 'black' : 'black',
+                }}
                 resizeMode="contain"
               />
             ),
           },
           {
             navigateTo: 'Cruhes',
+            color: 'black',
+
             icons: (
-              <MaterialCommunityIcons name="account" size={20} color={'gray'} />
+              <MaterialCommunityIcons
+                name="account"
+                size={20}
+                color={select == 3 ? 'black' : 'gray'}
+              />
             ),
           },
           {
             navigateTo: 'statusstack',
-            icons: <MaterialIcons name="settings" size={20} color={'gray'} />,
+            color: 'black',
+
+            icons: (
+              <MaterialIcons
+                name="settings"
+                size={20}
+                color={select == 4 ? 'black' : 'black'}
+              />
+            ),
           },
-        ].map((val) => (
+        ].map((val, i) => (
           <TouchableOpacity
             style={{
               // flex: 1,
@@ -351,14 +391,15 @@ const App = (props) => {
 
               padding: 10,
             }}
-            onPress={() =>
+            onPress={() => {
+              setSelected(i);
               props.navigation.navigate(val.navigateTo, {
                 screen: 'chooseyourinterest',
 
                 settingStatus: true,
                 dashboard: false,
-              })
-            }
+              });
+            }}
             // onPress={() =>
             //   props.navigation.navigate('statusstack', {
             //     screen: 'chooseyourinterest',

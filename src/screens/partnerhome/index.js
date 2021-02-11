@@ -26,19 +26,20 @@ const App = (props) => {
     {
       name: 'Create New Offers',
       navigation: 'createnewoffer',
-      image: <Feather name="plus" size={20} color="gray" />,
+      image: <Feather name="plus" size={20} color="#AAB1B5" />,
     },
     {
       name: 'Logout',
       navigation: 'Auth',
-      image: <Feather name="plus" size={20} color="gray" />,
+      image: <MaterialCommunityIcons name="logout" size={20} color="#AAB1B5" />,
     },
   ]);
+  const [select, setSelected] = useState(2);
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: '#352641',
+        backgroundColor: '#241332',
       }}>
       <ScrollView
         style={{flex: 1}}
@@ -48,19 +49,21 @@ const App = (props) => {
           style={{
             flex: 0.4,
             borderWidth: 1,
+            borderColor: '#423050',
             borderBottomLeftRadius: 80,
             overflow: 'hidden',
           }}>
           <ImageBackground
-            source={require('../../assets/icons/girls.png')}
-            style={{height: '100%', width: '100%', borderBottomLeftRadius: 80}}
+            // source={require('../../assets/icons/girls.png')}
+            source={require('../../../src/assets/images/r3.png')}
+            style={{height: '100%', width: '100%'}}
             resizeMode="cover">
             <View
               style={{
                 // height: 125,
                 backgroundColor: 'white',
                 // borderWidth:1,
-                borderBottomLeftRadius: 85,
+                borderBottomLeftRadius: 75,
                 flexDirection: 'row',
                 overflow: 'hidden',
                 // elevation: 1,
@@ -90,7 +93,7 @@ const App = (props) => {
                           borderWidth: 0.6,
                           borderRadius: 50,
                           marginHorizontal: 15,
-                          borderColor: '#707070',
+                          borderColor: '#AAB1B5',
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
@@ -110,7 +113,7 @@ const App = (props) => {
                       </TouchableOpacity>
                       <Text
                         style={{
-                          color: '#707070',
+                          color: '#8F989D',
                           fontSize: 11,
                           marginTop: 7,
                           textAlign: 'center',
@@ -137,46 +140,48 @@ const App = (props) => {
               style={{
                 alignItems: 'flex-end',
                 flex: 1,
-                paddingLeft: 45,
-                paddingBottom: 20,
+                // paddingLeft: 45,
+                // paddingBottom: 20,
                 flexDirection: 'row',
               }}>
               <View
                 style={{
-                  height: 100,
-                  alignItems: 'flex-end',
+                  height: 60,
+                  // alignItems: 'flex-end',
                   flexDirection: 'row',
                 }}>
                 <View
-                  style={{width: '80%', borderWidth: 0, flexDirection: 'row'}}>
+                  style={{
+                    width: '80%',
+                    paddingLeft: 40,
+                    justifyContent: 'center',
+                    // paddingBottom: 20,
+                  }}>
                   <Text
-                    style={{fontSize: 23, color: 'white', fontWeight: 'bold'}}>
+                    style={{fontSize: 22, color: 'white', fontWeight: 'bold'}}>
                     Hill View Resturant
                   </Text>
-                  <View
-                    style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
-                    <Image
-                      source={require('../../assets/icons/edit.png')}
-                      resizeMode="contain"
-                      style={{
-                        height: 30,
-                        width: 30,
-                        borderWidth: 0,
-                        borderRadius: 30,
-                      }}
-                    />
-                  </View>
                 </View>
 
                 <View
                   style={{
-                    width: '25%',
-                    height: '100%',
-                    paddingTop: 20,
+                    width: '20%',
                     // borderWidth: 1,
+                    // backgroundColor: 'red',
+                    alignItems: 'center',
                     justifyContent: 'center',
-                    alignItems: 'flex-end',
-                  }}></View>
+                  }}>
+                  <Image
+                    source={require('../../assets/icons/edit.png')}
+                    resizeMode="contain"
+                    style={{
+                      height: 30,
+                      width: 30,
+                      borderWidth: 0,
+                      borderRadius: 30,
+                    }}
+                  />
+                </View>
               </View>
             </View>
           </ImageBackground>
@@ -184,18 +189,18 @@ const App = (props) => {
         <View style={{flex: 0.6, borderWidth: 0}}>
           <View
             style={{
-              height: 120,
+              height: 150,
               borderWidth: 0,
               flexDirection: 'row',
-              borderBottomLeftRadius: 50,
+              borderBottomLeftRadius: 45,
               shadowColor: 'white',
 
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
               overflow: 'hidden',
-              borderColor: '#707070',
-              borderBottomWidth: 0.7,
-              borderLeftWidth: 0.7,
+              borderColor: '#423050',
+              borderBottomWidth: 1,
+              borderLeftWidth: 1,
               // elevation: 1,
             }}>
             <TouchableOpacity
@@ -209,12 +214,13 @@ const App = (props) => {
               <View
                 style={{
                   borderRightWidth: 0.5,
-                  borderColor: '#707070',
+                  borderColor: '#423050',
+
                   width: '100%',
                   alignItems: 'center',
                 }}>
-                <Feather name="mail" size={40} color={'white'} />
-                <Text style={{color: 'white', fontSize: 10, marginTop: 5}}>
+                <Feather name="mail" size={35} color={'white'} />
+                <Text style={{color: 'white', fontSize: 10, marginTop: 10}}>
                   Messages
                 </Text>
               </View>
@@ -233,7 +239,7 @@ const App = (props) => {
                 style={{height: 40, width: 40}}
                 resizeMode="contain"
               />
-              <Text style={{color: 'white', fontSize: 10, marginTop: 5}}>
+              <Text style={{color: 'white', fontSize: 10, marginTop: 10}}>
                 {' '}
                 Notifications{' '}
               </Text>
@@ -242,23 +248,25 @@ const App = (props) => {
 
           <View
             style={{
-              height: 120,
+              height: 150,
               borderWidth: 0,
               flexDirection: 'row',
-              borderBottomLeftRadius: 50,
+              borderBottomLeftRadius: 45,
               overflow: 'hidden',
 
               borderColor: 'white',
               paddingTop: 20,
-              borderColor: '#707070',
-              borderBottomWidth: 0.7,
-              borderLeftWidth: 0.7,
+              borderColor: '#423050',
+              borderBottomWidth: 1,
+              borderLeftWidth: 1,
               paddingLeft: 20,
             }}>
             <View>
-              <Text style={{color: 'white', fontSize: 15}}>About Me</Text>
+              <Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
+                About the Bussiness
+              </Text>
               <Text style={{color: '#9599B3', fontSize: 12, marginTop: 2}}>
-                Tell us about you!!
+                Tell Bssiness!!
               </Text>
             </View>
             <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
@@ -288,10 +296,15 @@ const App = (props) => {
         {[
           {
             navigateTo: 'SelectOffer',
+            color: 'black',
             icons: (
               <Image
                 source={require('../../assets/icons/path.png')}
-                style={{height: 18, width: 18, tintColor: 'gray'}}
+                style={{
+                  height: 18,
+                  width: 18,
+                  tintColor: select == 0 ? 'black' : 'black',
+                }}
                 resizeMode="contain"
               />
             ),
@@ -309,25 +322,45 @@ const App = (props) => {
           // },
           {
             navigateTo: 'allchats',
+            color: 'black',
+
             icons: (
               <Image
                 source={require('../../assets/icons/Chat.png')}
-                style={{height: 18, width: 18, tintColor: 'gray'}}
+                style={{
+                  height: 18,
+                  width: 18,
+                  tintColor: select == 1 ? 'black' : 'black',
+                }}
                 resizeMode="contain"
               />
             ),
           },
           {
             navigateTo: 'partnerhome',
+            color: 'black',
+
             icons: (
-              <MaterialCommunityIcons name="account" size={20} color={'gray'} />
+              <MaterialCommunityIcons
+                name="account"
+                size={20}
+                color={select == 2 ? 'black' : 'black'}
+              />
             ),
           },
           {
             navigateTo: 'statusstack',
-            icons: <MaterialIcons name="settings" size={20} color={'gray'} />,
+            color: 'black',
+
+            icons: (
+              <MaterialIcons
+                name="settings"
+                size={20}
+                color={select == 3 ? 'black' : 'black'}
+              />
+            ),
           },
-        ].map((val) => (
+        ].map((val, i) => (
           <TouchableOpacity
             style={{
               // flex: 1,
@@ -338,14 +371,15 @@ const App = (props) => {
 
               padding: 10,
             }}
-            onPress={() =>
+            onPress={() => {
+              setSelected(i);
               props.navigation.navigate(val.navigateTo, {
                 screen: 'chooseyourinterest',
 
                 settingStatus: true,
                 dashboard: false,
-              })
-            }
+              });
+            }}
             activeOpacity={1}>
             {val.icons}
           </TouchableOpacity>

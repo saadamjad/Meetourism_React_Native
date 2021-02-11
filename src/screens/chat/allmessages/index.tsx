@@ -65,7 +65,7 @@ const Messages = (props) => {
           navigation={props.navigation}
           leftArrow={true}
           searchIcon={true}
-          headerText="Chats"
+          headerText="Messages"
         />
         {state.messages.map((val, i) => {
           let l = i - state.messages.length;
@@ -112,6 +112,7 @@ const Messages = (props) => {
                   <View style={{width: '60%', alignItems: 'center'}}>
                     <Image
                       resizeMode="contain"
+                      style={{height: 40, width: 40, borderRadius: 40}}
                       source={require('../../../assets/images/ava.png')}
                     />
                     {/* </View> */}

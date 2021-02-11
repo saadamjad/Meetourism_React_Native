@@ -12,7 +12,7 @@ function SelectPaymentMethod(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
     <CustomView
-      image={require('../../assets/images/home.png')}
+      image={require('../../assets/images/statusbg.png')}
       bg={'rgba(00,00,00, 0.8)'}
       scroll>
       <App leftArrow={true} navigation={props.navigation} isTransparent />

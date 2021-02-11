@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../components/header';
 import GlobalButton from '../../components/buttons/generalbutton';
+import {theme} from '../../constants/theme';
 
 const App = (props) => {
   const [buttonHide, setButtonHide] = useState(false);
@@ -46,7 +47,9 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#241332',
       }}>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        showsVerticalScrollIndicator={false}>
         <Header
           leftArrow={true}
           searchIcon={true}
@@ -111,8 +114,8 @@ const App = (props) => {
                 flex: 1,
                 paddingVertical: 15,
                 borderBottomWidth: 1.5,
-                borderColor: '#707070',
-                backgroundColor: '#423050',
+                borderColor: theme.primaryColor1,
+                backgroundColor: theme.primaryColor,
                 justifyContent: 'center',
               }}>
               <View
