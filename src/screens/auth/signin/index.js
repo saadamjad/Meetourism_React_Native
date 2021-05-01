@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {theme} from '../../../constants/theme';
 // import styles from './styles';
+import ForgotPassword from '../forgotpassword';
 import CustomView from '../../../components/customView';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import HoldOn from '../../holdOn';
@@ -50,7 +51,8 @@ const SignIn = (props) => {
               width: '80%',
               height: 40,
               marginTop: 20,
-            }}>
+            }}
+            key={i}>
             <TextInput
               style={{
                 width: '100%',
@@ -111,7 +113,8 @@ const SignIn = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          onPress={() => props.navigation.navigate('ForgotPassword')}>
           <Text
             style={{
               color: '#352641',
@@ -158,6 +161,7 @@ const SignIn = (props) => {
             {placeholder: 'Password', isSecure: true, keyboardType: 'default'},
           ].map((val, i) => (
             <View
+              key={i}
               style={{
                 borderBottomColor:
                   state.activeInput == i
@@ -192,6 +196,7 @@ const SignIn = (props) => {
               source={val}
               style={{height: 30, width: 30}}
               resizeMode="contain"
+              key={ind}
             />
           ))}
           {/* <View
@@ -251,6 +256,7 @@ const SignIn = (props) => {
             {['SIGN IN', 'SIGN UP'].map((val, i) => (
               <TouchableOpacity
                 onPress={() => setState({...state, selectedIndex: i})}
+                key={i}
                 activeOpacity={0.7}
                 style={{
                   backgroundColor:

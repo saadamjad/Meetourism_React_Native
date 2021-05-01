@@ -143,22 +143,22 @@ function DetailOffer1(props) {
                 justifyContent: 'flex-end',
                 paddingBottom: 30,
               }}>
-              {statusValue == 2 ? (
-                <View style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
-                  <Image
-                    source={require('../../../assets/images/map.jpg')}
-                    style={{height: '100%', width: '100%'}}
-                    resizeMode="contain"
-                  />
-                </View>
-              ) : (
-                <GlobalButton
-                  buttonText="Pay the Offer"
-                  height={50}
-                  width="66%"
-                  onPress={() => props.navigation.navigate('payment')}
+              {/* {statusValue == 2 ? ( */}
+              <View style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
+                <Image
+                  source={require('../../../assets/images/map.jpg')}
+                  style={{height: '100%', width: '100%'}}
+                  resizeMode="contain"
                 />
-              )}
+              </View>
+              {/* ) : ( */}
+              <GlobalButton
+                buttonText="Pay the Offer"
+                height={50}
+                width="66%"
+                onPress={() => props.navigation.navigate('payment')}
+              />
+              {/* )} */}
             </View>
           </View>
         </View>

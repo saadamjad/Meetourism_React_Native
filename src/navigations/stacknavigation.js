@@ -49,6 +49,7 @@ import SelectOffer from '../screens/alloffers/selectOffer';
 import Createnewoffer from '../screens/alloffers/createnewoffer';
 import confirmedoffers from '../screens/alloffers/confirmations';
 import Gallery from '../components/gallery';
+import ForgotPassword from '../screens/auth/forgotpassword';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -57,6 +58,11 @@ function Auth() {
       <Stack.Screen
         name="signin"
         component={signin}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
         options={{headerShown: false}}
       />
       {/* <Stack.Screen name="otp" component={otp} options={{headerShown: false}} /> */}

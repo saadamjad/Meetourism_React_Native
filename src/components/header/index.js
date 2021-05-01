@@ -4,6 +4,7 @@ import {theme} from '../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Icon} from 'native-base';
 
 // allPRops
 //   // textAlign={'flex-end'}
@@ -23,6 +24,9 @@ const App = ({
   bgColor,
   sColor,
   height,
+  filterIcon,
+  OpenFilter,
+  filterColor,
 }) => {
   return (
     <View
@@ -85,6 +89,20 @@ const App = ({
             <Ionicons name="search" size={20} color={sColor || '#241332'} />
           )}
         </TouchableOpacity>
+        {filterIcon && (
+          <TouchableOpacity
+            style={{paddingRight: 25, borderWidth: 0}}
+            onPress={() => OpenFilter()}>
+            <Icon
+              type="AntDesign"
+              name="filter"
+              style={{
+                fontSize: 20,
+                color: filterColor ? filterColor : '#241332',
+              }}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

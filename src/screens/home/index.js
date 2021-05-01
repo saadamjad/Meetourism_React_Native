@@ -26,10 +26,10 @@ const App = (props) => {
       navigation: 'statusstack',
       image: <FontAwesome name="user" size={20} color="black" />,
     },
-    {
-      name: 'Add more',
-      image: <Feather name="plus" size={20} color="black" />,
-    },
+    // {
+    //   name: 'Add more',
+    //   image: <Feather name="plus" size={20} color="black" />,
+    // },
   ]);
   return (
     <View
@@ -106,7 +106,10 @@ const App = (props) => {
                         }}
                         onPress={() =>
                           item.navigation &&
-                          props.navigation.navigate(item.navigation)
+                          props.navigation.navigate('statusstack', {
+                            screen: 'selectstatus',
+                            params: {comeFromProfileStatus: true},
+                          })
                         }>
                         {i == 0 ? (
                           <Image

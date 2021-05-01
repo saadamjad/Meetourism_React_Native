@@ -16,6 +16,7 @@ import Header from '../../../components/header';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Gallery from '../../../components/gallery';
+import {Icon} from 'native-base';
 const Profile = (props) => {
   const [buttonHide, setButtonHide] = useState(false);
   const [userType, setUserType] = useState('0');
@@ -63,6 +64,10 @@ const Profile = (props) => {
             navigation={props.navigation}
             leftArrow={true}
             isTransparent={true}
+            filterIcon={true}
+            filterColor={'white'}
+            OpenFilter={() => props.navigation.navigate('Gallery')}
+
             // searchIcon={true}
           />
         </ImageBackground>
