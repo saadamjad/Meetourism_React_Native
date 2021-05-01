@@ -6,17 +6,20 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const DrawerContent = (props) => {
   let array;
   return (
     <View
       style={{
-        // flex: 1,
+        flex: 1,
         backgroundColor: '#ED1C24',
+        // backgroundColor: 'blue',
+        marginVertical: 10,
         width: '90%',
         borderWidth: 1,
-        height: '93%',
+        // height: '93%',
         borderTopRightRadius: 60,
         borderBottomRightRadius: 60,
         opacity: 0.9,
@@ -25,7 +28,8 @@ const DrawerContent = (props) => {
       <View
         style={{
           justifyContent: 'space-evenly',
-          height: '26%',
+          // height: '26%',
+          flex: 0.24,
         }}>
         <ImageBackground
           source={require('../../assets/icons/group1.png')}
@@ -88,133 +92,139 @@ const DrawerContent = (props) => {
           </View>
         </ImageBackground>
       </View>
-      <View style={{flex: 1}}>
-        {
-          (array = [
-            // {
-            //   title: 'Admin screens',
-            //   name: 'adminscreens',
-            //   // icon: require('../assets/icons/64.png'),
-            //   icon: require('../../assets/icons/singleuser.png'),
-            // },
-            {
-              title: 'Home',
-              name: 'Home',
-              // name: props.navigation.closeDrawer(),
-              type: 'FontAwesome',
-              icon: require('../../assets/icons/home.png'),
-            },
-            {
-              title: 'Match',
-              name: 'Match',
-              type: 'Entypo',
-              // icon: require('../assets/icons/70.png'),
-              icon: require('../../assets/icons/userss.png'),
-            },
-            {
-              title: 'Events ',
-              name: 'Calender',
+      <View style={{flex: 0.76, paddingVertical: 3}}>
+        <ScrollView>
+          {
+            (array = [
+              // {
+              //   title: 'Admin screens',
+              //   name: 'adminscreens',
+              //   // icon: require('../assets/icons/64.png'),
+              //   icon: require('../../assets/icons/singleuser.png'),
+              // },
+              {
+                title: 'Home',
+                name: 'Home',
+                // name: props.navigation.closeDrawer(),
+                type: 'FontAwesome',
+                icon: require('../../assets/icons/home.png'),
+              },
+              {
+                title: 'Match',
+                name: 'Match',
+                type: 'Entypo',
+                // icon: require('../assets/icons/70.png'),
+                icon: require('../../assets/icons/userss.png'),
+              },
+              {
+                title: 'Events ',
+                name: 'Calender',
 
-              type: 'Fontisto',
-              // icon: require('../assets/icons/69.png'),
-              icon: require('../../assets/icons/calendar.png'),
-            },
-            {
-              title: 'Search Location ',
-              name: 'search',
-              type: 'FontAwesome5',
-              // icon: require('../assets/icons/68.png'),
-              icon: require('../../assets/icons/search.png'),
-            },
-            {
-              title: 'Calender ',
-              name: 'Calender',
-              type: 'FontAwesome5',
-              // icon: require('../assets/icons/68.png'),
-              icon: require('../../assets/icons/search.png'),
-            },
+                type: 'Fontisto',
+                // icon: require('../assets/icons/69.png'),
+                icon: require('../../assets/icons/calendar.png'),
+              },
+              {
+                title: 'Search Location ',
+                name: 'search',
+                type: 'FontAwesome5',
+                // icon: require('../assets/icons/68.png'),
+                icon: require('../../assets/icons/search.png'),
+              },
+              {
+                title: 'Calender ',
+                name: 'Calender',
+                type: 'FontAwesome5',
+                // icon: require('../assets/icons/68.png'),
+                icon: require('../../assets/icons/search.png'),
+              },
 
-            {
-              title: 'Search for Date',
-              name: 'search',
+              {
+                title: 'Search for Date',
+                name: 'search',
 
-              type: 'Entypo',
-              // icon: require('../assets/icons/66.png'),
-              icon: require('../../assets/icons/search.png'),
-            },
-            {
-              title: 'Offers',
-              name: 'Selectoffer',
-              // icon: require('../assets/icons/65.png'),
-              icon: require('../../assets/icons/offers.png'),
-            },
-            {
-              title: 'Contact Us',
-              // name: 'Home',
-              // icon: require('../assets/icons/64.png'),
-              icon: require('../../assets/icons/singleuser.png'),
-            },
+                type: 'Entypo',
+                // icon: require('../assets/icons/66.png'),
+                icon: require('../../assets/icons/search.png'),
+              },
+              {
+                title: 'Offers',
+                name: 'Selectoffer',
+                // icon: require('../assets/icons/65.png'),
+                icon: require('../../assets/icons/offers.png'),
+              },
+              {
+                title: 'Contact Us',
+                // name: 'Home',
+                // icon: require('../assets/icons/64.png'),
+                icon: require('../../assets/icons/singleuser.png'),
+              },
 
-            {
-              title: 'About us ',
-              // name: 'visitwebsite',
+              {
+                title: 'About us ',
+                // name: 'visitwebsite',
 
-              type: 'FontAwesome',
-              // icon: require('../assets/icons/67.png'),
-              icon: require('../../assets/icons/info.png'),
-            },
-            {
-              title: 'Log Out',
-              name: 'Auth',
-              // icon: require('../assets/icons/64.png'),
-              icon: require('../../assets/icons/logout.png'),
-            },
-          ].map(
-            (val, i) => (
-              console.log('loop', val),
-              (
-                <TouchableOpacity
-                  onPress={
-                    () => val.name && props.navigation.navigate(val.name)
+                type: 'FontAwesome',
+                // icon: require('../assets/icons/67.png'),
+                icon: require('../../assets/icons/info.png'),
+              },
+              {
+                title: 'Language ',
 
-                    // i == 4
-                    //   ? props.navigation.navigate('name')
-                    //   : props.navigation.navigate('setting')
-                  }
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingHorizontal: 10,
-                    marginTop: 5,
-                    borderColor: 'black',
-                    paddingVertical: 10,
-                    width: '96%',
-                    borderRadius: 1,
-                    alignSelf: 'center',
-                    borderColor: '#dc92a2',
-                  }}>
-                  <Image
-                    source={val.icon}
-                    style={{height: 15, width: 15, marginRight: 15}}
-                    resizeMode="contain"
-                  />
+                type: 'FontAwesome',
+                name: 'Langauge',
 
-                  <Text
+                icon: require('../../assets/icons/info.png'),
+              },
+              {
+                title: 'Log Out',
+                name: 'Auth',
+                // icon: require('../assets/icons/64.png'),
+                icon: require('../../assets/icons/logout.png'),
+              },
+            ].map(
+              (val, i) => (
+                console.log('loop', val),
+                (
+                  <TouchableOpacity
+                    onPress={() =>
+                      val.name && props.navigation.navigate(val.name)
+                    }
                     style={{
-                      letterSpacing: 1,
-
-                      flex: 1,
-                      // textAlign: 'left',
-                      color: 'white',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingHorizontal: 10,
+                      marginTop: 5,
+                      borderColor: 'black',
+                      paddingVertical: 10,
+                      width: '96%',
+                      borderRadius: 1,
+                      alignSelf: 'center',
+                      borderColor: '#dc92a2',
                     }}>
-                    {val.title}
-                  </Text>
-                </TouchableOpacity>
-              )
-            ),
-          ))
-        }
+                    <Image
+                      source={val.icon}
+                      style={{height: 15, width: 15, marginRight: 15}}
+                      resizeMode="contain"
+                    />
+
+                    <Text
+                      style={{
+                        letterSpacing: 1,
+
+                        flex: 1,
+                        // textAlign: 'left',
+                        color: 'white',
+                      }}>
+                      {val.title}
+                    </Text>
+                  </TouchableOpacity>
+                )
+              ),
+            ))
+          }
+        </ScrollView>
       </View>
     </View>
   );

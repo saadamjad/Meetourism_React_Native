@@ -147,6 +147,7 @@ const Tutorial = (props) => {
             <View style={{flexDirection: 'row'}}>
               {[0, 1].map((val, i) => (
                 <View
+                  key={i}
                   style={{
                     width: 10,
                     height: 10,
@@ -199,7 +200,6 @@ const Tutorial = (props) => {
           showDoneButton={false}
           showNextButton={false}
         />
-        {/* {state.selectedIndex == 0 ? firstSlide() : secondSlide()} */}
       </View>
     </CustomView>
   );

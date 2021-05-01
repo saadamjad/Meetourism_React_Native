@@ -15,6 +15,7 @@ import Search from '../screens/search';
 import profilePreivew from '../screens/profile';
 import Home from '../screens/home';
 import {theme} from '../constants/theme';
+import Langauge from '../screens/language';
 
 // console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -53,6 +54,11 @@ function MyDrawer(props) {
         options={{headerShown: false, drawerLabel: false}}
         name="Match"
         component={Matches}
+      />
+      <Drawer.Screen
+        options={{headerShown: false, drawerLabel: false}}
+        name="Langauge"
+        component={Langauge}
       />
 
       <Drawer.Screen

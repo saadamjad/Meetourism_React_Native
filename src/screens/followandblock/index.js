@@ -27,7 +27,7 @@ const Profile = (props) => {
           <Header
             leftArrow={true}
             isTransparent={true}
-            searchIcon={true}
+            // searchIcon={true}
             navigation={props.navigation}
           />
         </ImageBackground>
@@ -104,6 +104,7 @@ const Profile = (props) => {
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
+                activeOpacity={1}
                 style={{
                   // width: 100,
                   borderBottomLeftRadius: 20,
@@ -117,8 +118,7 @@ const Profile = (props) => {
                   paddingVertical: 10,
                 }}>
                 <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  {' '}
-                  Follow{' '}
+                  Following
                 </Text>
               </TouchableOpacity>
             )}
@@ -129,8 +129,9 @@ const Profile = (props) => {
               width: '100%',
               overflow: 'hidden',
               flexDirection: 'row',
-              height: 100,
-              alignSelf: 'center',
+              // height: 100,
+              flex: 1,
+              // alignSelf: 'center',
               borderRadius: 40,
               marginVertical: 10,
               backgroundColor: 'white',
@@ -138,6 +139,7 @@ const Profile = (props) => {
             <TouchableOpacity
               style={{
                 width: '33.33%',
+                height: 100,
                 borderWidth: 0,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -154,6 +156,8 @@ const Profile = (props) => {
               style={{
                 width: '33.33%',
                 borderWidth: 0,
+                height: 100,
+
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -172,6 +176,8 @@ const Profile = (props) => {
             <TouchableOpacity
               style={{
                 width: '33.33%',
+                height: 100,
+
                 // borderWidth: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -179,11 +185,11 @@ const Profile = (props) => {
               onPress={() => props.navigation.navigate('location')}>
               <Entypo name="location" size={15} color={'purple'} />
 
-              <Text style={{fontSize: 12, marginTop: 5}}>Follow </Text>
+              <Text style={{fontSize: 12, marginTop: 5}}>Location </Text>
             </TouchableOpacity>
           </View>
 
-          <View
+          {/* <View
             style={{
               width: '100%',
               overflow: 'hidden',
@@ -295,7 +301,10 @@ const Profile = (props) => {
                 </View>
               </View>
             </View>
+      
+      
           </View>
+      */}
         </View>
       </View>
     </CustomView>

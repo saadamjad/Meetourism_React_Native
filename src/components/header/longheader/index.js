@@ -79,7 +79,9 @@ const App = (props) => {
           )}
 
           {props.filterIcon && (
-            <TouchableOpacity style={{paddingRight: 25, borderWidth: 0}}>
+            <TouchableOpacity
+              style={{paddingRight: 25, borderWidth: 0}}
+              onPress={() => props.OpenFilter()}>
               <Icon
                 type="AntDesign"
                 name="filter"

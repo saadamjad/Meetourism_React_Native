@@ -9,15 +9,10 @@ import {
   AsyncStorage,
   ImageBackground,
 } from 'react-native';
-// import {Icon} from 'native-base';
-// import Style from './style';
-import CustomView from '../../../components/customView';
+
 import {theme} from '../../../constants/theme';
 import {Icon} from 'native-base';
-import Overlay from '../../../components/overlays';
-import {ScrollView} from 'react-native-gesture-handler';
-// import Header from '../../../components/header/longheader';
-// import LongHeader from '../../../components/header/longheader';
+
 const Status = (props) => {
   const [state, setState] = useState({
     visible: false,
@@ -25,21 +20,36 @@ const Status = (props) => {
     selected: 0.1,
     settingStatus: false,
   });
+  const comeFromProfileStatus = props?.route?.params?.comeFromProfileStatus;
+  console.log('comeFromProfileStatus', comeFromProfileStatus);
 
-  const [allStatus, setAllStatus] = useState([
-    {
-      name: 'single',
-      navigateTo: 'chooseyourinterest',
-    },
-    {
-      name: 'In a relationship',
-      navigateTo: 'chooseyourinterest',
-    },
-    {
-      name: 'partner',
-      navigateTo: '',
-    },
-  ]);
+  const [allStatus, setAllStatus] = useState(
+    comeFromProfileStatus
+      ? [
+          {
+            name: 'single',
+            navigateTo: 'chooseyourinterest',
+          },
+          {
+            name: 'In a relationship',
+            navigateTo: 'chooseyourinterest',
+          },
+        ]
+      : [
+          {
+            name: 'single',
+            navigateTo: 'chooseyourinterest',
+          },
+          {
+            name: 'In a relationship',
+            navigateTo: 'chooseyourinterest',
+          },
+          {
+            name: 'partner',
+            navigateTo: '',
+          },
+        ],
+  );
   const toggleOverlay = (i, item) => {
     console.log('0', item);
     console.log(typeof i);
@@ -126,7 +136,7 @@ const Status = (props) => {
             borderTopLeftRadius: 60,
             overflow: 'hidden',
             backgroundColor: 'white',
-            justifyContent: 'space-between',
+            // justifyContent: 'space-between',
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
@@ -153,7 +163,7 @@ const Status = (props) => {
                 activeOpacity={1}
                 style={{
                   height: 100,
-                  backgroundColor: 'white',
+                  // backgroundColor: 'blue',
                   justifyContent: 'center',
                   // borderWidth: 1,
                   borderBottomLeftRadius: 60,

@@ -231,6 +231,19 @@ const App = (props) => {
                         }
                       />
                     </View>
+                    <View
+                      style={{
+                        overflow: 'hidden',
+                        // width: '70%',
+                        marginVertical: 5,
+                      }}>
+                      <Button
+                        width={'80%'}
+                        buttonText="Dashboard"
+                        height={40}
+                        onPress={() => props.navigation.navigate('partnerhome')}
+                      />
+                    </View>
                   </View>
                 </View>
               );

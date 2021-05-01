@@ -3,7 +3,13 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import Swiper from 'react-native-swiper';
 const App = () => {
   return (
-    <Swiper style={styles.wrapper} showsPagination={false} showsButtons={true}>
+    <Swiper
+      style={styles.wrapper}
+      showsPagination={false}
+      showsButtons={true}
+      // color={'red'}
+      // ={{color: 'red'}}
+    >
       {/* <View style={styles.slide1}> */}
       <Image
         source={require('../../assets/images/profile.png')}

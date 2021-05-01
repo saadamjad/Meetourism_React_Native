@@ -5,7 +5,6 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 import CustomView from '../../../components/customView';
 import {theme} from '../../../constants/theme';
 import LongHeader from '../../../components/header/longheader';
-import {Item} from 'native-base';
 const AllProfiles = (props) => {
   const [state, setState] = useState({
     messages: [

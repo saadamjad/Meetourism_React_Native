@@ -17,6 +17,7 @@ import Header from '../../components/header';
 
 const Profile = (props) => {
   const [userType, setUserType] = useState('0');
+  const comeFromProfileStatus = props?.route?.params?.comeFromProfileStatus;
   useEffect(() => {
     _GetUserType();
   }, []);
@@ -154,13 +155,6 @@ const Profile = (props) => {
             </Text>
             <Text style={{fontSize: 18, paddingVertical: 5}}>Language</Text>
             <SliderCom trackStyle="black" />
-            {/* <GlobalButton
-              buttonText="Dashboard"
-              width="70%"
-              onPress={() => props.navigation.navigate('drawer')}
-            /> */}
-
-            {/* {console.log('===props', props.route.params.status==1)} */}
 
             {userType == '2' || props?.route?.params?.status == 1 ? (
               <GlobalButton
@@ -175,6 +169,20 @@ const Profile = (props) => {
                 onPress={() => props.navigation.navigate('SeeYourMatch')}
               />
             )}
+
+            {/* {userType == '2' || props?.route?.params?.status == 1 ? (
+              <GlobalButton
+                buttonText="Dashboard "
+                width="70%"
+                onPress={() => props.navigation.navigate('drawer')}
+              />
+            ) : (
+              <GlobalButton
+                buttonText="See Your Matches"
+                width="70%"
+                onPress={() => props.navigation.navigate('SeeYourMatch')}
+              />
+            )} */}
           </View>
         </View>
       </View>
