@@ -26,31 +26,18 @@ import Home from './src/screens/home';
 import Search from './src/screens/search';
 import Location from './src/screens/location';
 import Calendar from './src/screens/calendar';
+import {PersistGate} from 'redux-persist/integration/react';
+import {store, persistor} from './src/redux/store';
+import {Provider} from 'react-redux';
 
 const App = (props) => {
   return (
     <>
-      {/* <BGcustom /> */}
-      {/* <Profile /> */}
-      {/* <Stack navigation={props.navigation} /> */}
-      {/* <Location /> */}
-      {/* <Calendar /> */}
-      <Stack navigation={props.navigation} />
-      {/* <Location /> */}
-      {/* <Home /> */}
-      {/* <CreateOffer /> */}
-      {/* <SelectOffer /> */}
-      {/* <DetailOffer /> */}
-      {/* <DetailOffer1 /> */}
-      {/* <HoldOn /> */}
-      {/* <SelectPaymentMethod /> */}
-      {/* <AddPayment /> */}
-      {/* <Status /> */}
-      {/* <AllProfiles /> */}
-      {/* <Crushes /> */}
-      {/* <OfferUploaded /> */}
-      {/* <Successfull /> */}
-      {/* <Allresturant /> */}
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Stack navigation={props.navigation} />
+        </PersistGate>
+      </Provider>
       {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );

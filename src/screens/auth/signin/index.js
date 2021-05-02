@@ -1,8 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {
   View,
-  ScrollView,
-  ImageBackground,
   Dimensions,
   TouchableOpacity,
   Text,
@@ -16,9 +14,12 @@ import CustomView from '../../../components/customView';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import HoldOn from '../../holdOn';
 import axios from 'axios';
-// import {connect} from 'redux'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-const SignIn = (props) => {
+import * as Actions from '../../../redux/actions/index';
+
+const App = (props) => {
   const [signupValues, setSignvalues] = useState({
     name: '',
     email: '',
@@ -198,6 +199,8 @@ const SignIn = (props) => {
       interests: [1, 2],
       images: ['user_images/user-image-608de193434244-74625999.jpg'],
     };
+    props.Signup(data);
+
     axios
       .post(url, data, header)
       .then((res) => {
@@ -409,4 +412,23 @@ const SignIn = (props) => {
     </CustomView>
   );
 };
-export default SignIn;
+// export default SignIn;
+
+const mapStateToProp = (state) => ({
+  // loader: state.HomeandBookingsReducer.loader,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(App);
+// const mapStateToProps = (state) => ({
+//   // loader: state.reducers.loader,
+// });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   Actions: bindActionCreators(Actions, dispatch),
+// });
+
+// // export default connect(null, mapDispatchToProps)(App);
+// export default connect(mapDispatchToProps, mapStateToProps)(App);
