@@ -14,6 +14,7 @@ const initialState = {
   loader: false,
   serviceCategory: [],
   userDetails: {},
+  signupData: {},
 };
 
 export default function (state = initialState, action) {
@@ -29,6 +30,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loader: false,
+      };
+    case actionTypes.SIGNUPDATA:
+      console.log('SIGNUPDATA data');
+      return {
+        ...state,
+        loader: false,
+        signupData: {...signupData, ...action.payload},
       };
 
     case actionTypes.LOGOUT:

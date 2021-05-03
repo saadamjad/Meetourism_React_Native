@@ -11,17 +11,14 @@ import {
 } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
-import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
-import GlobalButton from '../../components/buttons/generalbutton';
 
 import {Icon} from 'native-base';
-// import Overlay from '../../../components/overlays';
-// import {ScrollView} from 'react-native-gesture-handler';
-// import Header from '../../../components/header/longheader';
-// import LongHeader from '../../../components/header/longheader';
 let statusValue = 0;
 const Status = (props) => {
+  const data = props?.route?.params?.profileData;
+  console.log('Data all interests', data);
+
   const [state, setState] = useState({
     visible: false,
     visible1: false,
@@ -29,28 +26,8 @@ const Status = (props) => {
     settingStatus: false,
   });
 
-  const [allStatus, setAllStatus] = useState([
-    {
-      name: 'single',
-    },
-    {
-      name: 'In a relationship',
-    },
-    {
-      name: 'partner',
-    },
-  ]);
-  const toggleOverlay = (i) => {
-    console.log(typeof i);
-    if (!state.visible == false) {
-      setState({...state, visible: !state.visible, visible1: true});
-    } else {
-      setState({...state, visible: !state.visible});
-    }
-  };
   useEffect(() => {
     _UserType();
-    console.log('===');
 
     if (props?.route?.params || props?.route?.params) {
       setState({...state, visible: true, settingStatus: true});
