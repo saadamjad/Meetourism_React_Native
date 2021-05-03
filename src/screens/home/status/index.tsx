@@ -12,8 +12,11 @@ import {
 
 import {theme} from '../../../constants/theme';
 import {Icon} from 'native-base';
+import {connect} from 'react-redux';
+import * as ReduxActions from '../../../redux/actions';
+const App = (props) => {
+  const data = props?.route?.params?.profileData;
 
-const Status = (props) => {
   const [state, setState] = useState({
     visible: false,
     visible1: false,
@@ -21,7 +24,7 @@ const Status = (props) => {
     settingStatus: false,
   });
   const comeFromProfileStatus = props?.route?.params?.comeFromProfileStatus;
-  console.log('comeFromProfileStatus', comeFromProfileStatus);
+  // console.log('comeFromProfileStatus', props.loader);
 
   const [allStatus, setAllStatus] = useState(
     comeFromProfileStatus
@@ -50,35 +53,24 @@ const Status = (props) => {
           },
         ],
   );
-  const toggleOverlay = (i, item) => {
-    console.log('0', item);
-    console.log(typeof i);
-    _UserType(i);
-    if (i != 2) {
-      props.navigation.navigate('chooseyourinterest');
-    } else {
-      props.navigation.navigate('chooseyourinterest');
-    }
 
-    // if (!state.visible == false) {
-    //   setState({...state, visible: !state.visible, visible1: true});
+  const toggleOverlay = async (i, item) => {
+    const data2 = {...data, status: item};
+    console.log('state==', data2);
+    _UserType(i);
+    props.navigation.navigate('chooseyourinterest', {
+      profileData: data2,
+    });
+
+    // if (i != 2) {
+    //   props.navigation.navigate('chooseyourinterest');
     // } else {
-    //   setState({...state, visible: !state.visible});
+    //   props.navigation.navigate('chooseyourinterest');
     // }
   };
-  // useEffect(() => {
-  //   console.log(
-  //     '==================================================================',
-  //   );
-
-  //   if (props?.route?.params || props?.route?.params) {
-  //     setState({...state, visible: true, settingStatus: true});
-  //   }
-  // }, []);
 
   const _UserType = async (i) => {
     let number = JSON.stringify(i);
-    console.log('number beta', typeof number);
     try {
       await AsyncStorage.setItem('userStatus', number);
     } catch (error) {
@@ -86,18 +78,6 @@ const Status = (props) => {
     }
   };
 
-  const toggleOverlay1 = () => {
-    if (state.selected !== 0.1) {
-      // _UserType();
-      setState({...state, visible: false, visible1: !state.visible1});
-      // props.navigation.navigate('drawer')
-      state.settingStatus
-        ? props.navigation.navigate('profilePreivew')
-        : props.navigation.navigate('HomeStack');
-    } else {
-      alert('Please select one of them');
-    }
-  };
   return (
     <>
       <ImageBackground
@@ -175,7 +155,7 @@ const Status = (props) => {
                   borderLeftWidth: 1,
                   borderColor: '#D3D3D3',
                 }}
-                onPress={() => toggleOverlay(i, item)}>
+                onPress={() => toggleOverlay(i, item.name)}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -205,4 +185,13 @@ const Status = (props) => {
   );
 };
 
-export default Status;
+const mapStateToProps = (state) => ({
+  // loader: state.AuthReducer.loader,
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  Signup: ReduxActions.Signup,
+  profileData: ReduxActions.profileData,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default Status;

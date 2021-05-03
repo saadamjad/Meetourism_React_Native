@@ -4,69 +4,35 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  Dimensions,
   TextInput,
   ScrollView,
-  AsyncStorage,
+  ImageBackground,
 } from 'react-native';
-// import {Icon} from 'native-base';
-// import Style from './style';
-import CustomView from '../../components/customView';
+
 import {theme} from '../../constants/theme';
 import {Icon} from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
-import {ImageBackground} from 'react-native';
-// import Overlay from '../../../components/overlays';
-// import {ScrollView} from 'react-native-gesture-handler';
-// import Header from '../../../components/header/longheader';
-// import LongHeader from '../../../components/header/longheader';
+
 const Status = (props) => {
+  const data = props?.route?.params.profileData;
+  console.log('data choose your interest', data);
+
   const [state, setState] = useState({
-    visible: false,
-    visible1: false,
-    selected: 0.1,
-    settingStatus: false,
+    interests: [],
+    images: [
+      'user_images/user-image-608de193434244-74625999.jpg',
+      'user_images/user-image-608de193434244-74625999.jpg',
+    ],
   });
 
-  const [allStatus, setAllStatus] = useState([
-    {
-      name: 'single',
-    },
-    {
-      name: 'In a relationship',
-    },
-    {
-      name: 'partner',
-    },
-  ]);
-  const toggleOverlay = (i) => {
-    console.log(typeof i);
-    _UserType(i);
-    if (!state.visible == false) {
-      setState({...state, visible: !state.visible, visible1: true});
-    } else {
-      setState({...state, visible: !state.visible});
-    }
-  };
+  // useEffect(() => {
+  //   if (props?.route?.params || props?.route?.params) {
+  //     setState({...state, visible: true, settingStatus: true});
+  //   }
+  // }, []);
   useEffect(() => {
-    console.log(
-      '==================================================================',
-    );
-
-    if (props?.route?.params || props?.route?.params) {
-      setState({...state, visible: true, settingStatus: true});
-    }
+    setState({...state, status: data.status, email: data.value});
   }, []);
-
-  const _UserType = async (i) => {
-    let number = JSON.stringify(i);
-    console.log('number beta', typeof number);
-    try {
-      await AsyncStorage.setItem('userType', number);
-    } catch (error) {
-      // Error saving data
-    }
-  };
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -176,10 +142,13 @@ const Status = (props) => {
                     height: 40,
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
+                  value={state.firstName}
+                  onChangeText={(text) => setState({...state, firstName: text})}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="First Name"
                 />
                 <TextInput
+                  value={state.lastName}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -187,10 +156,13 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
+                  onChangeText={(text) => setState({...state, lastName: text})}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Last Name"
                 />
                 <TextInput
+                  value={data.value}
+                  editable={false}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -202,6 +174,8 @@ const Status = (props) => {
                   placeholder="Email"
                 />
                 <TextInput
+                  onChangeText={(text) => setState({...state, contact: text})}
+                  value={state.contact}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -213,6 +187,8 @@ const Status = (props) => {
                   placeholder="Contact"
                 />
                 <TextInput
+                  onChangeText={(text) => setState({...state, age: text})}
+                  value={state.age}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -224,6 +200,8 @@ const Status = (props) => {
                   placeholder="Age"
                 />
                 <TextInput
+                  value={state.city}
+                  onChangeText={(text) => setState({...state, city: text})}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -235,6 +213,11 @@ const Status = (props) => {
                   placeholder="City"
                 />
                 <TextInput
+                  onChangeText={(text) =>
+                    setState({...state, description: text})
+                  }
+                  value={state.description}
+                  maxLength={100}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -253,6 +236,8 @@ const Status = (props) => {
                     // borderWidth: 1,
                   }}>
                   <TextInput
+                    onChangeText={(text) => setState({...state, height: text})}
+                    value={state.height}
                     style={{
                       // width: '20%',
                       borderBottomWidth: 1,
@@ -264,6 +249,8 @@ const Status = (props) => {
                     placeholder="Height"
                   />
                   <TextInput
+                    onChangeText={(text) => setState({...state, weight: text})}
+                    value={state.weight}
                     style={{
                       // width: '20%',
                       borderBottomWidth: 1,
@@ -272,9 +259,13 @@ const Status = (props) => {
                       borderColor: theme.borderColor.inActiveBorderColor,
                     }}
                     placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                    placeholder="Shape"
+                    placeholder="weight"
                   />
                   <TextInput
+                    onChangeText={(text) =>
+                      setState({...state, eyeColor: text})
+                    }
+                    value={state.eyeColor}
                     style={{
                       // width: '20%',
                       borderBottomWidth: 1,
@@ -290,7 +281,11 @@ const Status = (props) => {
                 <View style={{overflow: 'hidden', marginVertical: 5}}>
                   <GlobalButton
                     buttonText="Choose Your Interest"
-                    onPress={() => props.navigation.navigate('yourinterests')}
+                    onPress={() =>
+                      props.navigation.navigate('yourinterests', {
+                        profileData: state,
+                      })
+                    }
                   />
                 </View>
               </View>

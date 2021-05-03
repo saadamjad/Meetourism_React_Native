@@ -10,6 +10,10 @@ export const Signup = (data, navigation) => async (dispatch) => {
   console.log('data redux===>|sss|||', data);
   // dispatch({type: actionTypes.STARTLOADER});
 };
+export const profileData = (data, navigation) => async (dispatch) => {
+  console.log('data redux===>|sss|||', data);
+  dispatch({type: actionTypes.STARTLOADER});
+};
 export const Logout = (navigation) => async (dispatch) => {
   console.log('props======', navigation);
   dispatch({type: actionTypes.LOGOUT});

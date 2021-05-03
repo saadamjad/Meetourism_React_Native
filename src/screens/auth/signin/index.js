@@ -38,8 +38,8 @@ const App = (props) => {
 
   const [activeInput, setActiveInput] = useState(0);
 
-  const toggleOverlay = () => {
-    setState({...state, visible: !state.visible});
+  const toggleOverlay = (data) => {
+    setState({...state, visible: !state.visible, data: data});
   };
 
   const signInRoute = () => (
@@ -180,36 +180,44 @@ const App = (props) => {
     let header = {
       headers: {'Content-Type': 'application/json'},
     };
-    let url = 'https://meetourism.deviyoinc.com/api/v1/auth/register';
+    let url = 'https://meetourism.deviyoinc.com/api/v1/auth/check-exists';
+    // let data = {
+    //   first_name: 'First Name',
+    //   last_name: 'Last Name',
+    //   username: 'hsasrsissss',
+    //   email: 'harsisssssss@yopmail.com',
+    //   phone: '1234ss5ss6323239',
+    //   password: '123456789',
+    //   password_confirmation: '123456789',
+    //   age: 20,
+    //   country_id: 1,
+    //   city: 'City',
+    //   weight: 40,
+    //   height: 6.2,
+    //   eye_color: 'green',
+    //   status: 'single',
+    //   interests: [1, 2],
+    //   images: ['user_images/user-image-608de193434244-74625999.jpg'],
+    // };
     let data = {
-      first_name: 'First Name',
-      last_name: 'Last Name',
-      username: 'hsasrsissss',
-      email: 'harsisssssss@yopmail.com',
-      phone: '1234ss5ss6323239',
-      password: '123456789',
-      password_confirmation: '123456789',
-      age: 20,
-      country_id: 1,
-      city: 'City',
-      weight: 40,
-      height: 6.2,
-      eye_color: 'green',
-      status: 'single',
-      interests: [1, 2],
-      images: ['user_images/user-image-608de193434244-74625999.jpg'],
+      type: 'email',
+      value: 'saad@hotmail.com',
     };
-    props.Signup(data);
+    // props.Signup(data);
 
     axios
       .post(url, data, header)
       .then((res) => {
-        console.log('res.status_type', res.status_type);
-        if (res.data.status_type === 'success') {
-          console.log('Res', res.data.data);
-          // toggleOverlay();
-        } else {
-          console.log('res else ', res);
+        let response = res.data;
+        console.log('res.status_type', response);
+        if (response.status_type === 'success') {
+          if (response.data.exists) {
+            console.log('exist nahi ha');
+            toggleOverlay(data);
+          } else {
+            alert('Email Already Exist');
+            // console.log('already exist ');
+          }
         }
       })
       .catch((err) => {
@@ -408,6 +416,7 @@ const App = (props) => {
         visible={state.visible}
         navigation={props.navigation}
         toggleOverlay={toggleOverlay}
+        data={state.data}
       />
     </CustomView>
   );
