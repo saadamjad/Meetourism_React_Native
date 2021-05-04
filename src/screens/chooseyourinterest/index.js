@@ -13,12 +13,16 @@ import {theme} from '../../constants/theme';
 import {Icon} from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
 
+import axios from 'axios';
 const Status = (props) => {
   const data = props?.route?.params.profileData;
+  let url = 'https://meetourism.deviyoinc.com/api/v1/countries';
+
   console.log('data choose your interest', data);
 
   const [state, setState] = useState({
-    interests: [],
+    interests: [1, 2],
+    selectCountry: '',
     images: [
       'user_images/user-image-608de193434244-74625999.jpg',
       'user_images/user-image-608de193434244-74625999.jpg',
@@ -30,10 +34,36 @@ const Status = (props) => {
   //     setState({...state, visible: true, settingStatus: true});
   //   }
   // }, []);
-  useEffect(() => {
-    setState({...state, status: data.status, email: data.value});
+  useEffect(async () => {
+    _GetCities();
   }, []);
-
+  const _GetCities = async () => {
+    let headers = {
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${token}`,
+      },
+    };
+    await axios
+      .get(url)
+      .then((res) => {
+        // console.log('res', res.data.data);
+        if (res.data.status_type === 'success') {
+          // setState({...state, countries: res.data.data});
+          setState({
+            ...state,
+            status: data.status,
+            email: data.value,
+            countries: res.data.data,
+          });
+        } else {
+          setState({...state, status: data.status, email: data.value});
+        }
+      })
+      .catch((error) => {
+        console.log('error in catch _GetCities', error);
+      });
+  };
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <ImageBackground
@@ -212,6 +242,68 @@ const Status = (props) => {
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="City"
                 />
+                <View
+                  style={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    height: 40,
+                    flexDirection: 'row',
+
+                    borderColor: theme.borderColor.inActiveBorderColor,
+                  }}>
+                  <View style={{width: '80%', justifyContent: 'center'}}>
+                    <Text>
+                      {state.selectCountry
+                        ? state.selectCountry
+                        : 'Select Country'}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      width: '20%',
+                      justifyContent: 'center',
+                      alignItems: 'flex-end',
+                    }}
+                    onPress={() => setState({...state, open: !state.open})}>
+                    <Text> arrow</Text>
+                  </TouchableOpacity>
+                </View>
+                {state.open ? (
+                  <View
+                    style={{
+                      width: '100%',
+                      // borderWidth: 0.3,
+                      borderLeftWidth: 1,
+                      borderRightWidth: 1,
+                      // paddingVertical: 5,
+                    }}>
+                    {/* <ScrollView nestedScrollEnabled={true}> */}
+                    {state.countries &&
+                      state.countries.map((item, i) => {
+                        console.log('item', item);
+                        return (
+                          <TouchableOpacity
+                            style={{
+                              borderBottomWidth: 1,
+                              borderColor: 'gray',
+                              paddingVertical: 6,
+                            }}
+                            onPress={() =>
+                              setState({
+                                ...state,
+                                selectCountry: item.name,
+                                countryId: item.id,
+                                open: false,
+                              })
+                            }>
+                            <Text> {item.name}</Text>
+                          </TouchableOpacity>
+                        );
+                      })}
+                    {/* </ScrollView> */}
+                  </View>
+                ) : null}
+
                 <TextInput
                   onChangeText={(text) =>
                     setState({...state, description: text})

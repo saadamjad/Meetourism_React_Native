@@ -14,10 +14,11 @@ import {
 import {theme} from '../../constants/theme';
 
 import {Icon} from 'native-base';
+import axios from 'axios';
 let statusValue = 0;
 const Status = (props) => {
   const data = props?.route?.params?.profileData;
-  console.log('Data all interests', data);
+  console.log('Data all interests', data.value);
 
   const [state, setState] = useState({
     visible: false,
@@ -38,6 +39,71 @@ const Status = (props) => {
     let value = await AsyncStorage.getItem('userStatus');
     console.log(value);
     statusValue = value;
+  };
+  const _UserRegister = async () => {
+    let _url = 'https://meetourism.deviyoinc.com/api/v1/auth/register';
+    let header = {
+      headers: {Accept: 'application/json'},
+    };
+    let data2 = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      username: 'userssssssssssname',
+      email: 'emaissssssssssl@yopma.com',
+      // phone: data.contact,
+      phone: '12323456',
+      password: 'password12345',
+      password_confirmation: 'password12345',
+      age: 20,
+      country_id: data.countryId,
+      city: data.city,
+      weight: data.weight,
+      height: data.height,
+      eye_color: data.eyeColor,
+      status: data.status,
+      interests: [1, 2],
+      images: data.images,
+      // first_name: 'First Name',
+      // last_name: 'Last Name',
+      // username: 'usersskkjjjjsname',
+      // email: 'emassdddddil@yosssspmail.com',
+      // phone: '12345ssddddds6',
+      // password: 'password12',
+      // password_confirmation: 'password12',
+      // age: 20,
+      // country_id: 1,
+      // city: 'City',
+      // weight: 40,
+      // height: 6.2,
+      // eye_color: 'green',
+      // status: 'single',
+      // interests: [1, 2],
+      // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+    };
+
+    console.log('data2', data2);
+    // let value = JSON.stringify(data2);
+    axios
+      .post(_url, data2, header)
+      .then((res) => {
+        let response = res.data;
+        console.log('res.status_type', response.data);
+        if (response.status_type === 'success') {
+          console.log('successully regisetered');
+        } else {
+          console.log('else ');
+        }
+      })
+      .catch((err) => {
+        let errResponse = err.response.data.errors;
+        if (errResponse.email) {
+          console.log('email', errResponse.email[0]);
+        } else if (errResponse.username) {
+          console.log('username', errResponse.username[0]);
+        } else if (errResponse.phone) {
+          console.log('phone', errResponse.phone[0]);
+        }
+      });
   };
 
   return (
@@ -216,20 +282,21 @@ const Status = (props) => {
               activeOpacity={0.75}
               onPress={() => {
                 console.log(statusValue);
+                _UserRegister();
 
-                if (statusValue == 0) {
-                  // alert('user');
-                  props.navigation.navigate('profilePreivew');
-                } else if (statusValue == 1) {
-                  // alert('relationship');
-                  props.navigation.navigate('userProfile', {
-                    status: 1,
-                  });
-                } else if (statusValue == 2) {
-                  // alert('partner');
+                // if (statusValue == 0) {
+                //   // alert('user');
+                //   props.navigation.navigate('profilePreivew');
+                // } else if (statusValue == 1) {
+                //   // alert('relationship');
+                //   props.navigation.navigate('userProfile', {
+                //     status: 1,
+                //   });
+                // } else if (statusValue == 2) {
+                //   // alert('partner');
 
-                  props.navigation.navigate('PartnerStack');
-                }
+                //   props.navigation.navigate('PartnerStack');
+                // }
               }}
               style={{
                 height: 40,
