@@ -16,7 +16,7 @@ import {connect} from 'react-redux';
 import * as ReduxActions from '../../../redux/actions';
 const App = (props) => {
   const data = props?.route?.params?.profileData;
-
+  console.log('data', data);
   const [state, setState] = useState({
     visible: false,
     visible1: false,
@@ -61,12 +61,6 @@ const App = (props) => {
     props.navigation.navigate('chooseyourinterest', {
       profileData: data2,
     });
-
-    // if (i != 2) {
-    //   props.navigation.navigate('chooseyourinterest');
-    // } else {
-    //   props.navigation.navigate('chooseyourinterest');
-    // }
   };
 
   const _UserType = async (i) => {

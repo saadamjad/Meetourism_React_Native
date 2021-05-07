@@ -203,7 +203,6 @@ const App = (props) => {
       type: 'email',
       value: 'saad@hotmail.com',
     };
-    // props.Signup(data);
 
     axios
       .post(url, data, header)
@@ -213,10 +212,11 @@ const App = (props) => {
         if (response.status_type === 'success') {
           if (response.data.exists) {
             console.log('exist nahi ha');
-            toggleOverlay(data);
+            let value = {...data, userName: signupValues.name};
+            // console.log('Value', value);
+            toggleOverlay(value);
           } else {
             alert('Email Already Exist');
-            // console.log('already exist ');
           }
         }
       })

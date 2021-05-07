@@ -29,12 +29,7 @@ const Status = (props) => {
     ],
   });
 
-  // useEffect(() => {
-  //   if (props?.route?.params || props?.route?.params) {
-  //     setState({...state, visible: true, settingStatus: true});
-  //   }
-  // }, []);
-  useEffect(async () => {
+  useEffect(() => {
     _GetCities();
   }, []);
   const _GetCities = async () => {
@@ -242,7 +237,9 @@ const Status = (props) => {
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="City"
                 />
-                <View
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => setState({...state, open: !state.open})}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -264,10 +261,11 @@ const Status = (props) => {
                       justifyContent: 'center',
                       alignItems: 'flex-end',
                     }}
-                    onPress={() => setState({...state, open: !state.open})}>
+                    // onPress={() => setState({...state, open: !state.open})}
+                  >
                     <Text> arrow</Text>
                   </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
                 {state.open ? (
                   <View
                     style={{

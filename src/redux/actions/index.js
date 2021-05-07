@@ -1,7 +1,6 @@
 import React from 'react';
 
 import * as actionTypes from './types';
-import AsyncStorage from '@react-native-community/async-storage';
 // import Axios from 'axios';
 // import Toast from '../../components/toastmessage';
 // import baseUrl from '../../apis/constant';

@@ -12,7 +12,6 @@ const HoldOn = (props) => {
   const [state, setState] = useState({selected: 0});
   console.log(': props.data', props.data);
   return (
-    // <CustomView bg={'transparent'} scroll>
     <Overlay
       overlayStyle={{
         backgroundColor: 'transparent',
@@ -88,7 +87,6 @@ const HoldOn = (props) => {
         </View>
       </View>
     </Overlay>
-    // </CustomView>
   );
 };
 export default HoldOn;
