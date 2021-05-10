@@ -36,9 +36,9 @@ const App = (props) => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Stack navigation={props.navigation} />
+          <Toast ref={(ref) => Toast.setRef(ref)} />
         </PersistGate>
       </Provider>
-      {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </>
   );
 };

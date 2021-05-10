@@ -7,21 +7,27 @@ import {
   Dimensions,
   TextInput,
   AsyncStorage,
+  StyleSheet,
   ImageBackground,
 } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
+import Toast from '../../components/toastmessage';
+
 import {theme} from '../../constants/theme';
 
 import {Icon} from 'native-base';
 import {Button, Overlay} from 'react-native-elements';
 import {CheckBox} from 'react-native-elements';
 import axios from 'axios';
+import AnimatedLoader from 'react-native-animated-loader';
+
 import {ScrollView} from 'react-native-gesture-handler';
 let statusValue = 0;
 const Status = (props) => {
   const data = props?.route?.params?.profileData;
-  console.log('Data  your interets.', data.contact);
+  const [loader, setLoader] = useState(false);
+  console.log('Data  your interets>>.', data.age);
 
   const [state, setState] = useState({
     visible: false,
@@ -48,19 +54,15 @@ const Status = (props) => {
     statusValue = value;
   };
   const _UserRegister = async () => {
-    let _url = 'https://meetourism.deviyoinc.com/api/v1/auth/register';
-    let header = {
-      headers: {Accept: 'application/json'},
-    };
     let data2 = {
       first_name: data.firstName,
       last_name: data.lastName,
-      username: data.userName,
+      username: 'testuser23',
       email: data.email,
-      phone: '1234565432345sss',
-      password: 'password12345',
-      password_confirmation: 'password12345',
-      age: 21,
+      phone: data.contact,
+      password: data.password,
+      password_confirmation: data.confirmPassword,
+      age: Number(data.age),
       country_id: data.countryId,
       city: data.city,
       weight: Number(data.weight),
@@ -86,40 +88,59 @@ const Status = (props) => {
       // interests: [1, 2],
       // images: ['user_images/user-image-608de193434244-74625999.jpg'],
     };
+    console.log('dataa======', data2);
 
-    console.log('data2', data2);
-    _Navigation();
-
+    _ApiCall(data2);
+  };
+  const _ApiCall = (data2) => {
+    setLoader(true);
+    let _url = 'https://meetourism.deviyoinc.com/api/v1/auth/register';
+    let header = {
+      headers: {Accept: 'application/json'},
+    };
     axios
       .post(_url, data2, header)
       .then((res) => {
         let response = res.data;
         console.log('res.status_type', response.data);
         if (response.status_type === 'success') {
+          setLoader(false);
+
           console.log('successully regisetered');
+          Toast('Success', 'successully regisetered', 'success');
+
           _Navigation();
         } else {
-          _Navigation();
-          console.log('else ');
+          console.log('res==  ,', response.data);
+
+          setLoader(false);
         }
       })
       .catch((err) => {
         let errResponse = err.response.data.errors;
         console.log('err ', errResponse);
+        setLoader(false);
 
         if (errResponse.email) {
-          console.log('email', errResponse.email[0]);
+          let email = errResponse.email[0];
+          console.log('email', email);
+          Toast('Error', email, 'error');
         } else if (errResponse.username) {
-          console.log('username', errResponse.username[0]);
+          let username = errResponse.username[0];
+          console.log('username', username);
+          Toast('Error', username, 'error');
         } else if (errResponse.phone) {
-          console.log('phone', errResponse.phone[0]);
+          let phone = errResponse.phone[0];
+          Toast('Error', phone, 'error');
+
+          // console.log('phone', phone);
         }
       });
   };
 
   const _Navigation = () => {
     // props.navigation.navigate('PartnerStack');
-    props.navigation.navigate('profilePreivew');
+    props.navigation.replace('profilePreivew');
 
     // if (statusValue == 0) {
     //   // alert('user');
@@ -259,7 +280,8 @@ const Status = (props) => {
                             // borderWidth: 1,
                             alignItems: 'center',
                             justifyContent: 'center',
-                          }}>
+                          }}
+                          key={i}>
                           <View
                             style={{
                               // height: '100%',
@@ -391,6 +413,7 @@ const Status = (props) => {
               state.interests.map((val, i) => {
                 return (
                   <TouchableOpacity
+                    key={i}
                     onPress={() => {
                       let value = state.interests.map((item, index) => {
                         if (index == i) {
@@ -518,8 +541,31 @@ const Status = (props) => {
           </TouchableOpacity>
         </View>
       </Overlay>
+
+      <AnimatedLoader
+        visible={loader}
+        overlayColor="rgba(255,255,255,0.6)"
+        source={require('./loaders.json')}
+        animationStyle={styles.lottie}
+        speed={1}>
+        <Text
+          style={{
+            color: theme.primaryColor,
+            fontSize: 15,
+            fontWeight: 'bold',
+          }}>
+          Creating Profile Please Wait
+        </Text>
+      </AnimatedLoader>
     </>
   );
 };
 
 export default Status;
+
+const styles = StyleSheet.create({
+  lottie: {
+    width: 100,
+    height: 100,
+  },
+});

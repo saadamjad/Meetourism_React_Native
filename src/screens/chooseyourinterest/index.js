@@ -19,8 +19,6 @@ const Status = (props) => {
   const data = props?.route?.params.profileData;
   let url = 'https://meetourism.deviyoinc.com/api/v1/countries';
 
-  // console.log('data choose your interest========+++++', data);
-
   const [state, setState] = useState({
     interests: [1, 2],
     selectCountry: '',
@@ -39,6 +37,7 @@ const Status = (props) => {
   });
 
   const [value, setValue] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     _GetCities();
   }, []);
@@ -61,6 +60,8 @@ const Status = (props) => {
             email: data.value,
             userName: data.userName,
             countries: res.data.data,
+            confirmPassword: data.confirmPassword,
+            password: data.password,
           });
         } else {
           setState({...state, status: data.status, email: data.value});
@@ -78,7 +79,7 @@ const Status = (props) => {
       noData: false,
       quality: 0.1,
     };
-    launchCamera(options, (res) => {
+    launchImageLibrary(options, (res) => {
       if (res.didCancel) {
         console.log('User cancelled');
       } else if (res.error) {
@@ -135,34 +136,38 @@ const Status = (props) => {
       });
   };
   const _Buttons = () => {
+    var value2 = false;
+
     return (
       <View style={{overflow: 'hidden', marginVertical: 5}}>
         <GlobalButton
           buttonText="Choose Your Interest"
           onPress={async () => {
-            var newArrayDataOfOjbect = Object.values(state);
-            var value2 = false;
-            newArrayDataOfOjbect.map((item, i) => {
-              console.log('item=b', item.length);
-              if (item.length == 0) {
-                console.log('values AGYA');
-
-                setValue(true);
-              } else {
-                setValue(false);
-              }
+            props.navigation.navigate('yourinterests', {
+              profileData: state,
             });
+            // console.log('item=b', state);
+            // var newArrayDataOfOjbect = Object.values(state);
+            // newArrayDataOfOjbect.map((item, i) => {
+            //   if (item.length < 1) {
+            //     console.log('not empty');
 
-            console.log('values', value);
-            if (value) {
-              alert('please fill  All inputs');
-            } else {
-              // console.log('donee', value);
+            //     value2 = false;
+            //   } else {
+            //     console.log('empty');
+            //     value2 = true;
+            //   }
+            // });
 
-              props.navigation.navigate('yourinterests', {
-                profileData: state,
-              });
-            }
+            // console.log('values', value2);
+            // if (value2) {
+            //   alert('please fill  All inputs');
+            // } else {
+            //   console.log('donee', value2);
+            //   props.navigation.navigate('yourinterests', {
+            //     profileData: state,
+            //   });
+            // }
           }}
         />
       </View>
@@ -234,30 +239,25 @@ const Status = (props) => {
                   // alignItems: 'space-around',
                 }}>
                 {state.images &&
-                  state.images.map(
-                    (val) => (
-                      console.log('valuee====', val),
-                      (
-                        <View
-                          style={{
-                            width: 50,
-                            marginLeft: 5,
-                            height: 50,
-                            overflow: 'hidden',
-                            borderRadius: 50,
-                          }}>
-                          <Image
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                            }}
-                            resizeMode="cover"
-                            source={{uri: val}}
-                          />
-                        </View>
-                      )
-                    ),
-                  )}
+                  state.images.map((val) => (
+                    <View
+                      style={{
+                        width: 50,
+                        marginLeft: 5,
+                        height: 50,
+                        overflow: 'hidden',
+                        borderRadius: 50,
+                      }}>
+                      <Image
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                        }}
+                        resizeMode="cover"
+                        source={{uri: val}}
+                      />
+                    </View>
+                  ))}
                 <TouchableOpacity
                   style={{
                     backgroundColor: '#998FA2',
@@ -361,6 +361,7 @@ const Status = (props) => {
                   }}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Age"
+                  keyboardType="number-pad"
                 />
                 <TextInput
                   value={state.city}
@@ -377,7 +378,7 @@ const Status = (props) => {
                 />
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  onPress={() => setState({...state, open: !state.open})}
+                  onPress={() => setOpen(!open)}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -399,15 +400,15 @@ const Status = (props) => {
                       justifyContent: 'center',
                       alignItems: 'flex-end',
                     }}
-                    onPress={() => setState({...state, open: !state.open})}>
-                    {state.open ? (
+                    onPress={() => setOpen(!open)}>
+                    {open ? (
                       <Feather name="arrow-up-circle" size={18} />
                     ) : (
                       <Feather name="arrow-down-circle" size={18} />
                     )}
                   </TouchableOpacity>
                 </TouchableOpacity>
-                {state.open ? (
+                {open ? (
                   <View
                     style={{
                       width: '100%',
@@ -426,14 +427,14 @@ const Status = (props) => {
                               borderColor: 'gray',
                               paddingVertical: 6,
                             }}
-                            onPress={() =>
-                              setState({
+                            onPress={async () => {
+                              await setState({
                                 ...state,
                                 selectCountry: item.name,
                                 countryId: item.id,
-                                open: false,
-                              })
-                            }>
+                              });
+                              setOpen(false);
+                            }}>
                             <Text> {item.name}</Text>
                           </TouchableOpacity>
                         );
@@ -477,6 +478,7 @@ const Status = (props) => {
                     }}
                     placeholderTextColor={theme.borderColor.inActiveBorderColor}
                     placeholder="Height"
+                    keyboardType="number-pad"
                   />
                   <TextInput
                     onChangeText={(text) => setState({...state, weight: text})}
@@ -490,6 +492,7 @@ const Status = (props) => {
                     }}
                     placeholderTextColor={theme.borderColor.inActiveBorderColor}
                     placeholder="weight"
+                    keyboardType="number-pad"
                   />
                   <TextInput
                     onChangeText={(text) =>
@@ -497,7 +500,6 @@ const Status = (props) => {
                     }
                     value={state.eyeColor}
                     style={{
-                      // width: '20%',
                       borderBottomWidth: 1,
                       height: 40,
 

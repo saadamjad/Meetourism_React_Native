@@ -10,13 +10,72 @@ import {
   Text,
   TextInput,
   Image,
+  StyleSheet,
 } from 'react-native';
 import {theme} from '../../../constants/theme';
+import Toast from '../../../components/toastmessage';
+import axios from 'axios';
+
+import AnimatedLoader from 'react-native-animated-loader';
 
 const App = (props) => {
   const [email, setEmail] = useState('');
   const [newpassword, setNewPassword] = useState(false);
+  const [loader, setLoader] = useState(false);
 
+  const _CheckEmail = () => {
+    let value = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+      email,
+    );
+    if (value) {
+      _ApiCallForgotPassword();
+    } else {
+      Toast('Error', 'Incorrect Email', 'error');
+    }
+  };
+  const _ApiCallForgotPassword = () => {
+    setLoader(true);
+    let header = {
+      headers: {'Content-Type': 'application/json'},
+    };
+    let url = 'https://meetourism.deviyoinc.com/api/v1/auth/forgot';
+
+    let data = {
+      email: email,
+    };
+
+    axios
+      .post(url, data, header)
+      .then((res) => {
+        let response = res.data;
+        console.log('res.status_type', response);
+
+        if (response.status_type === 'success') {
+          console.log('res.status_type', response);
+          Toast('Sent', 'Verification Link Is Sent To Your Email  ', 'success');
+          setLoader(false);
+          props.navigation.goBack();
+        } else {
+          setLoader(false);
+          console.log('ELSE', response);
+        }
+      })
+      .catch((err) => {
+        setLoader(false);
+
+        let errResponse = err.response.data.errors;
+        if (errResponse.email) {
+          console.log('email', errResponse.email[0]);
+          Toast('Error', 'The Email You Entered Not Registered', 'error');
+        } else if (errResponse.username) {
+          console.log('username');
+          Toast('Error', errResponse.username[0], 'error');
+        } else if (errResponse.phone) {
+          console.log('phone', errResponse.phone[0]);
+          Toast('Error', errResponse.phone[0], 'error');
+        }
+      });
+  };
   const _NewPassword = () => {
     return (
       <View
@@ -138,7 +197,9 @@ const App = (props) => {
               alignItems: 'center',
               marginTop: 50,
             }}
-            onPress={() => setNewPassword(true)}
+            onPress={() => {
+              _CheckEmail();
+            }}
             activeOpacity={0.75}>
             <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
           </TouchableOpacity>
@@ -149,6 +210,21 @@ const App = (props) => {
   return (
     <>
       <View style={{flex: 1, backgroundColor: 'white'}}>
+        <AnimatedLoader
+          visible={loader}
+          overlayColor="rgba(255,255,255,0.6)"
+          source={require('./loaders.json')}
+          animationStyle={styles.lottie}
+          speed={1}>
+          <Text
+            style={{
+              color: theme.primaryColor,
+              fontSize: 15,
+              fontWeight: 'bold',
+            }}>
+            {'Verifying'}
+          </Text>
+        </AnimatedLoader>
         <Header
           text={true}
           isTransparent={true}
@@ -164,4 +240,11 @@ const App = (props) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  lottie: {
+    width: 100,
+    height: 100,
+  },
+});
 export default App;
