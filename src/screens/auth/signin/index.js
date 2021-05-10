@@ -37,6 +37,11 @@ const App = (props) => {
   });
 
   const [activeInput, setActiveInput] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirm] = useState('');
 
   const toggleOverlay = (data) => {
     setState({...state, visible: !state.visible, data: data});
@@ -73,19 +78,6 @@ const App = (props) => {
                 // borderBottomWidth: 1,
               }}
               placeholder={val.placeholder}
-              onFocus={() => {
-                setActiveInput(i);
-              }}
-              onBlur={() => (activeInput == i ? false : true)}
-              // onFocus={() => {
-              //   setActiveInput(i);
-              //   // console.log('ttext', ttext);
-              // }}
-              // showSoftInputOnFocus={true}
-              // autoFocus={ }
-              // onBlur={() => {
-              //   setState({...state, activeInput: 3});
-              // }}
               keyboardType={val.keyboardType}
               secureTextEntry={val.isSecure}
             />
@@ -162,46 +154,27 @@ const App = (props) => {
     );
   };
   const _Signup = async () => {
-    _ApiCallSingup();
-
-    // if (
-    //   signupValues.name == '' ||
-    //   signupValues.password == '' ||
-    //   signupValues.password == ''
-    // ) {
-    //   alert('please enter inputs');
-    // } else if (signupValues.password !== signupValues.confirmPassword) {
-    //   alert('password and confirm password should be same');
-    // } else {
-    //   _ApiCallSingup();
-    // }
+    if (
+      signupValues.name == '' ||
+      signupValues.password == '' ||
+      signupValues.email == ''
+    ) {
+      alert('please enter all inputs');
+    } else if (signupValues.password !== signupValues.confirmPassword) {
+      alert('password and confirm password should be same');
+    } else {
+      _ApiCallSingup();
+    }
   };
   const _ApiCallSingup = () => {
     let header = {
       headers: {'Content-Type': 'application/json'},
     };
     let url = 'https://meetourism.deviyoinc.com/api/v1/auth/check-exists';
-    // let data = {
-    //   first_name: 'First Name',
-    //   last_name: 'Last Name',
-    //   username: 'hsasrsissss',
-    //   email: 'harsisssssss@yopmail.com',
-    //   phone: '1234ss5ss6323239',
-    //   password: '123456789',
-    //   password_confirmation: '123456789',
-    //   age: 20,
-    //   country_id: 1,
-    //   city: 'City',
-    //   weight: 40,
-    //   height: 6.2,
-    //   eye_color: 'green',
-    //   status: 'single',
-    //   interests: [1, 2],
-    //   images: ['user_images/user-image-608de193434244-74625999.jpg'],
-    // };
+
     let data = {
       type: 'email',
-      value: 'saad@hotmail.com',
+      value: signupValues.email,
     };
 
     axios
@@ -265,9 +238,10 @@ const App = (props) => {
                 height: '100%',
                 fontSize: 16,
               }}
+              // value={email}
               value={signupValues.name}
               onChangeText={(text) => _onChangeText(text, 'name')}
-              placeholder={'name'}
+              placeholder={'username'}
             />
           </View>
           <View
@@ -339,7 +313,10 @@ const App = (props) => {
         }}>
         <TouchableOpacity
           activeOpacity={0.75}
-          onPress={() => _Signup()}
+          onPress={() => {
+            console.log('state', signupValues);
+            _Signup();
+          }}
           style={{
             backgroundColor: theme.secondaryColor,
             width: '80%',
@@ -360,58 +337,46 @@ const App = (props) => {
   });
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
-      <TabView
-        navigationState={{index: state.selectedIndex, routes: state.routes}}
-        renderScene={renderScene}
-        renderTabBar={(props) => (
-          <View
+      <View
+        style={{
+          width: '100%',
+          height: 150,
+          // backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}>
+        {['SIGN IN', 'SIGN UP'].map((val, i) => (
+          <TouchableOpacity
+            onPress={() => setState({...state, selectedIndex: i})}
+            key={i}
+            activeOpacity={0.7}
             style={{
-              width: '100%',
-              height: 150,
-              // backgroundColor: 'white',
-              justifyContent: 'center',
+              backgroundColor:
+                state.selectedIndex == i ? theme.secondaryColor : 'white',
+              width: 90,
+
+              elevation: state.selectedIndex == i ? 0 : 1,
+              height: 33,
+              borderRadius: 30,
               alignItems: 'center',
-              flexDirection: 'row',
+              justifyContent: 'center',
             }}>
-            {['SIGN IN', 'SIGN UP'].map((val, i) => (
-              <TouchableOpacity
-                onPress={() => setState({...state, selectedIndex: i})}
-                key={i}
-                activeOpacity={0.7}
-                style={{
-                  backgroundColor:
-                    state.selectedIndex == i ? theme.secondaryColor : 'white',
-                  width: 90,
-                  // borderWidth: 0.5,
-                  // borderColor: 'gray',
-                  elevation: state.selectedIndex == i ? 0 : 1,
-                  // marginLeft: i == 1 && 20,
-                  height: 33,
-                  borderRadius: 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text
-                  style={{
-                    color:
-                      state.selectedIndex == i
-                        ? theme.textColor.whiteColor
-                        : theme.textColor.greyColor,
-                    fontSize: 12,
-                  }}>
-                  {val}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-        onIndexChange={(ind) => {
-          setState({...state, selectedIndex: ind});
-        }}
-        initialLayout={{
-          width: Dimensions.get('window').width,
-        }}
-      />
+            <Text
+              style={{
+                color:
+                  state.selectedIndex == i
+                    ? theme.textColor.whiteColor
+                    : theme.textColor.greyColor,
+                fontSize: 12,
+              }}>
+              {val}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      {state.selectedIndex == '0' ? signInRoute() : signUpRoute()}
+
       <HoldOn
         visible={state.visible}
         navigation={props.navigation}
