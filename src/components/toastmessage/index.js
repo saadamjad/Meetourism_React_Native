@@ -1,10 +1,10 @@
 import React from 'react';
 import Toast from 'react-native-toast-message';
 
-function Tost(text1, text2, type) {
+function Tost(text1, text2, type, position) {
   Toast.show({
     type: type,
-    position: 'top',
+    position: position ? position : 'top',
     text1: text1,
     text2: text2,
     visibilityTime: 4000,

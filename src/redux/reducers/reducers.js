@@ -1,20 +1,8 @@
 import * as actionTypes from '../actions/types';
 
 const initialState = {
-  userdata: '',
-  details: {},
-  Isloggedin: false,
-  allShops: [],
-  allShopsByCategory: [],
-  serviceProviderDescription: {},
-  serviceOrder: [],
-  orderCreation: {},
-  filterData: {},
-  openFilterbottomSheet: false,
+  userData: {},
   loader: false,
-  serviceCategory: [],
-  userDetails: {},
-  signupData: {},
 };
 
 export default function (state = initialState, action) {
@@ -37,6 +25,14 @@ export default function (state = initialState, action) {
         ...state,
         loader: false,
         signupData: {...signupData, ...action.payload},
+      };
+    case actionTypes.LOGINSUCCESS:
+      console.log('LOGINSUCCESS data', action.token);
+      return {
+        ...state,
+        loader: false,
+        userData: action.payload,
+        token: action.payload,
       };
 
     case actionTypes.LOGOUT:
