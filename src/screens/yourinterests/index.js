@@ -15,13 +15,13 @@ import {theme} from '../../constants/theme';
 
 import {Icon} from 'native-base';
 import {Button, Overlay} from 'react-native-elements';
-
+import {CheckBox} from 'react-native-elements';
 import axios from 'axios';
 import {ScrollView} from 'react-native-gesture-handler';
 let statusValue = 0;
 const Status = (props) => {
   const data = props?.route?.params?.profileData;
-  console.log('Data all interests', data.value);
+  console.log('Data  your interets.', data.contact);
 
   const [state, setState] = useState({
     visible: false,
@@ -30,6 +30,7 @@ const Status = (props) => {
     interests: [],
     selectedInterests: [],
     isVisible: false,
+    noValues: true,
   });
 
   useEffect(() => {
@@ -54,20 +55,19 @@ const Status = (props) => {
     let data2 = {
       first_name: data.firstName,
       last_name: data.lastName,
-      username: 'userssssssssssname',
-      email: 'emaissssssssssl@yopma.com',
-      // phone: data.contact,
-      phone: '12323456',
+      username: data.userName,
+      email: data.email,
+      phone: '1234565432345sss',
       password: 'password12345',
       password_confirmation: 'password12345',
-      age: 20,
+      age: 21,
       country_id: data.countryId,
       city: data.city,
-      weight: data.weight,
-      height: data.height,
+      weight: Number(data.weight),
+      height: Number(data.height),
       eye_color: data.eyeColor,
       status: data.status,
-      interests: [1, 2],
+      interests: data.interests,
       images: data.images,
       // first_name: 'First Name',
       // last_name: 'Last Name',
@@ -88,7 +88,8 @@ const Status = (props) => {
     };
 
     console.log('data2', data2);
-    // let value = JSON.stringify(data2);
+    _Navigation();
+
     axios
       .post(_url, data2, header)
       .then((res) => {
@@ -96,12 +97,16 @@ const Status = (props) => {
         console.log('res.status_type', response.data);
         if (response.status_type === 'success') {
           console.log('successully regisetered');
+          _Navigation();
         } else {
+          _Navigation();
           console.log('else ');
         }
       })
       .catch((err) => {
         let errResponse = err.response.data.errors;
+        console.log('err ', errResponse);
+
         if (errResponse.email) {
           console.log('email', errResponse.email[0]);
         } else if (errResponse.username) {
@@ -110,6 +115,25 @@ const Status = (props) => {
           console.log('phone', errResponse.phone[0]);
         }
       });
+  };
+
+  const _Navigation = () => {
+    // props.navigation.navigate('PartnerStack');
+    props.navigation.navigate('profilePreivew');
+
+    // if (statusValue == 0) {
+    //   // alert('user');
+    //   props.navigation.navigate('profilePreivew');
+    // } else if (statusValue == 1) {
+    //   // alert('relationship');
+    //   props.navigation.navigate('userProfile', {
+    //     status: 1,
+    //   });
+    // } else if (statusValue == 2) {
+    //   // alert('partner');
+
+    //   props.navigation.navigate('PartnerStack');
+    // }
   };
 
   const _GetInterests = async () => {
@@ -144,6 +168,8 @@ const Status = (props) => {
         console.log('error in catch _GetInterests', error);
       });
   };
+
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   return (
     <>
@@ -222,71 +248,69 @@ const Status = (props) => {
                   // borderWidth: 1,
                   paddingHorizontal: 25,
                 }}>
-                {state.interests.length > 0 ? (
-                  state.interests.map((val, i) =>
-                    val.selected ? (
-                      <TouchableOpacity
-                        onPress={() => {
-                          setState({...state, selected: i});
-                        }}
-                        style={{
-                          width: '80%',
-                          flexDirection: 'row',
-                          marginTop: 20,
-                          // borderWidth: 1,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}>
-                        <View
+                {state.interests.length > 0
+                  ? state.interests.map((val, i) =>
+                      val.selected ? (
+                        <TouchableOpacity
                           style={{
-                            // height: '100%',
-                            width: '30%',
+                            width: '80%',
+                            flexDirection: 'row',
+                            marginTop: 20,
                             // borderWidth: 1,
                             alignItems: 'center',
                             justifyContent: 'center',
                           }}>
                           <View
                             style={{
-                              height: 36,
-                              width: 36,
-                              borderRadius: 36,
+                              // height: '100%',
+                              width: '30%',
                               // borderWidth: 1,
+                              alignItems: 'center',
+                              justifyContent: 'center',
                             }}>
-                            <Image
-                              resizeMode="contain"
-                              style={{height: '100%', width: '100%'}}
-                              source={require('../../assets/images/girl.png')}
-                            />
+                            <View
+                              style={{
+                                height: 36,
+                                width: 36,
+                                borderRadius: 36,
+                                // borderWidth: 1,
+                              }}>
+                              <Image
+                                resizeMode="contain"
+                                style={{height: '100%', width: '100%'}}
+                                source={require('../../assets/images/girl.png')}
+                              />
+                            </View>
                           </View>
-                        </View>
-                        <View
-                          style={{
-                            width: '70%',
-                            borderWidth: 0,
-                            paddingLeft: 10,
-                          }}>
-                          <Text
+                          <View
                             style={{
-                              color:
-                                theme.textColor[
-                                  state.selected == i
-                                    ? 'blackColor'
-                                    : 'greyColor'
-                                ],
-                              fontWeight: '700',
-                              // marginLeft: 30,
-                              fontSize: 20,
-                              // width: '85%',
+                              width: '70%',
+                              borderWidth: 0,
+                              paddingLeft: 10,
                             }}>
-                            {val.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    ) : null,
-                  )
-                ) : (
-                  <Text> No Interest Selected </Text>
-                )}
+                            <Text
+                              style={{
+                                color:
+                                  theme.textColor[
+                                    state.selected == i
+                                      ? 'blackColor'
+                                      : 'greyColor'
+                                  ],
+                                fontWeight: '700',
+                                // marginLeft: 30,
+                                fontSize: 20,
+                                // width: '85%',
+                              }}>
+                              {val.name}
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      ) : (
+                        val.selected
+                      ),
+                    )
+                  : null}
+                {state.noValues ? <Text> No Interest Selected </Text> : null}
               </View>
             </View>
             <View
@@ -319,25 +343,8 @@ const Status = (props) => {
             activeOpacity={0.75}
             onPress={() => {
               console.log(statusValue);
-              if (state.selectedInterests.length > 0) {
-                _UserRegister();
-              } else {
-                alert('please select any interest');
-              }
 
-              // if (statusValue == 0) {
-              //   // alert('user');
-              //   props.navigation.navigate('profilePreivew');
-              // } else if (statusValue == 1) {
-              //   // alert('relationship');
-              //   props.navigation.navigate('userProfile', {
-              //     status: 1,
-              //   });
-              // } else if (statusValue == 2) {
-              //   // alert('partner');
-
-              //   props.navigation.navigate('PartnerStack');
-              // }
+              _UserRegister();
             }}
             style={{
               height: 40,
@@ -387,28 +394,63 @@ const Status = (props) => {
                     onPress={() => {
                       let value = state.interests.map((item, index) => {
                         if (index == i) {
-                          return {...item, selected: !item.selected};
+                          return {
+                            ...item,
+                            selected: !item.selected,
+                          };
                         } else {
                           return {...item};
                         }
                       });
 
-                      // let temp = state.selectedInterests;
-                      // temp.push(val);
-                      setState({...state, interests: value});
+                      setState({...state, interests: value, noValues: false});
                     }}
                     style={{
-                      width: '80%',
+                      width: '100%',
                       flexDirection: 'row',
                       marginTop: 20,
-                      // borderWidth: 1,
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
                     <View
                       style={{
+                        height: 50,
+                        width: '20%',
+                        alignItems: 'center',
+                      }}>
+                      <CheckBox
+                        checkedColor={theme.secondaryColor}
+                        // checkedIcon={
+                        //   <Image source={require('../checked.png')} />
+                        // }
+                        // uncheckedIcon={
+                        //   <Image source={require('../unchecked.png')} />
+                        // }
+                        checked={val.selected ? true : false}
+                        onPress={() => {
+                          let value = state.interests.map((item, index) => {
+                            if (index == i) {
+                              return {
+                                ...item,
+                                selected: !item.selected,
+                              };
+                            } else {
+                              return {...item};
+                            }
+                          });
+
+                          setState({
+                            ...state,
+                            interests: value,
+                            noValues: false,
+                          });
+                        }}
+                      />
+                    </View>
+                    <View
+                      style={{
                         // height: '100%',
-                        width: '30%',
+                        width: '20%',
                         // borderWidth: 1,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -416,28 +458,26 @@ const Status = (props) => {
                       }}>
                       <View
                         style={{
-                          height: 36,
-                          width: 36,
-                          borderRadius: 36,
+                          height: 30,
+                          width: 30,
+                          borderRadius: 30,
                           overflow: 'hidden',
                           borderWidth: 1,
                         }}>
                         <Image
                           resizeMode="contain"
                           style={{height: '100%', width: '100%'}}
-                          source={
-                            val.image_url
-                              ? {uri: val.image_url}
-                              : require('../../assets/images/girl.png')
-                          }
+                          source={require('../../assets/images/girl.png')}
                         />
                       </View>
                     </View>
                     <View
                       style={{
-                        width: '70%',
+                        // width: '70%',
+                        flex: 1,
                         borderWidth: 0,
                         paddingLeft: 10,
+                        paddingLeft: 20,
                       }}>
                       <Text
                         style={{
@@ -447,7 +487,7 @@ const Status = (props) => {
                             ],
                           fontWeight: '700',
                           // marginLeft: 30,
-                          fontSize: 20,
+                          fontSize: 24,
                           // width: '85%',
                         }}>
                         {val.name}
