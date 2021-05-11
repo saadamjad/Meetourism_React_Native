@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -13,8 +13,14 @@ import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
 import {theme} from '../../constants/theme';
+import Entypo from 'react-native-vector-icons/Entypo';
+import * as Actions from '../../redux/actions/index';
+import {connect} from 'react-redux';
+
+import {ProgressViewIOS} from 'react-native';
 const App = (props) => {
   const [select, setSelected] = useState(3);
+  const [userData, setUserData] = useState('');
 
   const [allStatus, setStatus] = useState([
     {
@@ -26,11 +32,25 @@ const App = (props) => {
       navigation: 'statusstack',
       image: <FontAwesome name="user" size={20} color="black" />,
     },
+
     // {
     //   name: 'Add more',
     //   image: <Feather name="plus" size={20} color="black" />,
     // },
   ]);
+  useEffect(() => {
+    // _GetUserType();
+    let data = props?.userData;
+    setUserData(data);
+    console.log('userData', userData);
+  }, []);
+  useEffect(() => {
+    // _GetUserType();
+    let data = props?.userData;
+    setUserData(data);
+    console.log('userData', userData);
+  }, [props.userData]);
+
   return (
     <View
       style={{
@@ -49,7 +69,11 @@ const App = (props) => {
             overflow: 'hidden',
           }}>
           <ImageBackground
-            source={require('../../assets/icons/girls.png')}
+            source={
+              props?.image[0]
+                ? {uri: props.image[0]}
+                : require('../../assets/icons/girls.png')
+            }
             style={{height: '100%', width: '100%', borderBottomLeftRadius: 80}}
             resizeMode="cover">
             <View
@@ -141,6 +165,40 @@ const App = (props) => {
                     </View>
                   );
                 })}
+
+                <View
+                  style={{
+                    alignItems: 'center',
+                    // borderWidth: 1,
+                    paddingHorizontal: 10,
+                    paddingTop: 20,
+                  }}>
+                  <TouchableOpacity
+                    style={{
+                      height: 50,
+                      overflow: 'hidden',
+                      width: 50,
+                      borderWidth: 0.6,
+                      borderRadius: 50,
+                      marginHorizontal: 15,
+
+                      borderColor: '#AAB1B5',
+
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    onPress={() => props.Logout(props.navigation)}>
+                    <Entypo name="log-out" size={20} />
+                  </TouchableOpacity>
+                  <Text
+                    style={{
+                      color: '#8F989D',
+                      fontSize: 12,
+                      marginTop: 7,
+                    }}>
+                    Log Out
+                  </Text>
+                </View>
               </View>
             </View>
 
@@ -156,13 +214,11 @@ const App = (props) => {
               <View style={{width: '75%', borderWidth: 0}}>
                 <Text
                   style={{fontSize: 10, color: 'white', fontWeight: 'bold'}}>
-                  {' '}
-                  0 meetups{' '}
+                  0 meetups
                 </Text>
                 <Text
                   style={{fontSize: 23, color: 'white', fontWeight: 'bold'}}>
-                  {' '}
-                  Lady in the Blue{' '}
+                  {userData?.username}
                 </Text>
               </View>
               <View
@@ -265,7 +321,7 @@ const App = (props) => {
             <View>
               <Text style={{color: 'white', fontSize: 15}}>About Me</Text>
               <Text style={{color: '#9599B3', fontSize: 12, marginTop: 2}}>
-                Tell us about you!!
+                {userData?.description}
               </Text>
             </View>
             <View
@@ -396,12 +452,15 @@ const App = (props) => {
             }}
             onPress={() => {
               setSelected(i);
-              props.navigation.navigate(val.navigateTo, {
-                screen: 'chooseyourinterest',
+              if (val.navigateTo === 'statusstack') {
+                null;
+              } else
+                props.navigation.navigate(val.navigateTo, {
+                  // screen: 'chooseyourinterest',
 
-                settingStatus: true,
-                dashboard: false,
-              });
+                  settingStatus: true,
+                  dashboard: false,
+                });
             }}
             // onPress={() =>
             //   props.navigation.navigate('statusstack', {
@@ -425,4 +484,17 @@ const App = (props) => {
     </View>
   );
 };
-export default App;
+
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  image: state.reducers.images_Interests,
+
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+  Login: Actions.Login,
+  Logout: Actions.Logout,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(App);

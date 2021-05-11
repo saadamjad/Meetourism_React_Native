@@ -16,7 +16,6 @@ import {connect} from 'react-redux';
 import * as ReduxActions from '../../../redux/actions';
 const App = (props) => {
   const data = props?.route?.params?.profileData;
-  console.log('data', data);
   const [state, setState] = useState({
     visible: false,
     visible1: false,
@@ -34,7 +33,7 @@ const App = (props) => {
             navigateTo: 'chooseyourinterest',
           },
           {
-            name: 'In a relationship',
+            name: 'in-relation',
             navigateTo: 'chooseyourinterest',
           },
         ]
@@ -45,6 +44,7 @@ const App = (props) => {
           },
           {
             name: 'In a relationship',
+
             navigateTo: 'chooseyourinterest',
           },
           {
@@ -55,9 +55,10 @@ const App = (props) => {
   );
 
   const toggleOverlay = async (i, item) => {
-    const data2 = {...data, status: item};
-    console.log('state==', data2);
-    _UserType(i);
+    console.log('helloo itsm', item, 'lop', i);
+    i;
+    const data2 = {...data, status: i == 1 ? 'in-relation' : item};
+    // _UserType(i);
     props.navigation.navigate('chooseyourinterest', {
       profileData: data2,
     });
@@ -131,7 +132,6 @@ const App = (props) => {
           </Text>
 
           {allStatus.map((item, i) => {
-            // console.log('item,', i);
             return (
               <TouchableOpacity
                 activeOpacity={1}
