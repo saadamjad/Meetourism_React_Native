@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
+import * as Actions from '../../redux/actions/index';
+import {connect} from 'react-redux';
 const App = (props) => {
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    // _GetUserType();
+    let data = props?.userData;
+    setUserData({...userData, data});
+    // console.log('userData++', userData?.data);
+  }, []);
+  useEffect(() => {
+    // _GetUserType();
+    let data = props?.userData;
+    setUserData({...userData, data});
+  }, [props.userData]);
   const [allStatus, setStatus] = useState([
     {
       name: 'YOU',
@@ -41,6 +56,7 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#241332',
       }}>
+      {console.log('props.image[0]props.image[0]')}
       <ScrollView
         style={{flex: 1}}
         contentContainerStyle={{flexGrow: 1}}
@@ -55,7 +71,12 @@ const App = (props) => {
           }}>
           <ImageBackground
             // source={require('../../assets/icons/girls.png')}
-            source={require('../../../src/assets/images/r3.png')}
+            // source={require('../../../src/assets/images/r3.png')}
+            source={
+              props?.image?.length > 0
+                ? {uri: props.image[0]}
+                : require('../../../src/assets/images/r3.png')
+            }
             style={{height: '100%', width: '100%'}}
             resizeMode="cover">
             <View
@@ -97,10 +118,13 @@ const App = (props) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
-                        onPress={() =>
+                        onPress={() => {
+                          if (item.name === 'Logout') {
+                            props.Logout(props.navigation);
+                          }
                           item.navigation &&
-                          props.navigation.navigate(item.navigation)
-                        }>
+                            props.navigation.navigate(item.navigation);
+                        }}>
                         {i == 0 ? (
                           <Image
                             source={item.image}
@@ -159,7 +183,8 @@ const App = (props) => {
                   }}>
                   <Text
                     style={{fontSize: 22, color: 'white', fontWeight: 'bold'}}>
-                    Hill View Resturant
+                    {/* Hill View Resturant */}
+                    {userData?.data?.company_name}
                   </Text>
                 </View>
 
@@ -266,7 +291,7 @@ const App = (props) => {
                 About the Bussiness
               </Text>
               <Text style={{color: '#9599B3', fontSize: 12, marginTop: 2}}>
-                Tell Bssiness!!
+                {userData?.data?.description}
               </Text>
             </View>
             <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
@@ -372,13 +397,17 @@ const App = (props) => {
               padding: 10,
             }}
             onPress={() => {
-              setSelected(i);
-              props.navigation.navigate(val.navigateTo, {
-                screen: 'chooseyourinterest',
+              if (val.navigateTo === 'statusstack') {
+                null;
+              }
+              // setSelected(i);
+              else
+                props.navigation.navigate(val.navigateTo, {
+                  // screen: 'chooseyourinterest',
 
-                settingStatus: true,
-                dashboard: false,
-              });
+                  settingStatus: true,
+                  dashboard: false,
+                });
             }}
             activeOpacity={1}>
             {val.icons}
@@ -388,4 +417,16 @@ const App = (props) => {
     </View>
   );
 };
-export default App;
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  image: state.reducers.images_Interests,
+
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+  Login: Actions.Login,
+  Logout: Actions.Logout,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(App);

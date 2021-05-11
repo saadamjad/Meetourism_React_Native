@@ -63,16 +63,16 @@ const App = (props) => {
       .catch((err) => {
         setLoader(false);
 
-        let errResponse = err.response.data.errors;
-        if (errResponse.email) {
-          console.log('email', errResponse.email[0]);
+        let errResponse = err?.response?.data?.errors;
+        if (errResponse?.email) {
+          console.log('email', errResponse?.email[0]);
           Toast('Error', 'The Email You Entered Not Registered', 'error');
-        } else if (errResponse.username) {
+        } else if (errResponse?.username) {
           console.log('username');
-          Toast('Error', errResponse.username[0], 'error');
-        } else if (errResponse.phone) {
-          console.log('phone', errResponse.phone[0]);
-          Toast('Error', errResponse.phone[0], 'error');
+          Toast('Error', errResponse?.username[0], 'error');
+        } else if (errResponse?.phone) {
+          console.log('phone', errResponse?.phone[0]);
+          Toast('Error', errResponse?.phone[0], 'error');
         }
       });
   };
@@ -188,7 +188,8 @@ const App = (props) => {
           <TouchableOpacity
             disabled={email.length > 0 ? false : true}
             style={{
-              backgroundColor: email.length > 0 ? theme.secondaryColor : 'gray',
+              backgroundColor:
+                email.length > 0 ? theme.secondaryColor : '#D3D3D3',
               width: '80%',
 
               height: 50,
@@ -201,7 +202,14 @@ const App = (props) => {
               _CheckEmail();
             }}
             activeOpacity={0.75}>
-            <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+            <Text
+              style={{
+                fontSize: 17,
+                letterSpacing: 3,
+                color: email.length > 0 ? theme.textColor.whiteColor : 'black',
+              }}>
+              CONTINUE
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -233,7 +241,7 @@ const App = (props) => {
           navigation={props.navigation}
           //   drawerIcon={true}
           text={newpassword ? 'New Password' : ' Password Reset'}
-          textColor={'black'}
+          textColor={theme.secondaryColor}
         />
         {newpassword ? _NewPassword() : _EnterEmail()}
       </View>

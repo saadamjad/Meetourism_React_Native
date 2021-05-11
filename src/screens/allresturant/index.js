@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,23 @@ import {
 import Header from '../../components/header';
 import Button from '../../components/buttons/generalbutton';
 import {Item} from 'native-base';
+import * as Actions from '../../redux/actions/index';
+import {connect} from 'react-redux';
+
 const App = (props) => {
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    // _GetUserType();
+    let data = props?.userData;
+    setUserData({...userData, data});
+    // console.log('userData++', userData?.data);
+  }, []);
+  useEffect(() => {
+    // _GetUserType();
+    let data = props?.userData;
+    setUserData({...userData, data});
+  }, [props.userData]);
   const Food = [
     {
       allinterests: ['Fitness', 'Buety', 'Dogs', 'Cats', 'Laundry'],
@@ -41,7 +57,7 @@ const App = (props) => {
             }}>
             <Header
               isTransparent={true}
-              leftArrow={true}
+              // leftArrow={true}
               navigation={props.navigation}
             />
             {Food.map((item, i) => {
@@ -80,7 +96,11 @@ const App = (props) => {
                         justifyContent: 'flex-start',
                       }}>
                       <Image
-                        source={require('../../../src/assets/images/r3.png')}
+                        source={
+                          props?.image?.length > 0
+                            ? {uri: props.image[0]}
+                            : require('../../assets/images/statusbg.png')
+                        }
                         style={{
                           width: '100%',
                           height: '100%',
@@ -103,7 +123,8 @@ const App = (props) => {
                           color: 'red',
                           fontWeight: 'bold',
                         }}>
-                        Hill View Resturant
+                        {/* Hill View Resturants */}
+                        {userData?.data?.company_name}
                       </Text>
                     </View>
                     <Text style={{fontSize: 18, color: 'black'}}>
@@ -115,20 +136,22 @@ const App = (props) => {
                         flexWrap: 'wrap',
                         marginVertical: 10,
                       }}>
-                      {item.allinterests.map((item, i) => {
-                        return (
-                          <View
-                            style={{
-                              width: '20%',
-                              paddingVertical: 10,
+                      {userData?.data?.interests &&
+                        userData?.data.interests.map((value, i) => {
+                          console.log('values', value.name);
+                          return (
+                            <View
+                              style={{
+                                width: '20%',
+                                paddingVertical: 10,
 
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}>
-                            <Text style={{fontSize: 10}}> {item} </Text>
-                          </View>
-                        );
-                      })}
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}>
+                              <Text style={{fontSize: 10}}>{value.name}</Text>
+                            </View>
+                          );
+                        })}
                     </View>
                     <View
                       style={{
@@ -140,12 +163,19 @@ const App = (props) => {
                         style={{
                           width: '50%',
                           alignItems: 'flex-start',
+                          paddingRight: 50,
 
                           justifyContent: 'center',
                         }}>
                         <Text style={{fontSize: 18}}>Contact </Text>
-                        <Text style={{fontSize: 15, marginVertical: 5}}>
-                          ********
+                        <Text
+                          style={{
+                            fontSize: 12,
+                            marginVertical: 5,
+                            alignItems: 'center',
+                          }}>
+                          {' '}
+                          {userData?.data?.phone}{' '}
                         </Text>
                       </View>
                       <View
@@ -156,7 +186,8 @@ const App = (props) => {
                         }}>
                         <Text style={{fontSize: 18}}>City </Text>
                         <Text style={{fontSize: 15, marginVertical: 5}}>
-                          xyz
+                          {' '}
+                          {userData?.data?.city}{' '}
                         </Text>
                       </View>
                     </View>
@@ -164,7 +195,8 @@ const App = (props) => {
                     <Text style={{fontSize: 14}}>Description </Text>
                     <View style={{marginVertical: 10}}>
                       <Text style={{fontSize: 10, lineHeight: 15}}>
-                        {item.Idetail}
+                        {' '}
+                        {userData?.data?.description}{' '}
                       </Text>
                     </View>
                     <View
@@ -254,7 +286,20 @@ const App = (props) => {
     </SafeAreaView>
   );
 };
-export default App;
+
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  image: state.reducers.images_Interests,
+
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+  Login: Actions.Login,
+  Logout: Actions.Logout,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(App);
 
 // <>
 // {Food.map((item, i) => {

@@ -50,27 +50,39 @@ import Createnewoffer from '../screens/alloffers/createnewoffer';
 import confirmedoffers from '../screens/alloffers/confirmations';
 import Gallery from '../components/gallery';
 import ForgotPassword from '../screens/auth/forgotpassword';
+import Splash2 from '../screens/auth/splash';
 const Stack = createStackNavigator();
 
 function Auth() {
   return (
-    <Stack.Navigator initialRouteName={'splash'}>
+    <Stack.Navigator>
       <Stack.Screen
-        name="signin"
-        component={signin}
+        name="Splash2"
+        component={Splash2}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="ForgotPassword"
-        component={ForgotPassword}
-        options={{headerShown: false}}
-      />
-      {/* <Stack.Screen name="otp" component={otp} options={{headerShown: false}} /> */}
       <Stack.Screen
         name="splash"
         component={splash}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="signin"
+        component={signin}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="profilePreivew"
+        component={profilePreivew}
+        options={{headerShown: false}}
+      />
+      {/* <Stack.Screen name="otp" component={otp} options={{headerShown: false}} /> */}
     </Stack.Navigator>
   );
 }

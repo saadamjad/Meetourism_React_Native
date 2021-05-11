@@ -15,23 +15,23 @@ import CustomView from '../../../components/customView';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import HoldOn from '../../holdOn';
 import axios from 'axios';
-import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import AnimatedLoader from 'react-native-animated-loader';
 import reducers from '../../../redux/reducers/reducers';
+import {connect} from 'react-redux';
 
 import * as Actions from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    name: 'asdssssfddasds',
-    email: 'sdsfasssssssd@gmail.com',
-    password: '123456789',
-    confirmPassword: '123456789',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'sdsfasssssssd@gmail.com',
-    password: '123456789',
+    email: '',
+    password: '',
   });
   const [state, setState] = useState({
     selectedIndex: 0,
@@ -106,13 +106,21 @@ const App = (props) => {
       .catch((err) => {
         setLoader(false);
 
-        let errResponse = err.response.data.errors;
+        let errResponse = err?.response?.data?.errors;
         if (errResponse.email) {
-          console.log('email', errResponse.email[0]);
-        } else if (errResponse.username) {
-          console.log('username', errResponse.username[0]);
-        } else if (errResponse.phone) {
-          console.log('phone', errResponse.phone[0]);
+          // console.log('email', errResponse?.email[0]);
+          Toast('Error', errResponse?.email[0], 'error');
+        } else if (errResponse?.username) {
+          Toast('Error', errResponse?.username[0], 'error');
+
+          // console.log('username', errResponse?.username[0]);
+        } else if (errResponse?.phone) {
+          // console.log('phone', errResponse?.phone[0]);
+          Toast('Error', errResponse?.phone[0], 'error');
+        } else {
+          let message = Object.values(errResponse);
+          // console.log('message', message[0]);
+          Toast('Error', message[0], 'error');
         }
       });
   };
@@ -278,14 +286,16 @@ const App = (props) => {
         console.log('res.status_type', response);
         if (response.status_type === 'success') {
           if (response.data.exists) {
-            console.log('exist nahi ha');
+            var str = signupValues.name;
+            str = str.replace(/ +/g, '');
+            console.log('exist nahi ha', str);
             Toast('Success', ' Successfully Created', 'success');
 
             setLoader(false);
 
             let value = {
               ...data,
-              userName: signupValues.name,
+              userName: str,
               password: signupValues.password,
               confirmPassword: signupValues.confirmPassword,
             };
@@ -301,13 +311,13 @@ const App = (props) => {
       .catch((err) => {
         setLoader(false);
 
-        let errResponse = err.response.data.errors;
-        if (errResponse.email) {
-          console.log('email', errResponse.email[0]);
-        } else if (errResponse.username) {
-          console.log('username', errResponse.username[0]);
-        } else if (errResponse.phone) {
-          console.log('phone', errResponse.phone[0]);
+        let errResponse = err?.response?.data?.errors;
+        if (errResponse?.email) {
+          console.log('email', errResponse?.email[0]);
+        } else if (errResponse?.username) {
+          console.log('username', errResponse?.username[0]);
+        } else if (errResponse?.phone) {
+          console.log('phone', errResponse?.phone[0]);
         }
       });
   };

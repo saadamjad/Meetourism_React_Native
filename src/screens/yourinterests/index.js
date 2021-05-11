@@ -22,12 +22,17 @@ import {CheckBox} from 'react-native-elements';
 import axios from 'axios';
 import AnimatedLoader from 'react-native-animated-loader';
 
+import {connect} from 'react-redux';
+
+import * as Actions from '../../redux/actions/index';
 import {ScrollView} from 'react-native-gesture-handler';
 let statusValue = 0;
 const Status = (props) => {
   const data = props?.route?.params?.profileData;
   const [loader, setLoader] = useState(false);
-  console.log('Data  your interets>>.', data.age);
+  console.log('Data  your interets>>.', data?.company_name);
+  const company_name = data?.status == 'partner' ? true : false;
+  console.log(' data.userName');
 
   const [state, setState] = useState({
     visible: false,
@@ -54,41 +59,85 @@ const Status = (props) => {
     statusValue = value;
   };
   const _UserRegister = async () => {
-    let data2 = {
-      first_name: data.firstName,
-      last_name: data.lastName,
-      username: 'testuser23',
-      email: data.email,
-      phone: data.contact,
-      password: data.password,
-      password_confirmation: data.confirmPassword,
-      age: Number(data.age),
-      country_id: data.countryId,
-      city: data.city,
-      weight: Number(data.weight),
-      height: Number(data.height),
-      eye_color: data.eyeColor,
-      status: data.status,
-      interests: data.interests,
-      images: data.images,
-      // first_name: 'First Name',
-      // last_name: 'Last Name',
-      // username: 'usersskkjjjjsname',
-      // email: 'emassdddddil@yosssspmail.com',
-      // phone: '12345ssddddds6',
-      // password: 'password12',
-      // password_confirmation: 'password12',
-      // age: 20,
-      // country_id: 1,
-      // city: 'City',
-      // weight: 40,
-      // height: 6.2,
-      // eye_color: 'green',
-      // status: 'single',
-      // interests: [1, 2],
-      // images: ['user_images/user-image-608de193434244-74625999.jpg'],
-    };
-    console.log('dataa======', data2);
+    let data2 = company_name
+      ? {
+          company_name: data?.company_name,
+          first_name: data?.firstName,
+          last_name: data?.lastName,
+          username: data?.userName,
+          email: data?.email,
+          phone: data?.contact,
+          password: data?.password,
+          password_confirmation: data?.confirmPassword,
+          age: Number(data?.age),
+          country_id: data?.countryId,
+          city: data?.city,
+          weight: Number(data?.weight),
+          height: Number(data?.height),
+          eye_color: data?.eyeColor,
+          status: data?.status,
+          interests: data?.interests,
+          images: data?.images,
+          description: data?.description,
+          // company_name: data.company_name,
+          // first_name: 'First Name',
+          // last_name: 'Last Name',
+          // username:
+          //   'usersskskskksksksssjsjsjssadshshhsjdjdsjsjsdjsjddsfdasdsfkjjjjsname',
+          // email:
+          //   'emassdddskskskskasssdfsksksksdjdjxnnxanajajjanxdjdkdsaddil@yosssspmail.com',
+          // phone: '12345ssdskskksasdsssksjsjsjsshsjsjsjshshjssjsjssssasdsdddds6',
+          // password: 'password12',
+          // password_confirmation: 'password12',
+          // description: 'ssssssssssssssssssssssssssssss',
+          // age: 20,
+          // country_id: 1,
+          // city: 'City',
+          // weight: 40,
+          // height: 6.2,
+          // eye_color: 'green',
+          // status: data?.status,
+          // interests: [1, 2],
+          // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+        }
+      : {
+          first_name: data?.firstName,
+          last_name: data?.lastName,
+          username: data?.userName,
+          email: data?.email,
+          phone: data?.contact,
+          password: data?.password,
+          password_confirmation: data?.confirmPassword,
+          age: Number(data?.age),
+          country_id: data?.countryId,
+          city: data?.city,
+          weight: Number(data?.weight),
+          height: Number(data?.height),
+          eye_color: data?.eyeColor,
+          status: data?.status,
+          interests: data?.interests,
+          images: data?.images,
+          description: data?.description,
+
+          // first_name: 'First Name',
+          // last_name: 'Last Name',
+          // username: 'userssksssadsfdasdsfkjjjjsname',
+          // email: 'emassdddasssdfdsaddil@yosssspmail.com',
+          // phone: '12345ssdasdsssssasdsdddds6',
+          // password: 'password12',
+          // password_confirmation: 'password12',
+          // description: 'ssssssssssssssssssssssssssssss',
+          // age: 20,
+          // country_id: 1,
+          // city: 'City',
+          // weight: 40,
+          // height: 6.2,
+          // eye_color: 'green',
+          // status: 'single',
+          // interests: [1, 2],
+          // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+        };
+    console.log('data', data2);
 
     _ApiCall(data2);
   };
@@ -102,45 +151,52 @@ const Status = (props) => {
       .post(_url, data2, header)
       .then((res) => {
         let response = res.data;
-        console.log('res.status_type', response.data);
         if (response.status_type === 'success') {
           setLoader(false);
+          console.log(
+            'res.status_type================================================',
+            response.data,
+          );
 
           console.log('successully regisetered');
           Toast('Success', 'successully regisetered', 'success');
 
-          _Navigation();
+          // _Navigation();
+          props.Signup(response?.data, props?.navigation, company_name);
         } else {
-          console.log('res==  ,', response.data);
+          console.log('res==  ,', response?.data);
+          Toast('Error', 'something went wrong', 'error');
 
           setLoader(false);
         }
       })
       .catch((err) => {
-        let errResponse = err.response.data.errors;
+        let errResponse = err?.response?.data?.errors;
         console.log('err ', errResponse);
         setLoader(false);
 
-        if (errResponse.email) {
-          let email = errResponse.email[0];
-          console.log('email', email);
+        if (errResponse?.email) {
+          let email = errResponse?.email[0];
           Toast('Error', email, 'error');
-        } else if (errResponse.username) {
-          let username = errResponse.username[0];
-          console.log('username', username);
+        } else if (errResponse?.username) {
+          let username = errResponse?.username[0];
           Toast('Error', username, 'error');
-        } else if (errResponse.phone) {
-          let phone = errResponse.phone[0];
+        } else if (errResponse?.phone) {
+          let phone = errResponse?.phone[0];
           Toast('Error', phone, 'error');
-
-          // console.log('phone', phone);
+        } else {
+          console.log('esle');
+          // Toast('Error', errResponse, 'error');
+          let message = Object.values(errResponse);
+          console.log('message', message[0]);
+          Toast('Error', message[0], 'error');
         }
       });
   };
 
   const _Navigation = () => {
     // props.navigation.navigate('PartnerStack');
-    props.navigation.replace('profilePreivew');
+    props.Signup(data, props.navigation);
 
     // if (statusValue == 0) {
     //   // alert('user');
@@ -561,7 +617,16 @@ const Status = (props) => {
   );
 };
 
-export default Status;
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+  Login: Actions.Login,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Status);
 
 const styles = StyleSheet.create({
   lottie: {

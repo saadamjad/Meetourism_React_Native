@@ -14,11 +14,18 @@ import {Icon} from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
+import * as Actions from '../../redux/actions/index';
+import {connect} from 'react-redux';
+
 import axios from 'axios';
 const Status = (props) => {
-  const data = props?.route?.params.profileData;
+  const data = props?.route?.params?.profileData
+    ? props?.route?.params?.profileData
+    : null;
   let url = 'https://meetourism.deviyoinc.com/api/v1/countries';
 
+  const company_name = data?.status == 'partner' ? true : false;
+  // console.log('Data  your interets>>.=====', data.userName);
   const [state, setState] = useState({
     interests: [1, 2],
     selectCountry: '',
@@ -34,6 +41,7 @@ const Status = (props) => {
     lastName: '',
     city: '',
     description: '',
+    company_name: '',
   });
 
   const [value, setValue] = useState(false);
@@ -52,19 +60,19 @@ const Status = (props) => {
       .get(url)
       .then((res) => {
         // console.log('res', res.data.data);
-        if (res.data.status_type === 'success') {
+        if (res.data?.status_type === 'success') {
           // setState({...state, countries: res.data.data});
           setState({
             ...state,
-            status: data.status,
-            email: data.value,
-            userName: data.userName,
-            countries: res.data.data,
-            confirmPassword: data.confirmPassword,
-            password: data.password,
+            status: data?.status,
+            email: data?.value,
+            userName: data?.userName,
+            countries: res.data?.data,
+            confirmPassword: data?.confirmPassword,
+            password: data?.password,
           });
         } else {
-          setState({...state, status: data.status, email: data.value});
+          setState({...state, status: data?.status, email: data?.value});
         }
       })
       .catch((error) => {
@@ -143,6 +151,7 @@ const Status = (props) => {
         <GlobalButton
           buttonText="Choose Your Interest"
           onPress={async () => {
+            props.StoreData(state.images);
             props.navigation.navigate('yourinterests', {
               profileData: state,
             });
@@ -286,6 +295,23 @@ const Status = (props) => {
                   flex: 1,
                   paddingHorizontal: 20,
                 }}>
+                {company_name ? (
+                  <TextInput
+                    style={{
+                      width: '100%',
+                      borderBottomWidth: 1,
+                      height: 40,
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}
+                    value={state.company_name}
+                    onChangeText={(text) =>
+                      setState({...state, company_name: text})
+                    }
+                    placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                    placeholder={'Enter Company Name'}
+                  />
+                ) : null}
+
                 <TextInput
                   style={{
                     width: '100%',
@@ -293,8 +319,9 @@ const Status = (props) => {
                     height: 40,
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
-                  editable={false}
-                  value={data.userName}
+                  // editable={false}
+                  value={state.userName}
+                  onChangeText={(text) => setState({...state, userName: text})}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Username"
                 />
@@ -324,7 +351,7 @@ const Status = (props) => {
                   placeholder="Last Name"
                 />
                 <TextInput
-                  value={data.value}
+                  value={data?.value}
                   editable={false}
                   style={{
                     width: '100%',
@@ -419,7 +446,6 @@ const Status = (props) => {
                     }}>
                     {state.countries &&
                       state.countries.map((item, i) => {
-                        console.log('item', item);
                         return (
                           <TouchableOpacity
                             style={{
@@ -510,7 +536,7 @@ const Status = (props) => {
                   />
                 </View>
 
-                {<_Buttons />}
+                {_Buttons()}
               </View>
             </View>
           </View>
@@ -520,4 +546,16 @@ const Status = (props) => {
   );
 };
 
-export default Status;
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  loader: state.reducers.loader,
+  images: state.reducers.images_Interests,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+  Login: Actions.Login,
+  Logout: Actions.Logout,
+  StoreData: Actions.StoreData,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Status);
