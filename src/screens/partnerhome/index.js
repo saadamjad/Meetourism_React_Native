@@ -399,9 +399,7 @@ const App = (props) => {
             onPress={() => {
               if (val.navigateTo === 'statusstack') {
                 null;
-              }
-              // setSelected(i);
-              else
+              } else
                 props.navigation.navigate(val.navigateTo, {
                   // screen: 'chooseyourinterest',
 
