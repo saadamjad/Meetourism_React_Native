@@ -14,8 +14,9 @@ import {Icon} from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
-import * as Actions from '../../redux/actions/index';
+// import * as Actions from '../../redux/actions/index';
 import {connect} from 'react-redux';
+import {Actions} from '../../redux/actions/index';
 
 import axios from 'axios';
 const Status = (props) => {
@@ -553,7 +554,6 @@ const mapStateToProp = (state) => ({
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
-  Login: Actions.Login,
   Logout: Actions.Logout,
   StoreData: Actions.StoreData,
 };

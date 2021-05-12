@@ -12,7 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
-import * as Actions from '../../redux/actions/index';
+import {Actions} from '../../redux/actions/index';
 import {connect} from 'react-redux';
 const App = (props) => {
   const [userData, setUserData] = useState({});
@@ -422,8 +422,6 @@ const mapStateToProp = (state) => ({
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
-  Signup: Actions.Signup,
-  Login: Actions.Login,
   Logout: Actions.Logout,
 };
 

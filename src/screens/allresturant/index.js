@@ -12,7 +12,9 @@ import {
 import Header from '../../components/header';
 import Button from '../../components/buttons/generalbutton';
 import {Item} from 'native-base';
-import * as Actions from '../../redux/actions/index';
+// import * as Actions from '../../redux/actions/index';
+import {Actions} from '../../redux/actions/index';
+
 import {connect} from 'react-redux';
 
 const App = (props) => {

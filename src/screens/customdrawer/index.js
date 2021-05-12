@@ -7,8 +7,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import * as Actions from '../../redux/actions/index';
 import {connect} from 'react-redux';
+import {Actions} from '../../redux/actions/index';
 
 const DrawerContent = (props) => {
   let array;
@@ -191,7 +191,6 @@ const DrawerContent = (props) => {
                   <TouchableOpacity
                     onPress={() => {
                       if (val.name == 'Auth') {
-                        console.log('helloo logout');
                         props.Logout(props.navigation);
                       } else {
                         val.name && props.navigation.navigate(val.name);
@@ -241,8 +240,6 @@ const mapStateToProp = (state) => ({
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
-  Signup: Actions.Signup,
-  Login: Actions.Login,
   Logout: Actions.Logout,
 };
 

@@ -20,18 +20,18 @@ import AnimatedLoader from 'react-native-animated-loader';
 import reducers from '../../../redux/reducers/reducers';
 import {connect} from 'react-redux';
 
-import * as Actions from '../../../redux/actions/index';
+import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: 'saad amjad',
+    email: 'saad@gmail.com',
+    password: '123456789',
+    confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: '',
-    password: '',
+    email: 'saad.amjad434sssssdmsk@gmail.com',
+    password: 'saad@12345',
   });
   const [state, setState] = useState({
     selectedIndex: 0,
@@ -43,12 +43,6 @@ const App = (props) => {
     ],
   });
 
-  const [activeInput, setActiveInput] = useState(0);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirm] = useState('');
   const [loader, setLoader] = useState(false);
   const [loaderMessage, setLoaderMessage] = useState('');
 
@@ -64,66 +58,23 @@ const App = (props) => {
     },
     {placeholder: 'Password', isSecure: true, keyboardType: 'default'},
   ]);
-  const _SignIn = () => {
+  const _SignIn = async () => {
     if (signInValues.email == '' || signInValues.password == '') {
       Toast('Error', 'Please both inputs', 'error');
     } else {
       setLoaderMessage('In');
+      setLoader(true);
 
-      _ApiCallSignIN();
+      let data = {
+        email: signInValues.email,
+        password: signInValues.password,
+      };
+
+      let value = await props.Login(data, props.navigation);
+      setLoader(false);
     }
   };
-  const _ApiCallSignIN = () => {
-    setLoader(true);
-    let header = {
-      headers: {'Content-Type': 'application/json'},
-    };
-    let url = 'https://meetourism.deviyoinc.com/api/v1/auth/login';
 
-    let data = {
-      email: signInValues.email,
-      password: signInValues.password,
-    };
-
-    axios
-      .post(url, data, header)
-      .then((res) => {
-        let response = res.data;
-        console.log('res.status_type', response);
-
-        if (response.status_type === 'success') {
-          console.log('res.status_type=======', response.data);
-          Toast('Success', 'Successfully Login', 'success');
-          setLoader(false);
-          props.Login(response.data, props.navigation);
-        } else {
-          setLoader(false);
-          console.log('ELSE', response);
-
-          Toast('Error', 'You Entered a Wrong Email or Password', 'error');
-        }
-      })
-      .catch((err) => {
-        setLoader(false);
-
-        let errResponse = err?.response?.data?.errors;
-        if (errResponse.email) {
-          // console.log('email', errResponse?.email[0]);
-          Toast('Error', errResponse?.email[0], 'error');
-        } else if (errResponse?.username) {
-          Toast('Error', errResponse?.username[0], 'error');
-
-          // console.log('username', errResponse?.username[0]);
-        } else if (errResponse?.phone) {
-          // console.log('phone', errResponse?.phone[0]);
-          Toast('Error', errResponse?.phone[0], 'error');
-        } else {
-          let message = Object.values(errResponse);
-          // console.log('message', message[0]);
-          Toast('Error', message[0], 'error');
-        }
-      });
-  };
   const signInRoute = () => (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{alignItems: 'center'}}>
@@ -162,6 +113,7 @@ const App = (props) => {
                 placeholder={val.placeholder}
                 keyboardType={val.keyboardType}
                 secureTextEntry={val.isSecure}
+                value={i == 0 ? signInValues.email : signInValues.password}
               />
             </View>
           );
@@ -263,63 +215,30 @@ const App = (props) => {
       );
     } else {
       setLoaderMessage('Up');
-
-      _ApiCallSingup();
+      let data = {
+        type: 'email',
+        value: signupValues.email,
+      };
+      _Api(data);
     }
   };
-  const _ApiCallSingup = () => {
+  const _Api = async (data) => {
     setLoader(true);
-    let header = {
-      headers: {'Content-Type': 'application/json'},
+
+    let values = {
+      name: signupValues.name,
+      password: signupValues.password,
+      confirmPassword: signupValues.confirmPassword,
     };
-    let url = 'https://meetourism.deviyoinc.com/api/v1/auth/check-exists';
+    let value = await props.CheckUser(data, props.navigation, values);
+    if (!value) {
+      setLoader(false);
+    } else {
+      console.log('resturn else');
+      setLoader(false);
 
-    let data = {
-      type: 'email',
-      value: signupValues.email,
-    };
-
-    axios
-      .post(url, data, header)
-      .then((res) => {
-        let response = res.data;
-        console.log('res.status_type', response);
-        if (response.status_type === 'success') {
-          if (response.data.exists) {
-            var str = signupValues.name;
-            str = str.replace(/ +/g, '');
-            console.log('exist nahi ha', str);
-            Toast('Success', ' Successfully Created', 'success');
-
-            setLoader(false);
-
-            let value = {
-              ...data,
-              userName: str,
-              password: signupValues.password,
-              confirmPassword: signupValues.confirmPassword,
-            };
-
-            toggleOverlay(value);
-          } else {
-            setLoader(false);
-
-            Toast('Error', 'Email Already Exist', 'error');
-          }
-        }
-      })
-      .catch((err) => {
-        setLoader(false);
-
-        let errResponse = err?.response?.data?.errors;
-        if (errResponse?.email) {
-          console.log('email', errResponse?.email[0]);
-        } else if (errResponse?.username) {
-          console.log('username', errResponse?.username[0]);
-        } else if (errResponse?.phone) {
-          console.log('phone', errResponse?.phone[0]);
-        }
-      });
+      toggleOverlay(value);
+    }
   };
 
   const signUpRoute = () => (
@@ -431,7 +350,7 @@ const App = (props) => {
         <TouchableOpacity
           activeOpacity={0.75}
           onPress={() => {
-            console.log('state', signupValues);
+            // props.Signup('helo');
             _Signup();
           }}
           style={{
@@ -448,10 +367,6 @@ const App = (props) => {
     </>
   );
 
-  const renderScene = SceneMap({
-    first: signInRoute,
-    second: signUpRoute,
-  });
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
       <View
@@ -518,14 +433,13 @@ const App = (props) => {
     </CustomView>
   );
 };
-// export default SignIn;
 
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
-  Signup: Actions.Signup,
+  CheckUser: Actions.CheckUser,
   Login: Actions.Login,
 };
 
@@ -536,13 +450,3 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-// const mapStateToProps = (state) => ({
-//   // loader: state.reducers.loader,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   Actions: bindActionCreators(Actions, dispatch),
-// });
-
-// // export default connect(null, mapDispatchToProps)(App);
-// export default connect(mapDispatchToProps, mapStateToProps)(App);

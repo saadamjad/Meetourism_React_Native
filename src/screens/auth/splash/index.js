@@ -25,6 +25,7 @@ const App = (props) => {
         }
       } else {
         props.navigation.replace('signin');
+        // props.navigation.replace('splash');
       }
     }, 1200);
   }, []);

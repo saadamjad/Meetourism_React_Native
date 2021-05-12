@@ -13,7 +13,7 @@ import {
 import {theme} from '../../../constants/theme';
 import {Icon} from 'native-base';
 import {connect} from 'react-redux';
-import * as ReduxActions from '../../../redux/actions';
+import {Actions} from '../../../redux/actions';
 const App = (props) => {
   const data = props?.route?.params?.profileData;
   const [state, setState] = useState({
@@ -23,7 +23,6 @@ const App = (props) => {
     settingStatus: false,
   });
   const comeFromProfileStatus = props?.route?.params?.comeFromProfileStatus;
-  // console.log('comeFromProfileStatus', props.loader);
 
   const [allStatus, setAllStatus] = useState(
     comeFromProfileStatus
@@ -180,12 +179,10 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  // loader: state.AuthReducer.loader,
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
-  Signup: ReduxActions.Signup,
-  profileData: ReduxActions.profileData,
+  profileData: Actions.profileData,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 // export default Status;

@@ -14,7 +14,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
 import {theme} from '../../constants/theme';
 import Entypo from 'react-native-vector-icons/Entypo';
-import * as Actions from '../../redux/actions/index';
+import {Actions} from '../../redux/actions/index';
 import {connect} from 'react-redux';
 
 import {ProgressViewIOS} from 'react-native';
@@ -492,8 +492,6 @@ const mapStateToProp = (state) => ({
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
-  Signup: Actions.Signup,
-  Login: Actions.Login,
   Logout: Actions.Logout,
 };
 

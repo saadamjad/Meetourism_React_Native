@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
         token: action.token,
       };
     case actionTypes.SIGNUPUPSUCCESS:
-      console.log('reducer data', action.token);
+      // console.log('reducer data', action.status);
       return {
         ...state,
         loader: false,
