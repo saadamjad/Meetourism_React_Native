@@ -13,6 +13,7 @@ import {
 // import {Icon} from 'native-base';
 // import Style from './style';
 import Toast from '../../components/toastmessage';
+import {Actions} from '../../redux/actions/index';
 
 import {theme} from '../../constants/theme';
 
@@ -24,7 +25,6 @@ import AnimatedLoader from 'react-native-animated-loader';
 
 import {connect} from 'react-redux';
 
-import * as Actions from '../../redux/actions/index';
 import {ScrollView} from 'react-native-gesture-handler';
 let statusValue = 0;
 const Status = (props) => {
@@ -47,10 +47,6 @@ const Status = (props) => {
   useEffect(() => {
     _UserType();
     _GetInterests();
-
-    // if (props?.route?.params || props?.route?.params) {
-    //   setState({...state, visible: true, settingStatus: true});
-    // }
   }, []);
 
   const _UserType = async () => {
@@ -138,64 +134,13 @@ const Status = (props) => {
           // images: ['user_images/user-image-608de193434244-74625999.jpg'],
         };
     console.log('data', data2);
-
-    _ApiCall(data2);
-  };
-  const _ApiCall = (data2) => {
     setLoader(true);
-    let _url = 'https://meetourism.deviyoinc.com/api/v1/auth/register';
-    let header = {
-      headers: {Accept: 'application/json'},
-    };
-    axios
-      .post(_url, data2, header)
-      .then((res) => {
-        let response = res.data;
-        if (response.status_type === 'success') {
-          setLoader(false);
-          console.log(
-            'res.status_type================================================',
-            response.data,
-          );
 
-          console.log('successully regisetered');
-          Toast('Success', 'successully regisetered', 'success');
-
-          // _Navigation();
-          props.Signup(response?.data, props?.navigation, company_name);
-        } else {
-          console.log('res==  ,', response?.data);
-          Toast('Error', 'something went wrong', 'error');
-
-          setLoader(false);
-        }
-      })
-      .catch((err) => {
-        let errResponse = err?.response?.data?.errors;
-        console.log('err ', errResponse);
-        setLoader(false);
-
-        if (errResponse?.email) {
-          let email = errResponse?.email[0];
-          Toast('Error', email, 'error');
-        } else if (errResponse?.username) {
-          let username = errResponse?.username[0];
-          Toast('Error', username, 'error');
-        } else if (errResponse?.phone) {
-          let phone = errResponse?.phone[0];
-          Toast('Error', phone, 'error');
-        } else {
-          console.log('esle');
-          // Toast('Error', errResponse, 'error');
-          let message = Object.values(errResponse);
-          console.log('message', message[0]);
-          Toast('Error', message[0], 'error');
-        }
-      });
+    let value = await props.Signup(data2, props.navigation, company_name);
+    setLoader(false);
   };
 
   const _Navigation = () => {
-    // props.navigation.navigate('PartnerStack');
     props.Signup(data, props.navigation);
 
     // if (statusValue == 0) {
@@ -245,8 +190,6 @@ const Status = (props) => {
         console.log('error in catch _GetInterests', error);
       });
   };
-
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   return (
     <>
@@ -623,7 +566,6 @@ const mapStateToProp = (state) => ({
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
-  Login: Actions.Login,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Status);

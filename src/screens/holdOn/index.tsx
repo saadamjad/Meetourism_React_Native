@@ -10,7 +10,6 @@ import {Button, Overlay} from 'react-native-elements';
 // import Overlay from '../../components/overlays';
 const HoldOn = (props) => {
   const [state, setState] = useState({selected: 0});
-  console.log(': props.data', props.data);
   return (
     <Overlay
       overlayStyle={{
@@ -75,7 +74,7 @@ const HoldOn = (props) => {
               width={80}
               onPress={() => {
                 props.toggleOverlay();
-                props.navigation.navigate('statusstack', {
+                props.navigation.replace('statusstack', {
                   screen: 'selectstatus',
                   params: {profileData: props.data},
                 });

@@ -1,10 +1,10 @@
-import {BASE_URL, TestUrl, uthpath, filter} from './constants';
+import {BASE_URL, TestUrl, uthpath, filter} from '../apis/constant';
 import axios from 'axios';
 
 async function Put(path, token, data2, param4) {
   console.log('==============PUT=======');
   let url = BASE_URL + path;
-  // console.log('url===', url);
+  console.log('url===', url);
   // console.log('data', data2, 'token', token);
 
   let response = await axios.put(url, data2, {
