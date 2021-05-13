@@ -8,7 +8,7 @@ import drawer from '../navigations/drawernavigation';
 import splash from '../screens/tutorial';
 
 import selectstatus from '../screens/home/status';
-import ChooseYourInterest from '../screens/home/status';
+// import ChooseYourInterest from '../screens/home/status';
 import allchats from '../screens/chat/allmessages';
 import profilePreivew from '../screens/profile';
 import Home from '../screens/home';

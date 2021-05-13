@@ -6,6 +6,7 @@ const initialState = {
   token: '',
   images_Interests: [],
   status: '',
+  alloffers: [],
 };
 
 export default function (state = initialState, action) {
@@ -36,6 +37,7 @@ export default function (state = initialState, action) {
         loader: false,
         userData: action.payload,
         token: action.token,
+        status: action.status,
       };
     case actionTypes.SIGNUPUPSUCCESS:
       // console.log('reducer data', action.status);
@@ -56,6 +58,10 @@ export default function (state = initialState, action) {
     case actionTypes.LOGOUT:
       console.log('helloo beta');
       return {...state, ...initialState};
+
+    case actionTypes.ADDOFFER:
+      console.log('ADDOFFER reducers');
+      return {...state, alloffers: action.payload};
 
     default:
       return state;

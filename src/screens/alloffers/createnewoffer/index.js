@@ -8,15 +8,43 @@ import GlobalButton from '../../../components/buttons/generalbutton';
 import Header from '../../../components/header';
 
 import {theme} from '../../../constants/theme';
+import {Actions} from '../../../redux/actions/index';
+
+import {connect} from 'react-redux';
+import {ProfileStack} from '../../../navigations/stacknavigation';
+import Toast from '../../../components/toastmessage';
 
 function CreateOffer(props) {
+  const [state, setState] = useState({
+    images: '',
+    title: 'ssss',
+    offerDescription: 'ss',
+    price: '10',
+  });
+
+  const _AddOffer = () => {
+    let data = {
+      image: 'https://meetourism.deviyoinc.com/images/user_demo.png',
+
+      title: 'hello  offer',
+      description: 'nice offer in town',
+      price: 100,
+      feature_type: 'none',
+    };
+    if (
+      state.title !== '' ||
+      state.offerDescription !== '' ||
+      state.price !== ''
+    ) {
+      props.AddOffers(data, props.navigation);
+    } else {
+      Toast('Error', 'PLease Fill All Required Information', 'error');
+    }
+  };
   return (
     <View
       style={{
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: 'white',
       }}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageBackground
@@ -100,6 +128,7 @@ function CreateOffer(props) {
                     }}
                     placeholder="Title here"
                     placeholderTextColor="black"
+                    onChangeText={(text) => setState({...state, title: text})}
                   />
                 </View>
                 <View style={{width: '100%', height: 40, marginVertical: 10}}>
@@ -115,6 +144,9 @@ function CreateOffer(props) {
                     }}
                     placeholder="Write Description Here"
                     placeholderTextColor="black"
+                    onChangeText={(text) =>
+                      setState({...state, offerDescription: text})
+                    }
                   />
                 </View>
                 <View style={{width: '60%', height: 40, marginVertical: 10}}>
@@ -129,6 +161,7 @@ function CreateOffer(props) {
                       borderStyle: 'solid',
                     }}
                     placeholder="Enter Price here"
+                    onChangeText={(text) => setState({...state, price: text})}
                     placeholderTextColor="black"
                   />
                 </View>
@@ -150,7 +183,8 @@ function CreateOffer(props) {
                   onPress={
                     () => {
                       // setOfferPosted(true);
-                      props.navigation.navigate('confirmedoffers');
+                      _AddOffer();
+                      // props.navigation.navigate('confirmedoffers');
                     }
                     // props.navigation.navigate('offerUploadedSuccessfully')
                   }
@@ -163,7 +197,17 @@ function CreateOffer(props) {
     </View>
   );
 }
-export default CreateOffer;
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  image: state.reducers.images_Interests,
+
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  AddOffers: Actions.AddOffers,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(CreateOffer);
 
 // import React from 'react';
 // import {

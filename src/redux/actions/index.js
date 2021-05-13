@@ -104,6 +104,7 @@ class Actions {
               type: actionTypes.LOGINSUCCESS,
               payload: response,
               token: response?.token,
+              status: response?.status,
             });
             navigation.replace(
               response?.status == 'partner' ? 'PartnerStack' : 'drawer',
@@ -165,6 +166,33 @@ class Actions {
       navigation.navigate('Auth', {
         screen: 'signin',
       });
+    };
+  };
+
+  //PARTNER ACTIONS
+
+  static AddOffers = (data, navigation) => {
+    return async (dispatch) => {
+      dispatch({type: actionTypes.ADDOFFER});
+      console.log('given data', data);
+      Post('offers', data)
+        .then((res) => {
+          console.log('resss', res);
+          // if (res.status_type === 'success') {
+          //   console.log('res offers', res.data);
+          //   let response = res?.data;
+          // } else {
+          //   console.log('ELSE in login', res);
+          //   Toast('Error', 'You Entered Wrong Email or Password', 'error');
+          // }
+        })
+        .catch((err) => {
+          // console.log('error');
+          let errResponse = err?.response?.data;
+          let type = 'Addoffer';
+          console.log('Error in catch', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
     };
   };
 }
