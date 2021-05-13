@@ -14,14 +14,11 @@ import ForgotPassword from '../forgotpassword';
 import CustomView from '../../../components/customView';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import HoldOn from '../../holdOn';
-import axios from 'axios';
-import {bindActionCreators} from 'redux';
-import AnimatedLoader from 'react-native-animated-loader';
-import reducers from '../../../redux/reducers/reducers';
 import {connect} from 'react-redux';
 
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
+import AnimatedLoader from '../../../components/loader';
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
     name: 'saad amjad',
@@ -30,8 +27,8 @@ const App = (props) => {
     confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'saad.amjad434sssssdmsk@gmail.com',
-    password: 'saad@12345',
+    email: 'partner2@gmail.com',
+    password: '123456789',
   });
   const [state, setState] = useState({
     selectedIndex: 0,
@@ -103,7 +100,6 @@ const App = (props) => {
                   width: '100%',
                   height: '100%',
                   fontSize: 16,
-                  // borderBottomWidth: 1,
                 }}
                 onChangeText={(text) =>
                   i == 0
@@ -408,22 +404,11 @@ const App = (props) => {
         ))}
       </View>
       {state.selectedIndex == '0' ? signInRoute() : signUpRoute()}
-
       <AnimatedLoader
-        visible={loader}
-        overlayColor="rgba(255,255,255,0.6)"
-        source={require('./loaders.json')}
-        animationStyle={styles.lottie}
-        speed={1}>
-        <Text
-          style={{
-            color: theme.primaryColor,
-            fontSize: 15,
-            fontWeight: 'bold',
-          }}>
-          {`Signing ${loaderMessage}`}
-        </Text>
-      </AnimatedLoader>
+        status={loader}
+        loaderMessage={`Signing ${loaderMessage}`}
+      />
+
       <HoldOn
         visible={state.visible}
         navigation={props.navigation}
@@ -444,9 +429,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);
-const styles = StyleSheet.create({
-  lottie: {
-    width: 100,
-    height: 100,
-  },
-});

@@ -10,6 +10,8 @@ const App = (props) => {
     console.log(
       'tokentokentokentoken===================================',
       props.token,
+      'statusss',
+      props.status,
     );
 
     setTimeout(() => {
@@ -17,10 +19,13 @@ const App = (props) => {
 
       if (props.token) {
         if (props.status === 'partner') {
-          props.navigation.replace('PartnerStack', {
-            screen: 'partnerhome',
+          console.log('if');
+          props.navigation.navigate('PartnerStack', {
+            screen: 'Hillviewresturant',
           });
         } else {
+          console.log('elseeeee');
+
           props.navigation.replace('drawer');
         }
       } else {
