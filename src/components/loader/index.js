@@ -17,7 +17,7 @@ const Loader = ({status, loaderMessage, path}) => {
           fontSize: 15,
           fontWeight: 'bold',
         }}>
-        {`${loaderMessage}`}
+        {loaderMessage ? `${loaderMessage}` : null}
       </Text>
     </AnimatedLoader>
   );

@@ -195,5 +195,73 @@ class Actions {
         });
     };
   };
+  static GetAllOffers = (data, token, navigation) => {
+    return async (dispatch) => {
+      dispatch({type: actionTypes.ADDOFFER});
+      return Get('offers', token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('resss========', response);
+
+            return response;
+          } else {
+            console.log('ELSE in login', res);
+
+            // Toast('Error', 'You Entered Wrong Email or Password', 'error');
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'GetAllOffers';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static ApplyFilter = (data, token, navigation) => {
+    console.log('offers?', data);
+    return async (dispatch) => {
+      return Get(`offers?${data}`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('resss========', response);
+            // navigation.navigate('applyfiltersresult', {
+            //   data: response,
+            // });
+            return response;
+          } else {
+            console.log('ELSE in login', res);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'applyfilter';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+
+  static DeleteOffer = (data, token, navigation) => {
+    console.log('DeleteOffer', data);
+    return async (dispatch) => {
+      return Post('offers', data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('resss========', response);
+
+            return response;
+          } else {
+            console.log('ELSE in login', res);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'DeleteOffer';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
 }
 export {Actions};

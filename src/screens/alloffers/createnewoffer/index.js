@@ -1,4 +1,4 @@
-import {Icon} from 'native-base';
+import {Form, Icon} from 'native-base';
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
@@ -9,12 +9,15 @@ import Header from '../../../components/header';
 
 import {theme} from '../../../constants/theme';
 import {Actions} from '../../../redux/actions/index';
+import ImagePicker from '../../../globalfunctions/imagepicker';
 
 import {connect} from 'react-redux';
 import {ProfileStack} from '../../../navigations/stacknavigation';
 import Toast from '../../../components/toastmessage';
 
 function CreateOffer(props) {
+  const token = props.token;
+  console.log('token===', token);
   const [state, setState] = useState({
     images: '',
     title: 'ssss',
@@ -40,6 +43,10 @@ function CreateOffer(props) {
     } else {
       Toast('Error', 'PLease Fill All Required Information', 'error');
     }
+  };
+  const IMAGEUPLOAD = async () => {
+    let value = ImagePicker();
+    console.log('Value retuuunnnn+', value);
   };
   return (
     <View
@@ -111,8 +118,21 @@ function CreateOffer(props) {
                 <GlobalButton
                   height={40}
                   width="100%"
+                  onPress={async () => {
+                    let value = await ImagePicker();
+                    // console.log('Value retuuunnnn+', value);
+                  }}
                   buttonText="Upload Image"
                 />
+                {/* <TouchableOpacity
+                  onPress={() => {
+                    IMAGEUPLOAD();
+                  }}
+                  style={{
+                    height: 50,
+                    width: 50,
+                    borderWidth: 1,
+                  }}></TouchableOpacity> */}
               </View>
               <View style={{width: '80%'}}>
                 <View style={{width: '100%', height: 40, marginVertical: 10}}>
@@ -200,6 +220,7 @@ function CreateOffer(props) {
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   image: state.reducers.images_Interests,
+  token: state.reducers.token,
 
   loader: state.reducers.loader,
 });

@@ -16,72 +16,145 @@ import LatestOffer from '../../alloffers/detailsOffer1';
 import Overlay from '../../../components/overlays';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Actions} from '../../../redux/actions';
+import {connect} from 'react-redux';
+import AnimatedLoader from '../../../components/loader';
+import moment from 'moment';
 
 function SelectOffer(props) {
+  const token = props.token;
+  const status = props.status;
+
+  const [state, setState] = useState({
+    showOfferDetails: false,
+    allOffers: [],
+    index: 0,
+    loader: true,
+    minimumPrice: '',
+    maximumPrice: '',
+    showFilter: false,
+    loaderMessage: 'Loading...',
+    notFoundMessage: '',
+  });
+
   const [filterItems, setFilterItems] = useState([
     {
       name: 'SELECT MINIMUM PRICE',
+      value: ['10', '200', '300'],
     },
     {
       name: 'SELECT MAXIMUM PRICE',
+      value: ['400', '600', '1000'],
     },
   ]);
-  const [state, setState] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
-  const [overlay, setOpenOverlay] = useState(true);
-  return state ? (
+
+  const [overlay, setOpenOverlay] = useState();
+  useEffect(() => {
+    // q=o&price[min]=1&price[max]=1000&start=0&limit=20
+    _GetAllOffersData();
+  }, []);
+  const _GetAllOffersData = async () => {
+    let value = await props.GetAllOffers(null, token);
+    if (value) {
+      setState({...state, allOffers: value, loader: false});
+    } else {
+      setState({
+        ...state,
+        allOffers: [],
+        loader: false,
+        notFoundMessage: 'No offers found',
+      });
+    }
+  };
+  const ApplyFilter = async (value, index) => {
+    setState({...state, loader: true, loaderMessage: 'searching'});
+
+    let data = `price[min]=${state.minimumPrice}&price[max]=${state.maximumPrice}`;
+    let filterValues = await props.ApplyFilter(data, token, props.navigation);
+
+    filterValues
+      ? setState({
+          ...state,
+          loader: props.loader,
+          showFilter: false,
+          allOffers: filterValues,
+          notFoundMessage:
+            filterValues?.length > 0
+              ? ''
+              : 'No Offers Found Related to this search',
+        })
+      : setState({
+          ...state,
+          loader: false,
+          showFilter: false,
+          allOffers: [],
+          notFoundMessage: 'No Offers Found Related to this search',
+        });
+  };
+  const DeleteOffer = (data) => {
+    console.log('Data', data, 'token', token);
+    props.DeleteOffer(data, token);
+  };
+  return state.showOfferDetails ? (
     <LatestOffer
-      navigation={props.navigation}
-      _onPress={() => setState(false)}
+      status={status}
+      props={{...props}}
+      DeleteOffer={(data) => DeleteOffer(data)}
+      token={token}
+      data={state?.allOffers[state.index]}
+      _onPress={() => setState({...state, showOfferDetails: false})}
     />
   ) : (
-    <CustomView bg={theme.textColor.whiteColor} scroll>
+    <>
       <Longheader
-        headerText="Select Offer"
+        headerText="Select Offers"
         filterIcon
-        OpenFilter={() => setShowFilter(true)}
+        OpenFilter={() => setState({...state, showFilter: true})}
         alignItemsText="center"
         backgroundColor={theme.textColor.whiteColor}
         leftArrow={true}
         paddingLeft={10}
         navigation={props.navigation}
       />
-      <View
-        style={{
-          flex: 1,
-          // marginTop: 2,
-          // justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        {[0, 1, 2, 3].map((val) => (
-          <TouchableOpacity
-            onPress={() => {
-              // navigate to screen there
-              setState(true);
-              // props.navigation.navigate('dealoffer');
-            }}
-            activeOpacity={1}
-            style={{width: '100%', height: 260, marginVertical: 10}}>
-            <View
-              style={{
-                height: 200,
-                width: '90%',
-                borderTopRightRadius: 120,
-                borderBottomRightRadius: 120,
-                justifyContent: 'flex-end',
-                overflow: 'hidden',
-                backgroundColor: 'white',
-                elevation: 2,
-              }}>
-              <ImageBackground
-                resizeMode="cover"
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  justifyContent: 'flex-end',
+      <CustomView bg={theme.textColor.whiteColor} scroll>
+        <View
+          style={{
+            flex: 1,
+
+            alignItems: 'center',
+          }}>
+          {state.allOffers &&
+            state.allOffers.map((val, i) => (
+              <TouchableOpacity
+                onPress={() => {
+                  setState({...state, showOfferDetails: true, index: i});
                 }}
-                source={require('../../../assets/images/download.jpg')}>
-                {/* <View
+                activeOpacity={1}
+                style={{width: '100%', marginVertical: 10}}>
+                <View
+                  style={{
+                    height: 200,
+                    width: '90%',
+                    borderTopRightRadius: 120,
+                    borderBottomRightRadius: 120,
+                    justifyContent: 'flex-end',
+                    overflow: 'hidden',
+                    backgroundColor: 'white',
+                    elevation: 2,
+                  }}>
+                  <ImageBackground
+                    resizeMode="cover"
+                    style={{
+                      height: '100%',
+                      width: '100%',
+                      justifyContent: 'flex-end',
+                    }}
+                    source={
+                      val.image_path
+                        ? {uri: val.image_path}
+                        : require('../../../assets/images/download.jpg')
+                    }>
+                    {/* <View
                   style={{
                     flexDirection: 'row',
                     height: '25%',
@@ -130,218 +203,281 @@ function SelectOffer(props) {
                   </View>
                 </View>
             */}
-              </ImageBackground>
-            </View>
-
-            <View
-              style={{
-                width: '85%',
-                alignSelf: 'center',
-                flexDirection: 'row',
-                marginTop: 20,
-              }}>
-              <Image source={require('../../../assets/images/avatar.png')} />
-              <View style={{marginLeft: 20}}>
-                <Text
-                  style={{
-                    color: theme.textColor.blackColor,
-                    fontWeight: '800',
-                  }}>
-                  Fast Food
-                </Text>
-                <Text style={{color: theme.textColor.greyColor, fontSize: 13}}>
-                  8 Nov
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <Overlay
-        overlayStyle={{
-          backgroundColor: 'blue',
-          width: '100%',
-          height: '100%',
-        }}
-        onBackdropPress={() => {
-          setOpenOverlay(false);
-        }}
-        visible={showFilter}>
-        <View
-          style={{
-            // flex: 1,
-            justifyContent: 'center',
-            width: '96%',
-            height: '90%',
-
-            borderRadius: 20,
-            overflow: 'hidden',
-            alignSelf: 'center',
-          }}>
-          <View
-            style={{
-              backgroundColor: 'white',
-              borderRadius: 20,
-
-              paddingVertical: 20,
-            }}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 20,
-                color: 'red',
-                marginTop: 15,
-                fontWeight: 'bold',
-                letterSpacing: 1,
-              }}>
-              Apply Price Filters
-            </Text>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <View
-                style={{
-                  marginHorizontal: 10,
-                }}>
-                {filterItems.map((items, index) => {
-                  return (
-                    <>
-                      <TouchableOpacity
-                        activeOpacity={0.8}
-                        onPress={() => {
-                          let array = filterItems.map((val, i) => {
-                            if (i == index) {
-                              return {...val, open: !val.open};
-                            } else {
-                              return {...val, open: false};
-                            }
-                          });
-                          setFilterItems(array);
-                        }}
-                        style={{
-                          height: 50,
-                          width: '100%',
-                          borderWidth: 0.6,
-                          paddingHorizontal: 10,
-                          marginVertical: 15,
-
-                          flexDirection: 'row',
-                        }}>
-                        <View
-                          style={{
-                            height: '100%',
-                            justifyContent: 'center',
-                            flex: 1,
-                          }}>
-                          <Text style={{fontSize: 20, color: 'black'}}>
-                            {items.name}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            height: '100%',
-                            // flex: 1,
-                            width: 50,
-                            justifyContent: 'center',
-                            alignItems: 'flex-end',
-                          }}>
-                          <Icon
-                            name={
-                              items.open
-                                ? 'arrow-circle-up'
-                                : 'arrow-circle-down'
-                            }
-                            type="MaterialIcons"
-                            style={{fontSize: 30, color: 'black'}}
-                          />
-                        </View>
-                      </TouchableOpacity>
-                      {items.open ? (
-                        <View
-                          style={{
-                            // height: 100,
-                            borderWidth: 1,
-                            width: '100%',
-                            height: 200,
-                            marginVertical: 15,
-                          }}>
-                          <ScrollView nestedScrollEnabled={true}>
-                            {[
-                              '100-200',
-                              '300-500',
-                              '1000-2000',
-                              '3000-10000',
-                            ].map((item, i) => {
-                              return (
-                                <TouchableOpacity
-                                  activeOpacity={0.8}
-                                  style={{
-                                    flexDirection: 'row',
-                                    paddingVertical: 20,
-                                    alignItems: 'center',
-                                    paddingLeft: 20,
-                                    borderBottomWidth: 0.5,
-                                  }}>
-                                  <View
-                                    style={{
-                                      height: 16,
-                                      width: 16,
-                                      borderRadius: 16,
-                                      borderWidth: 1,
-                                      backgroundColor: 'black',
-                                    }}></View>
-                                  <Text
-                                    style={{
-                                      color: 'black',
-                                      fontSize: 16,
-                                      marginLeft: 10,
-                                    }}>
-                                    {item}
-                                  </Text>
-                                </TouchableOpacity>
-                              );
-                            })}
-                          </ScrollView>
-                        </View>
-                      ) : null}
-                    </>
-                  );
-                })}
+                  </ImageBackground>
+                </View>
 
                 <View
                   style={{
-                    justifyContent: 'flex-end',
+                    width: '85%',
+                    alignSelf: 'center',
+                    flexDirection: 'row',
+                    marginTop: 20,
                     alignItems: 'center',
-                    flex: 1,
-                    // height: '50%',
-                    paddingVertical: 40,
                   }}>
-                  <TouchableOpacity
-                    activeOpacity={0.75}
-                    onPress={() => setShowFilter(false)}
+                  <View
                     style={{
-                      backgroundColor: theme.secondaryColor,
-                      width: '80%',
-                      height: 50,
-                      borderRadius: 50,
-                      justifyContent: 'center',
-                      alignItems: 'center',
+                      height: 40,
+                      width: 40,
+                      borderRadius: 40,
+                      overflow: 'hidden',
+                      borderWidth: 1,
                     }}>
+                    <Image
+                      style={{height: '100%', width: '100%'}}
+                      resizeMode="cover"
+                      source={
+                        val.user.profile_url
+                          ? {uri: val.user.profile_url}
+                          : require('../../../assets/images/avatar.png')
+                      }
+                    />
+                  </View>
+                  <View style={{marginLeft: 20}}>
                     <Text
                       style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 20,
-                        letterSpacing: 2,
+                        color: theme.textColor.blackColor,
+                        fontWeight: '800',
                       }}>
-                      APPLY
+                      {val.title}
                     </Text>
-                  </TouchableOpacity>
+                    <Text
+                      style={{
+                        color: theme.textColor.greyColor,
+                        fontSize: 13,
+                      }}>
+                      {moment(val.created_at).format('DD-MM-YYYY')}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            </ScrollView>
-          </View>
+              </TouchableOpacity>
+            ))}
+          {state.allOffers.length == 0 && !state.loader ? (
+            <Text style={{color: 'red', fontSize: 15}}>
+              {state.notFoundMessage}
+            </Text>
+          ) : null}
         </View>
-      </Overlay>
-    </CustomView>
+        <Overlay
+          overlayStyle={{
+            backgroundColor: 'blue',
+            width: '100%',
+            height: '100%',
+          }}
+          onBackdropPress={() => {
+            setOpenOverlay(false);
+          }}
+          visible={state.showFilter}>
+          <View
+            style={{
+              // flex: 1,
+              justifyContent: 'center',
+              width: '96%',
+              height: '90%',
+
+              borderRadius: 20,
+              overflow: 'hidden',
+              alignSelf: 'center',
+            }}>
+            <View
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 20,
+
+                paddingVertical: 20,
+              }}>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontSize: 20,
+                  color: 'red',
+                  marginTop: 15,
+                  fontWeight: 'bold',
+                  letterSpacing: 1,
+                }}>
+                Apply Price Filters
+              </Text>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <View
+                  style={{
+                    marginHorizontal: 10,
+                  }}>
+                  {filterItems.map((items, index) => {
+                    return (
+                      <>
+                        <TouchableOpacity
+                          activeOpacity={0.8}
+                          onPress={() => {
+                            let array = filterItems.map((val, i) => {
+                              if (i == index) {
+                                return {...val, open: !val.open};
+                              } else {
+                                return {...val, open: false};
+                              }
+                            });
+                            setFilterItems(array);
+                          }}
+                          style={{
+                            height: 50,
+                            width: '100%',
+                            borderWidth: 0.6,
+                            paddingHorizontal: 10,
+                            marginVertical: 15,
+
+                            flexDirection: 'row',
+                          }}>
+                          <View
+                            style={{
+                              height: '100%',
+                              justifyContent: 'center',
+                              flex: 1,
+                            }}>
+                            <Text style={{fontSize: 20, color: 'black'}}>
+                              {items.name}
+                              {'  |  '}
+                              {index == 0
+                                ? state.minimumPrice
+                                : state.maximumPrice}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              height: '100%',
+                              // flex: 1,
+                              width: 50,
+                              justifyContent: 'center',
+                              alignItems: 'flex-end',
+                            }}>
+                            <Icon
+                              name={
+                                items.open
+                                  ? 'arrow-circle-up'
+                                  : 'arrow-circle-down'
+                              }
+                              type="MaterialIcons"
+                              style={{fontSize: 30, color: 'black'}}
+                            />
+                          </View>
+                        </TouchableOpacity>
+                        {items.open ? (
+                          <View
+                            style={{
+                              // height: 100,
+                              borderWidth: 1,
+                              width: '100%',
+                              height: 200,
+                              marginVertical: 15,
+                            }}>
+                            <ScrollView nestedScrollEnabled={true}>
+                              {items.value.map((item, i) => {
+                                return (
+                                  <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={{
+                                      flexDirection: 'row',
+                                      paddingVertical: 20,
+                                      alignItems: 'center',
+                                      paddingLeft: 20,
+                                      borderBottomWidth: 0.5,
+                                    }}
+                                    onPress={async () => {
+                                      (await index) == 0
+                                        ? setState({
+                                            ...state,
+                                            minimumPrice: item,
+                                          })
+                                        : setState({
+                                            ...state,
+                                            maximumPrice: item,
+                                          });
+                                      let array = filterItems.map((val, i) => {
+                                        if (i == index) {
+                                          return {...val, open: !val.open};
+                                        } else {
+                                          return {...val, open: false};
+                                        }
+                                      });
+                                      setFilterItems(array);
+                                    }}>
+                                    <View
+                                      style={{
+                                        height: 16,
+                                        width: 16,
+                                        borderRadius: 16,
+                                        borderWidth: 1,
+                                        backgroundColor: 'black',
+                                      }}></View>
+                                    <Text
+                                      style={{
+                                        color: 'black',
+                                        fontSize: 16,
+                                        marginLeft: 10,
+                                      }}>
+                                      {item}
+                                    </Text>
+                                  </TouchableOpacity>
+                                );
+                              })}
+                            </ScrollView>
+                          </View>
+                        ) : null}
+                      </>
+                    );
+                  })}
+
+                  <View
+                    style={{
+                      justifyContent: 'flex-end',
+                      alignItems: 'center',
+                      flex: 1,
+                      // height: '50%',
+                      paddingVertical: 40,
+                    }}>
+                    <TouchableOpacity
+                      activeOpacity={0.75}
+                      onPress={() => ApplyFilter()}
+                      style={{
+                        backgroundColor: theme.secondaryColor,
+                        width: '80%',
+                        height: 50,
+                        borderRadius: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text
+                        style={{
+                          color: theme.textColor.whiteColor,
+                          fontSize: 20,
+                          letterSpacing: 2,
+                        }}>
+                        APPLY
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </ScrollView>
+            </View>
+          </View>
+        </Overlay>
+
+        <AnimatedLoader
+          status={state.loader}
+          loaderMessage={state.loaderMessage}
+        />
+      </CustomView>
+    </>
   );
 }
 
-export default SelectOffer;
+const mapStateToProps = (state) => ({
+  loader: state.reducers.loader,
+  token: state.reducers.token,
+  status: state.reducers.status,
+});
+const mapDispatchToProps = {
+  // Signup: Actions.Signup,
+  GetAllOffers: Actions.GetAllOffers,
+  ApplyFilter: Actions.ApplyFilter,
+  DeleteOffer: Actions.DeleteOffer,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectOffer);

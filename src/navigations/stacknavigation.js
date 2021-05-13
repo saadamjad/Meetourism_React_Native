@@ -51,6 +51,7 @@ import confirmedoffers from '../screens/alloffers/confirmations';
 import Gallery from '../components/gallery';
 import ForgotPassword from '../screens/auth/forgotpassword';
 import Splash2 from '../screens/auth/splash';
+import applyfiltersresult from '../screens/applyfiltersresult';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -341,6 +342,11 @@ export function PartnerStack() {
       <Stack.Screen
         name="Hillviewresturant"
         component={Hillviewresturant}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="applyfiltersresult"
+        component={applyfiltersresult}
         options={{headerShown: false}}
       />
       <Stack.Screen

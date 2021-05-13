@@ -9,27 +9,36 @@ import {
   AsyncStorage,
   ScrollView,
 } from 'react-native';
+import {Actions} from '../../../redux/actions/index';
+
+import {connect} from 'react-redux';
+
 import GlobalButton from '../../../components/buttons/generalbutton';
-import CustomView from '../../../components/customView';
-import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
-import Longheader from '../../../components/header';
 import {ImageBackground} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 let statusValue = 0;
 
-function DetailOffer1(props) {
-  const [statusValue, setStatusValue] = useState(0);
-  useEffect(() => {
-    _UserType();
-  }, []);
-  const _UserType = async () => {
-    console.log('===');
-    AsyncStorage.getItem('userStatus').then((res) => {
-      console.log('==res', res);
-      setStatusValue(res);
-    });
-  };
+function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
+  console.log('data=====', data);
+  const [state, setState] = useState({
+    edit: false,
+  });
+  let userStatus = status == 'partner' ? true : false;
+  useEffect(() => {}, []);
+  const _DeleteOffer = async () => {
+    let data2 = {
+      offer_id: data?.id,
+      action: 'delete',
+      // image: 'https://meetourism.deviyoinc.com/images/user_demo.png',
 
+      title: data?.title,
+      description: data?.description,
+      price: data?.price,
+      feature_type: 'none',
+    };
+    DeleteOffer(data2);
+  };
   return (
     <ImageBackground
       source={require('../../../assets/images/statusbg.png')}
@@ -38,7 +47,6 @@ function DetailOffer1(props) {
         <View
           style={{
             flex: 1,
-            // backgroundColor: '#241332',
             backgroundColor: 'rgba(00,00,00,0.8)',
             // borderWidth: 1,
             // paddingVertical: 2,
@@ -47,16 +55,10 @@ function DetailOffer1(props) {
           <TouchableOpacity
             activeOpacity={0.7}
             style={{
-              // borderWidth: 1,
-
               paddingHorizontal: 12,
-              // paddingVertical: 10,
               alignSelf: 'flex-start',
             }}
-            onPress={() =>
-              //   setState({...state, visible: !state.visible, visible1: false})
-              props._onPress()
-            }>
+            onPress={() => _onPress()}>
             <Icon
               type="AntDesign"
               name="arrowleft"
@@ -80,18 +82,40 @@ function DetailOffer1(props) {
                 style={{
                   // width: '100%',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  // borderWidth: 1,
+                  height: 40,
                 }}>
-                <Text
+                <TextInput
+                  value={data?.title}
+                  editable={state.edit}
                   style={{
                     color: theme.secondaryColor,
-                    // paddingBottom: 25,
                     fontSize: 24,
+                    paddingHorizontal: 10,
+                    padding: 0,
+                    margin: 0,
+                    borderBottomWidth: state.edit ? 1 : 0,
+                    borderColor: 'red',
                     fontWeight: '700',
+
                     // width: '70%',
-                  }}>
-                  Whopper Feast
-                </Text>
+                  }}
+                  maxLength={20}
+                />
+                {userStatus ? (
+                  <TouchableOpacity
+                    style={{
+                      alignItems: 'flex-end',
+                      justifyContent: 'center',
+                      height: '100%',
+                      width: 50,
+                    }}
+                    onPress={() => setState({...state, edit: !state.edit})}>
+                    <FontAwesome5 name="edit" color="black" size={20} />
+                  </TouchableOpacity>
+                ) : null}
               </View>
               <Text
                 style={{
@@ -104,23 +128,35 @@ function DetailOffer1(props) {
                 }}>
                 Description
               </Text>
-              <Text
+              <TextInput
+                editable={state.edit}
+                value={data?.description}
                 style={{
                   color: 'black',
                   paddingBottom: 25,
+                  borderBottomWidth: state.edit ? 1 : 0,
+                  borderColor: 'red',
+                  margin: 0,
+                  padding: 0,
                   fontSize: 14,
-                }}>
-                10 Chicken Whopper and 10 Drink
-              </Text>
+                }}
+                maxLength={100}
+              />
+
               <View style={{alignItems: 'flex-end'}}>
-                <Text
+                <TextInput
+                  value={data?.price + '$.only/-'}
                   style={{
                     color: theme.secondaryColor,
                     fontWeight: '700',
+                    borderBottomWidth: state.edit ? 1 : 0,
+                    borderColor: 'red',
                     fontSize: 15,
-                  }}>
-                  15.99$.only/-
-                </Text>
+                    padding: 0,
+                    margin: 0,
+                    marginTop: 5,
+                  }}
+                />
               </View>
               <View
                 style={{
@@ -132,7 +168,11 @@ function DetailOffer1(props) {
                 <Image
                   resizeMode="contain"
                   style={{height: '100%', width: '100%'}}
-                  source={require('../../../assets/images/burgerDrink.png')}
+                  source={
+                    data?.image_path
+                      ? {uri: data?.image_path}
+                      : require('../../../assets/images/burgerDrink.png')
+                  }
                 />
               </View>
             </View>
@@ -151,14 +191,22 @@ function DetailOffer1(props) {
                   resizeMode="contain"
                 />
               </View>
-              {/* ) : ( */}
               <GlobalButton
                 buttonText="Pay the Offer"
                 height={50}
                 width="66%"
                 onPress={() => props.navigation.navigate('payment')}
               />
-              {/* )} */}
+
+              <View style={{height: 10}}></View>
+              {state.edit ? (
+                <GlobalButton
+                  buttonText="Delete this offer"
+                  height={50}
+                  width="66%"
+                  onPress={() => _DeleteOffer()}
+                />
+              ) : null}
             </View>
           </View>
         </View>
@@ -166,4 +214,17 @@ function DetailOffer1(props) {
     </ImageBackground>
   );
 }
+// const mapStateToProp = (state) => ({
+//   userData: state.reducers.userData,
+//   image: state.reducers.images_Interests,
+
+//   loader: state.reducers.loader,
+// });
+// const mapDispatchToProps = {
+//   Signup: Actions.Signup,
+//   DeleteOffer: Actions.DeleteOffer,
+// };
+
+// export default connect(mapStateToProp, mapDispatchToProps)(DetailOffer1);
+
 export default DetailOffer1;

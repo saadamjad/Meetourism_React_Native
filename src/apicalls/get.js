@@ -1,8 +1,8 @@
-import {BASE_URL, TestUrl, uthpath, filter} from '../apis/constant';
+import {baseUrl, TestUrl, uthpath, filter} from '../apis/constant';
 import axios from 'axios';
 
 async function Get(path, token, param3, param4) {
-  let url = BASE_URL + path;
+  let url = baseUrl + path;
   console.log('url===>', url);
 
   let header = {
