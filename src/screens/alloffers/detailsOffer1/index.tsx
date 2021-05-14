@@ -22,49 +22,34 @@ import AnimatedLoader from '../../../components/loader';
 
 let statusValue = 0;
 
-function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
+function DetailOffer1({
+  props,
+  data,
+  _onPress,
+  status,
+  token,
+  DeleteOffer,
+  loader,
+  UpdateOfferData,
+}) {
   const [state, setState] = useState({
     edit: false,
-    loader: false,
-    loaderMessage: 'Deleting..',
+    offerData: {},
   });
+  const [test, setTest] = useState();
   let userStatus = status == 'partner' ? true : false;
-  useEffect(() => {}, []);
-  // const _DeleteOffer = async () => {
-  //   _ImageUploadApiCall();
-  // };
 
-  const _DeleteOffer = async () => {
-    setState({...state, loader: true});
-    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+  const _UpdateOffersDetails = async () => {
+    // _ImageUploadApiCall();
+  };
+  console.log('Data===>=', data);
+  useEffect(() => {
+    setTest(data);
+  }, []);
 
-    let formData = new FormData();
-
-    formData.append('title', data?.title);
-    formData.append('description', data?.offerDescription);
-    formData.append('price', Number(data?.price));
-    formData.append('feature_type', 'none');
-    formData.append('offer_id', data?.id);
-    formData.append('action', 'delete');
-
-    let header = {
-      headers: {
-        'Content-Type': 'multipart/form-data; ',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios
-      .post(base_url, formData, header)
-      .then(async (Res) => {
-        setState({...state, loader: false});
-        props.navigation.navigate('SelectOffer');
-        // console.log('Resss', Res.data.data);
-      })
-      .catch((err) => {
-        console.log('Error', err?.response?.data);
-
-        setState({...state, loader: false});
-      });
+  const _UpdateOfferData = (data) => {
+    UpdateOfferData(data);
+    setState({...state, edit: !state.edit});
   };
   return (
     <ImageBackground
@@ -75,8 +60,7 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
           style={{
             flex: 1,
             backgroundColor: 'rgba(00,00,00,0.8)',
-            // borderWidth: 1,
-            // paddingVertical: 2,
+
             justifyContent: 'center',
           }}>
           <TouchableOpacity
@@ -115,7 +99,8 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
                   height: 40,
                 }}>
                 <TextInput
-                  value={data?.title}
+                  value={test?.title}
+                  onChangeText={(text) => setTest({...test, title: text})}
                   editable={state.edit}
                   style={{
                     color: theme.secondaryColor,
@@ -139,8 +124,16 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
                       height: '100%',
                       width: 50,
                     }}
-                    onPress={() => setState({...state, edit: !state.edit})}>
-                    <FontAwesome5 name="edit" color="black" size={20} />
+                    onPress={() => {
+                      state.edit
+                        ? _UpdateOfferData(test)
+                        : setState({...state, edit: !state.edit});
+                    }}>
+                    <FontAwesome5
+                      name={state.edit ? 'pen' : 'edit'}
+                      color="black"
+                      size={20}
+                    />
                   </TouchableOpacity>
                 ) : null}
               </View>
@@ -156,8 +149,8 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
                 Description
               </Text>
               <TextInput
-                editable={state.edit}
-                value={data?.description}
+                value={test?.description}
+                onChangeText={(text) => setTest({...test, description: text})}
                 style={{
                   color: 'black',
                   paddingBottom: 25,
@@ -172,7 +165,9 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
 
               <View style={{alignItems: 'flex-end'}}>
                 <TextInput
-                  value={data?.price + '$.only/-'}
+                  editable={state.edit}
+                  onChangeText={(text) => setTest({...test, price: text})}
+                  value={test?.price + '$.only/-'}
                   style={{
                     color: theme.secondaryColor,
                     fontWeight: '700',
@@ -196,8 +191,8 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
                   resizeMode="contain"
                   style={{height: '100%', width: '100%'}}
                   source={
-                    data?.image_path
-                      ? {uri: data?.image_path}
+                    state.offerData?.image_path
+                      ? {uri: state.offerData?.image_path}
                       : require('../../../assets/images/burgerDrink.png')
                   }
                 />
@@ -239,10 +234,7 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
         </View>
       </ScrollView>
 
-      <AnimatedLoader
-        status={state.loader}
-        loaderMessage={state.loaderMessage}
-      />
+      <AnimatedLoader status={loader} loaderMessage={'Deleting...'} />
     </ImageBackground>
   );
 }
