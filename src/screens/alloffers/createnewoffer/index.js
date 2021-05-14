@@ -1,6 +1,12 @@
 import {Form, Icon} from 'native-base';
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  Image,
+} from 'react-native';
 import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import GlobalButton from '../../../components/buttons/generalbutton';
 // import CustomView from '../../../components/customView';
@@ -14,45 +20,103 @@ import ImagePicker from '../../../globalfunctions/imagepicker';
 import {connect} from 'react-redux';
 import {ProfileStack} from '../../../navigations/stacknavigation';
 import Toast from '../../../components/toastmessage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import axios from 'axios';
+import AnimatedLoader from '../../../components/loader';
 
+// import { error } from 'react-native-gifted-chat/lib/utils';
 function CreateOffer(props) {
   const token = props.token;
   console.log('token===', token);
   const [state, setState] = useState({
     images: '',
-    title: 'ssss',
-    offerDescription: 'ss',
-    price: '10',
+    title: '',
+    offerDescription: '',
+    price: '',
+    imageData: {},
+    loader: false,
+    loaderMessage: 'Uploading...',
   });
 
   const _AddOffer = () => {
-    let data = {
-      image: 'https://meetourism.deviyoinc.com/images/user_demo.png',
-
-      title: 'hello  offer',
-      description: 'nice offer in town',
-      price: 100,
-      feature_type: 'none',
-    };
     if (
-      state.title !== '' ||
-      state.offerDescription !== '' ||
+      state.title !== '' &&
+      state.offerDescription !== '' &&
       state.price !== ''
     ) {
-      props.AddOffers(data, props.navigation);
+      // props.AddOffers(data, props.navigation);
+      _ImageUploadApiCall();
     } else {
       Toast('Error', 'PLease Fill All Required Information', 'error');
     }
   };
-  const IMAGEUPLOAD = async () => {
-    let value = ImagePicker();
-    console.log('Value retuuunnnn+', value);
+
+  const _ImageUploadApiCall = async () => {
+    setState({...state, loader: true});
+    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+    console.log('res.fileName', state.imageData);
+    let path = state.imageData.uri;
+
+    let formData = new FormData();
+
+    formData.append('image', {...state.imageData, name: path});
+    formData.append('title', state.title);
+    formData.append('description', state.offerDescription);
+    formData.append('price', Number(state.price));
+    formData.append('feature_type', 'none');
+    // formData.append('offer_id', 18);
+    // formData.append('action', 'delete');
+
+    let header = {
+      headers: {
+        'Content-Type': 'multipart/form-data; ',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .post(base_url, formData, header)
+      .then(async (Res) => {
+        setState({...state, loader: false});
+        props.navigation.goBack();
+        console.log('Resss', Res.data.data);
+      })
+      .catch((err) => {
+        console.log('Error', err?.response?.data);
+        setState({...state, loader: false});
+      });
   };
+
+  const _ImagePicker = (data) => {
+    var options = {
+      title: 'Select Image',
+      mediaType: 'photo',
+      base64: true,
+      noData: false,
+      quality: 0.1,
+    };
+    let value = launchImageLibrary(options, (res) => {
+      if (res.didCancel) {
+        console.log('User cancelled');
+      } else if (res.error) {
+        console.log('Camera Error: ');
+      } else {
+        setState({...state, imageData: res});
+        // console.log('res', res);
+        // imageUpload(res);
+      }
+    });
+    return value;
+  };
+
   return (
     <View
       style={{
         flex: 1,
       }}>
+      <AnimatedLoader
+        status={state.loader}
+        loaderMessage={state.loaderMessage}
+      />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageBackground
           source={require('../../../assets/images/statusbg.png')}
@@ -99,15 +163,24 @@ function CreateOffer(props) {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text
+                <ImageBackground
+                  source={{uri: state.imageData.uri}}
                   style={{
-                    fontSize: 30,
-                    fontWeight: '700',
-                    color: theme.textColor.lightWhiteColor,
-                    opacity: 0.4,
+                    height: '100%',
+                    width: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}>
-                  Image
-                </Text>
+                  <Text
+                    style={{
+                      fontSize: 30,
+                      fontWeight: '700',
+                      color: theme.textColor.lightWhiteColor,
+                      opacity: 0.4,
+                    }}>
+                    Image
+                  </Text>
+                </ImageBackground>
               </View>
               <View
                 style={{
@@ -119,7 +192,7 @@ function CreateOffer(props) {
                   height={40}
                   width="100%"
                   onPress={async () => {
-                    let value = await ImagePicker();
+                    _ImagePicker();
                     // console.log('Value retuuunnnn+', value);
                   }}
                   buttonText="Upload Image"

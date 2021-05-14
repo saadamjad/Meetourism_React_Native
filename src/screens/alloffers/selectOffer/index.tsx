@@ -20,7 +20,7 @@ import {Actions} from '../../../redux/actions';
 import {connect} from 'react-redux';
 import AnimatedLoader from '../../../components/loader';
 import moment from 'moment';
-
+import axios from 'axios';
 function SelectOffer(props) {
   const token = props.token;
   const status = props.status;
@@ -51,8 +51,18 @@ function SelectOffer(props) {
   const [overlay, setOpenOverlay] = useState();
   useEffect(() => {
     // q=o&price[min]=1&price[max]=1000&start=0&limit=20
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // The screen is focused
+      setState({...state, showOfferDetails: false});
+
+      console.log('focuss running===========================================');
+      _GetAllOffersData();
+
+      // Call any action
+    });
     _GetAllOffersData();
-  }, []);
+    return unsubscribe;
+  }, [props.navigation]);
   const _GetAllOffersData = async () => {
     let value = await props.GetAllOffers(null, token);
     if (value) {
@@ -91,15 +101,45 @@ function SelectOffer(props) {
           notFoundMessage: 'No Offers Found Related to this search',
         });
   };
-  const DeleteOffer = (data) => {
-    console.log('Data', data, 'token', token);
-    props.DeleteOffer(data, token);
+  const _DeleteOffer = async (data) => {
+    console.log('gello');
+    setState({...state, loader: true});
+    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+
+    let formData = new FormData();
+
+    formData.append('title', data?.title);
+    formData.append('description', data?.offerDescription);
+    formData.append('price', Number(data?.price));
+    formData.append('feature_type', 'none');
+    formData.append('offer_id', data?.id);
+    formData.append('action', 'delete');
+
+    let header = {
+      headers: {
+        'Content-Type': 'multipart/form-data; ',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .post(base_url, formData, header)
+      .then(async (Res) => {
+        // props.navigation.navigate('SelectOffer');
+        await setState({...state, loader: false, showOfferDetails: false});
+
+        _GetAllOffersData();
+      })
+      .catch((err) => {
+        console.log('Error', err?.response?.data);
+
+        setState({...state, loader: false});
+      });
   };
   return state.showOfferDetails ? (
     <LatestOffer
       status={status}
       props={{...props}}
-      DeleteOffer={(data) => DeleteOffer(data)}
+      DeleteOffer={(data) => _DeleteOffer(data)}
       token={token}
       data={state?.allOffers[state.index]}
       _onPress={() => setState({...state, showOfferDetails: false})}
