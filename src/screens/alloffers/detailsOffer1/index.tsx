@@ -17,27 +17,54 @@ import GlobalButton from '../../../components/buttons/generalbutton';
 import {theme} from '../../../constants/theme';
 import {ImageBackground} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import axios from 'axios';
+import AnimatedLoader from '../../../components/loader';
+
 let statusValue = 0;
 
 function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
-  console.log('data=====', data);
   const [state, setState] = useState({
     edit: false,
+    loader: false,
+    loaderMessage: 'Deleting..',
   });
   let userStatus = status == 'partner' ? true : false;
   useEffect(() => {}, []);
-  const _DeleteOffer = async () => {
-    let data2 = {
-      offer_id: data?.id,
-      action: 'delete',
-      // image: 'https://meetourism.deviyoinc.com/images/user_demo.png',
+  // const _DeleteOffer = async () => {
+  //   _ImageUploadApiCall();
+  // };
 
-      title: data?.title,
-      description: data?.description,
-      price: data?.price,
-      feature_type: 'none',
+  const _DeleteOffer = async () => {
+    setState({...state, loader: true});
+    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+
+    let formData = new FormData();
+
+    formData.append('title', data?.title);
+    formData.append('description', data?.offerDescription);
+    formData.append('price', Number(data?.price));
+    formData.append('feature_type', 'none');
+    formData.append('offer_id', data?.id);
+    formData.append('action', 'delete');
+
+    let header = {
+      headers: {
+        'Content-Type': 'multipart/form-data; ',
+        Authorization: `Bearer ${token}`,
+      },
     };
-    DeleteOffer(data2);
+    axios
+      .post(base_url, formData, header)
+      .then(async (Res) => {
+        setState({...state, loader: false});
+        props.navigation.navigate('SelectOffer');
+        // console.log('Resss', Res.data.data);
+      })
+      .catch((err) => {
+        console.log('Error', err?.response?.data);
+
+        setState({...state, loader: false});
+      });
   };
   return (
     <ImageBackground
@@ -204,13 +231,18 @@ function DetailOffer1({props, data, _onPress, status, token, DeleteOffer}) {
                   buttonText="Delete this offer"
                   height={50}
                   width="66%"
-                  onPress={() => _DeleteOffer()}
+                  onPress={() => DeleteOffer(data)}
                 />
               ) : null}
             </View>
           </View>
         </View>
       </ScrollView>
+
+      <AnimatedLoader
+        status={state.loader}
+        loaderMessage={state.loaderMessage}
+      />
     </ImageBackground>
   );
 }

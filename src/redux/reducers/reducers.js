@@ -49,7 +49,7 @@ export default function (state = initialState, action) {
         status: action.status,
       };
     case actionTypes.IMAGESANDINTERESTS:
-      console.log('reducer data=======', action.payload);
+      // console.log('reducer data=======', action.payload);
       return {
         ...state,
         images_Interests: action.payload,
