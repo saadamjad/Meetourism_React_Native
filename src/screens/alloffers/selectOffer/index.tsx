@@ -51,26 +51,32 @@ function SelectOffer(props) {
   const [overlay, setOpenOverlay] = useState();
   useEffect(() => {
     // q=o&price[min]=1&price[max]=1000&start=0&limit=20
-    const unsubscribe = props.navigation.addListener('focus', () => {
-      // The screen is focused
-      setState({...state, showOfferDetails: false});
+    // const unsubscribe = props.navigation.addListener('focus', () => {
+    //   // The screen is focused
+    //   setState({...state, showOfferDetails: false});
 
-      console.log('focuss running===========================================');
-      _GetAllOffersData();
+    //   console.log('focuss running===========================================');
+    //   _GetAllOffersData();
 
-      // Call any action
-    });
+    //   // Call any action
+    // });
     _GetAllOffersData();
-    return unsubscribe;
-  }, [props.navigation]);
+    // return unsubscribe;
+  }, []);
   const _GetAllOffersData = async () => {
     let value = await props.GetAllOffers(null, token);
     if (value) {
-      setState({...state, allOffers: value, loader: false});
+      setState({
+        ...state,
+        allOffers: value,
+        loader: false,
+        showOfferDetails: false,
+      });
     } else {
       setState({
         ...state,
         allOffers: [],
+        showOfferDetails: false,
         loader: false,
         notFoundMessage: 'No offers found',
       });
@@ -124,8 +130,12 @@ function SelectOffer(props) {
     axios
       .post(base_url, formData, header)
       .then(async (Res) => {
-        // props.navigation.navigate('SelectOffer');
-        await setState({...state, loader: false, showOfferDetails: false});
+        console.log('response deleted', Res);
+        await setState({
+          ...state,
+          loader: false,
+          showOfferDetails: false,
+        });
 
         _GetAllOffersData();
       })
@@ -135,8 +145,40 @@ function SelectOffer(props) {
         setState({...state, loader: false});
       });
   };
+
+  const UpdateOfferData = (param) => {
+    console.log(param?.id);
+    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+
+    let formData = new FormData();
+
+    formData.append('title', param?.title);
+    formData.append('description', param?.description);
+    formData.append('price', Number(param?.price));
+    formData.append('feature_type', 'none');
+    formData.append('offer_id', param?.id);
+
+    let header = {
+      headers: {
+        'Content-Type': 'multipart/form-data; ',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios
+      .post(base_url, formData, header)
+      .then(async (Res) => {
+        console.log('response update', Res);
+
+        _GetAllOffersData();
+      })
+      .catch((err) => {
+        console.log('Error', err?.response?.data);
+      });
+  };
   return state.showOfferDetails ? (
     <LatestOffer
+      loader={state?.loader}
+      UpdateOfferData={(data) => UpdateOfferData(data)}
       status={status}
       props={{...props}}
       DeleteOffer={(data) => _DeleteOffer(data)}
