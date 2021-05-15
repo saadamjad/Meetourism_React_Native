@@ -254,6 +254,34 @@ class Actions {
         });
     };
   };
+  static GetAllCrushes = (data, token, navigation) => {
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get(`me?only=${data}`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res.data;
+            console.log('resss GetAllCrushes', response);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            // dispatch({type: actionTypes.GETALLCRUSHES, payload: response});
+            return response;
+          } else {
+            console.log('ELSE in login', res);
+            // dispatch({type: actionTypes.GETALLCRUSHES});
+
+            dispatch({type: actionTypes.STOPLOADER});
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response?.data;
+          let type = 'GetAllCrushes';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
   static ApplyFilter = (data, token, navigation) => {
     console.log('offers?', data);
     return async (dispatch) => {

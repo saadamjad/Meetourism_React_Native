@@ -25,6 +25,7 @@ const Profile = (props) => {
   );
   const [buttonHide, setButtonHide] = useState(false);
   const [userType, setUserType] = useState('0');
+  // const [state, se];
 
   useEffect(() => {
     // _GetUserType();
@@ -35,19 +36,6 @@ const Profile = (props) => {
     // }
   }, []);
 
-  const _GetUserType = async () => {
-    try {
-      const value = await AsyncStorage.getItem('userType');
-      if (value !== null) {
-        // We have data!!
-        setUserType(value);
-
-        console.log(value);
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
   const _Gallery = () => {
     // return <Gallery />;
     props.navigation.navigate('Gallery');
@@ -94,6 +82,7 @@ const Profile = (props) => {
               //   paddingBottom: 10,
             }}>
             Peter
+            {/* {data?.name} */}
           </Text>
           <Text style={{fontSize: 15, color: '#9E94A6'}}>
             San Francisco, CA
