@@ -7,6 +7,7 @@ const initialState = {
   images_Interests: [],
   status: '',
   alloffers: [],
+  MatchesData: [],
 };
 
 export default function (state = initialState, action) {
@@ -59,9 +60,19 @@ export default function (state = initialState, action) {
       console.log('helloo beta');
       return {...state, ...initialState};
 
-    case actionTypes.ADDOFFER:
-      console.log('ADDOFFER reducers');
-      return {...state, alloffers: action.payload};
+    case actionTypes.GETMATCHESDATA:
+      console.log('GETMATCHESDATA reducers');
+
+      return {
+        ...state,
+        loader: false,
+
+        MatchesData: action.payload,
+      };
+    case actionTypes.GETALLOFFERS:
+      console.log('GETALLOFFERS reducers');
+
+      return {...state, alloffers: action.payload, loader: false};
 
     default:
       return state;

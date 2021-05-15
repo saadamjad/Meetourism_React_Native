@@ -127,6 +127,8 @@ class Actions {
   static ErrorsHandlingFucntion = (errResponse, type) => {
     console.log(`err in catch  ${type}`, errResponse);
     return async (dispatch) => {
+      dispatch({type: actionTypes.STOPLOADER});
+
       if (errResponse?.email) {
         let email = errResponse?.email[0];
         return Toast('Error', email, 'error');
@@ -158,6 +160,34 @@ class Actions {
       dispatch({type: actionTypes.STARTLOADER});
     };
   };
+  static GetMatchesData = (data, token, values) => {
+    // console.log('GetMatchesData', data);
+
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get('offers', token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('resss========', response);
+
+            dispatch({type: actionTypes.GETMATCHESDATA, payload: response});
+          } else {
+            console.log('ELSE in login', res);
+            dispatch({type: actionTypes.GETMATCHESDATA, payload: []});
+
+            dispatch({type: actionTypes.STOPLOADER});
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response?.data;
+          let type = 'GetMatchesData';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
   static Logout = (navigation, values) => {
     console.log('Logout');
 
@@ -171,47 +201,53 @@ class Actions {
 
   //PARTNER ACTIONS
 
-  static AddOffers = (data, navigation) => {
-    return async (dispatch) => {
-      dispatch({type: actionTypes.ADDOFFER});
-      console.log('given data', data);
-      Post('offers', data)
-        .then((res) => {
-          console.log('resss', res);
-          // if (res.status_type === 'success') {
-          //   console.log('res offers', res.data);
-          //   let response = res?.data;
-          // } else {
-          //   console.log('ELSE in login', res);
-          //   Toast('Error', 'You Entered Wrong Email or Password', 'error');
-          // }
-        })
-        .catch((err) => {
-          // console.log('error');
-          let errResponse = err?.response?.data;
-          let type = 'Addoffer';
-          console.log('Error in catch', errResponse);
-          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
-        });
-    };
-  };
+  // static AddOffers = (data, navigation) => {
+  //   return async (dispatch) => {
+  //     dispatch({type: actionTypes.ADDOFFER});
+  //     console.log('given data', data);
+  //     Post('offers', data)
+  //       .then((res) => {
+  //         console.log('resss', res);
+  //         // if (res.status_type === 'success') {
+  //         //   console.log('res offers', res.data);
+  //         //   let response = res?.data;
+  //         // } else {
+  //         //   console.log('ELSE in login', res);
+  //         //   Toast('Error', 'You Entered Wrong Email or Password', 'error');
+  //         // }
+  //       })
+  //       .catch((err) => {
+  //         // console.log('error');
+  //         let errResponse = err?.response?.data;
+  //         let type = 'Addoffer';
+  //         console.log('Error in catch', errResponse);
+  //         // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+  //       });
+  //   };
+  // };
   static GetAllOffers = (data, token, navigation) => {
     return async (dispatch) => {
-      dispatch({type: actionTypes.ADDOFFER});
+      dispatch({type: actionTypes.STARTLOADER});
       return Get('offers', token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
             console.log('resss========', response);
 
+            dispatch({type: actionTypes.GETALLOFFERS, payload: response});
             return response;
           } else {
             console.log('ELSE in login', res);
+            dispatch({type: actionTypes.GETALLOFFERS, payload: []});
+
+            dispatch({type: actionTypes.STOPLOADER});
 
             // Toast('Error', 'You Entered Wrong Email or Password', 'error');
           }
         })
         .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
           let errResponse = err?.response?.data;
           let type = 'GetAllOffers';
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
@@ -259,6 +295,27 @@ class Actions {
         .catch((err) => {
           let errResponse = err?.response?.data;
           let type = 'DeleteOffer';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static UpdateUserProfileData = (data, token, navigation) => {
+    console.log('UpdateUserProfileData', data);
+    return async (dispatch) => {
+      return Post('me', data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res;
+            console.log('resss========', response);
+
+            return response;
+          } else {
+            console.log('ELSE in login', res);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'UpdateUserProfileData';
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
     };

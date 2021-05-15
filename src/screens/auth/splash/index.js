@@ -21,7 +21,7 @@ const App = (props) => {
         if (props.status === 'partner') {
           console.log('if');
           props.navigation.navigate('PartnerStack', {
-            screen: 'Hillviewresturant',
+            screen: 'partnerhome',
           });
         } else {
           console.log('elseeeee');

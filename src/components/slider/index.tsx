@@ -79,6 +79,86 @@ const SliderCom = (props) => {
           // thumbStyle="red"
         />
       </View>
+
+      <View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text
+            style={{
+              color: props.color ? props.color : theme.textColor.blackColor,
+              fontSize: 14,
+              marginVertical: 10,
+            }}>
+            French{' '}
+          </Text>
+          <Text
+            style={{
+              color: props.color ? props.color : theme.textColor.blackColor,
+              fontSize: 14,
+              marginVertical: 10,
+            }}>
+            {' '}
+            Fluient{' '}
+          </Text>
+        </View>
+
+        <Slider
+          // value={this.state.value}
+          onValueChange={(value) => console.log('value', value)}
+          thumbStyle={{
+            backgroundColor: '#D9B372',
+            height: 20,
+            width: 20,
+            borderRadius: 10,
+          }}
+          trackStyle={{
+            backgroundColor: props.trackStyle ? props.trackStyle : 'white',
+            borderRadius: 10,
+          }}
+          // style={{backgroundColor:'blue'}}
+          minimumTrackTintColor="#998FA2"
+          // thumbStyle="red"
+        />
+      </View>
+
+      <View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text
+            style={{
+              color: props.color ? props.color : theme.textColor.blackColor,
+              fontSize: 14,
+              marginVertical: 10,
+            }}>
+            German{' '}
+          </Text>
+          <Text
+            style={{
+              color: props.color ? props.color : theme.textColor.blackColor,
+              fontSize: 14,
+              marginVertical: 10,
+            }}>
+            {' '}
+            Fluient{' '}
+          </Text>
+        </View>
+
+        <Slider
+          // value={this.state.value}
+          onValueChange={(value) => console.log('value', value)}
+          thumbStyle={{
+            backgroundColor: '#D9B372',
+            height: 20,
+            width: 20,
+            borderRadius: 10,
+          }}
+          trackStyle={{
+            backgroundColor: props.trackStyle ? props.trackStyle : 'white',
+            borderRadius: 10,
+          }}
+          // style={{backgroundColor:'blue'}}
+          minimumTrackTintColor="#998FA2"
+          // thumbStyle="red"
+        />
+      </View>
     </>
   );
 };
