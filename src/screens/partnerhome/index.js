@@ -14,17 +14,22 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
 import {Actions} from '../../redux/actions/index';
 import {connect} from 'react-redux';
+import {TextInput} from 'react-native-gesture-handler';
+import {theme} from '../../constants/theme';
+import axios from 'axios';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 const App = (props) => {
-  const [userData, setUserData] = useState({});
+  const token = props.token;
+  const [userData, setUserData] = useState({
+    edit: false,
+    changeTextInput: false, //this state is only   get to know which input data is update or not
+  });
 
   useEffect(() => {
-    // _GetUserType();
     let data = props?.userData;
     setUserData({...userData, data});
-    // console.log('userData++', userData?.data);
   }, []);
   useEffect(() => {
-    // _GetUserType();
     let data = props?.userData;
     setUserData({...userData, data});
   }, [props.userData]);
@@ -50,13 +55,30 @@ const App = (props) => {
     },
   ]);
   const [select, setSelected] = useState(2);
+
+  const UpdateProfile = async (param) => {
+    setUserData({...userData, edit: !userData.edit});
+    if (userData.changeTextInput) {
+      let formData = new FormData();
+      formData.append('data[company_name]', userData?.data?.company_name);
+      formData.append('data[description]', userData?.data?.description);
+      formData.append('type', 'profile');
+      let value = await props.UpdateUserProfileData(
+        formData,
+        token,
+        props.navigation,
+      );
+      setUserData({...userData, edit: false, changeTextInput: false});
+    } else {
+      console.log('else not change');
+    }
+  };
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: '#241332',
       }}>
-      {console.log('props.image[0]props.image[0]')}
       <ScrollView
         style={{flex: 1}}
         contentContainerStyle={{flexGrow: 1}}
@@ -164,14 +186,12 @@ const App = (props) => {
               style={{
                 alignItems: 'flex-end',
                 flex: 1,
-                // paddingLeft: 45,
-                // paddingBottom: 20,
+
                 flexDirection: 'row',
               }}>
               <View
                 style={{
                   height: 60,
-                  // alignItems: 'flex-end',
                   flexDirection: 'row',
                 }}>
                 <View
@@ -179,24 +199,65 @@ const App = (props) => {
                     width: '80%',
                     paddingLeft: 40,
                     justifyContent: 'center',
-                    // paddingBottom: 20,
+                    // backgroundColor: 'blue',
                   }}>
-                  <Text
-                    style={{fontSize: 22, color: 'white', fontWeight: 'bold'}}>
-                    {/* Hill View Resturant */}
-                    {userData?.data?.company_name}
-                  </Text>
+                  <TextInput
+                    maxLength={25}
+                    onChangeText={(text) => {
+                      setUserData({
+                        ...userData,
+                        changeTextInput: true,
+
+                        data: {...userData.data, company_name: text},
+                      });
+                    }}
+                    editable={userData.edit}
+                    style={{
+                      fontSize: 22,
+                      borderColor: 'white',
+                      borderBottomWidth: userData.edit ? 1 : 0,
+
+                      color: 'white',
+                      fontWeight: 'bold',
+                    }}
+                    // {/* Hill View Resturant */}
+                    value={userData?.data?.company_name}
+                  />
                 </View>
 
-                <View
+                <TouchableOpacity
+                  activeOpacity={0.8}
                   style={{
                     width: '20%',
-                    // borderWidth: 1,
-                    // backgroundColor: 'red',
                     alignItems: 'center',
                     justifyContent: 'center',
+                  }}
+                  onPress={() => {
+                    userData.edit
+                      ? UpdateProfile()
+                      : setUserData({...userData, edit: !userData.edit});
                   }}>
-                  <Image
+                  <View
+                    style={{
+                      padding: 7,
+                      borderRadius: 30,
+                      borderWidth: 1,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderColor: userData.edit
+                        ? 'white'
+                        : theme.secondaryColor,
+                      backgroundColor: userData.edit
+                        ? 'white'
+                        : theme.secondaryColor,
+                    }}>
+                    <SimpleLineIcons
+                      name={userData.edit ? 'pencil' : 'pencil'}
+                      size={16}
+                      color={userData.edit ? 'black' : 'white'}
+                    />
+                  </View>
+                  {/* <Image
                     source={require('../../assets/icons/edit.png')}
                     resizeMode="contain"
                     style={{
@@ -205,8 +266,8 @@ const App = (props) => {
                       borderWidth: 0,
                       borderRadius: 30,
                     }}
-                  />
-                </View>
+                  /> */}
+                </TouchableOpacity>
               </View>
             </View>
           </ImageBackground>
@@ -290,9 +351,27 @@ const App = (props) => {
               <Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
                 About the Bussiness
               </Text>
-              <Text style={{color: '#9599B3', fontSize: 12, marginTop: 2}}>
-                {userData?.data?.description}
-              </Text>
+              <TextInput
+                editable={userData.edit}
+                multiline={true}
+                value={userData?.data?.description}
+                onChangeText={(text) =>
+                  setUserData({
+                    ...userData,
+                    changeTextInput: true,
+                    data: {...userData.data, description: text},
+                  })
+                }
+                style={{
+                  color: '#9599B3',
+                  padding: 0,
+                  margin: 0,
+                  fontSize: 12,
+                  marginTop: 2,
+                  borderBottomWidth: userData.edit ? 1 : 0,
+                  borderColor: userData.edit ? 'white' : theme.secondaryColor,
+                }}
+              />
             </View>
             <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
               {/* <Image
@@ -314,8 +393,10 @@ const App = (props) => {
           height: 60,
           // borderWidth: 1,
           width: '100%',
+          position: 'absolute',
           backgroundColor: 'white',
           flexDirection: 'row',
+          bottom: 0,
           justifyContent: 'space-around',
         }}>
         {[
@@ -418,11 +499,13 @@ const App = (props) => {
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   image: state.reducers.images_Interests,
+  token: state.reducers.token,
 
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
   Logout: Actions.Logout,
+  UpdateUserProfileData: Actions.UpdateUserProfileData,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

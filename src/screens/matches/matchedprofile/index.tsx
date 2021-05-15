@@ -18,21 +18,21 @@ import Feather from 'react-native-vector-icons/Feather';
 import Gallery from '../../../components/gallery';
 import {Icon} from 'native-base';
 const Profile = (props) => {
+  const data = props?.route?.params?.data;
+  console.log(
+    '==================================================================',
+    data,
+  );
   const [buttonHide, setButtonHide] = useState(false);
   const [userType, setUserType] = useState('0');
 
   useEffect(() => {
-    _GetUserType();
-
-    console.log(
-      '==================================================================',
-    );
+    // _GetUserType();
     // console.log('props?.route?.params?.dashboard', props?.route);
-
-    if (props?.route?.params) {
-      console.log('andr agyaa ha ', props?.route?.params);
-      setButtonHide(true);
-    }
+    // if (props?.route?.params) {
+    //   console.log('andr agyaa ha ', props?.route?.params);
+    //   setButtonHide(true);
+    // }
   }, []);
 
   const _GetUserType = async () => {
@@ -269,14 +269,13 @@ const Profile = (props) => {
               </Text>
               <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
               <SliderCom trackStyle="black" />
-              {console.log('--------', props.navigation)}
-              {buttonHide || userType == '2' ? null : (
-                <GlobalButton
-                  buttonText="Dashboard"
-                  width="70%"
-                  onPress={() => props.navigation.replace('drawer')}
-                />
-              )}
+              {/* {buttonHide || userType == '2' ? null : ( */}
+              <GlobalButton
+                buttonText="Dashboard"
+                width="70%"
+                onPress={() => props.navigation.replace('drawer')}
+              />
+              {/* )} */}
             </View>
           </View>
         </View>

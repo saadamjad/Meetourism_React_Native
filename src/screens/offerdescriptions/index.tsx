@@ -9,48 +9,35 @@ import {
   AsyncStorage,
   ScrollView,
 } from 'react-native';
-import {Actions} from '../../../redux/actions/index';
+import {Actions} from '../../redux/actions/index';
 
 import {connect} from 'react-redux';
 
-import GlobalButton from '../../../components/buttons/generalbutton';
-import {theme} from '../../../constants/theme';
+import GlobalButton from '../../components/buttons/generalbutton';
+import {theme} from '../../constants/theme';
 import {ImageBackground} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
-import AnimatedLoader from '../../../components/loader';
+import AnimatedLoader from '../../components/loader';
 
-let statusValue = 0;
-
-function DetailOffer1({
-  props,
-  data,
-  _onPress,
-  status,
-  token,
-  DeleteOffer,
-  loader,
-  UpdateOfferData,
-}) {
+function App(props) {
+  const offerDescriptions = props.alloffers;
+  const index = props?.route?.params?.index; //ye back se index leke arha ha and iskay according data get kr rha ha
   const [state, setState] = useState({
     edit: false,
-    offerData: {},
+    offerDescription: [],
+    loader: false,
   });
-  const [test, setTest] = useState();
-  let userStatus = status == 'partner' ? true : false;
 
   useEffect(() => {
-    console.log('Data===>===========', data);
-    setTest(data);
+    console.log('offerDescriptions', offerDescriptions[index]);
+    let getData = offerDescriptions[index];
+    setState({...state, offerDescription: getData});
   }, []);
 
-  const _UpdateOfferData = (data) => {
-    UpdateOfferData(data);
-    setState({...state, edit: !state.edit});
-  };
   return (
     <ImageBackground
-      source={require('../../../assets/images/statusbg.png')}
+      source={require('../../assets/images/statusbg.png')}
       style={{height: '100%', width: '100%'}}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View
@@ -66,7 +53,7 @@ function DetailOffer1({
               paddingHorizontal: 12,
               alignSelf: 'flex-start',
             }}
-            onPress={() => _onPress()}>
+            onPress={() => props.navigation.goBack()}>
             <Icon
               type="AntDesign"
               name="arrowleft"
@@ -96,9 +83,8 @@ function DetailOffer1({
                   height: 40,
                 }}>
                 <TextInput
-                  value={test?.title}
-                  onChangeText={(text) => setTest({...test, title: text})}
-                  editable={state.edit}
+                  value={state?.offerDescription?.title}
+                  editable={false}
                   style={{
                     color: theme.secondaryColor,
                     fontSize: 24,
@@ -113,26 +99,6 @@ function DetailOffer1({
                   }}
                   maxLength={20}
                 />
-                {userStatus ? (
-                  <TouchableOpacity
-                    style={{
-                      alignItems: 'flex-end',
-                      justifyContent: 'center',
-                      height: '100%',
-                      width: 50,
-                    }}
-                    onPress={() => {
-                      state.edit
-                        ? _UpdateOfferData(test)
-                        : setState({...state, edit: !state.edit});
-                    }}>
-                    <FontAwesome5
-                      name={state.edit ? 'pen' : 'edit'}
-                      color="black"
-                      size={20}
-                    />
-                  </TouchableOpacity>
-                ) : null}
               </View>
               <Text
                 style={{
@@ -146,8 +112,8 @@ function DetailOffer1({
                 Description
               </Text>
               <TextInput
-                value={test?.description}
-                onChangeText={(text) => setTest({...test, description: text})}
+                value={state?.offerDescription?.description}
+                editable={false}
                 style={{
                   color: 'black',
                   paddingBottom: 25,
@@ -174,9 +140,8 @@ function DetailOffer1({
                   borderColor: theme.secondaryColor,
                 }}>
                 <TextInput
-                  editable={state.edit}
-                  onChangeText={(text) => setTest({...test, price: text})}
-                  value={`${test?.price}`}
+                  editable={false}
+                  value={`${state?.offerDescription?.price}`}
                   style={{
                     color: theme.secondaryColor,
                     fontWeight: '700',
@@ -209,71 +174,74 @@ function DetailOffer1({
                 style={{
                   width: '100%',
                   alignItems: 'center',
-                  height: 200,
-                  paddingVertical: 20,
+                  height: 130,
+
+                  //   paddingVertical: 20,
+                  //   borderWidth: 1,
+                  overflow: 'hidden',
                 }}>
                 <Image
                   resizeMode="contain"
                   style={{height: '100%', width: '100%'}}
                   source={
-                    state.offerData?.image_path
-                      ? {uri: state.offerData?.image_path}
-                      : require('../../../assets/images/burgerDrink.png')
+                    state?.offerDescription?.image_path
+                      ? {uri: state.offerDescription?.image_path}
+                      : require('../../assets/images/burgerDrink.png')
                   }
                 />
               </View>
+              <View
+                style={{
+                  width: '100%',
+                  alignItems: 'center',
+                  height: 130,
+                  //   elevation: 1,
+                  paddingVertical: 5,
+                  overflow: 'hidden',
+                  //   borderWidth: 1,
+                }}>
+                <Image
+                  source={require('../../assets/images/map.jpg')}
+                  style={{height: '100%', width: '100%'}}
+                  resizeMode="cover"
+                />
+              </View>
             </View>
+
             <View
               style={{
                 flex: 1,
                 // borderWidth: 1,
                 justifyContent: 'flex-end',
-                paddingBottom: 30,
+                // paddingBottom: 30,
+                // backgroundColor: 'blue',
+                paddingVertical: 10,
               }}>
               {/* {statusValue == 2 ? ( */}
-              <View style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
-                <Image
-                  source={require('../../../assets/images/map.jpg')}
-                  style={{height: '100%', width: '100%'}}
-                  resizeMode="contain"
-                />
-              </View>
+
               <GlobalButton
                 buttonText="Pay the Offer"
                 height={50}
                 width="66%"
                 onPress={() => props.navigation.navigate('payment')}
               />
-
-              <View style={{height: 10}}></View>
-              {state.edit ? (
-                <GlobalButton
-                  buttonText="Delete this offer"
-                  height={50}
-                  width="66%"
-                  onPress={() => DeleteOffer(data)}
-                />
-              ) : null}
             </View>
           </View>
         </View>
       </ScrollView>
 
-      <AnimatedLoader status={loader} loaderMessage={'Deleting...'} />
+      <AnimatedLoader status={state.loader} loaderMessage={'Deleting...'} />
     </ImageBackground>
   );
 }
-// const mapStateToProp = (state) => ({
-//   userData: state.reducers.userData,
-//   image: state.reducers.images_Interests,
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  alloffers: state.reducers.alloffers,
 
-//   loader: state.reducers.loader,
-// });
-// const mapDispatchToProps = {
-//   Signup: Actions.Signup,
-//   DeleteOffer: Actions.DeleteOffer,
-// };
+  loader: state.reducers.loader,
+});
+const mapDispatchToProps = {
+  Signup: Actions.Signup,
+};
 
-// export default connect(mapStateToProp, mapDispatchToProps)(DetailOffer1);
-
-export default DetailOffer1;
+export default connect(mapStateToProp, mapDispatchToProps)(App);

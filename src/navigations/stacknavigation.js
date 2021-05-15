@@ -17,6 +17,7 @@ import allresturant from '../screens/allresturant';
 import Selectoffer from '../screens/alloffers/selectOffer';
 import createOffer from '../screens/alloffers/createOffer';
 import dealoffer1 from '../screens/alloffers/detailsOffer1';
+import offerdescriptions from '../screens/offerdescriptions';
 import selectPaymentMethod from '../screens/selectPaymentMethod';
 import AddPayment from '../screens/addPayment';
 import PaymentDetails from '../screens/payment';
@@ -209,6 +210,11 @@ export function ProfileStack() {
       <Stack.Screen
         name="detailoffer"
         component={dealoffer1}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="offerdescriptions"
+        component={offerdescriptions}
         options={{headerShown: false}}
       />
 
