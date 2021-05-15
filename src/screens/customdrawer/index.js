@@ -184,51 +184,46 @@ const DrawerContent = (props) => {
                 // icon: require('../assets/icons/64.png'),
                 icon: require('../../assets/icons/logout.png'),
               },
-            ].map(
-              (val, i) => (
-                console.log('loop', val),
-                (
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (val.name == 'Auth') {
-                        props.Logout(props.navigation);
-                      } else {
-                        val.name && props.navigation.navigate(val.name);
-                      }
-                    }}
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingHorizontal: 10,
-                      marginTop: 5,
-                      borderColor: 'black',
-                      paddingVertical: 10,
-                      width: '96%',
-                      borderRadius: 1,
-                      alignSelf: 'center',
-                      borderColor: '#dc92a2',
-                    }}>
-                    <Image
-                      source={val.icon}
-                      style={{height: 15, width: 15, marginRight: 15}}
-                      resizeMode="contain"
-                    />
+            ].map((val, i) => (
+              <TouchableOpacity
+                onPress={() => {
+                  if (val.name == 'Auth') {
+                    props.Logout(props.navigation);
+                  } else {
+                    val.name && props.navigation.navigate(val.name);
+                  }
+                }}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 10,
+                  marginTop: 5,
+                  borderColor: 'black',
+                  paddingVertical: 10,
+                  width: '96%',
+                  borderRadius: 1,
+                  alignSelf: 'center',
+                  borderColor: '#dc92a2',
+                }}>
+                <Image
+                  source={val.icon}
+                  style={{height: 15, width: 15, marginRight: 15}}
+                  resizeMode="contain"
+                />
 
-                    <Text
-                      style={{
-                        letterSpacing: 1,
+                <Text
+                  style={{
+                    letterSpacing: 1,
 
-                        flex: 1,
-                        // textAlign: 'left',
-                        color: 'white',
-                      }}>
-                      {val.title}
-                    </Text>
-                  </TouchableOpacity>
-                )
-              ),
-            ))
+                    flex: 1,
+                    // textAlign: 'left',
+                    color: 'white',
+                  }}>
+                  {val.title}
+                </Text>
+              </TouchableOpacity>
+            )))
           }
         </ScrollView>
       </View>

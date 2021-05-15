@@ -73,6 +73,10 @@ export default function (state = initialState, action) {
       console.log('GETALLOFFERS reducers');
 
       return {...state, alloffers: action.payload, loader: false};
+    case actionTypes.GETALLCRUSHES:
+      console.log('GETALLCRUSHES reducers');
+
+      return {...state, loader: false};
 
     default:
       return state;
