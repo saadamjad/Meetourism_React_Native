@@ -160,23 +160,20 @@ class Actions {
       dispatch({type: actionTypes.STARTLOADER});
     };
   };
-  static GetMatchesData = (data, token, values) => {
-    // console.log('GetMatchesData', data);
-
+  static GetMatchesData = (token) => {
     return async (dispatch) => {
       dispatch({type: actionTypes.STARTLOADER});
-      return Get('offers', token)
+      return Get('matches', token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            console.log('resss========', response);
+            // console.log('resss========', response.length);
+            console.log('resss========', response[0].interests);
 
             dispatch({type: actionTypes.GETMATCHESDATA, payload: response});
           } else {
             console.log('ELSE in login', res);
             dispatch({type: actionTypes.GETMATCHESDATA, payload: []});
-
-            dispatch({type: actionTypes.STOPLOADER});
           }
         })
         .catch((err) => {
@@ -324,6 +321,28 @@ class Actions {
           let errResponse = err?.response?.data;
           let type = 'DeleteOffer';
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static FollowUser = (data, token, navigation) => {
+    return async (dispatch) => {
+      return Post(`profile/relation/follow?user_id=${data}`, null, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('resss=FollowUser', response);
+
+            return true;
+          } else {
+            console.log('ELSE in FollowUser', res);
+            return false;
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'FollowUser';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          return false;
         });
     };
   };

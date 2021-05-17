@@ -7,7 +7,7 @@ const initialState = {
   images_Interests: [],
   status: '',
   alloffers: [],
-  MatchesData: [],
+  matchesData: [],
 };
 
 export default function (state = initialState, action) {
@@ -66,8 +66,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loader: false,
-
-        MatchesData: action.payload,
+        matchesData: action.payload,
       };
     case actionTypes.GETALLOFFERS:
       console.log('GETALLOFFERS reducers');

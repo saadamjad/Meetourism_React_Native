@@ -17,25 +17,35 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Gallery from '../../../components/gallery';
 import {Icon} from 'native-base';
+
+import {connect} from 'react-redux';
+
+import {Actions} from '../../../redux/actions/index';
 const Profile = (props) => {
+  const token = props.token;
   const data = props?.route?.params?.data;
-  console.log(
-    '==================================================================',
-    data,
-  );
+  const shape =
+    data?.weight < 50
+      ? 'slim'
+      : data?.weight >= 50 && data?.weight <= 65
+      ? 'smart'
+      : 'fat';
+
   const [buttonHide, setButtonHide] = useState(false);
-  const [userType, setUserType] = useState('0');
-  // const [state, se];
+  const [state, setState] = useState({
+    follow: false,
+  });
 
-  useEffect(() => {
-    // _GetUserType();
-    // console.log('props?.route?.params?.dashboard', props?.route);
-    // if (props?.route?.params) {
-    //   console.log('andr agyaa ha ', props?.route?.params);
-    //   setButtonHide(true);
-    // }
-  }, []);
-
+  const _followApiCall = async () => {
+    let id = data?.id;
+    let value = await props.FollowUser(id, token);
+    console.log('Valueeeee=', value);
+    if (value) {
+      setState({...state, follow: true});
+    } else {
+      setState({...state, follow: false});
+    }
+  };
   const _Gallery = () => {
     // return <Gallery />;
     props.navigation.navigate('Gallery');
@@ -81,13 +91,16 @@ const Profile = (props) => {
               fontWeight: '700',
               //   paddingBottom: 10,
             }}>
-            Peter
-            {/* {data?.name} */}
+            {/* Peter */}
+            {/* {data?.first_name + data?.last_name} */}
+            {data?.username}
           </Text>
           <Text style={{fontSize: 15, color: '#9E94A6'}}>
-            San Francisco, CA
+            {/* San Francisco, CA */}
+            {data?.country?.name}
+            {data?.city}
           </Text>
-          <Text style={{fontSize: 13, color: '#9E94A6'}}>20 years</Text>
+          <Text style={{fontSize: 13, color: '#9E94A6'}}> {data?.age} </Text>
           <View
             style={{
               width: '100%',
@@ -149,7 +162,8 @@ const Profile = (props) => {
                 borderWidth: 0,
                 alignItems: 'center',
                 justifyContent: 'center',
-              }}>
+              }}
+              onPress={() => _followApiCall()}>
               <FontAwesome name="user" color="#8A56AC" size={20} />
               {/* <Image
                 source={require('../../../assets/icons/userss.png')}
@@ -157,7 +171,7 @@ const Profile = (props) => {
                 resizeMode="contain"
               /> */}
               <Text style={{fontSize: 12, marginTop: 7, color: '#8F989D'}}>
-                Follow{' '}
+                {state.follow ? 'following' : 'Follow'}
               </Text>
             </TouchableOpacity>
           </View>
@@ -172,23 +186,37 @@ const Profile = (props) => {
               backgroundColor: 'white',
             }}>
             <View style={{flex: 1, paddingHorizontal: 30, paddingVertical: 20}}>
-              <Text style={{fontSize: 15, color: 'black', marginVertical: 5}}>
-                Interests
-              </Text>
+              {data?.interests?.length > 0 ? (
+                <Text style={{fontSize: 15, color: 'black', marginVertical: 5}}>
+                  Interests
+                </Text>
+              ) : null}
 
               <View
                 style={{
                   width: '100%',
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  // justifyContent: 'space-between',
                   flexWrap: 'wrap',
 
                   borderWidth: 0,
                   marginVertical: 5,
                 }}>
-                {['Fitness', 'Beauty', 'Dogs', 'Cats', 'Laundry'].map((val) => (
-                  <Text style={{fontSize: 10, color: 'black'}}>{val}</Text>
-                ))}
+                {data?.interests?.length > 0
+                  ? data?.interests.map((val) => (
+                      <View
+                        style={{
+                          width: '20%',
+                          alignItems: 'center',
+                          // borderWidth: 1,
+                          paddingVertical: 10,
+                        }}>
+                        <Text style={{fontSize: 13, color: 'black'}}>
+                          {val.name}{' '}
+                        </Text>
+                      </View>
+                    ))
+                  : null}
               </View>
               <View
                 style={{
@@ -199,9 +227,9 @@ const Profile = (props) => {
                   marginTop: 15,
                 }}>
                 {[
-                  {name: 'AGE', value: '17'},
-                  {name: 'Contact', value: 'xxxxxxx'},
-                  {name: 'City', value: 'XYZ'},
+                  {name: 'AGE', value: data?.age},
+                  {name: 'Contact', value: data?.phone},
+                  {name: 'City', value: data?.city},
                 ].map((val) => (
                   <View style={{width: '25%', alignItems: 'center'}}>
                     <Text
@@ -228,9 +256,9 @@ const Profile = (props) => {
                   marginTop: 15,
                 }}>
                 {[
-                  {name: 'Height', value: '5.9'},
-                  {name: 'Shape', value: 'slim'},
-                  {name: 'EyeColor', value: 'Blue'},
+                  {name: 'Height', value: data?.height},
+                  {name: 'Shape', value: shape},
+                  {name: 'EyeColor', value: data?.eye_color},
                 ].map((val) => (
                   <View style={{width: '25%', alignItems: 'center'}}>
                     <Text
@@ -252,19 +280,15 @@ const Profile = (props) => {
                 Description
               </Text>
               <Text style={{lineHeight: 20, color: 'gray', fontSize: 11}}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                sodales pulvinar lectus eu consequat. Sed sagittis ex non purus
-                porttitor, sit amet posuere justo ultrices.
+                {data?.description}
               </Text>
               <Text style={{fontSize: 18, paddingVertical: 10}}>Language</Text>
               <SliderCom trackStyle="black" />
-              {/* {buttonHide || userType == '2' ? null : ( */}
               <GlobalButton
                 buttonText="Dashboard"
                 width="70%"
                 onPress={() => props.navigation.replace('drawer')}
               />
-              {/* )} */}
             </View>
           </View>
         </View>
@@ -273,4 +297,15 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+const mapStateToProp = (state) => ({
+  loader: state.reducers.loader,
+  matches: state.reducers.matchesData,
+  alloffers: state.reducers.alloffers,
+  token: state.reducers.token,
+});
+const mapDispatchToProps = {
+  FollowUser: Actions.FollowUser,
+  // Login: Actions.Login,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Profile);

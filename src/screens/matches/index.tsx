@@ -17,46 +17,21 @@ const App = (props) => {
   const [state, setState] = useState({
     offers: [],
     loader: false,
+    matches: [],
   });
-  const [offer, setOffers] = useState([
-    {
-      image: '../../assets/images/burgerBackground.png',
-      offerName: 'whoper Feast',
-    },
-    {
-      image: '../../assets/images/burgerBackground.png',
-      offerName: 'whoper Feast',
-    },
-    {
-      image: '../../assets/images/burgerBackground.png',
-      offerName: 'whoper Feast',
-    },
-    {
-      image: '../../assets/images/burgerBackground.png',
-      offerName: 'whoper Feast',
-    },
-    {
-      image: '../../assets/images/burgerBackground.png',
-      offerName: 'whoper Feast',
-    },
-  ]);
 
   useEffect(() => {
-    _GetMatchesData();
-    // if (props?.route?.params) {
-    //   console.log('andr agyaa ha ', props?.route?.params);
-    //   setButtonHide(true);
-    // }
+    _GetMatchesData(), props.GetAllOffers(null, token);
   }, []);
-  // useEffect(() => {
-  //   setState({...state, offers: offers, loader: false});
-  // }, [props.alloffers]);
+  useEffect(() => {
+    setState({...state, matches: props.matches});
+  }, [props.matches]);
 
   const _GetMatchesData = async () => {
     setState({...state, loader: true});
-
-    let value = await props.GetMatchesData(null, token);
-    setState({...state, loader: false});
+    // '133|7YAjWfsLSQqRW4tI1VURjA4z1NAV7Sn2XyjV9Z7h',
+    let value = await props.GetMatchesData(token);
+    setState({...state, loader: false, matches: props.matches});
   };
   return (
     <View
@@ -130,86 +105,85 @@ const App = (props) => {
           </ScrollView>
         </View>
 
-        {props.matches &&
-          props.matches.map((item, i) => {
-            // console.log('itemmm', item);
-            return (
-              <View
-                style={{
-                  flex: 1,
-                  paddingVertical: 15,
-                  borderBottomWidth: 1.5,
-                  borderColor: theme.primaryColor1,
-                  backgroundColor: theme.primaryColor,
-                  justifyContent: 'center',
-                }}>
+        {state?.matches?.length > 0
+          ? state.matches.map((item, i) => {
+              {
+                console.log('item>>>', item.interests);
+              }
+              return (
                 <View
                   style={{
-                    borderRadius: 30,
-                    width: '88%',
-                    alignSelf: 'center',
-                    backgroundColor: 'white',
-                    paddingVertical: 10,
-                    marginVertical: 10,
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-
-                    elevation: 5,
+                    flex: 1,
+                    paddingVertical: 15,
+                    borderBottomWidth: 1.5,
+                    borderColor: theme.primaryColor1,
+                    backgroundColor: theme.primaryColor,
+                    justifyContent: 'center',
                   }}>
-                  <Text
+                  <View
                     style={{
-                      color: '#FF0606',
-                      fontSize: 26,
-                      textAlign: 'center',
-                      marginTop: 6,
-                    }}>
-                    {' '}
-                    See Your Match{' '}
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#707070',
+                      borderRadius: 30,
+                      width: '88%',
+                      alignSelf: 'center',
+                      backgroundColor: 'white',
+                      paddingVertical: 10,
                       marginVertical: 10,
-                      fontSize: 14,
-                      textAlign: 'center',
-                      marginTop: 10,
-                      lineHeight: 20,
-                    }}>
-                    {' '}
-                    Mutual sympathy. Do not waste {'\n'} and write to Him
-                  </Text>
+                      shadowColor: '#000',
+                      shadowOffset: {
+                        width: 0,
+                        height: 2,
+                      },
+                      shadowOpacity: 0.25,
+                      shadowRadius: 3.84,
 
-                  <View style={{borderWidth: 0, width: '100%'}}>
-                    <Image
-                      source={require('../../assets/icons/group.png')}
-                      style={{height: 240, width: '100%'}}
-                      resizeMode="cover"
-                    />
-                  </View>
-                  <View style={{paddingHorizontal: 25, marginBottom: 10}}>
+                      elevation: 5,
+                    }}>
                     <Text
                       style={{
-                        color: 'black',
-                        fontWeight: 'bold',
-                        marginBottom: 10,
+                        color: '#FF0606',
+                        fontSize: 26,
+                        textAlign: 'center',
+                        marginTop: 6,
                       }}>
-                      Description{' '}
+                      {' '}
+                      See Your Match{' '}
                     </Text>
-                    <Text style={{fontSize: 12, color: '#707070'}}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris ...{' '}
+                    <Text
+                      style={{
+                        color: '#707070',
+                        marginVertical: 10,
+                        fontSize: 14,
+                        textAlign: 'center',
+                        marginTop: 10,
+                        lineHeight: 20,
+                      }}>
+                      {' '}
+                      Mutual sympathy. Do not waste {'\n'} and write to Him/her
                     </Text>
-                  </View>
 
-                  {/* {buttonHide ? ( */}
-                  {/* <View style={{overflow: 'hidden'}}>
+                    <View style={{borderWidth: 0, width: '100%'}}>
+                      <Image
+                        source={require('../../assets/icons/group.png')}
+                        style={{height: 240, width: '100%'}}
+                        resizeMode="cover"
+                      />
+                    </View>
+                    <View style={{paddingHorizontal: 25, marginBottom: 10}}>
+                      <Text
+                        style={{
+                          color: 'black',
+                          fontWeight: 'bold',
+                          marginBottom: 10,
+                        }}>
+                        Description{' '}
+                      </Text>
+                      <Text style={{fontSize: 12, color: '#707070'}}>
+                        {item.description}
+                      </Text>
+                    </View>
+
+                    {/* {buttonHide ? ( */}
+                    {/* <View style={{overflow: 'hidden'}}>
                     <GlobalButton
                       onPress={() =>
                         props.navigation.navigate('matchprofile', {
@@ -222,38 +196,38 @@ const App = (props) => {
                       height={40}
                     />
                   </View> */}
-                  {/* ) : ( */}
-                  <View style={{overflow: 'hidden'}}>
-                    <GlobalButton
-                      onPress={() =>
-                        props.navigation.navigate('matchprofile', {
-                          // buttonHide: true,
-                          data: item,
-                        })
-                      }
-                      width="48%"
-                      buttonText="Profile"
-                      height={40}
-                    />
-                  </View>
-                  {/* )} */}
+                    {/* ) : ( */}
+                    <View style={{overflow: 'hidden'}}>
+                      <GlobalButton
+                        onPress={() =>
+                          props.navigation.navigate('matchprofile', {
+                            data: item,
+                          })
+                        }
+                        width="48%"
+                        buttonText="Profile"
+                        height={40}
+                      />
+                    </View>
+                    {/* )} */}
 
-                  <TouchableOpacity
-                    onPress={() => props.navigation.navigate('search')}
-                    style={{
-                      width: '60%',
-                      alignItems: 'center',
-                      alignSelf: 'center',
-                    }}>
-                    <Text style={{fontSize: 15, marginVertical: 5}}>
-                      {' '}
-                      Back to search
-                    </Text>
-                  </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => props.navigation.navigate('search')}
+                      style={{
+                        width: '60%',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                      }}>
+                      <Text style={{fontSize: 15, marginVertical: 5}}>
+                        {' '}
+                        Back to search
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            );
-          })}
+              );
+            })
+          : null}
       </ScrollView>
 
       <AnimatedLoader
@@ -265,12 +239,13 @@ const App = (props) => {
 };
 const mapStateToProp = (state) => ({
   loader: state.reducers.loader,
-  matches: state.reducers.alloffers,
+  matches: state.reducers.matchesData,
   alloffers: state.reducers.alloffers,
   token: state.reducers.token,
 });
 const mapDispatchToProps = {
   GetMatchesData: Actions.GetMatchesData,
+  GetAllOffers: Actions.GetAllOffers,
   // Login: Actions.Login,
 };
 
