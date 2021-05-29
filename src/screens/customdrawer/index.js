@@ -83,14 +83,17 @@ const DrawerContent = (props) => {
             }}>
             <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
               {' '}
-              Lady in the Blue
+              {props.userData?.first_name + ' ' + props.userData?.last_name}
             </Text>
           </View>
           <View
             style={{
               paddingLeft: 40,
             }}>
-            <Text style={{color: 'white', fontSize: 12}}> @LadyintheBlue</Text>
+            <Text style={{color: 'white', fontSize: 12}}>
+              {' '}
+              @{props.userData?.username}{' '}
+            </Text>
           </View>
         </ImageBackground>
       </View>
@@ -114,6 +117,13 @@ const DrawerContent = (props) => {
               {
                 title: 'Match',
                 name: 'Match',
+                type: 'Entypo',
+                // icon: require('../assets/icons/70.png'),
+                icon: require('../../assets/icons/userss.png'),
+              },
+              {
+                title: 'Orders',
+                name: 'userorders',
                 type: 'Entypo',
                 // icon: require('../assets/icons/70.png'),
                 icon: require('../../assets/icons/userss.png'),

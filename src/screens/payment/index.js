@@ -8,8 +8,14 @@ import LongHeader from '../../components/header/longheader';
 import {TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import DropDownPicker from 'react-native-dropdown-picker';
+
+import {connect} from 'react-redux';
+
+import {Actions} from '../../redux/actions/index';
 import Button from '../../components/buttons/generalbutton';
 const Messages = (props) => {
+  const token = props.token;
+  const orderData = props?.orderData;
   const [state, setState] = useState({
     messages: [
       {
@@ -61,15 +67,74 @@ const Messages = (props) => {
         l: 2,
       },
     ],
+    loader: false,
+    // dropDown: [
+    //   {
+    //     key: {
+    //       placeholder: 'Country',
+    //       value: 'usa',
+    //     },
+    //   },
+    //   {
+    //     key: {
+    //       placeholder: 'City',
+
+    //       value: 'karachi',
+    //     },
+    //   },
+    //   {
+    //     key: {
+    //       placeholder: 'Address',
+
+    //       value: 'shaz',
+    //     },
+    //   },
+    // ],
+    dropDown: [
+      {
+        name: 'country',
+        values: ['Pakistan', 'bangaladesh', 'Switzerland'],
+        // values: ['1', '1.0', '1.2'],
+      },
+      {
+        name: 'City',
+        values: ['Karachi', 'Hyderabad Dakan', 'SwitzerlandCity'],
+        // values: ['2', '2.0', '2.1'],
+      },
+      {
+        name: 'Address',
+        values: ['shaz', 'banglows', 'Defence'],
+        // values: ['3'],
+      },
+    ],
   });
+  const _CreateOrder = async () => {
+    setState({...state, loader: true});
+
+    let data = {
+      partner_id: orderData?.user?.id,
+      order_type: 'delivery',
+      payment_type: 'cash',
+      items: [
+        {
+          id: orderData?.id, //item id
+          quantity: 1,
+        },
+      ],
+    };
+    let value = await props.CreateOrder(data, token, props.navigation);
+
+    setState({...state, loader: false});
+  };
+
   return (
     <CustomView bg={theme.primaryColor} scroll>
       <LongHeader
         navigation={props.navigation}
         leftArrow={true}
-        searchIcon={true}
         headerText="Payment"
       />
+
       <View
         style={{
           flex: 1,
@@ -178,87 +243,102 @@ const Messages = (props) => {
             </View>
           </View>
           <View>
-            <DropDownPicker
-              items={[
-                {
-                  label: 'USA',
-                  value: 'usa',
-                },
-              ]}
-              placeholder="Country"
-              placeholderStyle={{color: 'white'}}
-              searchablePlaceholderTextColor="white"
-              containerStyle={{height: 40, marginTop: 20, color: 'white'}}
-              style={{
-                backgroundColor: 'transparent',
-                borderBottomWidth: 1,
-                borderWidth: 0,
-                color: 'white',
-              }}
-              itemStyle={{
-                justifyContent: 'flex-start',
-                color: 'white',
-              }}
-              arrowColor={'white'}
-              onChangeItem={(item) => console.log('items', item)}
-            />
+            {state.dropDown.map((item, i) => {
+              return (
+                <>
+                  <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => {
+                      setState({
+                        ...state,
+                        dropDown: state.dropDown.map((val, index) => {
+                          console.log('item.ke', val.selected);
+                          if (index == i) {
+                            return {...val, selected: !val.selected};
+                          } else {
+                            return {...val, selected: false};
+                          }
+                        }),
+                      });
+                    }}
+                    style={{
+                      flexDirection: 'row',
+                      width: '100%',
+                      alignSelf: 'center',
+                      height: 50,
+                    }}>
+                    <View style={{flex: 0.8, justifyContent: 'center'}}>
+                      <Text style={{fontSize: 16, color: 'white'}}>
+                        {item?.name}
+                      </Text>
+                    </View>
+                    <TouchableOpacity
+                      style={{
+                        flex: 0.2,
+                        justifyContent: 'center',
+                        alignItems: 'flex-end',
+                      }}
+                      onPress={() => {
+                        setState({
+                          ...state,
+                          dropDown: state.dropDown.map((val, index) => {
+                            console.log('item.ke', val.selected);
+                            if (index == i) {
+                              return {...val, selected: !val.selected};
+                            } else {
+                              return {...val, selected: false};
+                            }
+                          }),
+                        });
+                      }}>
+                      <Icon
+                        name={item.selected ? 'arrow-up' : 'arrow-down'}
+                        color="white"
+                        size={15}
+                      />
+                    </TouchableOpacity>
+                  </TouchableOpacity>
+                  {item.selected ? (
+                    <View
+                      style={{
+                        // height: 100,
+                        backgroundColor: 'white',
+                      }}>
+                      {item.values &&
+                        item.values.map((keys, loop) => {
+                          return (
+                            <TouchableOpacity
+                              onPress={() => {
+                                setState({
+                                  ...state,
 
-            <DropDownPicker
-              items={[
-                {
-                  label: 'USA',
-                  value: 'usa',
-                },
-              ]}
-              placeholder="City"
-              placeholderStyle={{color: 'white'}}
-              arrowColor={'white'}
-              searchablePlaceholderTextColor="white"
-              containerStyle={{
-                height: 40,
-                marginTop: 20,
-                color: 'white',
-              }}
-              style={{
-                backgroundColor: 'transparent',
-                borderBottomWidth: 1,
-                borderWidth: 0,
-                color: 'white',
-              }}
-              itemStyle={{
-                justifyContent: 'flex-start',
-                color: 'white',
-              }}
-              //   dropDownStyle={{color: 'white'}}
-              onChangeItem={(item) => console.log('items', item)}
-            />
-
-            <DropDownPicker
-              arrowColor={'white'}
-              items={[
-                {
-                  label: 'USA',
-                  value: 'usa',
-                },
-              ]}
-              placeholder="Address"
-              placeholderStyle={{color: 'white'}}
-              searchablePlaceholderTextColor="white"
-              containerStyle={{height: 40, marginTop: 20, color: 'white'}}
-              style={{
-                backgroundColor: 'transparent',
-                borderBottomWidth: 1,
-                borderWidth: 0,
-                color: 'white',
-              }}
-              itemStyle={{
-                justifyContent: 'flex-start',
-                color: 'white',
-              }}
-              //   dropDownStyle={{color: 'white'}}
-              onChangeItem={(item) => console.log('items', item)}
-            />
+                                  dropDown: state.dropDown.map((v, ind) => {
+                                    if (ind == i) {
+                                      return {
+                                        ...v,
+                                        name: item.values[loop],
+                                      };
+                                    } else {
+                                      return {...v};
+                                    }
+                                  }),
+                                });
+                              }}
+                              key={loop}
+                              style={{paddingVertical: 7, borderWidth: 0}}>
+                              <Text style={{fontSize: 15}}> {keys} </Text>
+                            </TouchableOpacity>
+                          );
+                        })}
+                    </View>
+                  ) : null}
+                </>
+              );
+            })}
           </View>
+          <Text style={{fontSize: 15, color: 'white', textAlign: 'right'}}>
+            {props?.orderData?.price}
+          </Text>
         </View>
         <View
           style={{
@@ -269,10 +349,10 @@ const Messages = (props) => {
           }}>
           <View style={{overflow: 'hidden'}}>
             <Button
+              loader={state.loader}
               buttonText={'Save'}
               width={'100%'}
-              onPress={() => props.navigation.navigate('detailsoffer')}
-              // onPress={() => props.navigation.navigate('selectPaymentMethodCards')}
+              onPress={() => _CreateOrder()}
             />
           </View>
         </View>
@@ -281,4 +361,13 @@ const Messages = (props) => {
   );
 };
 
-export default Messages;
+const mapStateToProp = (state) => ({
+  loader: state.reducers.loader,
+  token: state.reducers.token,
+  orderData: state.reducers.orderData,
+});
+const mapDispatchToProps = {
+  CreateOrder: Actions.CreateOrder,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Messages);

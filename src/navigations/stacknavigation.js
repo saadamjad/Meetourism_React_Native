@@ -41,6 +41,7 @@ import Search from '../screens/search';
 import Successful from '../screens/successful';
 import Cruhes from '../screens/crushes';
 import Friends from '../screens/friends';
+import userorders from '../screens/userorders';
 
 // ALL PARTNERS SCREENS
 import Hillviewresturant from '../screens/allresturant';
@@ -189,6 +190,11 @@ export function ProfileStack() {
       <Stack.Screen
         name="Friends"
         component={Friends}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="userorders"
+        component={userorders}
         options={{headerShown: false}}
       />
 

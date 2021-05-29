@@ -66,6 +66,7 @@ const App = (props) => {
       let value = await props.UpdateUserProfileData(
         formData,
         token,
+        userData,
         props.navigation,
       );
       setUserData({...userData, edit: false, changeTextInput: false});

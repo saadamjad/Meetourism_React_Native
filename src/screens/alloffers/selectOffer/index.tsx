@@ -15,7 +15,7 @@ import Successful from '../../successful';
 import LatestOffer from '../../alloffers/detailsOffer1';
 import Overlay from '../../../components/overlays';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import {Actions} from '../../../redux/actions';
 import {connect} from 'react-redux';
 import AnimatedLoader from '../../../components/loader';
@@ -35,12 +35,13 @@ function SelectOffer(props) {
     showFilter: false,
     loaderMessage: 'Loading...',
     notFoundMessage: '',
+    offerName: '',
   });
 
   const [filterItems, setFilterItems] = useState([
     {
       name: 'SELECT MINIMUM PRICE',
-      value: ['10', '200', '300'],
+      value: ['0', '200', '300'],
     },
     {
       name: 'SELECT MAXIMUM PRICE',
@@ -85,7 +86,7 @@ function SelectOffer(props) {
   const ApplyFilter = async (value, index) => {
     setState({...state, loader: true, loaderMessage: 'searching'});
 
-    let data = `price[min]=${state.minimumPrice}&price[max]=${state.maximumPrice}`;
+    let data = `q=${state.offerName}&price[min]=${state.minimumPrice}&price[max]=${state.maximumPrice}`;
     let filterValues = await props.ApplyFilter(data, token, props.navigation);
 
     filterValues
@@ -180,9 +181,10 @@ function SelectOffer(props) {
       loader={state?.loader}
       UpdateOfferData={(data) => UpdateOfferData(data)}
       status={status}
-      props={{...props}}
+      propss={{...props}}
       DeleteOffer={(data) => _DeleteOffer(data)}
       token={token}
+      SaveOrderData={(data) => props.SaveOrderData(data, props.navigation)}
       data={state?.allOffers[state.index]}
       _onPress={() => setState({...state, showOfferDetails: false})}
     />
@@ -379,6 +381,24 @@ function SelectOffer(props) {
                 Apply Price Filters
               </Text>
               <ScrollView showsVerticalScrollIndicator={false}>
+                <TextInput
+                  placeholder="Search  Offer Name"
+                  style={{
+                    height: 50,
+                    fontSize: 20,
+                    width: '90%',
+                    alignSelf: 'center',
+                    borderBottomWidth: 0.6,
+                    paddingHorizontal: 10,
+                    marginVertical: 15,
+                  }}
+                  onChangeText={(text) =>
+                    setState({
+                      ...state,
+                      offerName: text.replace(/^\s+|.\s+$/gm, ''),
+                    })
+                  }
+                />
                 <View
                   style={{
                     marginHorizontal: 10,
@@ -554,12 +574,14 @@ const mapStateToProps = (state) => ({
   loader: state.reducers.loader,
   token: state.reducers.token,
   status: state.reducers.status,
+  orderData: state.reducers.orderData,
 });
 const mapDispatchToProps = {
   // Signup: Actions.Signup,
   GetAllOffers: Actions.GetAllOffers,
   ApplyFilter: Actions.ApplyFilter,
   DeleteOffer: Actions.DeleteOffer,
+  SaveOrderData: Actions.SaveOrderData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectOffer);

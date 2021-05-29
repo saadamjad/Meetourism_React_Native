@@ -10,25 +10,29 @@ import {
 } from 'react-native';
 import {theme} from '../../../constants/theme';
 // import styles from './styles';
-import ForgotPassword from '../forgotpassword';
 import CustomView from '../../../components/customView';
-import {TabView, SceneMap} from 'react-native-tab-view';
 import HoldOn from '../../holdOn';
 import {connect} from 'react-redux';
-
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    name: 'saad amjad',
-    email: 'saad@gmail.com',
-    password: '123456789',
-    confirmPassword: '123456789',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    // name: 'saad amjad',
+    // email: 'saad@gmail.com',
+    // password: '123456789',
+    // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
     email: 'saad.amjad434@gmail.com',
     password: 'saad@12345',
+
+    // email: '',
+    // password: '',
   });
   const [state, setState] = useState({
     selectedIndex: 0,
