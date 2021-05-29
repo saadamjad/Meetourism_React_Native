@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   Dimensions,
@@ -16,6 +16,8 @@ import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
     name: '',
@@ -34,6 +36,12 @@ const App = (props) => {
     // email: '',
     // password: '',
   });
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.setAddressText('Some Text blue');
+  }, []);
+
   const [state, setState] = useState({
     selectedIndex: 0,
     visible: false,
@@ -369,7 +377,34 @@ const App = (props) => {
 
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
-      <View
+      <GooglePlacesAutocomplete
+        ref={ref}
+        placeholder="Enter Location"
+        minLength={2}
+        autoFocus={true}
+        // returnKeyType={'default'}
+        fetchDetails={true}
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log('sssss', data, details);
+        }}
+        onChangeText={(text) => console.log('Heo', text)}
+        styles={{
+          textInputContainer: {
+            backgroundColor: 'grey',
+          },
+          textInput: {
+            height: 38,
+            color: '#5d5d5d',
+            fontSize: 16,
+          },
+          predefinedPlacesDescription: {
+            color: '#1faadb',
+          },
+        }}
+      />
+
+      {/* <View
         style={{
           width: '100%',
           height: 150,
@@ -407,6 +442,8 @@ const App = (props) => {
           </TouchableOpacity>
         ))}
       </View>
+   */}
+
       {state.selectedIndex == '0' ? signInRoute() : signUpRoute()}
       <AnimatedLoader
         status={loader}
