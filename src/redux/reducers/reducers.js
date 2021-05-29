@@ -8,6 +8,11 @@ const initialState = {
   status: '',
   alloffers: [],
   matchesData: [],
+  allCrushes: [],
+  editSetting: false,
+  allCountries: [],
+  allInterests: [],
+  orderData: {},
 };
 
 export default function (state = initialState, action) {
@@ -56,27 +61,58 @@ export default function (state = initialState, action) {
         images_Interests: action.payload,
       };
 
-    case actionTypes.LOGOUT:
-      console.log('helloo beta');
-      return {...state, ...initialState};
-
     case actionTypes.GETMATCHESDATA:
-      console.log('GETMATCHESDATA reducers');
-
       return {
         ...state,
         loader: false,
         matchesData: action.payload,
       };
+    // case actionTypes.UPDATEPROFILEDATA:
+    //   console.log('UPDATEPROFILEDATA ', action.payload);
+    //   return {
+    //     ...state,
+    //     loader: false,
+    //     userData: action.payload,
+    //   };
+
     case actionTypes.GETALLOFFERS:
-      console.log('GETALLOFFERS reducers');
-
       return {...state, alloffers: action.payload, loader: false};
-    case actionTypes.GETALLCRUSHES:
-      console.log('GETALLCRUSHES reducers');
+    case actionTypes.EDITSETTING:
+      return {...state, loader: false, editSetting: action.payload};
 
+    case actionTypes.GETUSERPROFILEDATA:
       return {...state, loader: false};
+    case actionTypes.GETALLCRUSHES:
+      return {...state, loader: false, allCrushes: action.payload};
+    case actionTypes.GETCOUNTRIES:
+      return {...state, loader: false, allCountries: action.payload};
+    case actionTypes.GETINTERESTS:
+      return {...state, loader: false, allInterests: action.payload};
+    case actionTypes.UPDATECOMPLETEPROFILE:
+      console.log('action.payloadaction.payload', action.payload);
+      return {
+        ...state,
+        loader: false,
+        userData: action.payload,
+        editSetting: false,
+      };
+    case actionTypes.SAVEORDERDATA:
+      console.log('action.payloadaction.payload', action.payload);
+      return {
+        ...state,
+        loader: false,
+        orderData: action.payload,
+      };
+    case actionTypes.CREATEORDER:
+      console.log('action.payloadaction.payload', action.payload);
+      return {
+        ...state,
+        loader: false,
+        orderData: {},
+      };
 
+    case actionTypes.LOGOUT:
+      return {...state, ...initialState};
     default:
       return state;
   }

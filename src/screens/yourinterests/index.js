@@ -42,19 +42,26 @@ const Status = (props) => {
     selectedInterests: [],
     isVisible: false,
     noValues: true,
+    loader: true,
   });
 
   useEffect(() => {
-    _UserType();
-    _GetInterests();
-  }, []);
+    if (props.editSetting) {
+      let value = props?.userData?.interests.map((item, i) => {
+        return {...item, selected: true};
+      });
 
-  const _UserType = async () => {
-    let value = await AsyncStorage.getItem('userStatus');
-    console.log(value);
-    statusValue = value;
-  };
-  const _UserRegister = async () => {
+      setState({
+        ...state,
+        interests: value,
+        loader: false,
+      });
+    } else {
+      setState({...state, interests: props?.allInterests, loader: false});
+    }
+  }, [props.allInterests, props.userData]);
+
+  const _UserRegister = async (value) => {
     let data2 = company_name
       ? {
           company_name: data?.company_name,
@@ -72,7 +79,7 @@ const Status = (props) => {
           height: Number(data?.height),
           eye_color: data?.eyeColor,
           status: data?.status,
-          interests: data?.interests,
+          interests: state.interests,
           images: data?.images,
           description: data?.description,
           // company_name: data.company_name,
@@ -111,7 +118,7 @@ const Status = (props) => {
           height: Number(data?.height),
           eye_color: data?.eyeColor,
           status: data?.status,
-          interests: data?.interests,
+          interests: state?.interests,
           images: data?.images,
           description: data?.description,
 
@@ -133,62 +140,19 @@ const Status = (props) => {
           // interests: [1, 2],
           // images: ['user_images/user-image-608de193434244-74625999.jpg'],
         };
-    console.log('data', data2);
     setLoader(true);
 
-    let value = await props.Signup(data2, props.navigation, company_name);
+    if (props?.editSetting) {
+      await props.UpdateCompleteProfile(data2, props.navigation, company_name);
+      setLoader(false);
+    } else {
+      let testingValue = {...data2, interests: value};
+      console.log('testing,', testingValue);
+      await props.Signup(testingValue, props.navigation, company_name);
+
+      setLoader(false);
+    }
     setLoader(false);
-  };
-
-  const _Navigation = () => {
-    props.Signup(data, props.navigation);
-
-    // if (statusValue == 0) {
-    //   // alert('user');
-    //   props.navigation.navigate('profilePreivew');
-    // } else if (statusValue == 1) {
-    //   // alert('relationship');
-    //   props.navigation.navigate('userProfile', {
-    //     status: 1,
-    //   });
-    // } else if (statusValue == 2) {
-    //   // alert('partner');
-
-    //   props.navigation.navigate('PartnerStack');
-    // }
-  };
-
-  const _GetInterests = async () => {
-    console.log('all interests');
-    let url = 'https://meetourism.deviyoinc.com/api/v1/interests';
-    let headers = {
-      headers: {
-        'Content-Type': 'application/json',
-        // Authorization: `Bearer ${token}`,
-      },
-    };
-    await axios
-      .get(url)
-      .then((res) => {
-        if (res.data.status_type === 'success') {
-          console.log('res', res.data.data);
-          setState({
-            ...state,
-
-            interests: res.data.data,
-          });
-        } else {
-          console.log('else');
-          setState({
-            ...state,
-
-            interests: [],
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('error in catch _GetInterests', error);
-      });
   };
 
   return (
@@ -222,10 +186,7 @@ const Status = (props) => {
                 // paddingVertical: 10,
                 alignSelf: 'flex-start',
               }}
-              onPress={() =>
-                //   setState({...state, visible: !state.visible, visible1: false})
-                props.navigation.goBack()
-              }>
+              onPress={() => props.navigation.goBack()}>
               <Icon
                 type="AntDesign"
                 name="arrowleft"
@@ -328,10 +289,67 @@ const Status = (props) => {
                         </TouchableOpacity>
                       ) : (
                         val.selected
+                        // <TouchableOpacity
+                        //   style={{
+                        //     width: '80%',
+                        //     flexDirection: 'row',
+                        //     marginTop: 20,
+                        //     // borderWidth: 1,
+                        //     alignItems: 'center',
+                        //     justifyContent: 'center',
+                        //   }}
+                        //   key={i}>
+                        //   <View
+                        //     style={{
+                        //       // height: '100%',
+                        //       width: '30%',
+                        //       // borderWidth: 1,
+                        //       alignItems: 'center',
+                        //       justifyContent: 'center',
+                        //     }}>
+                        //     <View
+                        //       style={{
+                        //         height: 36,
+                        //         width: 36,
+                        //         borderRadius: 36,
+                        //         // borderWidth: 1,
+                        //       }}>
+                        //       <Image
+                        //         resizeMode="contain"
+                        //         style={{height: '100%', width: '100%'}}
+                        //         source={require('../../assets/images/girl.png')}
+                        //       />
+                        //     </View>
+                        //   </View>
+                        //   <View
+                        //     style={{
+                        //       width: '70%',
+                        //       borderWidth: 0,
+                        //       paddingLeft: 10,
+                        //     }}>
+                        //     <Text
+                        //       style={{
+                        //         color:
+                        //           theme.textColor[
+                        //             state.selected == i
+                        //               ? 'blackColor'
+                        //               : 'greyColor'
+                        //           ],
+                        //         fontWeight: '700',
+                        //         // marginLeft: 30,
+                        //         fontSize: 20,
+                        //         // width: '85%',
+                        //       }}>
+                        //       {val.name}
+                        //     </Text>
+                        //   </View>
+                        // </TouchableOpacity>
                       ),
                     )
                   : null}
-                {state.noValues ? <Text> No Interest Selected </Text> : null}
+                {!state.interests?.length > 0 && !state.loader ? (
+                  <Text> No Interest Selected </Text>
+                ) : null}
               </View>
             </View>
             <View
@@ -354,7 +372,14 @@ const Status = (props) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
-                onPress={() => setState({...state, isVisible: true})}>
+                onPress={() =>
+                  setState({
+                    ...state,
+                    isVisible: true,
+                    interests: props?.allInterests,
+                    loader: false,
+                  })
+                }>
                 <Icon style={{fontSize: 20}} type="AntDesign" name="plus" />
               </TouchableOpacity>
             </View>
@@ -363,9 +388,15 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => {
-              console.log(statusValue);
-
-              _UserRegister();
+              if (!state.interests?.length > 0) {
+                alert('please select Interests');
+              } else {
+                let value = state.interests.map((item, i) => {
+                  return item.id;
+                });
+                console.log('item', value);
+                _UserRegister(value);
+              }
             }}
             style={{
               height: 40,
@@ -410,6 +441,7 @@ const Status = (props) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {state.interests &&
               state.interests.map((val, i) => {
+                console.log('valee', val);
                 return (
                   <TouchableOpacity
                     key={i}
@@ -442,12 +474,6 @@ const Status = (props) => {
                       }}>
                       <CheckBox
                         checkedColor={theme.secondaryColor}
-                        // checkedIcon={
-                        //   <Image source={require('../checked.png')} />
-                        // }
-                        // uncheckedIcon={
-                        //   <Image source={require('../unchecked.png')} />
-                        // }
                         checked={val.selected ? true : false}
                         onPress={() => {
                           let value = state.interests.map((item, index) => {
@@ -518,6 +544,9 @@ const Status = (props) => {
                   </TouchableOpacity>
                 );
               })}
+            {!state.interests?.length > 0 && !state.loader ? (
+              <Text> No Interest selected </Text>
+            ) : null}
           </ScrollView>
           <TouchableOpacity
             activeOpacity={0.75}
@@ -562,10 +591,13 @@ const Status = (props) => {
 
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
+  editSetting: state.reducers.editSetting,
   loader: state.reducers.loader,
+  allInterests: state.reducers.allInterests,
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
+  UpdateCompleteProfile: Actions.UpdateCompleteProfile,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Status);

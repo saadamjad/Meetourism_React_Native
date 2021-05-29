@@ -11,27 +11,30 @@ import {connect} from 'react-redux';
 import {Actions} from '../../redux/actions/index';
 const App = (props) => {
   const [buttonHide, setButtonHide] = useState(false);
+  const params = props?.route?.params;
   const token = props.token;
   const offers = props.alloffers;
 
   const [state, setState] = useState({
     offers: [],
-    loader: false,
+    loader: true,
     matches: [],
   });
 
   useEffect(() => {
-    _GetMatchesData(), props.GetAllOffers(null, token);
+    _GetMatchesData();
+
+    props.GetAllOffers(null, token);
   }, []);
   useEffect(() => {
-    setState({...state, matches: props.matches});
+    console.log('ye wala chala');
+    setState({...state, matches: props.matches, loader: false});
   }, [props.matches]);
 
   const _GetMatchesData = async () => {
     setState({...state, loader: true});
-    // '133|7YAjWfsLSQqRW4tI1VURjA4z1NAV7Sn2XyjV9Z7h',
     let value = await props.GetMatchesData(token);
-    setState({...state, loader: false, matches: props.matches});
+    setState({...state, loader: false});
   };
   return (
     <View
@@ -43,6 +46,10 @@ const App = (props) => {
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Header
+          // LetIconFucntion={() => {
+          //   props.navigation.navigate('drawer');
+          // }}
+          // functionAllow={true}
           leftArrow={true}
           searchIcon={true}
           sColor={'black'}
@@ -64,6 +71,7 @@ const App = (props) => {
               props.alloffers.map((item, i) => {
                 return (
                   <TouchableOpacity
+                    key={i}
                     onPress={() => {
                       props.navigation.navigate('offerdescriptions', {
                         index: i,
@@ -105,85 +113,83 @@ const App = (props) => {
           </ScrollView>
         </View>
 
-        {state?.matches?.length > 0
-          ? state.matches.map((item, i) => {
-              {
-                console.log('item>>>', item.interests);
-              }
-              return (
+        {state?.matches?.length > 0 ? (
+          state.matches.map((item, i) => {
+            return (
+              <View
+                key={i}
+                style={{
+                  flex: 1,
+                  paddingVertical: 15,
+                  borderBottomWidth: 1.5,
+                  borderColor: theme.primaryColor1,
+                  backgroundColor: theme.primaryColor,
+                  justifyContent: 'center',
+                }}>
                 <View
                   style={{
-                    flex: 1,
-                    paddingVertical: 15,
-                    borderBottomWidth: 1.5,
-                    borderColor: theme.primaryColor1,
-                    backgroundColor: theme.primaryColor,
-                    justifyContent: 'center',
+                    borderRadius: 30,
+                    width: '88%',
+                    alignSelf: 'center',
+                    backgroundColor: 'white',
+                    paddingVertical: 10,
+                    marginVertical: 10,
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+
+                    elevation: 5,
                   }}>
-                  <View
+                  <Text
                     style={{
-                      borderRadius: 30,
-                      width: '88%',
-                      alignSelf: 'center',
-                      backgroundColor: 'white',
-                      paddingVertical: 10,
-                      marginVertical: 10,
-                      shadowColor: '#000',
-                      shadowOffset: {
-                        width: 0,
-                        height: 2,
-                      },
-                      shadowOpacity: 0.25,
-                      shadowRadius: 3.84,
-
-                      elevation: 5,
+                      color: '#FF0606',
+                      fontSize: 26,
+                      textAlign: 'center',
+                      marginTop: 6,
                     }}>
+                    {' '}
+                    See Your Match{' '}
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#707070',
+                      marginVertical: 10,
+                      fontSize: 14,
+                      textAlign: 'center',
+                      marginTop: 10,
+                      lineHeight: 20,
+                    }}>
+                    {' '}
+                    Mutual sympathy. Do not waste {'\n'} and write to Him/her
+                  </Text>
+
+                  <View style={{borderWidth: 0, width: '100%'}}>
+                    <Image
+                      source={require('../../assets/icons/group.png')}
+                      style={{height: 240, width: '100%'}}
+                      resizeMode="cover"
+                    />
+                  </View>
+                  <View style={{paddingHorizontal: 25, marginBottom: 10}}>
                     <Text
                       style={{
-                        color: '#FF0606',
-                        fontSize: 26,
-                        textAlign: 'center',
-                        marginTop: 6,
+                        color: 'black',
+                        fontWeight: 'bold',
+                        marginBottom: 10,
                       }}>
-                      {' '}
-                      See Your Match{' '}
+                      Description{' '}
                     </Text>
-                    <Text
-                      style={{
-                        color: '#707070',
-                        marginVertical: 10,
-                        fontSize: 14,
-                        textAlign: 'center',
-                        marginTop: 10,
-                        lineHeight: 20,
-                      }}>
-                      {' '}
-                      Mutual sympathy. Do not waste {'\n'} and write to Him/her
+                    <Text style={{fontSize: 12, color: '#707070'}}>
+                      {item.description}
                     </Text>
+                  </View>
 
-                    <View style={{borderWidth: 0, width: '100%'}}>
-                      <Image
-                        source={require('../../assets/icons/group.png')}
-                        style={{height: 240, width: '100%'}}
-                        resizeMode="cover"
-                      />
-                    </View>
-                    <View style={{paddingHorizontal: 25, marginBottom: 10}}>
-                      <Text
-                        style={{
-                          color: 'black',
-                          fontWeight: 'bold',
-                          marginBottom: 10,
-                        }}>
-                        Description{' '}
-                      </Text>
-                      <Text style={{fontSize: 12, color: '#707070'}}>
-                        {item.description}
-                      </Text>
-                    </View>
-
-                    {/* {buttonHide ? ( */}
-                    {/* <View style={{overflow: 'hidden'}}>
+                  {/* {buttonHide ? ( */}
+                  {/* <View style={{overflow: 'hidden'}}>
                     <GlobalButton
                       onPress={() =>
                         props.navigation.navigate('matchprofile', {
@@ -196,21 +202,22 @@ const App = (props) => {
                       height={40}
                     />
                   </View> */}
-                    {/* ) : ( */}
-                    <View style={{overflow: 'hidden'}}>
-                      <GlobalButton
-                        onPress={() =>
-                          props.navigation.navigate('matchprofile', {
-                            data: item,
-                          })
-                        }
-                        width="48%"
-                        buttonText="Profile"
-                        height={40}
-                      />
-                    </View>
-                    {/* )} */}
+                  {/* ) : ( */}
+                  <View style={{overflow: 'hidden'}}>
+                    <GlobalButton
+                      onPress={() =>
+                        props.navigation.navigate('matchprofile', {
+                          data: item,
+                        })
+                      }
+                      width="48%"
+                      buttonText="Profile"
+                      height={40}
+                    />
+                  </View>
+                  {/* )} */}
 
+                  {params?.backToSearch ? (
                     <TouchableOpacity
                       onPress={() => props.navigation.navigate('search')}
                       style={{
@@ -223,17 +230,26 @@ const App = (props) => {
                         Back to search
                       </Text>
                     </TouchableOpacity>
-                  </View>
+                  ) : null}
                 </View>
-              );
-            })
-          : null}
+              </View>
+            );
+          })
+        ) : !state?.matches?.length > 0 && !props.loader && !state.loader ? (
+          <Text
+            style={{
+              fontSize: 15,
+              color: 'white',
+              textAlign: 'center',
+              marginVertical: 10,
+            }}>
+            No Matches Found
+          </Text>
+        ) : null}
       </ScrollView>
-
-      <AnimatedLoader
-        status={state.loader}
-        loaderMessage={`Getting Matches...`}
-      />
+      {state.loader ? (
+        <AnimatedLoader status={true} loaderMessage={`Getting Matches...`} />
+      ) : null}
     </View>
   );
 };

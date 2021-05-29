@@ -45,7 +45,7 @@ const App = (props) => {
       formData.append('data[description]', userData?.data?.description);
       formData.append('data[username]', userData?.data?.username);
       formData.append('type', 'profile');
-      props.UpdateUserProfileData(formData, token, props.navigation);
+      props.UpdateUserProfileData(formData, token, userData, props.navigation);
       setUserData({...userData, edit: false, changeTextInput: false});
     } else {
       console.log('else not change');
@@ -119,6 +119,7 @@ const App = (props) => {
                 {allStatus.map((item, i) => {
                   return (
                     <View
+                      key={i}
                       style={{
                         alignItems: 'center',
                         // borderWidth: 1,
@@ -184,7 +185,7 @@ const App = (props) => {
                     paddingHorizontal: 10,
                     paddingTop: 20,
                   }}>
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     style={{
                       height: 50,
                       overflow: 'hidden',
@@ -208,7 +209,7 @@ const App = (props) => {
                       marginTop: 7,
                     }}>
                     Log Out
-                  </Text>
+                  </Text> */}
                 </View>
               </View>
             </View>
@@ -490,6 +491,7 @@ const App = (props) => {
           },
         ].map((val, i) => (
           <TouchableOpacity
+            key={i}
             style={{
               // flex: 1,
               width: '20%',
@@ -500,9 +502,14 @@ const App = (props) => {
               padding: 10,
             }}
             onPress={() => {
-              setSelected(i);
+              // setSelected(i);
               if (val.navigateTo === 'statusstack') {
-                null;
+                props.EditSetting(true);
+                props.navigation.navigate(val.navigateTo, {
+                  screen: 'chooseyourinterest',
+                  // settingStatus: true,
+                  // dashboard: false,
+                });
               } else
                 props.navigation.navigate(val.navigateTo, {
                   // screen: 'chooseyourinterest',
@@ -544,6 +551,7 @@ const mapStateToProp = (state) => ({
 const mapDispatchToProps = {
   Logout: Actions.Logout,
   UpdateUserProfileData: Actions.UpdateUserProfileData,
+  EditSetting: Actions.EditSetting,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

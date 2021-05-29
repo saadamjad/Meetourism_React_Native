@@ -1,5 +1,11 @@
 import React, {Component, useState, useEffect} from 'react';
-import {View, Image, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
@@ -9,123 +15,67 @@ import {Item} from 'native-base';
 import {Actions} from '../../redux/actions/index';
 import {connect} from 'react-redux';
 const Crushes = (props) => {
-  const token = props.token;
+  const token = props?.token;
   const [state, setState] = useState({
-    loader: false,
+    loader: true,
     CrushesArray: [],
-    messages: [
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Offer updated successfull',
-        date: '9 hrs',
-        badge: 5,
-        l: 8,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Password is successfully updated.',
-        date: '9 hrs',
-        badge: 7,
-        l: 7,
-      },
-      {
-        name: 'Stephen Moreau',
-        selected: false,
-        description:
-          'Everyday English-French-Spanish: Conversation and Fun-Joe!',
-        date: 'Aug 19',
-        l: 6,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 5,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 4,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 3,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 2,
-      },
-    ],
+    block: false,
   });
 
   useEffect(() => {
-    _GetCrushes();
-  }, []);
-  const _GetCrushes = async () => {
-    let _token = '133|7YAjWfsLSQqRW4tI1VURjA4z1NAV7Sn2XyjV9Z7h';
-    let data = 'followings';
-    let value = await props.GetAllCrushes(data, _token);
-    console.log('Valuee return', value);
-    if (value) {
-      setState({
-        ...state,
-        CrushesArray: value.map((item, i) => {
-          return {
-            ...item,
+    // const unsubscribe = props.navigation.addListener('focus', () => {
+    //   // do something
+    //   _GetCrushes(false);
+    // });
 
-            name: 'Dina Meyer',
-            selected: false,
-            description: 'Offer updated successfull',
-            date: '9 hrs',
-            badge: 5,
-            l: 8,
-          };
-        }),
-        loader: false,
-      });
+    _GetCrushes(true);
+    // return unsubscribe;
+  }, [props.navigation]);
+  useEffect(() => {
+    setState({
+      ...state,
+      CrushesArray: props.allCrushes,
+      loader: false,
+    });
+  }, [props.allCrushes]);
+  const _GetCrushes = async (param) => {
+    setState({...state, loader: param});
+    let data = 'followings';
+    props.GetAllCrushes(data, token);
+  };
+
+  const _Block_UnBlock = (block, id) => {
+    if (block) {
+      console.log('block ki api ', id);
+      props.Block_Unblock(id, token, 'block');
     } else {
-      setState({...state, CrushesArray: [], loader: false});
+      props.Block_Unblock(id, token, 'unblock');
+
+      console.log('unblock ki api', id);
     }
   };
   return (
     <CustomView bg={theme.primaryColor} scroll>
-      <View style={{backgroundColor: 'white', flex: 1}}>
-        {console.log('sssstate', state.CrushesArray[0])}
+      <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
         <LongHeader
-          // !props?.route?.params?.blockListNotOpen
-          // followandBlock
           if={props?.route?.params?.blockListNotOpen}
+          screenName={'crushes'}
           navigation={props.navigation}
           leftArrow={true}
           searchIcon={true}
           backgroundColor={
-            state.messages[0].selected
-              ? theme.primaryColor1
+            state?.CrushesArray[0]?.selected
+              ? theme.primaryColor3
               : theme.primaryColor
           }
           headerText="Crushes"
         />
         {state.CrushesArray &&
           state.CrushesArray.map((val, i) => {
-            console.log('Valueeee', val.user_id);
-            let l = i - state.messages.length;
+            console.log('valueeee', val.id);
             return (
               <TouchableOpacity
+                key={i}
                 activeOpacity={1}
                 onPress={() => {
                   setState({
@@ -141,40 +91,28 @@ const Crushes = (props) => {
                 }}
                 style={{
                   // height: 200,
-                  height: props?.route?.params?.blockListNotOpen
-                    ? 300
-                    : val.selected
-                    ? 300
-                    : 200,
-                  // backgroundColor: 'blue',
-                  backgroundColor: val.selected
-                    ? theme.primaryColor1
+                  height: val.selected ? 150 : 100,
+                  backgroundColor: val?.selected
+                    ? theme.primaryColor3
                     : theme.primaryColor,
 
                   borderRightWidth: 1,
-                  borderWidth: 0.5,
-                  // borderTopColor: 'transparent',
-                  // borderRightColor: 'transparent',
-                  justifyContent: 'flex-end',
+                  borderWidth: state?.CrushesArray[0]?.selected ? 0 : 0.5,
+
                   borderColor: theme.primaryColor1,
-                  // marginTop: -150,
-                  borderBottomLeftRadius:
-                    i == state.CrushesArray.length - 1 ? 0 : 100,
-                  // zIndex: val.l,
+                  justifyContent: 'center',
+                  borderBottomLeftRadius: 50,
+                  alignItems: 'center',
+
                   overflow: 'hidden',
                 }}>
                 <View
                   style={{
-                    // flex: val.selected ? 0.75 : 0.55,
                     width: '100%',
-                    alignSelf: 'flex-end',
-                    justifyContent: 'center',
                     alignItems: 'space-around',
-                    backgroundColor: 'red',
                   }}>
                   <View
                     style={{
-                      height: '40%',
                       width: '90%',
                       justifyContent: 'space-around',
                       flexDirection: 'row',
@@ -196,54 +134,102 @@ const Crushes = (props) => {
                           color: theme.textColor.whiteColor,
                           fontSize: 12,
                         }}>
-                        {val.user_id}
+                        {val?.follower?.username}
                       </Text>
                     </View>
                   </View>
-
-                  {props?.route?.params?.blockListNotOpen
-                    ? null
-                    : val.selected && (
-                        <View
+                  {val.selected ? (
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        // backgroundColor: 'blue',
+                        height: 50,
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        width: '80%',
+                        alignSelf: 'center',
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          val.is_blocked
+                            ? null
+                            : props.navigation.navigate('followandBlock', {
+                                data: val.follower,
+                              });
+                        }}
+                        style={{
+                          height: '100%',
+                          width: 100,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}>
+                        <Text
                           style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-around',
-                            alignItems: 'center',
-                            width: '80%',
-                            alignSelf: 'center',
+                            color: theme.textColor.whiteColor,
+                            fontSize: 16,
                           }}>
-                          <TouchableOpacity
-                            onPress={() =>
-                              props.navigation.navigate('followandBlock')
-                            }>
-                            <Text
-                              style={{
-                                color: theme.textColor.whiteColor,
-                                fontSize: 16,
-                              }}>
-                              View
-                            </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            onPress={() =>
-                              props.navigation.navigate('followandBlock', {
-                                block: true,
-                              })
-                            }>
-                            <Text
-                              style={{
-                                color: theme.textColor.whiteColor,
-                                fontSize: 16,
-                              }}>
-                              Block
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
-                      )}
+                          {val.is_blocked ? null : 'View'}
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={{
+                          height: '100%',
+                          width: 100,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                        onPress={async () => {
+                          await setState({
+                            ...state,
+                            CrushesArray: state.CrushesArray.map(
+                              (value, ind) => {
+                                console.log('values');
+                                let blockUserId = value.follower.id;
+                                if (i == ind) {
+                                  if (value.is_blocked) {
+                                    _Block_UnBlock(false, blockUserId);
+                                    return {...value, is_blocked: false};
+                                  } else {
+                                    _Block_UnBlock(true, blockUserId);
+                                    return {...value, is_blocked: true};
+                                  }
+                                } else {
+                                  return {...value};
+                                }
+                              },
+                            ),
+                          });
+                        }}>
+                        <Text
+                          style={{
+                            color: theme.textColor.whiteColor,
+                            fontSize: 16,
+                          }}>
+                          {val.is_blocked ? 'UnBlock' : 'Block'}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : null}
                 </View>
               </TouchableOpacity>
             );
           })}
+        {!state.CrushesArray?.length > 0 && !state.loader ? (
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 15,
+              textAlign: 'center',
+              marginVertical: 10,
+            }}>
+            {' '}
+            No Crushes Available{' '}
+          </Text>
+        ) : state.loader ? (
+          <View style={{marginVertical: 10}}>
+            <ActivityIndicator size={'small'} color="red" />
+          </View>
+        ) : null}
       </View>
     </CustomView>
   );
@@ -253,11 +239,13 @@ const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
 
   token: state.reducers.token,
+  allCrushes: state.reducers.allCrushes,
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
   Logout: Actions.Logout,
   GetAllCrushes: Actions.GetAllCrushes,
+  Block_Unblock: Actions.Block_Unblock,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Crushes);

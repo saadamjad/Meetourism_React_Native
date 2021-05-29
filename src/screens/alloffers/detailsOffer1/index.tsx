@@ -31,6 +31,7 @@ function DetailOffer1({
   DeleteOffer,
   loader,
   UpdateOfferData,
+  SaveOrderData,
 }) {
   const [state, setState] = useState({
     edit: false,
@@ -40,7 +41,6 @@ function DetailOffer1({
   let userStatus = status == 'partner' ? true : false;
 
   useEffect(() => {
-    console.log('Data===>===========', data);
     setTest(data);
   }, []);
 
@@ -242,7 +242,7 @@ function DetailOffer1({
                 buttonText="Pay the Offer"
                 height={50}
                 width="66%"
-                onPress={() => props.navigation.navigate('payment')}
+                onPress={() => SaveOrderData(test)}
               />
 
               <View style={{height: 10}}></View>

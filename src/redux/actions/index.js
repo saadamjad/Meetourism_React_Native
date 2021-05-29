@@ -72,9 +72,9 @@ class Actions {
             console.log('res', res.data);
             dispatch({
               type: actionTypes.SIGNUPUPSUCCESS,
-              payload: res.data,
-              token: res.data?.token,
-              status: res.data?.status,
+              payload: res?.data,
+              token: res?.data?.token,
+              status: res?.data?.status,
             });
             navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
             return true;
@@ -140,8 +140,10 @@ class Actions {
         return Toast('Error', phone, 'error');
       } else {
         console.log('esle');
-        let message = Object.values(errResponse);
-        return Toast('Error', message[0], 'error');
+        if (errResponse) {
+          let message = Object.values(errResponse);
+          return Toast('Error', message[0], 'error');
+        }
       }
     };
   };
@@ -160,17 +162,27 @@ class Actions {
       dispatch({type: actionTypes.STARTLOADER});
     };
   };
-  static GetMatchesData = (token) => {
+  static GetMatchesData = (token, searchKey, navigation) => {
+    console.log('serachhhh', searchKey);
     return async (dispatch) => {
       dispatch({type: actionTypes.STARTLOADER});
-      return Get('matches', token)
+      return Get(searchKey ? `matches?q=${searchKey}` : 'matches', token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            // console.log('resss========', response.length);
-            console.log('resss========', response[0].interests);
+            // var newData = res?.data?.filter((item) => {
+            //   console.log('valss', item.username);
 
-            dispatch({type: actionTypes.GETMATCHESDATA, payload: response});
+            //   return item.username == searchKey;
+            // });
+            console.log('newDatanewData ++++', response);
+            dispatch({
+              type: actionTypes.GETMATCHESDATA,
+              payload: response,
+            });
+            navigation.navigate('SeeYourMatch', {
+              backToSearch: true,
+            });
           } else {
             console.log('ELSE in login', res);
             dispatch({type: actionTypes.GETMATCHESDATA, payload: []});
@@ -179,10 +191,74 @@ class Actions {
         .catch((err) => {
           dispatch({type: actionTypes.STOPLOADER});
 
-          let errResponse = err?.response?.data;
+          let errResponse = err?.response;
           let type = 'GetMatchesData';
+
+          console.log('errResponse', errResponse);
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
+    };
+  };
+  static GetProfileData = (id, token) => {
+    // console.log('id', id, 'token', token);
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get(`profile/${id}`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('res', response);
+
+            dispatch({type: actionTypes.GETUSERPROFILEDATA});
+            return response;
+          } else {
+            console.log('ELSE in login', res);
+            dispatch({type: actionTypes.GETUSERPROFILEDATA});
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response?.data;
+          let type = 'GetProfileData';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+
+  //create order
+  static CreateOrder = (data, token, navigation) => {
+    return async (dispatch) => {
+      return await Post('orders', data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('res', response);
+            navigation.navigate('detailsoffer');
+            dispatch({type: actionTypes.CREATEORDER});
+            return true;
+          } else {
+            console.log('ELSE in CreateOrder', res.message);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return false;
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data?.errors;
+          let type = 'CreateOrder';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          return false;
+        });
+    };
+  };
+
+  //save order details
+  static SaveOrderData = (data, navigation, values) => {
+    return async (dispatch) => {
+      navigation.navigate('payment');
+
+      dispatch({type: actionTypes.SAVEORDERDATA, payload: data});
     };
   };
   static Logout = (navigation, values) => {
@@ -229,7 +305,7 @@ class Actions {
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            console.log('resss========', response);
+            // console.log('resss========', response);
 
             dispatch({type: actionTypes.GETALLOFFERS, payload: response});
             return response;
@@ -251,23 +327,27 @@ class Actions {
         });
     };
   };
-  static GetAllCrushes = (data, token, navigation) => {
+  static GetAllCrushes = (data, token, searchKey, navigation) => {
     return async (dispatch) => {
       dispatch({type: actionTypes.STARTLOADER});
-      return Get(`me?only=${data}`, token)
+      return Get(
+        searchKey ? `me?only=${data}&q=${searchKey}` : `me?only=${data}`,
+        token,
+      )
         .then((res) => {
           if (res.status_type === 'success') {
-            let response = res.data;
-            console.log('resss GetAllCrushes', response);
-            dispatch({type: actionTypes.STOPLOADER});
-
-            // dispatch({type: actionTypes.GETALLCRUSHES, payload: response});
-            return response;
+            let response = res?.data;
+            // var newData = response?.filter((item) => {
+            //   return item.follower.username == searchKey;
+            // });
+            console.log('response GetAllCrushes', response);
+            dispatch({type: actionTypes.GETALLCRUSHES, payload: response}),
+              navigation.goBack();
           } else {
             console.log('ELSE in login', res);
-            // dispatch({type: actionTypes.GETALLCRUSHES});
 
-            dispatch({type: actionTypes.STOPLOADER});
+            // dispatch({type: actionTypes.STOPLOADER});
+            dispatch({type: actionTypes.GETALLCRUSHES, payload: []});
           }
         })
         .catch((err) => {
@@ -286,7 +366,7 @@ class Actions {
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            console.log('resss========', response);
+            // console.log('resss========', response);
             // navigation.navigate('applyfiltersresult', {
             //   data: response,
             // });
@@ -310,7 +390,7 @@ class Actions {
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            console.log('resss========', response);
+            // console.log('resss========', response);
 
             return response;
           } else {
@@ -324,36 +404,37 @@ class Actions {
         });
     };
   };
-  static FollowUser = (data, token, navigation) => {
+  static FollowUser = (data, token, key, navigation) => {
+    console.log('KEY', key);
     return async (dispatch) => {
-      return Post(`profile/relation/follow?user_id=${data}`, null, token)
+      return Post(`profile/relation/${key}?user_id=${data}`, null, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            console.log('resss=FollowUser', response);
-
-            return true;
-          } else {
-            console.log('ELSE in FollowUser', res);
-            return false;
+            console.log(`${key}`, response);
           }
         })
         .catch((err) => {
           let errResponse = err?.response?.data;
-          let type = 'FollowUser';
+          let type = `${key}`;
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
           return false;
         });
     };
   };
-  static UpdateUserProfileData = (data, token, navigation) => {
-    console.log('UpdateUserProfileData', data);
+
+  static UpdateUserProfileData = (data, token, updateData, navigation) => {
+    console.log('UpdateUserProfileData', updateData);
     return async (dispatch) => {
       return Post('me', data, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res;
             console.log('resss========', response);
+            dispatch({
+              type: actionTypes.UPDATEPROFILEDATA,
+              payload: updateData,
+            });
 
             return response;
           } else {
@@ -365,6 +446,61 @@ class Actions {
           let type = 'UpdateUserProfileData';
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
+    };
+  };
+  static Block_Unblock = (data, token, key, navigation) => {
+    console.log('KEY', key);
+    return async (dispatch) => {
+      return Post(`profile/relation/${key}?user_id=${data}`, null, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log(`${key}`, response);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = `${key}`;
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          return false;
+        });
+    };
+  };
+
+  static GetCounties = (data) => {
+    console.log('GetCounties', data);
+    return async (dispatch) => {
+      dispatch({
+        type: actionTypes.GETCOUNTRIES,
+        payload: data,
+      });
+    };
+  };
+  static GetInterests = (data) => {
+    console.log('GetInterests', data);
+    return async (dispatch) => {
+      dispatch({
+        type: actionTypes.GETINTERESTS,
+        payload: data,
+      });
+    };
+  };
+  static EditSetting = (data) => {
+    return async (dispatch) => {
+      dispatch({
+        type: actionTypes.EDITSETTING,
+        payload: data,
+      });
+    };
+  };
+  static UpdateCompleteProfile = (data, navigation, status) => {
+    return async (dispatch) => {
+      dispatch({
+        type: actionTypes.UPDATECOMPLETEPROFILE,
+        payload: data,
+      });
+
+      navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
     };
   };
 }

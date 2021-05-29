@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import Longheader from '../../components/header/longheader'
+import Longheader from '../../components/header/longheader';
 
 const App = (props) => {
   return (
@@ -9,10 +9,11 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#241332',
       }}>
-      <Longheader leftArrow={true} searchIcon={true} headerText="All Offers "
-      
-      navigation={props.navigation}
-     
+      <Longheader
+        leftArrow={true}
+        searchIcon={true}
+        headerText="All Offers "
+        navigation={props.navigation}
       />
     </View>
   );

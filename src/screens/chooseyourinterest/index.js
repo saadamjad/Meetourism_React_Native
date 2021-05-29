@@ -45,35 +45,57 @@ const Status = (props) => {
     company_name: '',
   });
 
-  const [value, setValue] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    _GetCities();
+    if (props?.userData && props.editSetting) {
+      let data = props?.userData;
+      setState({
+        ...state,
+        interests: data?.interests,
+        selectCountry: data?.selectCountry,
+        images: data?.images,
+        userName: data?.username,
+        email: data?.email,
+        height: Number(data?.height),
+        weight: Number(data?.weight),
+        eyeColor: data?.eye_color,
+        contact: data?.phone,
+        age: Number(data?.age),
+        firstName: data?.first_name,
+        lastName: data?.last_name,
+        city: data?.city,
+        description: data?.description,
+        company_name: data?.company_name,
+      });
+    } else {
+      console.log('else');
+      _GetCities();
+    }
+    _GetInterests();
   }, []);
   const _GetCities = async () => {
-    let headers = {
-      headers: {
-        'Content-Type': 'application/json',
-        // Authorization: `Bearer ${token}`,
-      },
-    };
     await axios
       .get(url)
       .then((res) => {
-        // console.log('res', res.data.data);
-        if (res.data?.status_type === 'success') {
-          // setState({...state, countries: res.data.data});
+        if (res?.data?.status_type === 'success') {
           setState({
             ...state,
             status: data?.status,
             email: data?.value,
             userName: data?.userName,
-            countries: res.data?.data,
+            // countries: res.data?.data,
             confirmPassword: data?.confirmPassword,
             password: data?.password,
           });
+          props.GetCounties(res?.data?.data);
         } else {
-          setState({...state, status: data?.status, email: data?.value});
+          setState({
+            ...state,
+            status: data?.status,
+            email: data?.value,
+            // countries: [],
+          });
+          props.GetCounties([]);
         }
       })
       .catch((error) => {
@@ -145,8 +167,6 @@ const Status = (props) => {
       });
   };
   const _Buttons = () => {
-    var value2 = false;
-
     return (
       <View style={{overflow: 'hidden', marginVertical: 5}}>
         <GlobalButton
@@ -156,33 +176,33 @@ const Status = (props) => {
             props.navigation.navigate('yourinterests', {
               profileData: state,
             });
-            // console.log('item=b', state);
-            // var newArrayDataOfOjbect = Object.values(state);
-            // newArrayDataOfOjbect.map((item, i) => {
-            //   if (item.length < 1) {
-            //     console.log('not empty');
-
-            //     value2 = false;
-            //   } else {
-            //     console.log('empty');
-            //     value2 = true;
-            //   }
-            // });
-
-            // console.log('values', value2);
-            // if (value2) {
-            //   alert('please fill  All inputs');
-            // } else {
-            //   console.log('donee', value2);
-            //   props.navigation.navigate('yourinterests', {
-            //     profileData: state,
-            //   });
-            // }
           }}
         />
       </View>
     );
   };
+  const _GetInterests = async () => {
+    console.log('all interests');
+    let url = 'https://meetourism.deviyoinc.com/api/v1/interests';
+
+    await axios
+      .get(url)
+      .then((res) => {
+        if (res.data.status_type === 'success') {
+          let interest = res?.data?.data;
+
+          props.GetInterests(interest);
+        } else {
+          console.log('else');
+
+          props.GetInterests([]);
+        }
+      })
+      .catch((error) => {
+        console.log('error in catch _GetInterests', error);
+      });
+  };
+
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <ImageBackground
@@ -215,8 +235,7 @@ const Status = (props) => {
             style={{
               flex: 1,
               paddingBottom: 20,
-              // borderWidth: 1,
-              // backgroundColor: '#241332',
+
               alignItems: 'center',
               justifyContent: 'space-between',
             }}>
@@ -352,7 +371,7 @@ const Status = (props) => {
                   placeholder="Last Name"
                 />
                 <TextInput
-                  value={data?.value}
+                  value={state.email || data?.value}
                   editable={false}
                   style={{
                     width: '100%',
@@ -379,7 +398,7 @@ const Status = (props) => {
                 />
                 <TextInput
                   onChangeText={(text) => setState({...state, age: text})}
-                  value={state.age}
+                  value={String(state.age)}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -392,7 +411,7 @@ const Status = (props) => {
                   keyboardType="number-pad"
                 />
                 <TextInput
-                  value={state.city}
+                  value={String(state.city)}
                   onChangeText={(text) => setState({...state, city: text})}
                   style={{
                     width: '100%',
@@ -445,10 +464,11 @@ const Status = (props) => {
                       borderRightWidth: 1,
                       // paddingVertical: 5,
                     }}>
-                    {state.countries &&
-                      state.countries.map((item, i) => {
+                    {props?.allCountries &&
+                      props.allCountries.map((item, i) => {
                         return (
                           <TouchableOpacity
+                            key={i}
                             style={{
                               borderBottomWidth: 1,
                               borderColor: 'gray',
@@ -470,6 +490,16 @@ const Status = (props) => {
                   </View>
                 ) : null}
 
+                {/* {props?.allCountries?.length < 0 && !props.loader ? (
+                      <Text
+                        style={{
+                          color: 'red',
+                          marginVertical: 10,
+                          textAlign: 'center',
+                        }}>
+                        No countries found
+                      </Text>
+                    ) : null} */}
                 <TextInput
                   onChangeText={(text) =>
                     setState({...state, description: text})
@@ -495,7 +525,7 @@ const Status = (props) => {
                   }}>
                   <TextInput
                     onChangeText={(text) => setState({...state, height: text})}
-                    value={state.height}
+                    value={String(state.height)}
                     style={{
                       // width: '20%',
                       borderBottomWidth: 1,
@@ -509,7 +539,7 @@ const Status = (props) => {
                   />
                   <TextInput
                     onChangeText={(text) => setState({...state, weight: text})}
-                    value={state.weight}
+                    value={String(state.weight)}
                     style={{
                       // width: '20%',
                       borderBottomWidth: 1,
@@ -551,11 +581,15 @@ const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   loader: state.reducers.loader,
   images: state.reducers.images_Interests,
+  editSetting: state.reducers.editSetting,
+  allCountries: state.reducers.allCountries,
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
   Logout: Actions.Logout,
   StoreData: Actions.StoreData,
+  GetCounties: Actions.GetCounties,
+  GetInterests: Actions.GetInterests,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Status);

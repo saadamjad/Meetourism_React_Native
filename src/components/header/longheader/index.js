@@ -72,7 +72,11 @@ const App = (props) => {
           }}>
           {props.searchIcon && (
             <TouchableOpacity
-              onPress={() => props.navigation.navigate('search')}
+              onPress={() =>
+                props.navigation.navigate('search', {
+                  data: props.screenName,
+                })
+              }
               style={{paddingRight: 25, borderWidth: 0}}>
               <Ionicons name="search" size={20} color={'#241332'} />
             </TouchableOpacity>

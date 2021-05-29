@@ -27,6 +27,8 @@ const App = ({
   filterIcon,
   OpenFilter,
   filterColor,
+  functionAllow,
+  LetIconFucntion,
 }) => {
   return (
     <View
@@ -44,7 +46,10 @@ const App = ({
       }}>
       {leftArrow && (
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() =>
+            // functionAllow ? LetIconFucntion() : navigation.goBack()
+            navigation.goBack()
+          }
           style={{
             width: '15%',
             // padding: 5,
