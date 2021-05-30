@@ -7,8 +7,15 @@ import {theme} from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
 import {Item, Icon} from 'native-base';
 import {SwipeablePanel} from 'rn-swipeable-panel';
+import MapComponent from '../../components/googlemap';
 const Location = (props) => {
   const data = props?.route?.params?.data;
+  let userLatitude = data?.latitude;
+  let userLongitute = data?.longitude;
+  let username = data?.username;
+  let description = data?.description;
+  console.log('name', username);
+
   useEffect(() => {
     let value = state?.data?.map((val, index) => {
       return {...val, name: data?.interests[index]?.name};
@@ -193,10 +200,15 @@ const Location = (props) => {
   };
 
   return (
-    <CustomView
-      image={require('../../assets/images/map.jpg')}
-      bg={'transparent'}
-      scroll>
+    <CustomView bg={'transparent'} scroll>
+      <MapComponent
+        height={'100%'}
+        // latitude={24.8607} longitude={67.0011}
+        latitude={userLatitude}
+        username={username}
+        description={description}
+        longitude={userLongitute}
+      />
       <LongHeader
         navigation={props.navigation}
         leftArrow={true}
@@ -207,12 +219,12 @@ const Location = (props) => {
       <SwipeablePanel
         fullWidth
         isActive={isPanelActive}
-        openLarge={true}
+        // openLarge={true}
         closeOnTouchOutside={true}
         onClose={() => setIsPanelActive(false)}
         style={{
           backgroundColor: theme.primaryColor,
-          height: '70%',
+          height: '100%',
         }}>
         <_hello />
       </SwipeablePanel>

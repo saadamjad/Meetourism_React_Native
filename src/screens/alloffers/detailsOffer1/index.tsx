@@ -12,7 +12,7 @@ import {
 import {Actions} from '../../../redux/actions/index';
 
 import {connect} from 'react-redux';
-
+import MapComponent from '../../../components/googlemap';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import {theme} from '../../../constants/theme';
 import {ImageBackground} from 'react-native';
@@ -41,6 +41,8 @@ function DetailOffer1({
   let userStatus = status == 'partner' ? true : false;
 
   useEffect(() => {
+    // console.log('Dataaaaa', data.user.latitude);longitude
+
     setTest(data);
   }, []);
 
@@ -232,20 +234,17 @@ function DetailOffer1({
               }}>
               {/* {statusValue == 2 ? ( */}
               <View style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
-                <Image
-                  source={require('../../../assets/images/map.jpg')}
-                  style={{height: '100%', width: '100%'}}
-                  resizeMode="contain"
-                />
+                <MapComponent data={test} height={130} />
               </View>
               <GlobalButton
                 buttonText="Pay the Offer"
                 height={50}
+                marginVertical={20}
                 width="66%"
                 onPress={() => SaveOrderData(test)}
               />
 
-              <View style={{height: 10}}></View>
+              <View style={{height: 30}}></View>
               {state.edit ? (
                 <GlobalButton
                   buttonText="Delete this offer"

@@ -331,6 +331,18 @@ const Status = (props) => {
                     placeholder={'Enter Company Name'}
                   />
                 ) : null}
+                {company_name ? (
+                  <TouchableOpacity
+                    style={{
+                      width: '100%',
+                      justifyContent: 'center',
+                      borderBottomWidth: 1,
+                      height: 40,
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}>
+                    <Text> press to enter current location </Text>
+                  </TouchableOpacity>
+                ) : null}
 
                 <TextInput
                   style={{

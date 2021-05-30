@@ -305,7 +305,7 @@ class Actions {
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            // console.log('resss========', response);
+            console.log('resss========', response);
 
             dispatch({type: actionTypes.GETALLOFFERS, payload: response});
             return response;

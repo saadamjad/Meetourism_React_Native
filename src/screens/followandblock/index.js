@@ -47,7 +47,8 @@ const Profile = (props) => {
 
   const _GetProfileData = async (id) => {
     let value = await props.GetProfileData(id, token);
-    console.log('value', value);
+    console.log('value==', value.latitude);
+    console.log('value==', value.longitude);
     if (value) {
       setState({...state, loader: false, data: value});
     } else {

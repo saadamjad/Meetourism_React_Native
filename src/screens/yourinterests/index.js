@@ -13,7 +13,6 @@ import {
 // import {Icon} from 'native-base';
 // import Style from './style';
 import Toast from '../../components/toastmessage';
-import {Actions} from '../../redux/actions/index';
 
 import {theme} from '../../constants/theme';
 
@@ -22,6 +21,7 @@ import {Button, Overlay} from 'react-native-elements';
 import {CheckBox} from 'react-native-elements';
 import axios from 'axios';
 import AnimatedLoader from 'react-native-animated-loader';
+import {Actions} from '../../redux/actions/index';
 
 import {connect} from 'react-redux';
 
@@ -82,6 +82,9 @@ const Status = (props) => {
           interests: state.interests,
           images: data?.images,
           description: data?.description,
+          latitude: '24.123244',
+          longitude: '87.839483',
+          address: 'Test Address',
           // company_name: data.company_name,
           // first_name: 'First Name',
           // last_name: 'Last Name',
@@ -121,6 +124,9 @@ const Status = (props) => {
           interests: state?.interests,
           images: data?.images,
           description: data?.description,
+          latitude: '24.123244',
+          longitude: '87.839483',
+          address: 'Test Address',
 
           // first_name: 'First Name',
           // last_name: 'Last Name',
