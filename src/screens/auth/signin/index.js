@@ -16,8 +16,8 @@ import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import MapView, {Marker} from 'react-native-maps';
+
+import Geolocation from '@react-native-community/geolocation';
 
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
@@ -26,7 +26,7 @@ const App = (props) => {
     // password: '',
     // confirmPassword: '',
     name: 'saad amjad',
-    email: 'saad402@gmail.com',
+    email: 'partner@gmail.com',
     password: '123456789',
     confirmPassword: '123456789',
   });
@@ -41,8 +41,14 @@ const App = (props) => {
 
   useEffect(() => {
     ref.current?.setAddressText('Some Text blue');
+    // _getCurrentLocation();
   }, []);
 
+  const _getCurrentLocation = () => {
+    Geolocation.getCurrentPosition((info) =>
+      console.log('----', info.coords.latitude),
+    );
+  };
   const [state, setState] = useState({
     selectedIndex: 0,
     visible: false,
@@ -93,10 +99,6 @@ const App = (props) => {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{alignItems: 'center'}}>
         {elements.map((val, i) => {
-          let email = i == 0 && signInValues.email.length > 0 ? true : false;
-          let password =
-            i == 1 && signInValues.password.length > 0 ? true : false;
-
           return (
             <View
               style={{

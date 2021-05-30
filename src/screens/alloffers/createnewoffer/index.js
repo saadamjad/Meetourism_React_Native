@@ -29,12 +29,13 @@ function CreateOffer(props) {
   const token = props.token;
   console.log('token===', token);
   const [state, setState] = useState({
-    images: '',
-    title: '',
-    offerDescription: '',
-    price: '',
+    images: 'asdd',
+    title: 'asdaa',
+    offerDescription: 'ssassad',
+    price: '20',
     imageData: {},
     loader: false,
+    secondComponentCall: false,
     loaderMessage: 'Uploading...',
   });
 
@@ -76,9 +77,13 @@ function CreateOffer(props) {
     axios
       .post(base_url, formData, header)
       .then(async (Res) => {
-        setState({...state, loader: false});
-        props.navigation.goBack();
-        console.log('Resss', Res.data.data);
+        setState({
+          ...state,
+          loader: false,
+          secondComponentCall: !state.secondComponentCall,
+        });
+        // props.navigation.goBack();
+        console.log('Resss', Res?.data?.data);
       })
       .catch((err) => {
         console.log('Error', err?.response?.data);
@@ -107,188 +112,271 @@ function CreateOffer(props) {
     });
     return value;
   };
-
-  return (
-    <View
-      style={{
-        flex: 1,
-      }}>
-      <AnimatedLoader
-        status={state.loader}
-        loaderMessage={state.loaderMessage}
-      />
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <ImageBackground
-          source={require('../../../assets/images/statusbg.png')}
-          style={{height: '100%', width: '100%'}}>
+  const _Successfull = () => {
+    return (
+      <ImageBackground
+        source={require('../../../assets/images/statusbg.png')}
+        style={{height: '100%', width: '100%'}}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            // backgroundColor: 'rgba(000,000,000, 0.7)',
+          }}>
           <View
             style={{
-              backgroundColor: 'rgba(00,00,00, 0.7)',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flex: 1,
+              width: '90%',
+              backgroundColor: theme.primaryColor,
+              paddingHorizontal: 15,
+              // borderRadius: 45,
+              borderTopRightRadius: 100,
+              borderBottomLeftRadius: 100,
+              paddingVertical: 60,
+              elevation: 2,
+              // alignItems: 'center',
             }}>
-            <Header
-              isTransparent={true}
-              leftArrow={true}
-              navigation={props.navigation}
+            <Text
+              style={{
+                color: theme.textColor.whiteColor,
+                // paddingTop: 40,
+                paddingBottom: 40,
+                alignSelf: 'center',
+                fontSize: 30,
+                textAlign: 'center',
+                fontWeight: '700',
+              }}>
+              Offer Successfully Uploaded
+            </Text>
+
+            <GlobalButton
+              buttonText="My Offer"
+              height={40}
+              onPress={() => props.navigation.navigate('SelectOffer')}
+            />
+
+            <View
+              style={{
+                height: 20,
+              }}></View>
+            <GlobalButton
+              buttonText="Create new offer"
+              height={40}
+              onPress={() =>
+                setState({
+                  ...state,
+                  secondComponentCall: !state.secondComponentCall,
+                  images: '',
+                  title: '',
+                  offerDescription: '',
+                  price: '',
+                  imageData: {},
+                  loader: false,
+                  secondComponentCall: false,
+                  loaderMessage: 'Uploading...',
+                })
+              }
             />
             <View
               style={{
-                width: '90%',
-                // height: '80%',
-                backgroundColor: 'white',
-                borderRadius: 45,
-                paddingVertical: 10,
+                height: 20,
+              }}></View>
+            <GlobalButton
+              buttonText="Dashboard"
+              height={40}
+              onPress={() => props.navigation.navigate('partnerhome')}
+            />
+          </View>
+        </View>
+      </ImageBackground>
+    );
+  };
+
+  const _CreateOffer = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+        }}>
+        <AnimatedLoader
+          status={state.loader}
+          loaderMessage={state.loaderMessage}
+        />
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <ImageBackground
+            source={require('../../../assets/images/statusbg.png')}
+            style={{height: '100%', width: '100%'}}>
+            <View
+              style={{
+                backgroundColor: 'rgba(00,00,00, 0.7)',
                 alignItems: 'center',
                 justifyContent: 'center',
+                flex: 1,
               }}>
-              <Text
-                style={{
-                  color: theme.secondaryColor,
-                  // paddingBottom: 25,
-                  paddingVertical: 20,
-                  fontSize: 24,
-                  fontWeight: '700',
-                }}>
-                Post Offers
-              </Text>
+              <Header
+                isTransparent={true}
+                leftArrow={true}
+                navigation={props.navigation}
+              />
               <View
                 style={{
-                  width: '80%',
-                  borderWidth: 0.4,
-                  marginVertical: 10,
-                  height: 150,
-                  borderRadius: 20,
-                  justifyContent: 'center',
+                  width: '90%',
+                  // height: '80%',
+                  backgroundColor: 'white',
+                  borderRadius: 45,
+                  paddingVertical: 10,
                   alignItems: 'center',
+                  justifyContent: 'center',
                 }}>
-                <ImageBackground
-                  source={{uri: state.imageData.uri}}
+                <Text
                   style={{
-                    height: '100%',
-                    width: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    color: theme.secondaryColor,
+                    // paddingBottom: 25,
+                    paddingVertical: 20,
+                    fontSize: 24,
+                    fontWeight: '700',
                   }}>
-                  <Text
-                    style={{
-                      fontSize: 30,
-                      fontWeight: '700',
-                      color: theme.textColor.lightWhiteColor,
-                      opacity: 0.4,
-                    }}>
-                    Image
-                  </Text>
-                </ImageBackground>
-              </View>
-              <View
-                style={{
-                  width: '80%',
-                  backgroundColor: 'white',
-                  paddingVertical: 10,
-                }}>
-                <GlobalButton
-                  height={40}
-                  width="100%"
-                  onPress={async () => {
-                    _ImagePicker();
-                    // console.log('Value retuuunnnn+', value);
-                  }}
-                  buttonText="Upload Image"
-                />
-                {/* <TouchableOpacity
-                  onPress={() => {
-                    IMAGEUPLOAD();
-                  }}
+                  Post Offers
+                </Text>
+                <View
                   style={{
-                    height: 50,
-                    width: 50,
-                    borderWidth: 1,
-                  }}></TouchableOpacity> */}
-              </View>
-              <View style={{width: '80%'}}>
-                <View style={{width: '100%', height: 40, marginVertical: 10}}>
-                  <TextInput
+                    width: '80%',
+                    borderWidth: 0.4,
+                    marginVertical: 10,
+                    height: 150,
+                    borderRadius: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <ImageBackground
+                    source={{uri: state.imageData.uri}}
                     style={{
-                      width: '100%',
-                      borderBottomWidth: 0.4,
-
                       height: '100%',
-                      borderRadius: 1,
-                      borderStyle: 'solid',
-                      fontWeight: 'bold',
-                    }}
-                    placeholder="Title here"
-                    placeholderTextColor="black"
-                    onChangeText={(text) => setState({...state, title: text})}
-                  />
-                </View>
-                <View style={{width: '100%', height: 40, marginVertical: 10}}>
-                  <TextInput
-                    style={{
                       width: '100%',
-                      borderBottomWidth: 0.4,
-                      height: '100%',
-                      fontWeight: 'bold',
-
-                      borderRadius: 1,
-                      borderStyle: 'solid',
-                    }}
-                    placeholder="Write Description Here"
-                    placeholderTextColor="black"
-                    onChangeText={(text) =>
-                      setState({...state, offerDescription: text})
-                    }
-                  />
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 30,
+                        fontWeight: '700',
+                        color: theme.textColor.lightWhiteColor,
+                        opacity: 0.4,
+                      }}>
+                      Image
+                    </Text>
+                  </ImageBackground>
                 </View>
-                <View style={{width: '60%', height: 40, marginVertical: 10}}>
-                  <TextInput
-                    style={{
-                      width: '100%',
-                      borderBottomWidth: 0.4,
-
-                      height: '100%',
-                      fontWeight: 'bold',
-                      borderRadius: 1,
-                      borderStyle: 'solid',
+                <View
+                  style={{
+                    width: '80%',
+                    backgroundColor: 'white',
+                    paddingVertical: 10,
+                  }}>
+                  <GlobalButton
+                    height={40}
+                    width="100%"
+                    onPress={async () => {
+                      _ImagePicker();
+                      // console.log('Value retuuunnnn+', value);
                     }}
-                    placeholder="Enter Price here"
-                    onChangeText={(text) => setState({...state, price: text})}
-                    placeholderTextColor="black"
+                    buttonText="Upload Image"
                   />
-                </View>
-              </View>
-              <View
+                  {/* <TouchableOpacity
+                onPress={() => {
+                  IMAGEUPLOAD();
+                }}
                 style={{
-                  width: '80%',
-                  borderRadius: 30,
-                  backgroundColor: 'white',
-                  paddingVertical: 10,
-                  marginTop: 25,
-                  marginBottom: 25,
-                  overflow: 'hidden',
-                }}>
-                <GlobalButton
-                  height={40}
-                  width="100%"
-                  buttonText="Save & upload"
-                  onPress={
-                    () => {
-                      // setOfferPosted(true);
-                      _AddOffer();
-                      // props.navigation.navigate('confirmedoffers');
+                  height: 50,
+                  width: 50,
+                  borderWidth: 1,
+                }}></TouchableOpacity> */}
+                </View>
+                <View style={{width: '80%'}}>
+                  <View style={{width: '100%', height: 40, marginVertical: 10}}>
+                    <TextInput
+                      style={{
+                        width: '100%',
+                        borderBottomWidth: 0.4,
+
+                        height: '100%',
+                        borderRadius: 1,
+                        borderStyle: 'solid',
+                        fontWeight: 'bold',
+                      }}
+                      placeholder="Title here"
+                      placeholderTextColor="black"
+                      onChangeText={(text) => setState({...state, title: text})}
+                    />
+                  </View>
+                  <View style={{width: '100%', height: 40, marginVertical: 10}}>
+                    <TextInput
+                      style={{
+                        width: '100%',
+                        borderBottomWidth: 0.4,
+                        height: '100%',
+                        fontWeight: 'bold',
+
+                        borderRadius: 1,
+                        borderStyle: 'solid',
+                      }}
+                      placeholder="Write Description Here"
+                      placeholderTextColor="black"
+                      onChangeText={(text) =>
+                        setState({...state, offerDescription: text})
+                      }
+                    />
+                  </View>
+                  <View style={{width: '60%', height: 40, marginVertical: 10}}>
+                    <TextInput
+                      style={{
+                        width: '100%',
+                        borderBottomWidth: 0.4,
+
+                        height: '100%',
+                        fontWeight: 'bold',
+                        borderRadius: 1,
+                        borderStyle: 'solid',
+                      }}
+                      placeholder="Enter Price here"
+                      onChangeText={(text) => setState({...state, price: text})}
+                      placeholderTextColor="black"
+                    />
+                  </View>
+                </View>
+                <View
+                  style={{
+                    width: '80%',
+                    borderRadius: 30,
+                    backgroundColor: 'white',
+                    paddingVertical: 10,
+                    marginTop: 25,
+                    marginBottom: 25,
+                    overflow: 'hidden',
+                  }}>
+                  <GlobalButton
+                    height={40}
+                    width="100%"
+                    buttonText="Save & upload"
+                    onPress={
+                      () => {
+                        // setOfferPosted(true);
+                        _AddOffer();
+                        // props.navigation.navigate('confirmedoffers');
+                      }
+                      // props.navigation.navigate('offerUploadedSuccessfully')
                     }
-                    // props.navigation.navigate('offerUploadedSuccessfully')
-                  }
-                />
+                  />
+                </View>
               </View>
             </View>
-          </View>
-        </ImageBackground>
-      </ScrollView>
-    </View>
-  );
+          </ImageBackground>
+        </ScrollView>
+      </View>
+    );
+  };
+
+  return state.secondComponentCall ? _Successfull() : _CreateOffer();
 }
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,

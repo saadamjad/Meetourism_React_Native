@@ -34,10 +34,10 @@ const App = (props) => {
     setUserData({...userData, data});
   }, [props.userData]);
   const [allStatus, setStatus] = useState([
-    {
-      name: 'YOU',
-      image: require('../../assets/icons/row.png'),
-    },
+    // {
+    //   name: 'YOU',
+    //   image: require('../../assets/icons/row.png'),
+    // },
     {
       name: 'My offers ',
       navigation: 'SelectOffer',
@@ -119,7 +119,7 @@ const App = (props) => {
                   // borderWidth: 1,
                   justifyContent: 'space-between',
                   // alignItems: '',
-                  paddingHorizontal: 10,
+                  paddingHorizontal: 20,
                 }}>
                 {allStatus.map((item, i) => {
                   return (
@@ -127,7 +127,7 @@ const App = (props) => {
                       style={{
                         alignItems: 'center',
                         paddingTop: 20,
-                        width: '25%',
+                        width: '33.33%',
                       }}>
                       <TouchableOpacity
                         style={{

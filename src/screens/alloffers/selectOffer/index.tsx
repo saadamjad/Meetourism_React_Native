@@ -22,8 +22,10 @@ import AnimatedLoader from '../../../components/loader';
 import moment from 'moment';
 import axios from 'axios';
 function SelectOffer(props) {
-  const token = props.token;
-  const status = props.status;
+  const token = props?.token;
+  const status = props?.status;
+  const orderData = props?.orderData;
+  const userData = props?.userData;
 
   const [state, setState] = useState({
     showOfferDetails: false,
@@ -61,11 +63,15 @@ function SelectOffer(props) {
 
     //   // Call any action
     // });
+
     _GetAllOffersData();
     // return unsubscribe;
   }, []);
   const _GetAllOffersData = async () => {
-    let value = await props.GetAllOffers(null, token);
+    let id = userData?.id;
+    console.log('orderdata===?');
+
+    let value = await props.GetAllOffers(id, token, status);
     if (value) {
       setState({
         ...state,
@@ -337,7 +343,7 @@ function SelectOffer(props) {
             ))}
           {state.allOffers.length == 0 && !state.loader ? (
             <Text style={{color: 'red', fontSize: 15}}>
-              {state.notFoundMessage}
+              {state.notFoundMessage || 'Sorry No offers found'}
             </Text>
           ) : null}
         </View>
@@ -575,6 +581,7 @@ const mapStateToProps = (state) => ({
   token: state.reducers.token,
   status: state.reducers.status,
   orderData: state.reducers.orderData,
+  userData: state.reducers.userData,
 });
 const mapDispatchToProps = {
   // Signup: Actions.Signup,

@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
         signupData: {...signupData, ...action.payload},
       };
     case actionTypes.LOGINSUCCESS:
-      console.log('LOGINSUCCESS data', action.token);
+      console.log('LOGINSUCCESS data', action.payload);
       return {
         ...state,
         loader: false,
@@ -67,13 +67,6 @@ export default function (state = initialState, action) {
         loader: false,
         matchesData: action.payload,
       };
-    // case actionTypes.UPDATEPROFILEDATA:
-    //   console.log('UPDATEPROFILEDATA ', action.payload);
-    //   return {
-    //     ...state,
-    //     loader: false,
-    //     userData: action.payload,
-    //   };
 
     case actionTypes.GETALLOFFERS:
       return {...state, alloffers: action.payload, loader: false};

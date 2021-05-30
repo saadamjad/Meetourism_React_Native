@@ -39,6 +39,11 @@ function DetailOffer1({
   });
   const [test, setTest] = useState();
   let userStatus = status == 'partner' ? true : false;
+  let userLatitude = data?.user?.latitude;
+  let userLongitute = data?.user?.longitude;
+  let username = data?.user?.username;
+  let description = data?.user?.description;
+  console.log('user===', userLatitude, userLongitute, username, description);
 
   useEffect(() => {
     // console.log('Dataaaaa', data.user.latitude);longitude
@@ -234,17 +239,26 @@ function DetailOffer1({
               }}>
               {/* {statusValue == 2 ? ( */}
               <View style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
-                <MapComponent data={test} height={130} />
+                <MapComponent
+                  data={test}
+                  height={130}
+                  // latitude={userLatitude}
+                  username={username}
+                  description={description}
+                  // longitude={userLongitute}
+                />
               </View>
-              <GlobalButton
-                buttonText="Pay the Offer"
-                height={50}
-                marginVertical={20}
-                width="66%"
-                onPress={() => SaveOrderData(test)}
-              />
 
-              <View style={{height: 30}}></View>
+              {!userStatus ? (
+                <GlobalButton
+                  buttonText="Pay the Offer"
+                  height={50}
+                  marginVertical={20}
+                  width="66%"
+                  onPress={() => SaveOrderData(test)}
+                />
+              ) : null}
+
               {state.edit ? (
                 <GlobalButton
                   buttonText="Delete this offer"

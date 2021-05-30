@@ -121,13 +121,13 @@ const DrawerContent = (props) => {
                 // icon: require('../assets/icons/70.png'),
                 icon: require('../../assets/icons/userss.png'),
               },
-              {
-                title: 'Orders',
-                name: 'userorders',
-                type: 'Entypo',
-                // icon: require('../assets/icons/70.png'),
-                icon: require('../../assets/icons/userss.png'),
-              },
+              // {
+              //   title: 'Orders',
+              //   name: 'userorders',
+              //   type: 'Entypo',
+              //   // icon: require('../assets/icons/70.png'),
+              //   icon: require('../../assets/icons/userss.png'),
+              // },
               {
                 title: 'Events ',
                 name: 'Calender',

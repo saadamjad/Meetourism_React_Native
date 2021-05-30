@@ -9,74 +9,74 @@ import {Item} from 'native-base';
 const Friends = (props) => {
   const [state, setState] = useState({
     messages: [
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Offer updated successfull',
-        date: '9 hrs',
-        badge: 5,
-        l: 8,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Password is successfully updated.',
-        date: '9 hrs',
-        badge: 7,
-        l: 7,
-      },
-      {
-        name: 'Stephen Moreau',
-        selected: false,
-        description:
-          'Everyday English-French-Spanish: Conversation and Fun-Joe!',
-        date: 'Aug 19',
-        l: 6,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 5,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 4,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 3,
-      },
-      {
-        name: 'Dina Meyer',
-        selected: false,
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 2,
-      },
+      // {
+      //   name: 'Dina Meyer',
+      //   selected: false,
+      //   description: 'Offer updated successfull',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 8,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   selected: false,
+      //   description: 'Password is successfully updated.',
+      //   date: '9 hrs',
+      //   badge: 7,
+      //   l: 7,
+      // },
+      // {
+      //   name: 'Stephen Moreau',
+      //   selected: false,
+      //   description:
+      //     'Everyday English-French-Spanish: Conversation and Fun-Joe!',
+      //   date: 'Aug 19',
+      //   l: 6,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   selected: false,
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 5,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   selected: false,
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 4,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   selected: false,
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 3,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   selected: false,
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 2,
+      // },
     ],
   });
   return (
     <CustomView bg={theme.primaryColor} scroll>
-      <View style={{backgroundColor: 'white', flex: 1}}>
+      <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
         <LongHeader
           // !true
           // followandBlock
           if={true}
           navigation={props.navigation}
           leftArrow={true}
-          searchIcon={true}
+          // searchIcon={true}
           backgroundColor={theme.primaryColor}
           headerText="Friends"
         />
@@ -207,6 +207,17 @@ const Friends = (props) => {
             </TouchableOpacity>
           );
         })}
+
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 15,
+            marginVertical: 10,
+            textAlign: 'center',
+          }}>
+          {' '}
+          You Don't Have Friends{' '}
+        </Text>
       </View>
     </CustomView>
   );
