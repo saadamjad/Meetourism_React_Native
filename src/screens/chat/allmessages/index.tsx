@@ -8,63 +8,63 @@ import LongHeader from '../../../components/header/longheader';
 const Messages = (props) => {
   const [state, setState] = useState({
     messages: [
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 8,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Hi everyone!',
-        date: '9 hrs',
-        badge: 7,
-        l: 7,
-      },
-      {
-        name: 'Stephen Moreau',
-        description: 'Check out this Meetup with',
-        date: 'Aug 19',
-        l: 6,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 5,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 4,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 3,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 2,
-      },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 8,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Hi everyone!',
+      //   date: '9 hrs',
+      //   badge: 7,
+      //   l: 7,
+      // },
+      // {
+      //   name: 'Stephen Moreau',
+      //   description: 'Check out this Meetup with',
+      //   date: 'Aug 19',
+      //   l: 6,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 5,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 4,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 3,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 2,
+      // },
     ],
   });
   return (
     <CustomView bg={theme.primaryColor} scroll>
-      <View style={{backgroundColor: 'white', flex: 1}}>
+      <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
         <LongHeader
           navigation={props.navigation}
           leftArrow={true}
-          searchIcon={true}
+          // searchIcon={true}
           headerText="Messages"
         />
         {state.messages.map((val, i) => {
@@ -167,6 +167,16 @@ const Messages = (props) => {
             </TouchableOpacity>
           );
         })}
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 15,
+            marginVertical: 10,
+            textAlign: 'center',
+          }}>
+          {' '}
+          You Don't Have Messages Right Now{' '}
+        </Text>
       </View>
     </CustomView>
   );

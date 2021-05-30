@@ -30,7 +30,8 @@ let statusValue = 0;
 const Status = (props) => {
   const data = props?.route?.params?.profileData;
   const [loader, setLoader] = useState(false);
-  console.log('Data  your interets>>.', data?.company_name);
+  console.log('Data  your interets>>.', data?.latitude);
+  console.log('Data  your interets>>.', data?.longitude);
   const company_name = data?.status == 'partner' ? true : false;
   console.log(' data.userName');
 
@@ -82,8 +83,8 @@ const Status = (props) => {
           interests: state.interests,
           images: data?.images,
           description: data?.description,
-          latitude: '24.123244',
-          longitude: '87.839483',
+          latitude: data?.latitude,
+          longitude: data?.longitude,
           address: 'Test Address',
           // company_name: data.company_name,
           // first_name: 'First Name',

@@ -11,9 +11,6 @@ const GoogleMap = (props) => {
   const map = useRef();
   const loginUser = props?.userData;
 
-  console.log('latitude==?', props?.username);
-  console.log('longitude==', props?.description);
-
   const _onReady = () => {
     return (map.initialRegion = {
       latitude: 25.0915,
@@ -76,8 +73,10 @@ const GoogleMap = (props) => {
               //   longitude: 67.9034,
               // latitude={24.8607} longitude={67.0011}
 
-              latitude: props?.latitude ? props?.latitude : 24.8607,
-              longitude: props?.longitude ? props?.longitude : 67.0011,
+              latitude: props?.latitude ? parseFloat(props?.latitude) : 24.8607,
+              longitude: props?.longitude
+                ? parseFloat(props?.longitude)
+                : 67.0011,
               latitudeDelta: 3.0,
               longitudeDelta: 3.0,
             }}
@@ -97,8 +96,8 @@ const GoogleMap = (props) => {
               latitudeDelta: 3.0,
               longitudeDelta: 3.0,
             }}
-            title={props.userData?.username}
-            description={props.userData?.description}
+            title={loginUser?.username}
+            description={loginUser?.description}
           />
           <Polyline
             coordinates={[
@@ -111,8 +110,12 @@ const GoogleMap = (props) => {
                   : 67.9034,
               },
               {
-                latitude: props?.latitude ? props?.latitude : 24.8607,
-                longitude: props?.longitude ? props?.longitude : 67.0011,
+                latitude: props?.latitude
+                  ? parseFloat(props?.latitude)
+                  : 24.8607,
+                longitude: props?.longitude
+                  ? parseFloat(props?.longitude)
+                  : 67.0011,
               },
             ]}
             strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider

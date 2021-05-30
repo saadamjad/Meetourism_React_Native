@@ -98,8 +98,8 @@ class Actions {
       return await Post('auth/login', data)
         .then((res) => {
           if (res.status_type === 'success') {
-            console.log('res', res.data);
             let response = res?.data;
+            console.log('res===== USER DATA', response);
             dispatch({
               type: actionTypes.LOGINSUCCESS,
               payload: response,
@@ -110,17 +110,18 @@ class Actions {
               response?.status == 'partner' ? 'PartnerStack' : 'drawer',
             );
 
-            return;
+            return true;
           } else {
             console.log('ELSE in login', res.message);
             Toast('Error', 'You Entered Wrong Email or Password', 'error');
-            return;
+            return false;
           }
         })
         .catch((err) => {
           let errResponse = err?.response?.data?.errors;
           let type = 'signup';
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          return false;
         });
     };
   };
@@ -298,10 +299,14 @@ class Actions {
   //       });
   //   };
   // };
-  static GetAllOffers = (data, token, navigation) => {
+  static GetAllOffers = (id, token, status, navigation) => {
+    console.log('Data', id);
     return async (dispatch) => {
       dispatch({type: actionTypes.STARTLOADER});
-      return Get('offers', token)
+      return Get(
+        status === 'partner' ? `offers?user_id=${id}` : `offers`,
+        token,
+      )
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;

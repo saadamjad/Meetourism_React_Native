@@ -16,7 +16,12 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
 // import * as Actions from '../../redux/actions/index';
 import {connect} from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {Actions} from '../../redux/actions/index';
+import Geocoder from 'react-native-geocoding';
+Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // use a valid API key
 
 import axios from 'axios';
 const Status = (props) => {
@@ -26,7 +31,7 @@ const Status = (props) => {
   let url = 'https://meetourism.deviyoinc.com/api/v1/countries';
 
   const company_name = data?.status == 'partner' ? true : false;
-  // console.log('Data  your interets>>.=====', data.userName);
+  console.log('Data  your interets>>.=====', data?.userName);
   const [state, setState] = useState({
     interests: [1, 2],
     selectCountry: '',
@@ -42,7 +47,9 @@ const Status = (props) => {
     lastName: '',
     city: '',
     description: '',
+    Location: false,
     company_name: '',
+    geoCodeData: {},
   });
 
   const [open, setOpen] = useState(false);
@@ -69,28 +76,66 @@ const Status = (props) => {
       });
     } else {
       console.log('else');
-      _GetCities();
+      _ReverseGeoCode();
     }
     _GetInterests();
   }, []);
-  const _GetCities = async () => {
+
+  const _ReverseGeoCode = () => {
+    fetch('http://ip-api.com/json')
+      .then((response) => response.json())
+      .then((response) => {
+        // console.log("User's Location Data is ", response);
+        // console.log("User's Country ", response?.country);
+
+        let data = {
+          country: response?.country,
+          city: response?.city,
+          regionName: response?.regionName,
+          countryCode: response?.countryCode,
+        };
+        _GetCities(data);
+        // setState({
+        //   ...state,
+        //   geoCodeData: {
+        //     country: country,
+        //     city: city,
+        //     regionName: regionName,
+        //     countryCode: countryCode,
+        //   },
+        // });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    _GetCities();
+  };
+  const _GetCities = async (geocodedata) => {
     await axios
       .get(url)
       .then((res) => {
         if (res?.data?.status_type === 'success') {
           setState({
             ...state,
+            ...state.geoCodeData,
             status: data?.status,
             email: data?.value,
             userName: data?.userName,
             // countries: res.data?.data,
             confirmPassword: data?.confirmPassword,
             password: data?.password,
+            geoCodeData: {
+              country: geocodedata?.country,
+              city: geocodedata?.city,
+              regionName: geocodedata?.regionName,
+              countryCode: geocodedata?.countryCode,
+            },
           });
           props.GetCounties(res?.data?.data);
         } else {
           setState({
             ...state,
+
             status: data?.status,
             email: data?.value,
             // countries: [],
@@ -101,6 +146,17 @@ const Status = (props) => {
       .catch((error) => {
         console.log('error in catch _GetCities', error);
       });
+  };
+  const _getCurrentLocation = () => {
+    Geolocation.getCurrentPosition((info) => {
+      console.log('getCurrentPosition', info.coords?.latitude),
+        setState({
+          ...state,
+          latitude: info?.coords?.latitude,
+          longitude: info?.coords?.longitude,
+          Location: true,
+        });
+    });
   };
   const _Imageupload = () => {
     var options = {
@@ -119,7 +175,7 @@ const Status = (props) => {
         console.log('res', res);
         let temp = state.images;
         temp.push(res.uri);
-        setState({...state, images: temp});
+        setState({...state, ...geoCodeData, images: temp});
         // imageUpload(res);
       }
     });
@@ -331,19 +387,71 @@ const Status = (props) => {
                     placeholder={'Enter Company Name'}
                   />
                 ) : null}
-                {company_name ? (
-                  <TouchableOpacity
-                    style={{
-                      width: '100%',
-                      justifyContent: 'center',
-                      borderBottomWidth: 1,
-                      height: 40,
-                      borderColor: theme.borderColor.inActiveBorderColor,
-                    }}>
-                    <Text> press to enter current location </Text>
-                  </TouchableOpacity>
-                ) : null}
 
+                <View
+                  style={{
+                    width: '100%',
+                    borderBottomWidth: 1,
+                    height: 40,
+                    overflow: 'hidden',
+                    borderColor: theme.borderColor.inActiveBorderColor,
+                  }}
+                  // editable={false}
+                >
+                  {company_name ? (
+                    <TouchableOpacity
+                      onPress={() => _getCurrentLocation()}
+                      style={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        borderBottomWidth: 1,
+                        // borderWidth: 1,
+                        height: '100%',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+
+                        borderColor: theme.borderColor.inActiveBorderColor,
+                      }}>
+                      <View
+                        style={{
+                          height: '100%',
+                          justifyContent: 'center',
+                          borderWidth: 0,
+                          flex: 1,
+                        }}>
+                        {state.Location ? (
+                          <Text>
+                            {' '}
+                            {state?.geoCodeData?.city +
+                              '  ' +
+                              state?.geoCodeData?.country +
+                              ' , ' +
+                              state?.geoCodeData?.countryCode +
+                              '  ,  ' +
+                              state?.geoCodeData?.regionName}
+                          </Text>
+                        ) : null}
+                      </View>
+                      <TouchableOpacity
+                        onPress={() => _getCurrentLocation()}
+                        style={{
+                          height: '100%',
+                          width: 100,
+                          alignSelf: 'flex-end',
+                          alignItems: 'flex-end',
+                          justifyContent: 'center',
+                        }}>
+                        <MaterialIcons
+                          name="my-location"
+                          size={25}
+                          color="red"
+                        />
+                      </TouchableOpacity>
+                    </TouchableOpacity>
+                  ) : null}
+                </View>
+
+                {console.log('state.userNamestate.userName', state.userName)}
                 <TextInput
                   style={{
                     width: '100%',

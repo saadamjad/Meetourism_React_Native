@@ -9,65 +9,65 @@ import {Item} from 'native-base';
 const Notification = (props) => {
   const [state, setState] = useState({
     messages: [
-      {
-        name: 'Dina Meyer',
-        description: 'Offer updated successfull',
-        date: '9 hrs',
-        badge: 5,
-        l: 8,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Password is successfully updated.',
-        date: '9 hrs',
-        badge: 7,
-        l: 7,
-      },
-      {
-        name: 'Stephen Moreau',
-        description:
-          'Everyday English-French-Spanish: Conversation and Fun-Joe!',
-        date: 'Aug 19',
-        l: 6,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 5,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 4,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 3,
-      },
-      {
-        name: 'Dina Meyer',
-        description: 'Welcome to Yoga Meetup',
-        date: '9 hrs',
-        badge: 5,
-        l: 2,
-      },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Offer updated successfull',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 8,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Password is successfully updated.',
+      //   date: '9 hrs',
+      //   badge: 7,
+      //   l: 7,
+      // },
+      // {
+      //   name: 'Stephen Moreau',
+      //   description:
+      //     'Everyday English-French-Spanish: Conversation and Fun-Joe!',
+      //   date: 'Aug 19',
+      //   l: 6,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 5,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 4,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 3,
+      // },
+      // {
+      //   name: 'Dina Meyer',
+      //   description: 'Welcome to Yoga Meetup',
+      //   date: '9 hrs',
+      //   badge: 5,
+      //   l: 2,
+      // },
     ],
   });
   return (
     <CustomView bg={theme.primaryColor} scroll>
-      <View style={{backgroundColor: 'white', flex: 1}}>
+      <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
         <LongHeader
           navigation={props.navigation}
           leftArrow={true}
-          searchIcon={true}
-          backgroundColor={theme.secondaryColor}
+          // searchIcon={true}
+          // backgroundColor={theme.secondaryColor}
           headerText="Notifications"
         />
         {state.messages.map((val, i) => {
@@ -150,6 +150,16 @@ const Notification = (props) => {
             </View>
           );
         })}
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 15,
+            marginVertical: 10,
+            textAlign: 'center',
+          }}>
+          {' '}
+          You Don't Have Notification Right Now{' '}
+        </Text>
       </View>
     </CustomView>
   );

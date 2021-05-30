@@ -122,7 +122,6 @@ const App = (props) => {
                       key={i}
                       style={{
                         alignItems: 'center',
-                        // borderWidth: 1,
                         paddingHorizontal: 10,
                         paddingTop: 20,
                       }}>
@@ -134,19 +133,19 @@ const App = (props) => {
                           borderWidth: 0.6,
                           borderRadius: 50,
                           marginHorizontal: 15,
-
                           borderColor: '#AAB1B5',
-
                           alignItems: 'center',
                           justifyContent: 'center',
                         }}
-                        onPress={() =>
+                        onPress={() => {
+                          props.EditSetting(true);
+
                           item.navigation &&
-                          props.navigation.navigate('statusstack', {
-                            screen: 'selectstatus',
-                            params: {comeFromProfileStatus: true},
-                          })
-                        }>
+                            props.navigation.navigate('statusstack', {
+                              screen: 'selectstatus',
+                              params: {comeFromProfileStatus: true},
+                            });
+                        }}>
                         {i == 0 ? (
                           <Image
                             source={item.image}
