@@ -17,17 +17,18 @@ import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import MapView, {Marker} from 'react-native-maps';
 
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    // name: 'saad amjad',
-    // email: 'saad@gmail.com',
-    // password: '123456789',
-    // confirmPassword: '123456789',
+    // name: '',
+    // email: '',
+    // password: '',
+    // confirmPassword: '',
+    name: 'saad amjad',
+    email: 'saad402@gmail.com',
+    password: '123456789',
+    confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
     email: 'saad.amjad434@gmail.com',
@@ -77,6 +78,10 @@ const App = (props) => {
       let data = {
         email: signInValues.email,
         password: signInValues.password,
+
+        latitude: '25.0915',
+        longitude: '67.9034',
+        address: 'Test Address',
       };
 
       let value = await props.Login(data, props.navigation);
@@ -377,7 +382,7 @@ const App = (props) => {
 
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
-      <GooglePlacesAutocomplete
+      {/* <GooglePlacesAutocomplete
         ref={ref}
         placeholder="Enter Location"
         minLength={2}
@@ -402,9 +407,8 @@ const App = (props) => {
             color: '#1faadb',
           },
         }}
-      />
-
-      {/* <View
+      /> */}
+      <View
         style={{
           width: '100%',
           height: 150,
@@ -442,7 +446,6 @@ const App = (props) => {
           </TouchableOpacity>
         ))}
       </View>
-   */}
 
       {state.selectedIndex == '0' ? signInRoute() : signUpRoute()}
       <AnimatedLoader
@@ -458,6 +461,8 @@ const App = (props) => {
       />
     </CustomView>
   );
+
+  //  );
 };
 
 const mapStateToProp = (state) => ({
