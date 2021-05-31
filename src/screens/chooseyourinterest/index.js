@@ -31,7 +31,7 @@ const Status = (props) => {
   let url = 'https://meetourism.deviyoinc.com/api/v1/countries';
 
   const company_name = data?.status == 'partner' ? true : false;
-  console.log('Data  your interets>>.=====', data?.userName);
+  console.log('Data  your interets>>.=====', data?.status);
   const [state, setState] = useState({
     interests: [1, 2],
     selectCountry: '',
@@ -55,24 +55,26 @@ const Status = (props) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (props?.userData && props.editSetting) {
-      let data = props?.userData;
+      console.log('yeh wala');
+      let dataRedux = props?.userData;
       setState({
         ...state,
-        interests: data?.interests,
-        selectCountry: data?.selectCountry,
-        images: data?.images,
-        userName: data?.username,
-        email: data?.email,
-        height: Number(data?.height),
-        weight: Number(data?.weight),
-        eyeColor: data?.eye_color,
-        contact: data?.phone,
-        age: Number(data?.age),
-        firstName: data?.first_name,
-        lastName: data?.last_name,
-        city: data?.city,
-        description: data?.description,
-        company_name: data?.company_name,
+        interests: dataRedux?.interests,
+        selectCountry: dataRedux?.selectCountry,
+        images: dataRedux?.images,
+        userName: dataRedux?.username,
+        email: dataRedux?.email,
+        height: Number(dataRedux?.height),
+        weight: Number(dataRedux?.weight),
+        eyeColor: dataRedux?.eye_color,
+        contact: dataRedux?.phone,
+        age: Number(dataRedux?.age),
+        firstName: dataRedux?.first_name,
+        lastName: dataRedux?.last_name,
+        city: dataRedux?.city,
+        status: data?.status || dataRedux.status,
+        description: dataRedux?.description,
+        company_name: dataRedux?.company_name,
       });
     } else {
       console.log('else');

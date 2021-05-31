@@ -86,7 +86,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loader: false,
-        userData: action.payload,
+        // userData: {...state.userData, ...action.payload},
         editSetting: false,
       };
     case actionTypes.SAVEORDERDATA:
@@ -102,6 +102,13 @@ export default function (state = initialState, action) {
         ...state,
         loader: false,
         orderData: {},
+      };
+    case actionTypes.UPDATEPROFILEDATA:
+      console.log('action.payloadaction.payload', action.payload);
+      return {
+        ...state,
+        loader: false,
+        // userData: {...state.userData, ...action.payload},
       };
 
     case actionTypes.LOGOUT:

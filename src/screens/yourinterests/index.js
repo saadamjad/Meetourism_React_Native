@@ -29,11 +29,11 @@ import {ScrollView} from 'react-native-gesture-handler';
 let statusValue = 0;
 const Status = (props) => {
   const data = props?.route?.params?.profileData;
+  const token = props?.token;
+
   const [loader, setLoader] = useState(false);
-  console.log('Data  your interets>>.', data?.latitude);
-  console.log('Data  your interets>>.', data?.longitude);
+  // console.log('ALL DATA ==>.', data);
   const company_name = data?.status == 'partner' ? true : false;
-  console.log(' data.userName');
 
   const [state, setState] = useState({
     visible: false,
@@ -65,6 +65,27 @@ const Status = (props) => {
   const _UserRegister = async (value) => {
     let data2 = company_name
       ? {
+          // company_name: data.company_name,
+          // first_name: 'First Name',
+          // last_name: 'Last Name',
+          // username:
+          //   'usersskskskksksksssjsjsjssadshshhsjdjdsjsjsdjsjddsfdasdsfkjjjjsname',
+          // email:
+          //   'emassdddskskskskasssdfsksksksdjdjxnnxanajajjanxdjdkdsaddil@yosssspmail.com',
+          // phone: '12345ssdskskksasdsssksjsjsjsshsjsjsjshshjssjsjssssasdsdddds6',
+          // password: 'password12',
+          // password_confirmation: 'password12',
+          // description: 'ssssssssssssssssssssssssssssss',
+          // age: 20,
+          // country_id: 1,
+          // city: 'City',
+          // weight: 40,
+          // height: 6.2,
+          // eye_color: 'green',
+          // status: data?.status,
+          // interests: [1, 2],
+          // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+
           company_name: data?.company_name,
           first_name: data?.firstName,
           last_name: data?.lastName,
@@ -86,26 +107,6 @@ const Status = (props) => {
           latitude: data?.latitude,
           longitude: data?.longitude,
           address: 'Test Address',
-          // company_name: data.company_name,
-          // first_name: 'First Name',
-          // last_name: 'Last Name',
-          // username:
-          //   'usersskskskksksksssjsjsjssadshshhsjdjdsjsjsdjsjddsfdasdsfkjjjjsname',
-          // email:
-          //   'emassdddskskskskasssdfsksksksdjdjxnnxanajajjanxdjdkdsaddil@yosssspmail.com',
-          // phone: '12345ssdskskksasdsssksjsjsjsshsjsjsjshshjssjsjssssasdsdddds6',
-          // password: 'password12',
-          // password_confirmation: 'password12',
-          // description: 'ssssssssssssssssssssssssssssss',
-          // age: 20,
-          // country_id: 1,
-          // city: 'City',
-          // weight: 40,
-          // height: 6.2,
-          // eye_color: 'green',
-          // status: data?.status,
-          // interests: [1, 2],
-          // images: ['user_images/user-image-608de193434244-74625999.jpg'],
         }
       : {
           first_name: data?.firstName,
@@ -122,6 +123,7 @@ const Status = (props) => {
           height: Number(data?.height),
           eye_color: data?.eyeColor,
           status: data?.status,
+
           interests: state?.interests,
           images: data?.images,
           description: data?.description,
@@ -149,12 +151,36 @@ const Status = (props) => {
         };
     setLoader(true);
 
+    // images: data?.images,
+
     if (props?.editSetting) {
-      await props.UpdateCompleteProfile(data2, props.navigation, company_name);
+      let formData = new FormData();
+      // formData.append('data[company_name]', data2?.company_name);
+      formData.append('data[description]', data2?.description);
+      // formData.append('data[first_name]', data2?.first_name);
+      // formData.append('data[last_name]', data2?.last_name);
+      // formData.append('data[interests]', data2?.interests);
+      formData.append('data[status]', data2?.status);
+      // formData.append('data[city]', data2?.city);
+      // formData.append('data[phone]', data2?.phone);
+      // formData.append('data[age]', data2?.age);
+      // formData.append('data[country_id]', data2?.country_id);
+      formData.append('data[weight]', data2?.weight);
+      formData.append('data[height]', data2?.height);
+      formData.append('data[eye_color]', data2?.eye_color);
+      formData.append('type', 'profile');
+
+      await props.UpdateCompleteProfile(
+        formData,
+        props.navigation,
+        company_name,
+        token,
+      );
       setLoader(false);
     } else {
       let testingValue = {...data2, interests: value};
       console.log('testing,', testingValue);
+
       await props.Signup(testingValue, props.navigation, company_name);
 
       setLoader(false);
@@ -162,6 +188,7 @@ const Status = (props) => {
     setLoader(false);
   };
 
+  const _updateProfile = () => {};
   return (
     <>
       <ImageBackground
@@ -397,7 +424,11 @@ const Status = (props) => {
             onPress={() => {
               if (!state.interests?.length > 0) {
                 alert('please select Interests');
-              } else {
+              }
+              // else if (props?.userData && props.editSetting) {
+              //   alert('time editig profiel');
+              // }
+              else {
                 let value = state.interests.map((item, i) => {
                   return item.id;
                 });
@@ -448,7 +479,6 @@ const Status = (props) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {state.interests &&
               state.interests.map((val, i) => {
-                console.log('valee', val);
                 return (
                   <TouchableOpacity
                     key={i}
@@ -598,6 +628,7 @@ const Status = (props) => {
 
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
+  token: state.reducers.token,
   editSetting: state.reducers.editSetting,
   loader: state.reducers.loader,
   allInterests: state.reducers.allInterests,

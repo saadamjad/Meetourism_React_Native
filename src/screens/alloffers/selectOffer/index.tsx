@@ -560,6 +560,28 @@ function SelectOffer(props) {
                         APPLY
                       </Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                      activeOpacity={0.75}
+                      onPress={() => setState({...state, showFilter: false})}
+                      style={{
+                        backgroundColor: theme.secondaryColor,
+                        width: '80%',
+                        height: 50,
+                        marginTop: 20,
+                        borderRadius: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text
+                        style={{
+                          color: theme.textColor.whiteColor,
+                          fontSize: 20,
+                          letterSpacing: 2,
+                        }}>
+                        Cancel
+                      </Text>
+                    </TouchableOpacity>
                   </View>
                 </View>
               </ScrollView>
