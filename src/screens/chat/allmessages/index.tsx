@@ -64,7 +64,7 @@ const Messages = (props) => {
         <LongHeader
           navigation={props.navigation}
           leftArrow={true}
-          // searchIcon={true}
+          searchIcon={true}
           headerText="Messages"
         />
         {state.messages.map((val, i) => {

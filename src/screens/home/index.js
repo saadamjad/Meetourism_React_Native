@@ -253,6 +253,14 @@ const App = (props) => {
                   // {/* Hill View Resturant */}
                   value={userData?.data?.username}
                 />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    marginLeft: 5,
+                    color: 'white',
+                  }}>
+                  {userData?.data?.status}
+                </Text>
               </View>
               <TouchableOpacity
                 activeOpacity={0.8}

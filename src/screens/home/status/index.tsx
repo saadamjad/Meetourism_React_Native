@@ -63,15 +63,6 @@ const App = (props) => {
     });
   };
 
-  const _UserType = async (i) => {
-    let number = JSON.stringify(i);
-    try {
-      await AsyncStorage.setItem('userStatus', number);
-    } catch (error) {
-      // Error saving data
-    }
-  };
-
   return (
     <>
       <ImageBackground

@@ -498,15 +498,37 @@ class Actions {
       });
     };
   };
-  static UpdateCompleteProfile = (data, navigation, status) => {
+  static UpdateCompleteProfile = (data, navigation, status, token) => {
+    console.log('UpdateCompleteProfile', data);
     return async (dispatch) => {
-      dispatch({
-        type: actionTypes.UPDATECOMPLETEPROFILE,
-        payload: data,
-      });
+      return Post('me', data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res;
+            console.log('resss========', response);
+            dispatch({
+              type: actionTypes.UPDATECOMPLETEPROFILE,
+              payload: data,
+            });
 
-      navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
+            navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
+          } else {
+            console.log('ELSE in UpdateCompleteProfile', res);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'UpdateCompleteProfile';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
     };
+
+    // return async (dispatch) => {
+    //   dispatch({
+    //     type: actionTypes.UPDATECOMPLETEPROFILE,
+    //     payload: data,
+    //   });
   };
 }
+
 export {Actions};
