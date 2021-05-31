@@ -21,21 +21,21 @@ import Geolocation from '@react-native-community/geolocation';
 
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    // name: '',
-    // email: '',
-    // password: '',
-    // confirmPassword: '',
-    name: 'saad amjad',
-    email: 'partner@gmail.com',
-    password: '123456789',
-    confirmPassword: '123456789',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    // name: 'saad amjad',
+    // email: 'partner@gmail.com',
+    // password: '123456789',
+    // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'saad.amjad434@gmail.com',
-    password: 'saad@12345',
+    // email: 'saad.amjad434@gmail.com',
+    // password: 'saad@12345',
 
-    // email: '',
-    // password: '',
+    email: '',
+    password: '',
   });
   const ref = useRef();
 
