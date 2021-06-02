@@ -3,11 +3,13 @@ import AnimatedLoader from 'react-native-animated-loader';
 import {StyleSheet, Text} from 'react-native';
 import {theme} from '../../constants/theme';
 
-const Loader = ({status, loaderMessage, path}) => {
+const Loader = ({status, loaderMessage, path, loaderStyle}) => {
   return (
     <AnimatedLoader
       visible={status}
-      overlayColor="rgba(255,255,255,0.6)"
+      overlayColor={
+        loaderStyle ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.5) '
+      }
       source={require('./loaders.json')}
       animationStyle={styles.lottie}
       speed={1}>

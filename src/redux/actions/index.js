@@ -106,6 +106,7 @@ class Actions {
               token: response?.token,
               status: response?.status,
             });
+            // dispatch();
             navigation.replace(
               response?.status == 'partner' ? 'PartnerStack' : 'drawer',
             );
@@ -222,6 +223,34 @@ class Actions {
 
           let errResponse = err?.response?.data;
           let type = 'GetProfileData';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static GetLoggedInUserData = (id, token) => {
+    // console.log('id', id, 'token', token);
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get(`profile/${id}`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('res', response);
+
+            dispatch({
+              type: actionTypes.GETLOGGEDINUSERDATA,
+              payload: response,
+            });
+          } else {
+            console.log('ELSE in GetLoggedInUserData', res);
+            dispatch({type: actionTypes.GETLOGGEDINUSERDATA});
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response?.data;
+          let type = 'GetLoggedInUserData';
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
     };

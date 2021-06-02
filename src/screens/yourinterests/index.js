@@ -28,7 +28,9 @@ import {connect} from 'react-redux';
 import {ScrollView} from 'react-native-gesture-handler';
 let statusValue = 0;
 const Status = (props) => {
+  //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
+  console.log('Dataaa=====', data);
   const token = props?.token;
 
   const [loader, setLoader] = useState(false);
@@ -157,25 +159,26 @@ const Status = (props) => {
       let formData = new FormData();
       // formData.append('data[company_name]', data2?.company_name);
       formData.append('data[description]', data2?.description);
-      // formData.append('data[first_name]', data2?.first_name);
-      // formData.append('data[last_name]', data2?.last_name);
-      // formData.append('data[interests]', data2?.interests);
+      formData.append('data[first_name]', data?.firstName);
+      formData.append('data[last_name]', data?.lastName);
+      formData.append('data[interests]', [1]);
       formData.append('data[status]', data2?.status);
-      // formData.append('data[city]', data2?.city);
+      formData.append('data[city]', data?.city);
       // formData.append('data[phone]', data2?.phone);
-      // formData.append('data[age]', data2?.age);
+      formData.append('data[age]', data?.age);
       // formData.append('data[country_id]', data2?.country_id);
       formData.append('data[weight]', data2?.weight);
       formData.append('data[height]', data2?.height);
       formData.append('data[eye_color]', data2?.eye_color);
       formData.append('type', 'profile');
 
-      await props.UpdateCompleteProfile(
-        formData,
-        props.navigation,
-        company_name,
-        token,
-      );
+      console.log('formData', formData);
+      // await props.UpdateCompleteProfile(
+      //   formData,
+      //   props.navigation,
+      //   company_name,
+      //   token,
+      // );
       setLoader(false);
     } else {
       let testingValue = {...data2, interests: value};
