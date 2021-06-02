@@ -8,6 +8,8 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import AnimatedLoader from '../../components/loader';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -22,6 +24,9 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 const App = (props) => {
   const token = props.token;
   const [select, setSelected] = useState(3);
+  const [state, setState] = useState({
+    loader: false,
+  });
   const [userData, setUserData] = useState({
     edit: false,
     changeTextInput: false,
@@ -51,11 +56,20 @@ const App = (props) => {
       console.log('else not change');
     }
   };
-  useEffect(() => {
-    let data = props?.userData;
-    setUserData({...userData, data});
 
-    console.log('userData', userData);
+  const _GetLoggedInUserData = async () => {
+    console.log('props.userData.id', props?.userData?.id);
+    setState({...state, loader: true});
+    let value = await props.GetLoggedInUserData(props?.userData?.id, token);
+    setState({...state, loader: false});
+  };
+
+  useEffect(() => {
+    _GetLoggedInUserData();
+    // let data = props?.userData;
+    // setUserData({...userData, data});
+
+    // console.log('userData', userData);
   }, []);
   useEffect(() => {
     let data = props?.userData;
@@ -544,6 +558,11 @@ const App = (props) => {
           </TouchableOpacity>
         ))}
       </View>
+      <AnimatedLoader
+        status={state.loader}
+        loaderStyle={true}
+        // loaderMessage={`Signing ${loaderMessage}`}
+      />
     </View>
   );
 };
@@ -559,6 +578,7 @@ const mapDispatchToProps = {
   Logout: Actions.Logout,
   UpdateUserProfileData: Actions.UpdateUserProfileData,
   EditSetting: Actions.EditSetting,
+  GetLoggedInUserData: Actions.GetLoggedInUserData,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

@@ -532,6 +532,7 @@ const Status = (props) => {
                   placeholder="Age"
                   keyboardType="number-pad"
                 />
+                {console.log('state.city', state.city)}
                 <TextInput
                   value={String(state.city)}
                   onChangeText={(text) => setState({...state, city: text})}

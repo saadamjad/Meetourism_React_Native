@@ -25,9 +25,15 @@ const App = (props) => {
     changeTextInput: false, //this state is only   get to know which input data is update or not
   });
 
+  const _GetLoggedInUserData = () => {
+    console.log('props.userData.id', props.userData.id);
+    props.GetLoggedInUserData(props.userData.id, token);
+  };
+
   useEffect(() => {
-    let data = props?.userData;
-    setUserData({...userData, data});
+    _GetLoggedInUserData();
+    // let data = props?.userData;
+    // setUserData({...userData, data});
   }, []);
   useEffect(() => {
     let data = props?.userData;
@@ -507,6 +513,7 @@ const mapStateToProp = (state) => ({
 const mapDispatchToProps = {
   Logout: Actions.Logout,
   UpdateUserProfileData: Actions.UpdateUserProfileData,
+  GetLoggedInUserData: Actions.GetLoggedInUserData,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

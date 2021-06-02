@@ -110,6 +110,12 @@ export default function (state = initialState, action) {
         loader: false,
         // userData: {...state.userData, ...action.payload},
       };
+    case actionTypes.GETLOGGEDINUSERDATA:
+      return {
+        ...state,
+        userData: action.payload,
+        loader: false,
+      };
 
     case actionTypes.LOGOUT:
       return {...state, ...initialState};
