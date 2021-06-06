@@ -25,6 +25,8 @@ Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // u
 
 import axios from 'axios';
 const Status = (props) => {
+  let dataRedux = props?.userData;
+
   const data = props?.route?.params?.profileData
     ? props?.route?.params?.profileData
     : null;
@@ -33,20 +35,37 @@ const Status = (props) => {
   const company_name = data?.status == 'partner' ? true : false;
   console.log('Data  your interets>>.=====', data?.status);
   const [state, setState] = useState({
+    // interests: [1, 2],
+    // selectCountry: '',
+    // images: [],
+    // userName: '',
+    // email: '',
+    // height: '',
+    // weight: '',
+    // eyeColor: '',
+    // contact: '',
+    // age: '',
+    // firstName: '',
+    // lastName: '',
+    // city: '',
+    // description: '',
+    // Location: false,
+    // company_name: '',
+    // geoCodeData: {},
     interests: [1, 2],
-    selectCountry: '',
+    selectCountry: 'sss',
     images: [],
-    userName: '',
+    userName: 'sssssddd',
     email: '',
-    height: '',
-    weight: '',
-    eyeColor: '',
-    contact: '',
-    age: '',
-    firstName: '',
-    lastName: '',
-    city: '',
-    description: '',
+    height: 30,
+    weight: 30,
+    eyeColor: 'brown',
+    contact: '202002020',
+    age: '20',
+    firstName: 'ss',
+    lastName: 'sdsdsd',
+    city: 'karachi',
+    description: 'wdsdsdada',
     Location: false,
     company_name: '',
     geoCodeData: {},
@@ -56,7 +75,6 @@ const Status = (props) => {
   useEffect(() => {
     if (props?.userData && props.editSetting) {
       console.log('yeh wala');
-      let dataRedux = props?.userData;
       setState({
         ...state,
         interests: dataRedux?.interests,
@@ -373,7 +391,8 @@ const Status = (props) => {
                   flex: 1,
                   paddingHorizontal: 20,
                 }}>
-                {company_name ? (
+                {console.log('ssssdddsss============')}
+                {company_name || dataRedux.status ? (
                   <TextInput
                     style={{
                       width: '100%',
@@ -389,18 +408,17 @@ const Status = (props) => {
                     placeholder={'Enter Company Name'}
                   />
                 ) : null}
-
-                <View
-                  style={{
-                    width: '100%',
-                    borderBottomWidth: 1,
-                    height: 40,
-                    overflow: 'hidden',
-                    borderColor: theme.borderColor.inActiveBorderColor,
-                  }}
-                  // editable={false}
-                >
-                  {company_name ? (
+                {company_name ? (
+                  <View
+                    style={{
+                      width: '100%',
+                      borderBottomWidth: 1,
+                      height: 40,
+                      overflow: 'hidden',
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}
+                    // editable={false}
+                  >
                     <TouchableOpacity
                       onPress={() => _getCurrentLocation()}
                       style={{
@@ -450,10 +468,10 @@ const Status = (props) => {
                         />
                       </TouchableOpacity>
                     </TouchableOpacity>
-                  ) : null}
-                </View>
+                  </View>
+                ) : null}
 
-                {console.log('state.userNamestate.userName', state.userName)}
+                {/* {console.log('state.userNamestate.userName', state.userName)} */}
                 <TextInput
                   style={{
                     width: '100%',
@@ -463,7 +481,12 @@ const Status = (props) => {
                   }}
                   // editable={false}
                   value={state.userName}
-                  onChangeText={(text) => setState({...state, userName: text})}
+                  onChangeText={(text) =>
+                    setState({
+                      ...state,
+                      userName: text,
+                    })
+                  }
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Username"
                 />

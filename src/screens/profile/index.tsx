@@ -81,6 +81,7 @@ const Profile = (props) => {
             style={{
               color: theme.secondaryColor,
               fontSize: 30,
+
               fontWeight: '700',
               paddingBottom: 5,
             }}>

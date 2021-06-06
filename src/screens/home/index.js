@@ -65,11 +65,17 @@ const App = (props) => {
   };
 
   useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action
+      _GetLoggedInUserData();
+    });
     _GetLoggedInUserData();
     // let data = props?.userData;
     // setUserData({...userData, data});
 
     // console.log('userData', userData);
+    return unsubscribe;
   }, []);
   useEffect(() => {
     let data = props?.userData;
