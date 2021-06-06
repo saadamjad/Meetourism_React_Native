@@ -7,6 +7,8 @@ import {
   Image,
   TextInput,
   AsyncStorage,
+  Linking,
+  Platform,
   ScrollView,
 } from 'react-native';
 import {Actions} from '../../../redux/actions/index';
@@ -54,6 +56,53 @@ function DetailOffer1({
   const _UpdateOfferData = (data) => {
     UpdateOfferData(data);
     setState({...state, edit: !state.edit});
+  };
+  const _OpenGoogleMaps = () => {
+    const lat = test?.user?.latitude;
+    const lng = test?.user?.longitude;
+    const label = 'karachi,khi,Pakistan';
+
+    const scheme = Platform.select({
+      ios: 'maps:' + lat + ',' + lng + '?q=' + label,
+      android: 'geo:' + lat + ' , ' + lng + ' ?q= ' + label,
+    });
+    // const scheme =
+    //   Platform.OS === 'ios'
+    //     ? 'maps:0,0?q=' + label
+    //     : 'geo:0,0?q=' + label;
+    const latLng = `${lat},${lng}`;
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`,
+    });
+
+    Linking.openURL(url);
+
+    // const latitude = '24.9180';
+    // const longitude = '67.0971';
+    // const label = 'karachi, Khi, pakistan';
+
+    // const url = Platform.select({
+    // ios: 'maps:' + latitude + ',' + longitude + '?q=' + label,
+    // android: 'geo:' + latitude + ',' + longitude + '?q=' + label,
+    // });
+
+    // Linking.canOpenURL(url).then((supported) => {
+    //   console.log('urlll', url);
+    //   if (supported) {
+    //     return Linking.openURL(url);
+    //   } else {
+    //     console.log('else eeeeee');
+    //     const browser_url =
+    //       'https://www.google.de/maps/@' +
+    //       latitude +
+    //       ',' +
+    //       longitude +
+    //       '?q=' +
+    //       label;
+    //     return Linking.openURL(browser_url);
+    //   }
+    // });
   };
   return (
     <ImageBackground
@@ -251,6 +300,21 @@ function DetailOffer1({
 
               {!userStatus ? (
                 <GlobalButton
+                  buttonText="Open Google maps"
+                  height={50}
+                  marginVertical={20}
+                  width="66%"
+                  onPress={() => {
+                    _OpenGoogleMaps();
+                  }}
+                />
+              ) : null}
+              <View style={{marginVertical: 10}}></View>
+              {/* {console.log('testtest===', test.user.latitude)}
+              {console.log('testtest===', test.user.longitude)} */}
+
+              {!userStatus ? (
+                <GlobalButton
                   buttonText="Pay the Offer"
                   height={50}
                   marginVertical={20}
@@ -258,6 +322,7 @@ function DetailOffer1({
                   onPress={() => SaveOrderData(test)}
                 />
               ) : null}
+              <View style={{marginVertical: 10}}></View>
 
               {state.edit ? (
                 <GlobalButton

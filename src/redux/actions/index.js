@@ -18,6 +18,7 @@ class Actions {
               console.log('welcome');
               var str = values.name;
               str = str.replace(/ +/g, '');
+
               Toast('Success', ' Successfully Created', 'success');
 
               let value = {
@@ -548,6 +549,8 @@ class Actions {
         .catch((err) => {
           let errResponse = err?.response?.data;
           let type = 'UpdateCompleteProfile';
+          console.log('ELSE in UpdateCompleteProfile', errResponse);
+
           dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
     };
@@ -557,6 +560,133 @@ class Actions {
     //     type: actionTypes.UPDATECOMPLETEPROFILE,
     //     payload: data,
     //   });
+  };
+  static UpdateCompleteProfile = (data, navigation, status, token) => {
+    console.log('UpdateCompleteProfile', data);
+    return async (dispatch) => {
+      return Post('me', data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res;
+            console.log('resss========', response);
+            dispatch({
+              type: actionTypes.UPDATECOMPLETEPROFILE,
+              payload: data,
+            });
+
+            navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
+          } else {
+            console.log('ELSE in UpdateCompleteProfile', res);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'UpdateCompleteProfile';
+          console.log('ELSE in UpdateCompleteProfile', errResponse);
+
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+
+    // return async (dispatch) => {
+    //   dispatch({
+    //     type: actionTypes.UPDATECOMPLETEPROFILE,
+    //     payload: data,
+    //   });
+  };
+
+  static GetNotificaitons = (token, searchKey, navigation) => {
+    console.log('GetNotificaitons', searchKey);
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get('notifications', token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('GetNotificaitons ++++', response);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return response;
+          } else {
+            console.log('ELSE in GetNotificaitons', res);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response;
+          let type = 'GetNotificaitons';
+
+          console.log('errResponse', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static GetAllMessages = (token) => {
+    // console.log('get-conversations', searchKey);
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get('get-conversations', token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('GetAllMessages ++++', response);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return response;
+          } else {
+            console.log('ELSE in GetAllMessages', res);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response;
+          let type = 'GetAllMessages';
+
+          console.log('errResponse', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static GetPersonChat = (id, token) => {
+    // console.log('get-conversations', searchKey);
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get(`get-messages/${id}`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('GetPersonChat ++++', response);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return response;
+          } else {
+            console.log('ELSE in GetPersonChat', res);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response;
+          let type = 'GetPersonChat';
+
+          console.log('errResponse', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
   };
 }
 

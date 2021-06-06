@@ -16,6 +16,8 @@ import {Actions} from '../../redux/actions/index';
 import {connect} from 'react-redux';
 import {TextInput} from 'react-native-gesture-handler';
 import {theme} from '../../constants/theme';
+import AnimatedLoader from '../../components/loader';
+
 import axios from 'axios';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 const App = (props) => {
@@ -25,15 +27,25 @@ const App = (props) => {
     changeTextInput: false, //this state is only   get to know which input data is update or not
   });
 
-  const _GetLoggedInUserData = () => {
-    console.log('props.userData.id', props.userData.id);
-    props.GetLoggedInUserData(props.userData.id, token);
+  const _GetLoggedInUserData = async () => {
+    // console.log('props.userData.id', props.userData.id);
+    // props.GetLoggedInUserData(props.userData.id, token);
+
+    console.log('props.userData.id', props?.userData?.id);
+    let value = await props.GetLoggedInUserData(props?.userData?.id, token);
+    setState({...state, loader: false});
   };
 
   useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action
+      _GetLoggedInUserData();
+    });
     _GetLoggedInUserData();
     // let data = props?.userData;
     // setUserData({...userData, data});
+    return unsubscribe;
   }, []);
   useEffect(() => {
     let data = props?.userData;
@@ -61,6 +73,10 @@ const App = (props) => {
     },
   ]);
   const [select, setSelected] = useState(2);
+  const [state, setState] = useState({
+    loader: true,
+    message: 'Loading...',
+  });
 
   const UpdateProfile = async (param) => {
     setUserData({...userData, edit: !userData.edit});
@@ -486,7 +502,14 @@ const App = (props) => {
             }}
             onPress={() => {
               if (val.navigateTo === 'statusstack') {
-                null;
+                props.EditSetting(true);
+
+                props.navigation.navigate(val.navigateTo, {
+                  screen: 'chooseyourinterest',
+
+                  settingStatus: true,
+                  dashboard: false,
+                });
               } else
                 props.navigation.navigate(val.navigateTo, {
                   // screen: 'chooseyourinterest',
@@ -500,6 +523,11 @@ const App = (props) => {
           </TouchableOpacity>
         ))}
       </View>
+      <AnimatedLoader
+        status={state.loader}
+        loaderStyle={true}
+        loaderMessage={state.message}
+      />
     </View>
   );
 };
@@ -514,6 +542,7 @@ const mapDispatchToProps = {
   Logout: Actions.Logout,
   UpdateUserProfileData: Actions.UpdateUserProfileData,
   GetLoggedInUserData: Actions.GetLoggedInUserData,
+  EditSetting: Actions.EditSetting,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

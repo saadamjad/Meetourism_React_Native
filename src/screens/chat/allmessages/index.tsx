@@ -5,181 +5,197 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 import CustomView from '../../../components/customView';
 import {theme} from '../../../constants/theme';
 import LongHeader from '../../../components/header/longheader';
+import {connect} from 'react-redux';
+import {Actions} from '../../../redux/actions/index';
+import Toast from '../../../components/toastmessage';
+import AnimatedLoader from '../../../components/loader';
 const Messages = (props) => {
+  const token = props.token;
+  useEffect(() => {
+    _GetNotification();
+  }, []);
+
+  const _GetNotification = async () => {
+    // setState({...state, loader: true});
+    //
+    let value = await props.GetAllMessages(token);
+    // console.log('==========', value);
+    if (value) {
+      setState({...state, loader: false, messages: []});
+    } else {
+      setState({...state, loader: false, messages: []});
+    }
+  };
   const [state, setState] = useState({
-    messages: [
-      // {
-      //   name: 'Dina Meyer',
-      //   description: 'Welcome to Yoga Meetup',
-      //   date: '9 hrs',
-      //   badge: 5,
-      //   l: 8,
-      // },
-      // {
-      //   name: 'Dina Meyer',
-      //   description: 'Hi everyone!',
-      //   date: '9 hrs',
-      //   badge: 7,
-      //   l: 7,
-      // },
-      // {
-      //   name: 'Stephen Moreau',
-      //   description: 'Check out this Meetup with',
-      //   date: 'Aug 19',
-      //   l: 6,
-      // },
-      // {
-      //   name: 'Dina Meyer',
-      //   description: 'Welcome to Yoga Meetup',
-      //   date: '9 hrs',
-      //   badge: 5,
-      //   l: 5,
-      // },
-      // {
-      //   name: 'Dina Meyer',
-      //   description: 'Welcome to Yoga Meetup',
-      //   date: '9 hrs',
-      //   badge: 5,
-      //   l: 4,
-      // },
-      // {
-      //   name: 'Dina Meyer',
-      //   description: 'Welcome to Yoga Meetup',
-      //   date: '9 hrs',
-      //   badge: 5,
-      //   l: 3,
-      // },
-      // {
-      //   name: 'Dina Meyer',
-      //   description: 'Welcome to Yoga Meetup',
-      //   date: '9 hrs',
-      //   badge: 5,
-      //   l: 2,
-      // },
-    ],
+    messages: [],
+    loader: true,
   });
   return (
     <CustomView bg={theme.primaryColor} scroll>
       <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
+        <AnimatedLoader status={state.loader} loaderMessage={'Loading...'} />
+
         <LongHeader
           navigation={props.navigation}
           leftArrow={true}
-          searchIcon={true}
+          // searchIcon={true}
           headerText="Messages"
         />
-        {state.messages.map((val, i) => {
-          let l = i - state.messages.length;
-          console.log('helo', i == state.messages.length - 1);
-          return (
-            <TouchableOpacity
-              activeOpacity={1}
-              style={{
-                height: 300,
-                backgroundColor: theme.primaryColor,
-
-                justifyContent: 'flex-end',
-                borderColor: theme.primaryColor1,
-                marginTop: -150,
-                borderBottomLeftRadius:
-                  i == state.messages.length - 1 ? 0 : 100,
-                zIndex: val.l,
-                borderRightWidth: 0,
-                borderWidth: 0.5,
-                // borderRightWidth: 0,
-                // borderTopColor: theme.primaryColor,
-                // borderRightColor: theme.primaryColor,
-                // borderLeftColor: theme.primaryColor,
-                overflow: 'hidden',
-              }}
-              onPress={() => props.navigation.navigate('innerchat')}>
-              <View
+        {state.messages &&
+          state.messages.map((val, i) => {
+            let l = i - state.messages?.length;
+            console.log('hel===o', val);
+            return (
+              <TouchableOpacity
+                activeOpacity={1}
                 style={{
-                  flex: 0.55,
-                  width: '100%',
-                  flexDirection: 'row',
-                  alignSelf: 'flex-end',
-                  justifyContent: 'center',
-                  alignItems: 'space-around',
-                }}>
+                  height: 110,
+                  // backgroundColor: theme.primaryColor,
+
+                  // backgroundColor: 'blue',
+                  // justifyContent: 'flex-end',
+                  borderColor: theme.primaryColor1,
+                  // marginTop: -150,
+                  // borderBottomLeftRadius:
+                  //   i == state.messages?.length - 1 ? 100 : 100,
+                  // zIndex: val.l,
+                  borderRightWidth: 0,
+                  borderWidth: 0.5,
+                  // borderRightWidth: 0,
+                  // borderTopColor: theme.primaryColor,
+                  // borderRightColor: theme.primaryColor,
+                  // borderLeftColor: theme.primaryColor,
+                  overflow: 'hidden',
+                }}
+                onPress={() =>
+                  props.navigation.navigate('innerchat', {
+                    chatId: '5',
+                  })
+                }>
                 <View
                   style={{
-                    height: '100%',
-                    width: '80%',
-                    justifyContent: 'space-around',
+                    // flex: 0.55,
+                    // backgroundColor: 'blue',
+                    // backgroundColor: 'blue',
+
+                    width: '100%',
                     flexDirection: 'row',
-                    alignItems: 'center',
-                  }}>
-                  <View style={{width: '60%', alignItems: 'center'}}>
-                    <Image
-                      resizeMode="contain"
-                      style={{height: 40, width: 40, borderRadius: 40}}
-                      source={require('../../../assets/images/ava.png')}
-                    />
-                    {/* </View> */}
-                  </View>
-                  <View style={{width: '60%'}}>
-                    <Text style={{color: theme.textColor.whiteColor}}>
-                      {val.name}
-                    </Text>
-                    <Text
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontWeight: '900',
-                        fontSize: 14,
-                      }}>
-                      {val.description}
-                    </Text>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    height: '100%',
-                    width: '30%',
+                    // alignSelf: 'flex-end',
                     justifyContent: 'center',
-                    alignItems: 'center',
+
+                    // alignItems: 'space-around',
                   }}>
-                  <Text style={{color: theme.textColor.whiteColor}}>
-                    {val.date}
-                  </Text>
-                  {val.badge && (
+                  <View
+                    style={{
+                      // backgroundColor: 'red',
+
+                      height: '100%',
+                      width: '80%',
+                      justifyContent: 'space-around',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}>
+                    <View style={{width: '30%', alignItems: 'flex-end'}}>
+                      <View
+                        style={{
+                          // width: '60%',
+                          alignItems: 'center',
+                          borderWidth: 1,
+                          width: 50,
+                          borderRadius: 50,
+                          marginLeft: 10,
+                          height: 50,
+                          overflow: 'hidden',
+                        }}>
+                        <Image
+                          resizeMode="cover"
+                          style={{height: '100%', width: '100%'}}
+                          source={{uri: val?.sender?.profile_url}}
+                        />
+                        {/* </View> */}
+                      </View>
+                    </View>
+
                     <View
                       style={{
-                        backgroundColor: 'white',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-
-                        borderRadius: 25,
-                        height: 25,
-                        width: 25,
-                        marginTop: 4,
+                        flex: 1,
+                        paddingLeft: 10,
                       }}>
+                      <Text style={{color: theme.textColor.whiteColor}}>
+                        {val.sender.full_name}
+                      </Text>
                       <Text
                         style={{
-                          color: theme.primaryColor1,
+                          color: theme.textColor.whiteColor,
+                          fontWeight: '900',
                           fontSize: 14,
                         }}>
-                        {val.badge}
+                        {val?.messages[0]?.message}
                       </Text>
                     </View>
-                  )}
+                  </View>
+                  <View
+                    style={{
+                      height: '100%',
+                      width: '30%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={{color: theme.textColor.whiteColor}}>
+                      {val?.messages[0]?.updated_at}
+                    </Text>
+                    {val.badge && (
+                      <View
+                        style={{
+                          backgroundColor: 'white',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+
+                          borderRadius: 25,
+                          height: 25,
+                          width: 25,
+                          marginTop: 4,
+                        }}>
+                        <Text
+                          style={{
+                            color: theme.primaryColor1,
+                            fontSize: 14,
+                          }}>
+                          {val.badge}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-        <Text
-          style={{
-            color: 'white',
-            fontSize: 15,
-            marginVertical: 10,
-            textAlign: 'center',
-          }}>
-          {' '}
-          You Don't Have Messages Right Now{' '}
-        </Text>
+              </TouchableOpacity>
+            );
+          })}
+        {state?.messages?.length === 0 && !state.loader ? (
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 15,
+              marginVertical: 10,
+              textAlign: 'center',
+            }}>
+            {' '}
+            You Don't Have Messages Right Now{' '}
+          </Text>
+        ) : null}
       </View>
     </CustomView>
   );
 };
 
-export default Messages;
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  loader: state.reducers.loader,
+  token: state.reducers.token,
+});
+const mapDispatchToProps = {
+  CheckUser: Actions.CheckUser,
+  Login: Actions.Login,
+  GetAllMessages: Actions.GetAllMessages,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Messages);

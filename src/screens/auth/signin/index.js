@@ -7,6 +7,8 @@ import {
   TextInput,
   Image,
   StyleSheet,
+  Platform,
+  Linking,
 } from 'react-native';
 import {theme} from '../../../constants/theme';
 // import styles from './styles';
@@ -21,18 +23,18 @@ import Geolocation from '@react-native-community/geolocation';
 
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    // name: 'saad amjad',
-    // email: 'partner@gmail.com',
-    // password: '123456789',
-    // confirmPassword: '123456789',
+    // name: '',
+    // email: '',
+    // password: '',
+    // confirmPassword: '',
+    name: 'ok',
+    email: 'ok@gmail.com',
+    password: '123456789',
+    confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'saad.amjad434@gmail.com',
-    password: 'saad@12345',
+    email: 'fixedpartner@gmail.com',
+    password: '123456789',
 
     // email: '',
     // password: '',
@@ -160,6 +162,7 @@ const App = (props) => {
           activeOpacity={0.75}>
           <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={{
             // backgroundColor: theme.secondaryColor,

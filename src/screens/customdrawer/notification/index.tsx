@@ -6,7 +6,26 @@ import CustomView from '../../../components/customView';
 import {theme} from '../../../constants/theme';
 import LongHeader from '../../../components/header/longheader';
 import {Item} from 'native-base';
+import {connect} from 'react-redux';
+import {Actions} from '../../../redux/actions/index';
+import Toast from '../../../components/toastmessage';
+import AnimatedLoader from '../../../components/loader';
 const Notification = (props) => {
+  const token = props.token;
+  useEffect(() => {
+    _GetNotification();
+  }, []);
+
+  const _GetNotification = async () => {
+    let value = await props.GetNotificaitons(token);
+    console.log('=====', value);
+
+    if (value) {
+      setState({...state, loader: false, messages: value});
+    } else {
+      setState({...state, loader: false, messages: []});
+    }
+  };
   const [state, setState] = useState({
     messages: [
       // {
@@ -59,9 +78,11 @@ const Notification = (props) => {
       //   l: 2,
       // },
     ],
+    loader: true,
   });
   return (
     <CustomView bg={theme.primaryColor} scroll>
+      <AnimatedLoader status={state.loader} loaderMessage={'Loading...'} />
       <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
         <LongHeader
           navigation={props.navigation}
@@ -70,9 +91,9 @@ const Notification = (props) => {
           // backgroundColor={theme.secondaryColor}
           headerText="Notifications"
         />
-        {state.messages.map((val, i) => {
-          let l = i - state.messages.length;
-          console.log('helo', i == state.messages.length - 1);
+        {state?.messages?.map((val, i) => {
+          let l = i - state?.messages?.length;
+          console.log('helo', i == state?.messages?.length - 1);
           return (
             <View
               style={{
@@ -92,7 +113,7 @@ const Notification = (props) => {
                 borderColor: theme.primaryColor1,
                 marginTop: -150,
                 borderBottomLeftRadius:
-                  i == state.messages.length - 1 ? 0 : 100,
+                  i == state?.messages?.length - 1 ? 0 : 100,
                 zIndex: val.l,
                 overflow: 'hidden',
               }}>
@@ -150,19 +171,32 @@ const Notification = (props) => {
             </View>
           );
         })}
-        <Text
-          style={{
-            color: 'white',
-            fontSize: 15,
-            marginVertical: 10,
-            textAlign: 'center',
-          }}>
-          {' '}
-          You Don't Have Notification Right Now{' '}
-        </Text>
+        {state?.messages?.length === 0 && !state.loader ? (
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 15,
+              marginVertical: 10,
+              textAlign: 'center',
+            }}>
+            {' '}
+            You Don't Have Notification Right Now{' '}
+          </Text>
+        ) : null}
       </View>
     </CustomView>
   );
 };
 
-export default Notification;
+const mapStateToProp = (state) => ({
+  userData: state.reducers.userData,
+  loader: state.reducers.loader,
+  token: state.reducers.token,
+});
+const mapDispatchToProps = {
+  CheckUser: Actions.CheckUser,
+  Login: Actions.Login,
+  GetNotificaitons: Actions.GetNotificaitons,
+};
+
+export default connect(mapStateToProp, mapDispatchToProps)(Notification);
