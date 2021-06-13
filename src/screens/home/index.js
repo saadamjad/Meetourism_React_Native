@@ -25,7 +25,7 @@ const App = (props) => {
   const token = props.token;
   const [select, setSelected] = useState(3);
   const [state, setState] = useState({
-    loader: false,
+    loader: true,
   });
   const [userData, setUserData] = useState({
     edit: false,
@@ -58,8 +58,6 @@ const App = (props) => {
   };
 
   const _GetLoggedInUserData = async () => {
-    console.log('props.userData.id', props?.userData?.id);
-    setState({...state, loader: true});
     let value = await props.GetLoggedInUserData(props?.userData?.id, token);
     setState({...state, loader: false});
   };
@@ -135,6 +133,9 @@ const App = (props) => {
                   resizeMode="contain"
                 />
               </TouchableOpacity>
+              {/* {
+                console.log(" props.image[0] props.image[0]", props.image[0])
+              } */}
               <View style={{flexDirection: 'row'}}>
                 {allStatus.map((item, i) => {
                   return (
@@ -166,11 +167,17 @@ const App = (props) => {
                               params: {comeFromProfileStatus: true},
                             });
                         }}>
+
                         {i == 0 ? (
                           <Image
-                            source={item.image}
+                            // source={  item.image}
+                            source={
+                              props?.image[0]
+                                ? {uri: props.image[0]}
+                                : item.image
+                            }
                             style={{height: '100%', width: '100%'}}
-                            resizeMode="contain"
+                            resizeMode="cover"
                           />
                         ) : (
                           item.image

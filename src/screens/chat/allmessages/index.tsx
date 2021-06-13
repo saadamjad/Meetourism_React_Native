@@ -8,6 +8,7 @@ import LongHeader from '../../../components/header/longheader';
 import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
+import moment from 'moment';
 import AnimatedLoader from '../../../components/loader';
 const Messages = (props) => {
   const token = props.token;
@@ -19,9 +20,9 @@ const Messages = (props) => {
     // setState({...state, loader: true});
     //
     let value = await props.GetAllMessages(token);
-    // console.log('==========', value);
+    console.log('==========', value);
     if (value) {
-      setState({...state, loader: false, messages: []});
+      setState({...state, loader: false, messages: value});
     } else {
       setState({...state, loader: false, messages: []});
     }
@@ -44,21 +45,17 @@ const Messages = (props) => {
         {state.messages &&
           state.messages.map((val, i) => {
             let l = i - state.messages?.length;
-            console.log('hel===o', val);
+            // console.log('hel===o', val);
+            const d = new Date('2015-03-25T12:00:00Z');
+            // console.log('-======DATeE===', d.format(d, 'DDMMYY'));
             return (
               <TouchableOpacity
                 activeOpacity={1}
                 style={{
                   height: 110,
-                  // backgroundColor: theme.primaryColor,
 
-                  // backgroundColor: 'blue',
-                  // justifyContent: 'flex-end',
                   borderColor: theme.primaryColor1,
-                  // marginTop: -150,
-                  // borderBottomLeftRadius:
-                  //   i == state.messages?.length - 1 ? 100 : 100,
-                  // zIndex: val.l,
+
                   borderRightWidth: 0,
                   borderWidth: 0.5,
                   // borderRightWidth: 0,
@@ -67,11 +64,12 @@ const Messages = (props) => {
                   // borderLeftColor: theme.primaryColor,
                   overflow: 'hidden',
                 }}
-                onPress={() =>
+                onPress={() => {
                   props.navigation.navigate('innerchat', {
-                    chatId: '5',
-                  })
-                }>
+                    id: val?.id,
+                  });
+                  props.GetPersonChat(val?.id, token);
+                }}>
                 <View
                   style={{
                     // flex: 0.55,
@@ -110,7 +108,7 @@ const Messages = (props) => {
                         <Image
                           resizeMode="cover"
                           style={{height: '100%', width: '100%'}}
-                          source={{uri: val?.sender?.profile_url}}
+                          source={{uri: val?.user?.profile_url}}
                         />
                         {/* </View> */}
                       </View>
@@ -122,7 +120,7 @@ const Messages = (props) => {
                         paddingLeft: 10,
                       }}>
                       <Text style={{color: theme.textColor.whiteColor}}>
-                        {val.sender.full_name}
+                        {val?.user?.full_name}
                       </Text>
                       <Text
                         style={{
@@ -130,7 +128,7 @@ const Messages = (props) => {
                           fontWeight: '900',
                           fontSize: 14,
                         }}>
-                        {val?.messages[0]?.message}
+                        {val?.last_message[0]?.message}
                       </Text>
                     </View>
                   </View>
@@ -142,9 +140,15 @@ const Messages = (props) => {
                       alignItems: 'center',
                     }}>
                     <Text style={{color: theme.textColor.whiteColor}}>
-                      {val?.messages[0]?.updated_at}
+                      {/* {val?.last_message[0]?.moment(updated_at, 'DDMMYY') */}
+                      {/* {moment(val?.last_message[0]?.updated_at, 'DDMMYYYY')} */}
+
+                      {/* {new Date(val?.last_message[0]?.updated_at)} */}
+                      {moment(val?.last_message[0]?.updated_at).format(
+                        'yy-MM-DD',
+                      )}
                     </Text>
-                    {val.badge && (
+                    {val?.badge && (
                       <View
                         style={{
                           backgroundColor: 'white',
@@ -161,7 +165,7 @@ const Messages = (props) => {
                             color: theme.primaryColor1,
                             fontSize: 14,
                           }}>
-                          {val.badge}
+                          {val?.badge}ssssadaaddasdsad
                         </Text>
                       </View>
                     )}
@@ -196,6 +200,7 @@ const mapDispatchToProps = {
   CheckUser: Actions.CheckUser,
   Login: Actions.Login,
   GetAllMessages: Actions.GetAllMessages,
+  GetPersonChat: Actions.GetPersonChat,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Messages);

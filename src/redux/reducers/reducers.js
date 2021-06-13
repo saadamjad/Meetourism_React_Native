@@ -13,6 +13,8 @@ const initialState = {
   allCountries: [],
   allInterests: [],
   orderData: {},
+  personalChatData: [],
+  reverseGeoCodeData:{}
 };
 
 export default function (state = initialState, action) {
@@ -87,7 +89,7 @@ export default function (state = initialState, action) {
         ...state,
         loader: false,
         // userData: {...state.userData, ...action.payload},
-        editSetting: false,
+        // editSetting: false,
       };
     case actionTypes.SAVEORDERDATA:
       console.log('action.payloadaction.payload', action.payload);
@@ -114,6 +116,18 @@ export default function (state = initialState, action) {
       return {
         ...state,
         userData: action.payload,
+        loader: false,
+      };
+    case actionTypes.GETPERSONALCHATS:
+      return {
+        ...state,
+        personalChatData: action.payload,
+        loader: false,
+      };
+    case actionTypes.REVERSEGEOCODEDATA:
+      return {
+        ...state,
+        reverseGeoCodeData:action.payload,
         loader: false,
       };
 

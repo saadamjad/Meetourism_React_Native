@@ -51,14 +51,17 @@ const DrawerContent = (props) => {
               style={{
                 height: 50,
                 width: 50,
-                // borderWidth: 1,
+                borderWidth:1,
                 borderRadius: 50,
+                overflow:'hidden',
                 borderColor: '#D47FA6',
               }}>
               <Image
-                source={require('../../assets/icons/row.png')}
+                source={  props?.image[0]
+                  ? {uri: props.image[0]}
+                  :  require('../../assets/icons/row.png')}
                 style={{height: '100%', width: '100%'}}
-                resizeMode="contain"></Image>
+                resizeMode="cover"></Image>
             </TouchableOpacity>
             <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
               <TouchableOpacity
@@ -243,7 +246,10 @@ const DrawerContent = (props) => {
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   loader: state.reducers.loader,
+  image: state.reducers.images_Interests,
+
 });
+
 const mapDispatchToProps = {
   Logout: Actions.Logout,
 };

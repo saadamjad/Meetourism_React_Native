@@ -60,7 +60,7 @@ function DetailOffer1({
   const _OpenGoogleMaps = () => {
     const lat = test?.user?.latitude;
     const lng = test?.user?.longitude;
-    const label = 'karachi,khi,Pakistan';
+    const label = '';
 
     const scheme = Platform.select({
       ios: 'maps:' + lat + ',' + lng + '?q=' + label,

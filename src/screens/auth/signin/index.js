@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Dimensions,
@@ -10,12 +10,12 @@ import {
   Platform,
   Linking,
 } from 'react-native';
-import {theme} from '../../../constants/theme';
+import { theme } from '../../../constants/theme';
 // import styles from './styles';
 import CustomView from '../../../components/customView';
 import HoldOn from '../../holdOn';
-import {connect} from 'react-redux';
-import {Actions} from '../../../redux/actions/index';
+import { connect } from 'react-redux';
+import { Actions } from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
 
@@ -23,21 +23,21 @@ import Geolocation from '@react-native-community/geolocation';
 
 const App = (props) => {
   const [signupValues, setSignvalues] = useState({
-    // name: '',
-    // email: '',
-    // password: '',
-    // confirmPassword: '',
-    name: 'ok',
-    email: 'ok@gmail.com',
-    password: '123456789',
-    confirmPassword: '123456789',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    // name: 'ok',
+    // email: 'ok@gmail.com',
+    // password: '123456789',
+    // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'fixedpartner@gmail.com',
-    password: '123456789',
+    // email: 'fixedpartner@gmail.com',
+    // password: '123456789',
 
-    // email: '',
-    // password: '',
+    email: '',
+    password: '',
   });
   const ref = useRef();
 
@@ -56,8 +56,8 @@ const App = (props) => {
     visible: false,
 
     routes: [
-      {key: 'first', title: 'SignIn'},
-      {key: 'second', title: 'SignUp'},
+      { key: 'first', title: 'SignIn' },
+      { key: 'second', title: 'SignUp' },
     ],
   });
 
@@ -65,7 +65,7 @@ const App = (props) => {
   const [loaderMessage, setLoaderMessage] = useState('');
 
   const toggleOverlay = (data) => {
-    setState({...state, visible: !state.visible, data: data});
+    setState({ ...state, visible: !state.visible, data: data });
   };
 
   const [elements, setElemtns] = useState([
@@ -74,7 +74,7 @@ const App = (props) => {
       isSecure: false,
       keyboardType: 'email-address',
     },
-    {placeholder: 'Password', isSecure: true, keyboardType: 'default'},
+    { placeholder: 'Password', isSecure: true, keyboardType: 'default' },
   ]);
   const _SignIn = async () => {
     if (signInValues.email == '' || signInValues.password == '') {
@@ -98,8 +98,8 @@ const App = (props) => {
   };
 
   const signInRoute = () => (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ alignItems: 'center' }}>
         {elements.map((val, i) => {
           return (
             <View
@@ -108,8 +108,8 @@ const App = (props) => {
                   i == 0 && signInValues.email.length > 0
                     ? theme.borderColor.activeBorderColor
                     : i == 1 && signInValues.password.length > 0
-                    ? theme.borderColor.activeBorderColor
-                    : theme.borderColor.inActiveBorderColor,
+                      ? theme.borderColor.activeBorderColor
+                      : theme.borderColor.inActiveBorderColor,
                 borderBottomWidth: 1,
                 width: '80%',
                 height: 40,
@@ -124,8 +124,8 @@ const App = (props) => {
                 }}
                 onChangeText={(text) =>
                   i == 0
-                    ? setSignINvalues({...signInValues, email: text})
-                    : setSignINvalues({...signInValues, password: text})
+                    ? setSignINvalues({ ...signInValues, email: text })
+                    : setSignINvalues({ ...signInValues, password: text })
                 }
                 placeholder={val.placeholder}
                 keyboardType={val.keyboardType}
@@ -160,7 +160,7 @@ const App = (props) => {
             // props.navigation.replace('drawer')
           }
           activeOpacity={0.75}>
-          <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+          <Text style={{ color: theme.textColor.whiteColor }}>CONTINUE</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -187,11 +187,11 @@ const App = (props) => {
     </View>
   );
   const _onChangeText = (text, key) => {
-    setSignvalues({...signupValues, [key]: text});
+    setSignvalues({ ...signupValues, [key]: text });
   };
   const _SocialIcons = () => {
     return (
-      <View style={{flexDirection: 'row', marginTop: 20, borderWidth: 0}}>
+      <View style={{ flexDirection: 'row', marginTop: 20, borderWidth: 0 }}>
         {[
           require('../../../assets/images/gmail.png'),
           require('../../../assets/images/instagram.png'),
@@ -200,7 +200,7 @@ const App = (props) => {
           <Image
             resizeMode="contain"
             source={val}
-            style={{height: 30, width: 30}}
+            style={{ height: 30, width: 30 }}
             resizeMode="contain"
             key={ind}
           />
@@ -261,7 +261,7 @@ const App = (props) => {
 
   const signUpRoute = () => (
     <>
-      <View style={{alignItems: 'center'}}>
+      <View style={{ alignItems: 'center' }}>
         <View
           style={{
             backgroundColor: 'white',
@@ -379,7 +379,7 @@ const App = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+          <Text style={{ color: theme.textColor.whiteColor }}>CONTINUE</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -387,6 +387,39 @@ const App = (props) => {
 
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
+
+
+      {/* <TouchableOpacity
+        style={{ height: 50, width: 50, borderWidth: 1 }}
+        onPress={() => {
+          fetch('http://ip-api.com/json')
+            .then((response) => response.json())
+            .then((response) => {
+
+              let data = {
+                country: response?.country,
+                city: response?.city,
+                regionName: response?.regionName,
+                countryCode: response?.countryCode,
+              };
+
+              setState({ ...state, test: data })
+              alert("Ss")
+
+
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }}
+      >
+        <Text>please enter</Text>
+
+      </TouchableOpacity>
+      */}
+
+      {/* <Text> {state?.test?.city} </Text>
+      <Text> {state?.test?.regionName} </Text> */}
       {/* <GooglePlacesAutocomplete
         ref={ref}
         placeholder="Enter Location"
@@ -424,7 +457,7 @@ const App = (props) => {
         }}>
         {['SIGN IN', 'SIGN UP'].map((val, i) => (
           <TouchableOpacity
-            onPress={() => setState({...state, selectedIndex: i})}
+            onPress={() => setState({ ...state, selectedIndex: i })}
             key={i}
             activeOpacity={0.7}
             style={{

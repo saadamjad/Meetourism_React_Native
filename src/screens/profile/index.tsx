@@ -59,7 +59,7 @@ const Profile = (props) => {
             navigation={props.navigation}
             leftArrow={true}
             isTransparent={true}
-            searchIcon={true}
+            // searchIcon={true}
           />
         </ImageBackground>
 

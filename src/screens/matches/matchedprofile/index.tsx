@@ -25,6 +25,7 @@ import {Actions} from '../../../redux/actions/index';
 const Profile = (props) => {
   const token = props.token;
   const data = props?.route?.params?.data;
+  console.log('=========', data.id);
   const [state, setState] = useState({
     follow: false,
     loader: true,
@@ -149,7 +150,16 @@ const Profile = (props) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
-                  onPress={() => props.navigation.navigate('innerchat')}>
+                  onPress={
+                    async () => {
+                      props.navigation.navigate('innerchat', {
+                        id: data?.id,
+                      });
+                      // props.StartChat(data?.id, token, props.navigation);
+                    }
+                    // console.log('StartChat')
+                    //  props.navigation.navigate('innerchat')
+                  }>
                   <Image
                     source={require('../../../assets/images/path.png')}
                     style={{height: 20, width: 20, tintColor: '#9E94A6'}}
@@ -320,7 +330,14 @@ const Profile = (props) => {
                   <GlobalButton
                     buttonText="Dashboard"
                     width="70%"
-                    onPress={() => props.navigation.replace('drawer')}
+                    onPress={() => 
+
+                  {   
+
+                     props.navigation.replace('drawer')
+                     props.EditSetting(false);
+                    }
+                    }
                   />
                 </View>
               </View>
@@ -341,6 +358,8 @@ const mapStateToProp = (state) => ({
 const mapDispatchToProps = {
   FollowUser: Actions.FollowUser,
   GetProfileData: Actions.GetProfileData,
+  StartChat: Actions.StartChat,
+  EditSetting: Actions.EditSetting,
   // Login: Actions.Login,
 };
 

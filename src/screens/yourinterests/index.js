@@ -54,16 +54,16 @@ const Status = (props) => {
       let value = props?.userData?.interests.map((item, i) => {
         return {...item, selected: true};
       });
-
       setState({
         ...state,
         interests: value,
         loader: false,
       });
-    } else {
-      setState({...state, interests: props?.allInterests, loader: false});
     }
-  }, [props.allInterests, props.userData]);
+  }, []);
+  useEffect(() => {
+      setState({...state, interests: props.allInterests, loader: false});
+  }, [props.allInterests]);
 
   const _UserRegister = async (value) => {
     console.log('company_name,', company_name);
@@ -189,7 +189,6 @@ const Status = (props) => {
       setLoader(false);
     } else {
       let testingValue = {...data2, interests: value};
-      console.log('testing,====', testingValue);
 
       await props.Signup(testingValue, props.navigation, company_name);
 
@@ -274,7 +273,7 @@ const Status = (props) => {
                 }}>
                 {state.interests?.length > 0
                   ? state.interests.map((val, i) =>
-                      val.selected ? (
+                      val.selected || props.editSetting   ? (
                         <TouchableOpacity
                           style={{
                             width: '80%',
@@ -387,7 +386,6 @@ const Status = (props) => {
                 let value = state.interests.map((item, i) => {
                   return item.id;
                 });
-                console.log('item', value);
                 _UserRegister(value);
               }
             }}
@@ -583,6 +581,7 @@ const Status = (props) => {
           }}>
           Creating Profile Please Wait
         </Text>
+        
       </AnimatedLoader>
     </>
   );

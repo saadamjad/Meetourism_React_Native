@@ -59,7 +59,8 @@ const App = (props) => {
     {
       name: 'My offers ',
       navigation: 'SelectOffer',
-      image: <FontAwesome name="user" size={20} color="black" />,
+      // image: <FontAwesome name="user" size={20} color="black" />,
+      image: require('../../assets/images/burgerDrink.png'),
     },
     {
       name: 'Create New Offers',
@@ -172,9 +173,12 @@ const App = (props) => {
                         }}>
                         {i == 0 ? (
                           <Image
-                            source={item.image}
+                            // source={item.image}
+                            source={
+                              item.image
+                            }
                             style={{height: '100%', width: '100%'}}
-                            resizeMode="contain"
+                            resizeMode="cover"
                           />
                         ) : (
                           item.image

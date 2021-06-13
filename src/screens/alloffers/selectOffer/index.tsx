@@ -310,15 +310,21 @@ function SelectOffer(props) {
                       width: 40,
                       borderRadius: 40,
                       overflow: 'hidden',
-                      borderWidth: 1,
+                      // borderWidth: ,
+                      elevation:1,
+                      backgroundColor:'white',
+
                     }}>
+                      {/* val.user.profile_url
+                          ? {uri: val.user.profile_url}
+                          : */}
                     <Image
                       style={{height: '100%', width: '100%'}}
                       resizeMode="cover"
                       source={
-                        val.user.profile_url
-                          ? {uri: val.user.profile_url}
-                          : require('../../../assets/images/avatar.png')
+                          props?.image[0]
+                          ? {uri: props.image[0]}
+                          :  require('../../../assets/images/avatar.png')
                       }
                     />
                   </View>
@@ -604,6 +610,8 @@ const mapStateToProps = (state) => ({
   status: state.reducers.status,
   orderData: state.reducers.orderData,
   userData: state.reducers.userData,
+  image: state.reducers.images_Interests,
+
 });
 const mapDispatchToProps = {
   // Signup: Actions.Signup,
