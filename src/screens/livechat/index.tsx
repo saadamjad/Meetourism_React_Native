@@ -13,27 +13,37 @@ import Fontisto from 'react-native-vector-icons//Fontisto';
 import Feather from 'react-native-vector-icons//Feather';
 import {connect} from 'react-redux';
 import {Actions} from '../../redux/actions/index';
-import Toast from '../../components/toastmessage';
 import AnimatedLoader from '../../components/loader';
+import moment from 'moment';
+
 const Messages = (props) => {
   const token = props.token;
+  const _id = props?.route?.params?.id;
+  const loggedInUser = props.userData;
+  // console.log('loggedInUser', _id);
   useEffect(() => {
-    _GetNotification();
+    _StartChat();
   }, []);
+  useEffect(() => {
+    if (!props.loader) {
+      setState({...state, loader: false, messages: props.personalChatData});
+    }
+  }, [props.personalChatData]);
 
-  const _GetNotification = async () => {
-    // setState({...state, loader: true});
-    //
-    let id = '5';
-    let value = await props.GetPersonChat(id, token);
-    console.log('=====>>', value?.messages);
-
+  const _StartChat = async () => {
+    let value = await props.StartChat(_id, token, props.navigation);
     if (value) {
-      setState({...state, loader: false, messages: value?.messages});
+      setState({
+        ...state,
+        loader: false,
+        conversationId: value?.conversation_id,
+        messages: value.messages,
+      });
     } else {
-      setState({...state, loader: false, messages: []});
+      setState({...state, loader: false});
     }
   };
+
   const [state, setState] = useState({
     messages: [
       {
@@ -52,13 +62,33 @@ const Messages = (props) => {
           'March is the one of the best months to visit Rio. you can enjoy the beach and many of the attractions.',
       },
     ],
+    loader: true,
+    conversationId: '',
     message: '',
+    msgText: '',
   });
 
-  let id = 31;
+  let id = loggedInUser;
+
+  const _SendMessage = () => {
+    let conversation_id = String(_id);
+    let data = {message: state.msgText};
+
+    // console.log('Sss', conversation_id, '-dat', data);
+    props.SendMessage(conversation_id, data, token);
+
+    setState({...state, msgText: ''});
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <CustomView bg={theme.primaryColor} scroll>
+        {/* {console.log('ssss====', state)} */}
+
+        <AnimatedLoader
+          status={state.loader}
+          // loaderStyle={true}
+          loaderMessage={`Starting Conversation...`}
+        />
         <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
           <LongHeader
             navigation={props.navigation}
@@ -68,95 +98,113 @@ const Messages = (props) => {
           />
           <View style={{paddingTop: 20}}>
             {state.messages &&
-              state.messages.map((item, index) => (
-                <View
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: item?.id == id ? 'flex-end' : 'flex-start',
-                    // paddingVertical: 10,
-                  }}>
-                  <View
-                    style={{
-                      paddingHorizontal: 10,
-                      paddingVertical: 10,
-                      flexDirection: item?.id == id ? 'row-reverse' : 'row',
-                      alignItems: 'center',
-                    }}>
+              state.messages.map(
+                (item, index) => (
+                  console.log('======', item),
+                  (
                     <View
                       style={{
-                        borderWidth: 1,
-                        borderColor: 'pink',
-                        height: 35,
-                        width: 35,
-                        marginRight: 10,
-                        marginLeft: item?.id == id ? 10 : 0,
-                        borderRadius: 35,
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: item?.id == id ? 'flex-end' : 'flex-start',
+                        // paddingVertical: 10,
                       }}>
-                      <Image
-                        source={item?.image}
-                        style={{height: '100%', width: '100%'}}
-                        resizeMode="contain"
-                      />
-                    </View>
+                      <View
+                        style={{
+                          paddingHorizontal: 10,
+                          paddingVertical: 10,
+                          flexDirection: item?.id == id ? 'row-reverse' : 'row',
+                          alignItems: 'center',
+                        }}>
+                        <View
+                          style={{
+                            borderWidth: 1,
+                            borderColor: 'pink',
+                            height: 35,
+                            width: 35,
+                            marginRight: 10,
+                            marginLeft: item?.id == id ? 10 : 0,
+                            borderRadius: 35,
+                            overflow: 'hidden',
+                          }}>
+                          <Image
+                            source={
+                              item?.user?.profile_url
+                                ? {uri: item?.user?.profile_url}
+                                : item?.image
+                            }
+                            style={{height: '100%', width: '100%'}}
+                            resizeMode="cover"
+                          />
+                        </View>
 
-                    <Text
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 17,
-                        fontWeight: '600',
-                      }}>
-                      {item?.username}
-                    </Text>
-                  </View>
-                  <View
-                    style={
-                      item?.id == id
-                        ? {
-                            backgroundColor: theme.primaryColor2,
-                            paddingVertical: 15,
-                            width: '90%',
-                            borderTopLeftRadius: 50,
-                            borderBottomLeftRadius: 50,
-                            paddingHorizontal: 20,
-                          }
-                        : {
-                            backgroundColor: theme.primaryColor1,
-                            paddingVertical: 15,
-                            width: '90%',
-                            borderTopRightRadius: 50,
-                            borderBottomRightRadius: 50,
-                            paddingHorizontal: 20,
-                          }
-                    }>
-                    <Text
-                      style={{color: theme.textColor.whiteColor, fontSize: 14}}>
-                      {item?.message}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      paddingHorizontal: 10,
-                      paddingVertical: 5,
-                      alignItems: item?.id == id ? 'flex-end' : 'flex-start',
-                    }}>
-                    <Text
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 12,
-                      }}>
-                      Wednesday Aug 19
-                    </Text>
-                    <Text
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 12,
-                      }}>
-                      10:23 am
-                    </Text>
-                  </View>
-                </View>
-              ))}
+                        <Text
+                          style={{
+                            color: theme.textColor.whiteColor,
+                            fontSize: 17,
+                            fontWeight: '600',
+                          }}>
+                          {item?.user?.full_name}
+                        </Text>
+                      </View>
+                      <View
+                        style={
+                          item?.id == id
+                            ? {
+                                backgroundColor: theme.primaryColor2,
+                                paddingVertical: 15,
+                                width: '90%',
+                                borderTopLeftRadius: 50,
+                                borderBottomLeftRadius: 50,
+                                paddingHorizontal: 20,
+                              }
+                            : {
+                                backgroundColor: theme.primaryColor1,
+                                paddingVertical: 15,
+                                width: '90%',
+                                borderTopRightRadius: 50,
+                                borderBottomRightRadius: 50,
+                                paddingHorizontal: 20,
+                              }
+                        }>
+                        <Text
+                          style={{
+                            color: theme.textColor.whiteColor,
+                            fontSize: 14,
+                          }}>
+                          {item?.message}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          paddingHorizontal: 10,
+                          paddingVertical: 5,
+                          alignItems:
+                            item?.id == id ? 'flex-end' : 'flex-start',
+                        }}>
+                        <Text
+                          style={{
+                            color: theme.textColor.whiteColor,
+                            fontSize: 12,
+                            marginTop: 5,
+                          }}>
+                          {moment(item?.user?.updated_at).format('DD-MM-YYYY')}
+                          {/* {moment(val.created_at).format('DD-MM-YYYY')} */}
+                        </Text>
+                        <Text
+                          style={{
+                            color: theme.textColor.whiteColor,
+                            fontSize: 12,
+                            marginTop: 10,
+                          }}>
+                          10:23 am
+                          {/* {new Date().getTime()} */}
+                        </Text>
+                      </View>
+                    </View>
+                  )
+                ),
+              )}
           </View>
         </View>
       </CustomView>
@@ -183,26 +231,25 @@ const Messages = (props) => {
               // height: '100%',
               color: theme.textColor.whiteColor,
             }}
-            value={state.message}
-            onChangeText={(text) => setState({...state, message: text})}
+            value={state.msgText}
+            onChangeText={(text) => setState({...state, msgText: text})}
           />
         </View>
         <View>
-          {state.message.length > 0 ? (
+          {state.msgText.length > 0 ? (
             <TouchableOpacity
               onPress={() => {
-                setState({
-                  ...state,
-                  message: '',
-                  messages: [
-                    ...state.messages,
-                    {
-                      id,
-                      username: 'Max',
-                      message: state.message,
-                    },
-                  ],
-                });
+                _SendMessage();
+                // setState({
+                //   ...state,
+                //   message: '',
+                //   messages: [
+                //     ...state.messages,
+                //     {
+                //       message: state.message,
+                //     },
+                //   ],
+                // });
                 // refs.scrollView.scrollTo(0);
               }}>
               <Icon
@@ -224,11 +271,14 @@ const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   loader: state.reducers.loader,
   token: state.reducers.token,
+  personalChatData: state.reducers.personalChatData,
 });
 const mapDispatchToProps = {
   CheckUser: Actions.CheckUser,
   Login: Actions.Login,
   GetPersonChat: Actions.GetPersonChat,
+  StartChat: Actions.StartChat,
+  SendMessage: Actions.SendMessage,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Messages);

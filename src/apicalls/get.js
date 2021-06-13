@@ -3,7 +3,7 @@ import axios from 'axios';
 
 async function Get(path, token, param3, param4) {
   let url = baseUrl + path;
-  console.log('url===>', url);
+  console.log('url getRequest=>', url);
 
   let header = {
     headers: token

@@ -9,19 +9,28 @@ import {
   AsyncStorage,
   ImageBackground,
 } from 'react-native';
-
+import axios from 'axios'
 import {theme} from '../../../constants/theme';
 import {Icon} from 'native-base';
 import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions';
+import Geolocation from '@react-native-community/geolocation';
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Geocoder from 'react-native-geocoding';
+Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // use a valid API key
+
 const App = (props) => {
   const data = props?.route?.params?.profileData;
   const [state, setState] = useState({
-    visible: false,
-    visible1: false,
-    selected: 0.1,
-    settingStatus: false,
+  locationData:{}
   });
+
+  useEffect(()=>{
+    // _ReverseGeoCode()
+    // _GetCities()
+
+  },[])
   const comeFromProfileStatus = props?.route?.params?.comeFromProfileStatus;
 
   const [allStatus, setAllStatus] = useState(
@@ -53,11 +62,15 @@ const App = (props) => {
         ],
   );
 
+  
+  
+  const _GetCities = async () => {
+    props.GetCounties()
+  };
   const toggleOverlay = async (i, item) => {
-    console.log('helloo itsm', item, 'lop', i);
-    i;
+
     const data2 = {...data, status: i == 1 ? 'in-relation' : item};
-    // _UserType(i);
+
     props.navigation.navigate('chooseyourinterest', {
       profileData: data2,
     });
@@ -125,6 +138,7 @@ const App = (props) => {
             return (
               <TouchableOpacity
                 activeOpacity={1}
+                key={i}
                 style={{
                   height: 100,
                   // backgroundColor: 'blue',
@@ -174,6 +188,10 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   profileData: Actions.profileData,
+  GetCounties: Actions.GetCounties,
+  ReverseGeoCode: Actions.ReverseGeoCode,
+  
+
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 // export default Status;

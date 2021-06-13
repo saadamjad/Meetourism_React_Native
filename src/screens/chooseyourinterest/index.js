@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -8,20 +8,22 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
+import Toast from '../../components/toastmessage';
 
-import {theme} from '../../constants/theme';
-import {Icon} from 'native-base';
+
+import { theme } from '../../constants/theme';
+import { Icon } from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
 // import * as Actions from '../../redux/actions/index';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Actions} from '../../redux/actions/index';
+import { Actions } from '../../redux/actions/index';
 import Geocoder from 'react-native-geocoding';
-Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // use a valid API key
+Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
 
 import axios from 'axios';
 const Status = (props) => {
@@ -29,11 +31,10 @@ const Status = (props) => {
 
   const data = props?.route?.params?.profileData
     ? props?.route?.params?.profileData
-    : null;
-  let url = 'https://meetourism.deviyoinc.com/api/v1/countries';
+    : dataRedux;
 
   const company_name = data?.status == 'partner' ? true : false;
-  console.log('Data  your interets>>.=====', data?.status);
+  console.log('Data  your interets>>.=========', company_name);
   const [state, setState] = useState({
     // interests: [1, 2],
     // selectCountry: '',
@@ -53,33 +54,37 @@ const Status = (props) => {
     // company_name: '',
     // geoCodeData: {},
     interests: [1, 2],
-    selectCountry: 'sss',
+    selectCountry: '',
     images: [],
-    userName: 'sssssddd',
+    userName: '',
     email: '',
-    height: 30,
-    weight: 30,
-    eyeColor: 'brown',
-    contact: '202002020',
-    age: '20',
-    firstName: 'ss',
-    lastName: 'sdsdsd',
-    city: 'karachi',
-    description: 'wdsdsdada',
+    height: '',
+    weight: '',
+    eyeColor: '',
+    contact: '',
+    age: '',
+    firstName: '',
+    lastName: '',
+    city: '',
+    description: '',
     Location: false,
     company_name: '',
-    geoCodeData: {},
+    countryId: '',
+    geoCodeData: props.reverseGeoCodeData,
+    latitude: '24.9180',
+    longitude: '67.0971',
   });
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
+
+    // console.log("props?.userDataprops?.userData", props?.userData.selectCountry)
     if (props?.userData && props.editSetting) {
-      console.log('yeh wala');
       setState({
         ...state,
         interests: dataRedux?.interests,
         selectCountry: dataRedux?.selectCountry,
-        images: dataRedux?.images,
+        images: props.images,
         userName: dataRedux?.username,
         email: dataRedux?.email,
         height: Number(dataRedux?.height),
@@ -93,89 +98,35 @@ const Status = (props) => {
         status: data?.status || dataRedux.status,
         description: dataRedux?.description,
         company_name: dataRedux?.company_name,
+        Location: true
+
       });
     } else {
-      console.log('else');
-      _ReverseGeoCode();
+      setState({
+        ...state,
+        status: data?.status,
+        email: data?.value,
+        userName: data?.userName,
+        confirmPassword: data?.confirmPassword,
+        password: data?.password,
+      });
     }
-    _GetInterests();
+    props.GetCounties()
+    props.ReverseGeoCode()
+    props.GetInterests()
+
   }, []);
 
-  const _ReverseGeoCode = () => {
-    fetch('http://ip-api.com/json')
-      .then((response) => response.json())
-      .then((response) => {
-        // console.log("User's Location Data is ", response);
-        // console.log("User's Country ", response?.country);
 
-        let data = {
-          country: response?.country,
-          city: response?.city,
-          regionName: response?.regionName,
-          countryCode: response?.countryCode,
-        };
-        _GetCities(data);
-        // setState({
-        //   ...state,
-        //   geoCodeData: {
-        //     country: country,
-        //     city: city,
-        //     regionName: regionName,
-        //     countryCode: countryCode,
-        //   },
-        // });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    _GetCities();
-  };
-  const _GetCities = async (geocodedata) => {
-    await axios
-      .get(url)
-      .then((res) => {
-        if (res?.data?.status_type === 'success') {
-          setState({
-            ...state,
-            ...state.geoCodeData,
-            status: data?.status,
-            email: data?.value,
-            userName: data?.userName,
-            // countries: res.data?.data,
-            confirmPassword: data?.confirmPassword,
-            password: data?.password,
-            geoCodeData: {
-              country: geocodedata?.country,
-              city: geocodedata?.city,
-              regionName: geocodedata?.regionName,
-              countryCode: geocodedata?.countryCode,
-            },
-          });
-          props.GetCounties(res?.data?.data);
-        } else {
-          setState({
-            ...state,
 
-            status: data?.status,
-            email: data?.value,
-            // countries: [],
-          });
-          props.GetCounties([]);
-        }
-      })
-      .catch((error) => {
-        console.log('error in catch _GetCities', error);
-      });
-  };
   const _getCurrentLocation = () => {
     Geolocation.getCurrentPosition((info) => {
-      console.log('getCurrentPosition', info.coords?.latitude),
-        setState({
-          ...state,
-          latitude: info?.coords?.latitude,
-          longitude: info?.coords?.longitude,
-          Location: true,
-        });
+      setState({
+        ...state,
+        latitude: info?.coords?.latitude,
+        longitude: info?.coords?.longitude,
+        Location: true,
+      });
     });
   };
   const _Imageupload = () => {
@@ -195,68 +146,13 @@ const Status = (props) => {
         console.log('res', res);
         let temp = state.images;
         temp.push(res.uri);
-        setState({...state, ...geoCodeData, images: temp});
-        // imageUpload(res);
+        console.log("teemmmm", temp)
+        setState({ ...state, images: temp });
       }
     });
-    // ImagePicker.openPicker({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true,
-    // })
-    //   .then((image) => {
-    //     console.log('image response===', image);
-    //     setImageData(image);
-    //     // _ApiCallImageupload(image.path, image.mime);
-    //     // _ApiCallImageupload();
-    //   })
-    //   .catch((error) => {
-    //     console.log('error', error);
-    //   });
-  };
-  const imageUpload = (res) => {
-    const base_url = 'https://haosaudi-server.herokuapp.com/image';
-    console.log('res.fileName', res.fileName);
 
-    let formData = new FormData();
-    formData.append('photo', {...res, name: res.fileName});
-    // console.log('BODY', formData, {...imageData, name: imageData.fileName});
-    return axios
-      .post(`${base_url}`, formData, {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
-      })
-      .then(({data}) => {
-        if (data?.success) {
-          console.log('DATA IS THERE JUST CHECK IT OUT!', data.data.location);
-          settempImage(data.data.location);
-          let data2 = {
-            photo: data.data.location,
-          };
+  };
 
-          props.Updateprofilepic(data2, props.token);
-        }
-      })
-      .catch((err) => {
-        console.log('THERE IS ERROR WHEN IMAGE IS UPLOADING!!', err);
-      });
-  };
-  const _Buttons = () => {
-    return (
-      <View style={{overflow: 'hidden', marginVertical: 5}}>
-        <GlobalButton
-          buttonText="Choose Your Interest"
-          onPress={async () => {
-            props.StoreData(state.images);
-            props.navigation.navigate('yourinterests', {
-              profileData: state,
-            });
-          }}
-        />
-      </View>
-    );
-  };
   const _GetInterests = async () => {
     console.log('all interests');
     let url = 'https://meetourism.deviyoinc.com/api/v1/interests';
@@ -279,13 +175,62 @@ const Status = (props) => {
       });
   };
 
+  const _Buttons = () => {
+
+    return (
+
+
+      <View style={{ overflow: 'hidden', marginVertical: 5 }}>
+        <GlobalButton
+          buttonText="Choose Your Interest"
+          onPress={async () => {
+            if (
+              state.userName == "" ||
+              state.height == "" ||
+              state.weight == "" ||
+              state.eyeColor == "" ||
+              state.contact == "" ||
+              state.age == "" ||
+              state.firstName == "" ||
+              state.lastName == "" ||
+              state.city == "" ||
+              state.description == "") {
+
+              Toast('Error', ' Please fill all inputs correctly', 'error');
+
+            }
+
+            else if (company_name && state.company_name == "") {
+              Toast('Error', ' Please fill Company Name', 'error');
+
+            }
+            else if ((state.countryId == "" || state.selectCountry == '') && !props.editSetting) {
+              Toast('Error', ' Please Select Country', 'error');
+
+            }
+            else {
+              props.StoreData(state.images);
+              props.navigation.navigate('yourinterests', {
+                profileData: state,
+              });
+            }
+
+          }}
+        />
+      </View>
+    );
+  };
+
+
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      {/* {console.log("images",props.userData.interests)} */}
+
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
-        style={{height: '100%', width: '100%'}}
+        style={{ height: '100%', width: '100%' }}
         resizeMode="cover">
-        <View style={{flex: 1, backgroundColor: 'rgba(00,00,00,0.8)'}}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(00,00,00,0.8)' }}>
           <View
             style={{
               // flex: 0.1,
@@ -303,7 +248,7 @@ const Status = (props) => {
               <Icon
                 type="AntDesign"
                 name="arrowleft"
-                style={{color: 'white', fontSize: 17}}
+                style={{ color: 'white', fontSize: 17 }}
               />
             </TouchableOpacity>
           </View>
@@ -344,8 +289,10 @@ const Status = (props) => {
                   // alignItems: 'space-around',
                 }}>
                 {state.images &&
-                  state.images.map((val) => (
+                  state.images.map((val, i) => (
+                    console.log("valeee", val),
                     <View
+                      key={i}
                       style={{
                         width: 50,
                         marginLeft: 5,
@@ -359,7 +306,11 @@ const Status = (props) => {
                           height: '100%',
                         }}
                         resizeMode="cover"
-                        source={{uri: val}}
+                        source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
+                      // source={ val.image_path
+                      //   ? {uri: val.image_path}
+                      //   : require('../../assets/icons/girls.png')}
+
                       />
                     </View>
                   ))}
@@ -377,7 +328,7 @@ const Status = (props) => {
                   onPress={() => {
                     _Imageupload();
                   }}>
-                  <Icon style={{fontSize: 20}} type="AntDesign" name="plus" />
+                  <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
                 </TouchableOpacity>
               </View>
               <View
@@ -391,8 +342,7 @@ const Status = (props) => {
                   flex: 1,
                   paddingHorizontal: 20,
                 }}>
-                {console.log('ssssdddsss============')}
-                {company_name || dataRedux.status ? (
+                {company_name ? (
                   <TextInput
                     style={{
                       width: '100%',
@@ -402,13 +352,13 @@ const Status = (props) => {
                     }}
                     value={state.company_name}
                     onChangeText={(text) =>
-                      setState({...state, company_name: text})
+                      setState({ ...state, company_name: text })
                     }
                     placeholderTextColor={theme.borderColor.inActiveBorderColor}
                     placeholder={'Enter Company Name'}
                   />
                 ) : null}
-                {company_name ? (
+                {/* {company_name ? (
                   <View
                     style={{
                       width: '100%',
@@ -417,7 +367,7 @@ const Status = (props) => {
                       overflow: 'hidden',
                       borderColor: theme.borderColor.inActiveBorderColor,
                     }}
-                    // editable={false}
+                  // editable={false}
                   >
                     <TouchableOpacity
                       onPress={() => _getCurrentLocation()}
@@ -439,16 +389,17 @@ const Status = (props) => {
                           borderWidth: 0,
                           flex: 1,
                         }}>
-                        {state.Location ? (
+                        {state.Location && state.geoCodeData ? (
+
                           <Text>
                             {' '}
-                            {state?.geoCodeData?.city +
+                            {props.reverseGeoCodeData?.city +
                               '  ' +
-                              state?.geoCodeData?.country +
+                              props.reverseGeoCodeData?.country +
                               ' , ' +
-                              state?.geoCodeData?.countryCode +
+                              props.reverseGeoCodeData?.countryCode +
                               '  ,  ' +
-                              state?.geoCodeData?.regionName}
+                              props.reverseGeoCodeData?.regionName}
                           </Text>
                         ) : null}
                       </View>
@@ -469,9 +420,8 @@ const Status = (props) => {
                       </TouchableOpacity>
                     </TouchableOpacity>
                   </View>
-                ) : null}
+                ) : null} */}
 
-                {/* {console.log('state.userNamestate.userName', state.userName)} */}
                 <TextInput
                   style={{
                     width: '100%',
@@ -498,7 +448,7 @@ const Status = (props) => {
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   value={state.firstName}
-                  onChangeText={(text) => setState({...state, firstName: text})}
+                  onChangeText={(text) => setState({ ...state, firstName: text })}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="First Name"
                 />
@@ -511,7 +461,7 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
-                  onChangeText={(text) => setState({...state, lastName: text})}
+                  onChangeText={(text) => setState({ ...state, lastName: text })}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Last Name"
                 />
@@ -529,7 +479,7 @@ const Status = (props) => {
                   placeholder="Email"
                 />
                 <TextInput
-                  onChangeText={(text) => setState({...state, contact: text})}
+                  onChangeText={(text) => setState({ ...state, contact: text })}
                   value={state.contact}
                   style={{
                     width: '100%',
@@ -542,7 +492,7 @@ const Status = (props) => {
                   placeholder="Contact"
                 />
                 <TextInput
-                  onChangeText={(text) => setState({...state, age: text})}
+                  onChangeText={(text) => setState({ ...state, age: text })}
                   value={String(state.age)}
                   style={{
                     width: '100%',
@@ -555,10 +505,9 @@ const Status = (props) => {
                   placeholder="Age"
                   keyboardType="number-pad"
                 />
-                {console.log('state.city', state.city)}
                 <TextInput
                   value={String(state.city)}
-                  onChangeText={(text) => setState({...state, city: text})}
+                  onChangeText={(text) => setState({ ...state, city: text })}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -580,7 +529,7 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}>
-                  <View style={{width: '80%', justifyContent: 'center'}}>
+                  <View style={{ width: '80%', justifyContent: 'center' }}>
                     <Text>
                       {state.selectCountry
                         ? state.selectCountry
@@ -648,7 +597,7 @@ const Status = (props) => {
                     ) : null} */}
                 <TextInput
                   onChangeText={(text) =>
-                    setState({...state, description: text})
+                    setState({ ...state, description: text })
                   }
                   value={state.description}
                   maxLength={100}
@@ -670,7 +619,7 @@ const Status = (props) => {
                     // borderWidth: 1,
                   }}>
                   <TextInput
-                    onChangeText={(text) => setState({...state, height: text})}
+                    onChangeText={(text) => setState({ ...state, height: text })}
                     value={String(state.height)}
                     style={{
                       // width: '20%',
@@ -684,7 +633,7 @@ const Status = (props) => {
                     keyboardType="number-pad"
                   />
                   <TextInput
-                    onChangeText={(text) => setState({...state, weight: text})}
+                    onChangeText={(text) => setState({ ...state, weight: text })}
                     value={String(state.weight)}
                     style={{
                       // width: '20%',
@@ -699,7 +648,7 @@ const Status = (props) => {
                   />
                   <TextInput
                     onChangeText={(text) =>
-                      setState({...state, eyeColor: text})
+                      setState({ ...state, eyeColor: text })
                     }
                     value={state.eyeColor}
                     style={{
@@ -719,6 +668,7 @@ const Status = (props) => {
           </View>
         </View>
       </ImageBackground>
+
     </ScrollView>
   );
 };
@@ -729,6 +679,7 @@ const mapStateToProp = (state) => ({
   images: state.reducers.images_Interests,
   editSetting: state.reducers.editSetting,
   allCountries: state.reducers.allCountries,
+  reverseGeoCodeData: state.reducers.reverseGeoCodeData,
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
@@ -736,6 +687,7 @@ const mapDispatchToProps = {
   StoreData: Actions.StoreData,
   GetCounties: Actions.GetCounties,
   GetInterests: Actions.GetInterests,
+  ReverseGeoCode: Actions.ReverseGeoCode,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Status);

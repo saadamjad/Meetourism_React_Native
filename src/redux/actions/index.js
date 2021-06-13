@@ -501,23 +501,99 @@ class Actions {
         });
     };
   };
-
-  static GetCounties = (data) => {
-    console.log('GetCounties', data);
+ static GetCounties = () => {
+        return async (dispatch) => {
+          return Get('countries')
+          .then((res) => {
+            if (res.status_type === 'success') {
+              let response = res.data;
+              console.log('resss========', response);
+              dispatch({
+                type: actionTypes.GETCOUNTRIES,
+                payload: response,
+              });
+            } else {
+              console.log('ELSE in EditSetting', res);
+            }
+          })
+          .catch((err) => {
+            let errResponse = err?.response?.data;
+            let type = 'GetCounties';
+            console.log('ELSE in GetCounties', errResponse);
+    
+            // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          });
+        
+        };
+    
+  };
+  static ReverseGeoCode = () => {
+    console.log('ReverseGeoCode', );
     return async (dispatch) => {
-      dispatch({
-        type: actionTypes.GETCOUNTRIES,
-        payload: data,
+      fetch('http://ip-api.com/json')
+      .then((response) => response.json())
+      .then((response) => {
+
+        let data = {
+          country: response?.country,
+          city: response?.city,
+          regionName: response?.regionName,
+          countryCode: response?.countryCode,
+        };
+        dispatch({
+          type: actionTypes.REVERSEGEOCODEDATA,
+          payload: data,
+        });
+      
+      })
+      .catch((error) => {
+        console.log(error);
       });
+      
+   
     };
   };
-  static GetInterests = (data) => {
-    console.log('GetInterests', data);
+  // static GetInterests = (data) => {
+  //   console.log('GetInterests', data);
+  //   return async (dispatch) => {
+  //     dispatch({
+  //       type: actionTypes.GETINTERESTS,
+  //       payload: data,
+  //     });
+  //   };
+  // };
+  static GetInterests = () => {
+  
     return async (dispatch) => {
-      dispatch({
-        type: actionTypes.GETINTERESTS,
-        payload: data,
-      });
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get('interests')
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            dispatch({
+              type: actionTypes.GETINTERESTS,
+              payload: response,
+            });
+          } else {
+            console.log('ELSE in GetInterests', res);
+            dispatch({
+              type: actionTypes.GETINTERESTS,
+              payload: [],
+            });
+
+
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response;
+          let type = 'GetInterests';
+
+          console.log('errResponse', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
     };
   };
   static EditSetting = (data) => {
@@ -664,17 +740,13 @@ class Actions {
       return Get(`get-messages/${id}`, token)
         .then((res) => {
           if (res.status_type === 'success') {
-            let response = res?.data;
+            let response = res?.data?.messages;
 
-            console.log('GetPersonChat ++++', response);
-            dispatch({type: actionTypes.STOPLOADER});
-
-            return response;
+            console.log('GetPersonChat ', response);
+            dispatch({type: actionTypes.GETPERSONALCHATS, payload: response});
           } else {
             console.log('ELSE in GetPersonChat', res);
             dispatch({type: actionTypes.STOPLOADER});
-
-            return false;
           }
         })
         .catch((err) => {
@@ -682,6 +754,64 @@ class Actions {
 
           let errResponse = err?.response;
           let type = 'GetPersonChat';
+
+          console.log('errResponse', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static StartChat = (id, token) => {
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Get(`start-conversation/${id}`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('StartChat ++++', response);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return response;
+          } else {
+            console.log('ELSE in StartChat', res);
+            dispatch({type: actionTypes.STOPLOADER});
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response;
+          let type = 'StartChat';
+
+          console.log('errResponse', errResponse);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static SendMessage = (id, _data, token) => {
+    return async (dispatch) => {
+      dispatch({type: actionTypes.STARTLOADER});
+      return Post(`send-message/${id}`, _data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('SendMessage /++++++', response);
+            dispatch({type: actionTypes.STOPLOADER});
+
+            return response;
+          } else {
+            console.log('ELSE in SendMessage', res);
+            dispatch({type: actionTypes.STOPLOADER});
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({type: actionTypes.STOPLOADER});
+
+          let errResponse = err?.response;
+          let type = 'SendMessage';
 
           console.log('errResponse', errResponse);
           // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
