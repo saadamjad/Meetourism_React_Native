@@ -583,7 +583,8 @@ const Status = (props) => {
                       borderRightWidth: 1,
                       // paddingVertical: 5,
                     }}>
-                    {props?.allCountries &&
+
+                    {props?.allCountries?.length > 0 ?
                       props.allCountries.map((item, i) => {
                         return (
                           <TouchableOpacity
@@ -604,8 +605,20 @@ const Status = (props) => {
                             <Text> {item.name}</Text>
                           </TouchableOpacity>
                         );
-                      })}
-                    {/* </ScrollView> */}
+                      }) : (<View
+                        style={{
+                          borderBottomWidth: 1,
+                          justifyContent: 'center',
+                          height: 50,
+                          alignItems: 'center'
+                          // paddingVertical: 6,
+                        }}>
+
+
+
+                        <Text>  No cities found  </Text>
+                      </View>)}
+
                   </View>
                 ) : null}
 

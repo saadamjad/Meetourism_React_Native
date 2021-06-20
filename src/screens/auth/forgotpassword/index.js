@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import Header from '../../../components/header';
 
 import {
@@ -12,7 +12,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import {theme} from '../../../constants/theme';
+import { theme } from '../../../constants/theme';
 import Toast from '../../../components/toastmessage';
 import axios from 'axios';
 
@@ -36,9 +36,9 @@ const App = (props) => {
   const _ApiCallForgotPassword = () => {
     setLoader(true);
     let header = {
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
     };
-    let url = 'https://meetourism.deviyoinc.com/api/v1/auth/forgot';
+    let url = 'https://meetourism.com/api/v1//auth/forgot';
 
     let data = {
       email: email,
@@ -145,7 +145,7 @@ const App = (props) => {
             }}
             onPress={() => props.navigation.goBack()}
             activeOpacity={0.75}>
-            <Text style={{color: theme.textColor.whiteColor}}>update</Text>
+            <Text style={{ color: theme.textColor.whiteColor }}>update</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -217,7 +217,7 @@ const App = (props) => {
   };
   return (
     <>
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <AnimatedLoader
           visible={loader}
           overlayColor="rgba(255,255,255,0.6)"
