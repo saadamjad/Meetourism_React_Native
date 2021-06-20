@@ -1,4 +1,4 @@
-import {baseUrl} from '../apis/constant';
+import { baseUrl } from '../apis/constant';
 import axios from 'axios';
 
 async function Post(path, data, token, param4) {
