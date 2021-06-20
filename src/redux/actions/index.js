@@ -4,7 +4,7 @@ import * as actionTypes from './types';
 import Axios from 'axios';
 import Toast from '../../components/toastmessage';
 import baseUrl from '../../apis/constant';
-import {Get, Post, Put} from '../../apicalls/index';
+import { Get, Post, Put } from '../../apicalls/index';
 
 class Actions {
   static CheckUser = (data, navigation, values) => {
@@ -130,7 +130,7 @@ class Actions {
   static ErrorsHandlingFucntion = (errResponse, type) => {
     console.log(`err in catch  ${type}`, errResponse);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STOPLOADER});
+      dispatch({ type: actionTypes.STOPLOADER });
 
       if (errResponse?.email) {
         let email = errResponse?.email[0];
@@ -154,7 +154,7 @@ class Actions {
     console.log('StoreData', data);
 
     return async (dispatch) => {
-      dispatch({type: actionTypes.IMAGESANDINTERESTS, payload: data});
+      dispatch({ type: actionTypes.IMAGESANDINTERESTS, payload: data });
     };
   };
   static profileData = (data, navigation, values) => {
@@ -162,13 +162,13 @@ class Actions {
 
     return async (dispatch) => {
       console.log('data redux===>|sss|||', data);
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
     };
   };
   static GetMatchesData = (token, searchKey, navigation) => {
     console.log('serachhhh', searchKey);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(searchKey ? `matches?q=${searchKey}` : 'matches', token)
         .then((res) => {
           if (res.status_type === 'success') {
@@ -188,11 +188,11 @@ class Actions {
             });
           } else {
             console.log('ELSE in login', res);
-            dispatch({type: actionTypes.GETMATCHESDATA, payload: []});
+            dispatch({ type: actionTypes.GETMATCHESDATA, payload: [] });
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'GetMatchesData';
@@ -205,22 +205,22 @@ class Actions {
   static GetProfileData = (id, token) => {
     // console.log('id', id, 'token', token);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(`profile/${id}`, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
             console.log('res', response);
 
-            dispatch({type: actionTypes.GETUSERPROFILEDATA});
+            dispatch({ type: actionTypes.GETUSERPROFILEDATA });
             return response;
           } else {
             console.log('ELSE in login', res);
-            dispatch({type: actionTypes.GETUSERPROFILEDATA});
+            dispatch({ type: actionTypes.GETUSERPROFILEDATA });
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response?.data;
           let type = 'GetProfileData';
@@ -231,7 +231,7 @@ class Actions {
   static GetLoggedInUserData = (id, token) => {
     // console.log('id', id, 'token', token);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(`profile/${id}`, token)
         .then((res) => {
           if (res.status_type === 'success') {
@@ -244,11 +244,11 @@ class Actions {
             });
           } else {
             console.log('ELSE in GetLoggedInUserData', res);
-            dispatch({type: actionTypes.GETLOGGEDINUSERDATA});
+            dispatch({ type: actionTypes.GETLOGGEDINUSERDATA });
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response?.data;
           let type = 'GetLoggedInUserData';
@@ -266,11 +266,11 @@ class Actions {
             let response = res?.data;
             console.log('res', response);
             navigation.navigate('detailsoffer');
-            dispatch({type: actionTypes.CREATEORDER});
+            dispatch({ type: actionTypes.CREATEORDER });
             return true;
           } else {
             console.log('ELSE in CreateOrder', res.message);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return false;
           }
@@ -289,14 +289,14 @@ class Actions {
     return async (dispatch) => {
       navigation.navigate('payment');
 
-      dispatch({type: actionTypes.SAVEORDERDATA, payload: data});
+      dispatch({ type: actionTypes.SAVEORDERDATA, payload: data });
     };
   };
   static Logout = (navigation, values) => {
     console.log('Logout');
 
     return async (dispatch) => {
-      dispatch({type: actionTypes.LOGOUT});
+      dispatch({ type: actionTypes.LOGOUT });
       navigation.navigate('Auth', {
         screen: 'signin',
       });
@@ -332,7 +332,7 @@ class Actions {
   static GetAllOffers = (id, token, status, navigation) => {
     console.log('Data', id);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(
         status === 'partner' ? `offers?user_id=${id}` : `offers`,
         token,
@@ -342,19 +342,19 @@ class Actions {
             let response = res?.data;
             console.log('resss========', response);
 
-            dispatch({type: actionTypes.GETALLOFFERS, payload: response});
+            dispatch({ type: actionTypes.GETALLOFFERS, payload: response });
             return response;
           } else {
             console.log('ELSE in login', res);
-            dispatch({type: actionTypes.GETALLOFFERS, payload: []});
+            dispatch({ type: actionTypes.GETALLOFFERS, payload: [] });
 
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             // Toast('Error', 'You Entered Wrong Email or Password', 'error');
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response?.data;
           let type = 'GetAllOffers';
@@ -364,7 +364,7 @@ class Actions {
   };
   static GetAllCrushes = (data, token, searchKey, navigation) => {
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(
         searchKey ? `me?only=${data}&q=${searchKey}` : `me?only=${data}`,
         token,
@@ -376,17 +376,17 @@ class Actions {
             //   return item.follower.username == searchKey;
             // });
             console.log('response GetAllCrushes', response);
-            dispatch({type: actionTypes.GETALLCRUSHES, payload: response}),
+            dispatch({ type: actionTypes.GETALLCRUSHES, payload: response }),
               navigation.goBack();
           } else {
             console.log('ELSE in login', res);
 
             // dispatch({type: actionTypes.STOPLOADER});
-            dispatch({type: actionTypes.GETALLCRUSHES, payload: []});
+            dispatch({ type: actionTypes.GETALLCRUSHES, payload: [] });
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response?.data;
           let type = 'GetAllCrushes';
@@ -501,56 +501,56 @@ class Actions {
         });
     };
   };
- static GetCounties = () => {
-        return async (dispatch) => {
-          return Get('countries')
-          .then((res) => {
-            if (res.status_type === 'success') {
-              let response = res.data;
-              console.log('resss========', response);
-              dispatch({
-                type: actionTypes.GETCOUNTRIES,
-                payload: response,
-              });
-            } else {
-              console.log('ELSE in EditSetting', res);
-            }
-          })
-          .catch((err) => {
-            let errResponse = err?.response?.data;
-            let type = 'GetCounties';
-            console.log('ELSE in GetCounties', errResponse);
-    
-            // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
-          });
-        
-        };
-    
+  static GetCounties = () => {
+    return async (dispatch) => {
+      return Get('countries')
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res.data;
+            console.log('resss========', response);
+            dispatch({
+              type: actionTypes.GETCOUNTRIES,
+              payload: response,
+            });
+          } else {
+            console.log('ELSE in EditSetting', res);
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data;
+          let type = 'GetCounties';
+          console.log('ELSE in GetCounties', errResponse);
+
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+
+    };
+
   };
   static ReverseGeoCode = () => {
-    console.log('ReverseGeoCode', );
+    console.log('ReverseGeoCode',);
     return async (dispatch) => {
       fetch('http://ip-api.com/json')
-      .then((response) => response.json())
-      .then((response) => {
+        .then((response) => response.json())
+        .then((response) => {
 
-        let data = {
-          country: response?.country,
-          city: response?.city,
-          regionName: response?.regionName,
-          countryCode: response?.countryCode,
-        };
-        dispatch({
-          type: actionTypes.REVERSEGEOCODEDATA,
-          payload: data,
+          let data = {
+            country: response?.country,
+            city: response?.city,
+            regionName: response?.regionName,
+            countryCode: response?.countryCode,
+          };
+          dispatch({
+            type: actionTypes.REVERSEGEOCODEDATA,
+            payload: data,
+          });
+
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      
-   
+
+
     };
   };
   // static GetInterests = (data) => {
@@ -563,9 +563,9 @@ class Actions {
   //   };
   // };
   static GetInterests = () => {
-  
+
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get('interests')
         .then((res) => {
           if (res.status_type === 'success') {
@@ -586,7 +586,7 @@ class Actions {
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'GetInterests';
@@ -674,25 +674,25 @@ class Actions {
   static GetNotificaitons = (token, searchKey, navigation) => {
     console.log('GetNotificaitons', searchKey);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get('notifications', token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
 
             console.log('GetNotificaitons ++++', response);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return response;
           } else {
             console.log('ELSE in GetNotificaitons', res);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return false;
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'GetNotificaitons';
@@ -705,25 +705,25 @@ class Actions {
   static GetAllMessages = (token) => {
     // console.log('get-conversations', searchKey);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get('get-conversations', token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
 
             console.log('GetAllMessages ++++', response);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return response;
           } else {
             console.log('ELSE in GetAllMessages', res);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return false;
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'GetAllMessages';
@@ -736,21 +736,21 @@ class Actions {
   static GetPersonChat = (id, token) => {
     // console.log('get-conversations', searchKey);
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(`get-messages/${id}`, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data?.messages;
 
             console.log('GetPersonChat ', response);
-            dispatch({type: actionTypes.GETPERSONALCHATS, payload: response});
+            dispatch({ type: actionTypes.GETPERSONALCHATS, payload: response });
           } else {
             console.log('ELSE in GetPersonChat', res);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'GetPersonChat';
@@ -762,24 +762,24 @@ class Actions {
   };
   static StartChat = (id, token) => {
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Get(`start-conversation/${id}`, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
 
             console.log('StartChat ++++', response);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return response;
           } else {
             console.log('ELSE in StartChat', res);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
             return false;
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'StartChat';
@@ -791,24 +791,24 @@ class Actions {
   };
   static SendMessage = (id, _data, token) => {
     return async (dispatch) => {
-      dispatch({type: actionTypes.STARTLOADER});
+      dispatch({ type: actionTypes.STARTLOADER });
       return Post(`send-message/${id}`, _data, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
 
             console.log('SendMessage /++++++', response);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
 
             return response;
           } else {
             console.log('ELSE in SendMessage', res);
-            dispatch({type: actionTypes.STOPLOADER});
+            dispatch({ type: actionTypes.STOPLOADER });
             return false;
           }
         })
         .catch((err) => {
-          dispatch({type: actionTypes.STOPLOADER});
+          dispatch({ type: actionTypes.STOPLOADER });
 
           let errResponse = err?.response;
           let type = 'SendMessage';
@@ -818,6 +818,39 @@ class Actions {
         });
     };
   };
+  static ImageUploading = (data, token) => {
+
+    console.log("REDUX DATA", data)
+
+    return async (dispatch) => {
+      dispatch({ type: actionTypes.STARTLOADER });
+      return Post("images", data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('ImageUploading', response);
+            dispatch({ type: actionTypes.STOPLOADER });
+
+            return true;
+          } else {
+            console.log('ELSE in ImageUploading', res);
+            dispatch({ type: actionTypes.STOPLOADER });
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({ type: actionTypes.STOPLOADER });
+
+          let errResponse = err?.response;
+          let type = 'ImageUploading';
+
+          console.log('errResponse', errResponse);
+          console.log('errrrr', err);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
 }
 
-export {Actions};
+export { Actions };

@@ -129,7 +129,7 @@ const Status = (props) => {
       });
     });
   };
-  const _Imageupload = () => {
+  const _Imageupload = async () => {
     var options = {
       title: 'Select Image',
       mediaType: 'photo',
@@ -137,7 +137,7 @@ const Status = (props) => {
       noData: false,
       quality: 0.1,
     };
-    launchImageLibrary(options, (res) => {
+    launchImageLibrary(options, async (res) => {
       if (res.didCancel) {
         console.log('User cancelled');
       } else if (res.error) {
@@ -146,12 +146,38 @@ const Status = (props) => {
         console.log('res', res);
         let temp = state.images;
         temp.push(res.uri);
-        console.log("teemmmm", temp)
-        setState({ ...state, images: temp });
+        await setState({ ...state, images: temp });
+        ImageUploadingFunc()
       }
     });
 
   };
+
+  const ImageUploadingFunc = (param) => {
+    // let formData = new FormData();
+    // formData.append('images', param);
+    // formData.append('image_type', 'user');
+
+
+
+    // // console.log("form dataaaa", formData)
+
+
+    // props.ImageUploading(formData, props.token)
+
+
+
+
+    let formData = new FormData();
+    let array = ["file:///data/user/0/com.meetourism/cache/rn_image_picker_lib_temp_0478767e-e778-468d-91d5-f57758121138.jpg", "file:///data/user/0/com.meetourism/cache/rn_image_picker_lib_temp_0478767e-e778-468d-91d5-f57758121138.jpg"]
+    formData.append('image', array);
+    formData.append('image_type', 'user');
+    props.ImageUploading(formData, props.token)
+    // 
+
+
+
+  }
 
   const _GetInterests = async () => {
     console.log('all interests');
@@ -224,7 +250,6 @@ const Status = (props) => {
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      {/* {console.log("images",props.userData.interests)} */}
 
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
@@ -233,8 +258,7 @@ const Status = (props) => {
         <View style={{ flex: 1, backgroundColor: 'rgba(00,00,00,0.8)' }}>
           <View
             style={{
-              // flex: 0.1,
-              // backgroundColor: '#241332',
+
               paddingVertical: 10,
               paddingLeft: 20,
             }}>
@@ -679,6 +703,8 @@ const mapStateToProp = (state) => ({
   images: state.reducers.images_Interests,
   editSetting: state.reducers.editSetting,
   allCountries: state.reducers.allCountries,
+  token: state.reducers.token,
+
   reverseGeoCodeData: state.reducers.reverseGeoCodeData,
 });
 const mapDispatchToProps = {
@@ -688,6 +714,7 @@ const mapDispatchToProps = {
   GetCounties: Actions.GetCounties,
   GetInterests: Actions.GetInterests,
   ReverseGeoCode: Actions.ReverseGeoCode,
+  ImageUploading: Actions.ImageUploading,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Status);
