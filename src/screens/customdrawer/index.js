@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {connect} from 'react-redux';
-import {Actions} from '../../redux/actions/index';
+import { ScrollView } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import { Actions } from '../../redux/actions/index';
 
 const DrawerContent = (props) => {
   let array;
@@ -51,19 +51,19 @@ const DrawerContent = (props) => {
               style={{
                 height: 50,
                 width: 50,
-                borderWidth:1,
+                borderWidth: 1,
                 borderRadius: 50,
-                overflow:'hidden',
+                overflow: 'hidden',
                 borderColor: '#D47FA6',
               }}>
               <Image
-                source={  props?.image[0]
-                  ? {uri: props.image[0]}
-                  :  require('../../assets/icons/row.png')}
-                style={{height: '100%', width: '100%'}}
+                source={props?.image[0]
+                  ? { uri: props.image[0] }
+                  : require('../../assets/icons/row.png')}
+                style={{ height: '100%', width: '100%' }}
                 resizeMode="cover"></Image>
             </TouchableOpacity>
-            <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
+            <View style={{ flex: 1, borderWidth: 0, alignItems: 'flex-end' }}>
               <TouchableOpacity
                 style={{
                   width: 70,
@@ -74,7 +74,7 @@ const DrawerContent = (props) => {
                 onPress={() => props.navigation.closeDrawer()}>
                 <Image
                   source={require('../../assets/icons/drawer.png')}
-                  style={{height: 30, width: 50}}
+                  style={{ height: 30, width: 50 }}
                   resizeMode="contain"></Image>
               </TouchableOpacity>
             </View>
@@ -84,7 +84,7 @@ const DrawerContent = (props) => {
               paddingLeft: 40,
               marginVertical: 5,
             }}>
-            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+            <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
               {' '}
               {props.userData?.first_name + ' ' + props.userData?.last_name}
             </Text>
@@ -93,14 +93,14 @@ const DrawerContent = (props) => {
             style={{
               paddingLeft: 40,
             }}>
-            <Text style={{color: 'white', fontSize: 12}}>
+            <Text style={{ color: 'white', fontSize: 12 }}>
               {' '}
               @{props.userData?.username}{' '}
             </Text>
           </View>
         </ImageBackground>
       </View>
-      <View style={{flex: 0.76, paddingVertical: 3}}>
+      <View style={{ flex: 0.76, paddingVertical: 3 }}>
         <ScrollView>
           {
             (array = [
@@ -221,7 +221,7 @@ const DrawerContent = (props) => {
                 }}>
                 <Image
                   source={val.icon}
-                  style={{height: 15, width: 15, marginRight: 15}}
+                  style={{ height: 15, width: 15, marginRight: 15 }}
                   resizeMode="contain"
                 />
 

@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import signin from '../screens/auth/signin';
 
 import drawer from '../navigations/drawernavigation';
@@ -54,6 +54,8 @@ import Gallery from '../components/gallery';
 import ForgotPassword from '../screens/auth/forgotpassword';
 import Splash2 from '../screens/auth/splash';
 import applyfiltersresult from '../screens/applyfiltersresult';
+import testing from '../../testing';
+// import selectlanguage from '../screens/select_language';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -62,28 +64,28 @@ function Auth() {
       <Stack.Screen
         name="Splash2"
         component={Splash2}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="splash"
         component={splash}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="signin"
         component={signin}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="profilePreivew"
         component={profilePreivew}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       {/* <Stack.Screen name="otp" component={otp} options={{headerShown: false}} /> */}
     </Stack.Navigator>
@@ -96,38 +98,38 @@ export function Status() {
       <Stack.Screen
         name="selectstatus"
         component={selectstatus}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Gallery"
         component={Gallery}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
         name="chooseyourinterest"
         component={chooseyourinterest}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="yourinterests"
         component={yourinterests}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="profilePreivew"
         component={profilePreivew}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SeeYourMatch"
         component={SeeYourMatch}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="matchprofile"
         component={matchprofile}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -140,34 +142,35 @@ function App() {
         <Stack.Screen
           name="Auth"
           component={Auth}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
+
 
         <Stack.Screen
           name="drawer"
           component={drawer}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ProfileStack"
           component={ProfileStack}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="statusstack"
           component={Status}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="userProfile"
           component={userProfile}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="PartnerStack"
           component={PartnerStack}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -180,87 +183,87 @@ export function ProfileStack() {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Gallery"
         component={Gallery}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Friends"
         component={Friends}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="userorders"
         component={userorders}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
         name="SeeYourMatch"
         component={SeeYourMatch}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Cruhes"
         component={Cruhes}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="matchprofile"
         component={matchprofile}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="detailoffer"
         component={dealoffer1}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="offerdescriptions"
         component={offerdescriptions}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
         name="allchats"
         component={allchats}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="innerchat"
         component={innerchat}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SelectPaymentType"
         component={SelectPaymentType}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
 
       {/* //NOTIFICATION */}
       <Stack.Screen
         name="Notification"
         component={Notification}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       {/* //ALL PROFILE STACK */}
       <Stack.Screen
         name="allProfile"
         component={allProfile}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="followandBlock"
         component={followandBlock}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="location"
         component={location}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       {/* <Stack.Screen
         name="chooseyourinterest"
@@ -276,12 +279,12 @@ export function ProfileStack() {
       <Stack.Screen
         name="history"
         component={history}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="offerUploadedSuccessfully"
         component={offerUploadedSuccessfully}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       {/* <Stack.Screen
         name="Profile"
@@ -291,58 +294,58 @@ export function ProfileStack() {
       <Stack.Screen
         name="Alloffers"
         component={allresturant}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="userProfile"
         component={userProfile}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Selectoffer"
         component={Selectoffer}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="createOffer"
         component={createOffer}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="dealoffer1"
         component={dealoffer1}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="payment"
         component={selectPaymentMethod}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="selectPaymentmethod"
         component={AddPayment}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="PaymentDetails"
         component={PaymentDetails}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="detailsoffer"
         component={detailsoffer}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="search"
         component={Search}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
         name="dealoffer"
         component={Successful}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -354,57 +357,57 @@ export function PartnerStack() {
       <Stack.Screen
         name="Hillviewresturant"
         component={Hillviewresturant}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="applyfiltersresult"
         component={applyfiltersresult}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Gallery"
         component={Gallery}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="createnewoffer"
         component={Createnewoffer}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="confirmedoffers"
         component={confirmedoffers}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="partnerhome"
         component={PartnerHome}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SelectOffer"
         component={SelectOffer}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Notification"
         component={Notification}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="allchats"
         component={allchats}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="innerchat"
         component={innerchat}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="createOffer"
         component={createOffer}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

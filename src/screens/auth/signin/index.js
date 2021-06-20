@@ -10,6 +10,7 @@ import {
   Platform,
   Linking,
 } from 'react-native';
+
 import { theme } from '../../../constants/theme';
 // import styles from './styles';
 import CustomView from '../../../components/customView';
@@ -20,8 +21,32 @@ import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
 
 import Geolocation from '@react-native-community/geolocation';
+import { initReactI18next } from 'react-i18next'
+
+
 
 const App = (props) => {
+  // const { t, i18n } = useTranslation()
+
+
+
+
+
+  // console.log("t", t, i18n)
+  const getLanguage = (language) => {
+    if (language === 0) {
+      console.log("English")
+      return i18n.changeLanguage('en')
+    }
+    else if (language === 1) {
+      return i18n.changeLanguage('zh')
+
+    }
+    else if (language === 2) {
+      return i18n.changeLanguage('fr')
+    }
+  }
+
   const [signupValues, setSignvalues] = useState({
     name: '',
     email: '',
@@ -33,16 +58,21 @@ const App = (props) => {
     // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    // email: 'fixedpartner@gmail.com',
-    // password: '123456789',
+    email: 'saad.amjad434@gmail.com',
+    password: 'saad@12345',
 
-    email: '',
-    password: '',
+    // email: '',
+    // password: '',
   });
   const ref = useRef();
 
+
   useEffect(() => {
+
+
+
     ref.current?.setAddressText('Some Text blue');
+
     // _getCurrentLocation();
   }, []);
 
@@ -384,39 +414,13 @@ const App = (props) => {
       </View>
     </>
   );
+  // const { t, i18n } = useTranslation()
+
 
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
 
 
-      {/* <TouchableOpacity
-        style={{ height: 50, width: 50, borderWidth: 1 }}
-        onPress={() => {
-          fetch('http://ip-api.com/json')
-            .then((response) => response.json())
-            .then((response) => {
-
-              let data = {
-                country: response?.country,
-                city: response?.city,
-                regionName: response?.regionName,
-                countryCode: response?.countryCode,
-              };
-
-              setState({ ...state, test: data })
-              alert("Ss")
-
-
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }}
-      >
-        <Text>please enter</Text>
-
-      </TouchableOpacity>
-      */}
 
       {/* <Text> {state?.test?.city} </Text>
       <Text> {state?.test?.regionName} </Text> */}

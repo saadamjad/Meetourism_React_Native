@@ -12,30 +12,32 @@ import SelectOffer from './src/screens/alloffers/selectOffer';
 // import DetailOffer from './src/screens/alloffers/detailsOffer';
 import DetailOffer1 from './src/screens/alloffers/detailsOffer1';
 // import History from './src/screens/alloffers/history';
-import HoldOn from './src/screens/holdOn';
-import SelectPaymentMethod from './src/screens/selectPaymentMethod';
-import AddPayment from './src/screens/addPayment';
-import Notification from './src/screens/customdrawer/notification';
-import AllProfiles from './src/screens/customdrawer/allProfile';
-import Crushes from './src/screens/crushes';
-import OfferUploaded from './src/screens/offerUploaded';
-import Successfull from './src/screens/alloffers/detailsOffer';
-import LiveChat from './src/screens/livechat';
-import Allresturant from './src/screens/allresturant';
-import Home from './src/screens/home';
-import Search from './src/screens/search';
-import Location from './src/screens/location';
-import Calendar from './src/screens/calendar';
-import {PersistGate} from 'redux-persist/integration/react';
-import {store, persistor} from './src/redux/store';
-import {Provider} from 'react-redux';
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './src/redux/store';
+import { Provider } from 'react-redux';
+// import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
+// import './src/I18n'
+
+
 
 const App = (props) => {
+
+  const _Stack = () => {
+    return <Stack navigation={props.navigation} />
+
+  }
+  // const ReloadAppOnLanguageChange = withTranslation('translation', {
+  //   bindI18n: 'languageChanged',
+  //   bindStore: false,
+  // })(_Stack);
   return (
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Stack navigation={props.navigation} />
+          {/* <ReloadAppOnLanguageChange /> */}
+          {_Stack()}
           <Toast ref={(ref) => Toast.setRef(ref)} />
         </PersistGate>
       </Provider>
@@ -44,3 +46,37 @@ const App = (props) => {
 };
 
 export default App;
+
+
+// import React from 'react';
+// import {translate } from 'react-i18next';
+// import i18n from './src/I18n/index';
+// import { createStackNavigator } from 'react-navigation';
+// import Home from './src/screens/Home';
+// import Page2 from './src/screens/Page2';
+
+// const Stack = createStackNavigator({
+//   Home: { screen: Home },
+//   Page2: { screen: Page2 }
+// });
+
+// // Wrapping a stack with translation hoc asserts we get new render on language change
+// // the hoc is set to only trigger rerender on languageChanged
+// const WrappedStack = ({t}) => {
+//   return <Stack screenProps={{ t }} />;
+// };
+// const ReloadAppOnLanguageChange = translate('common', {
+//   bindI18n: 'languageChanged',
+//   bindStore: false,
+// })(WrappedStack);
+
+// // The entry point using a react navigation stack navigation
+// // gets wrapped by the I18nextProvider enabling using translations
+// // https://github.com/i18next/react-i18next#i18nextprovider
+// export default class App extends React.Component {
+//   render() {
+//       return (
+//             <ReloadAppOnLanguageChange />
+//       );
+//   }
+// }

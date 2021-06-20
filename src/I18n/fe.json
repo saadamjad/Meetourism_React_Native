@@ -1,0 +1,56 @@
+{
+    "translation":{
+        "English":"Anglaise", "French":"française", "German":"Allemande", "Arabic":"arabe",
+        
+         "Langauges":"Langues",
+
+        "accepted":"accepté",
+        "pending":"en attendant",
+        "Hire People":"Embaucher des gens",
+        "Add Payment":"Ajouter un paiement",
+        "Invitations":"Invitations",
+        "Settings":"Paramètres",
+        "History":"Histoire",
+        "Share UGGLAN":"Partager UGGLAN",
+        "Help":"Aider",
+        "Log Out":"Se déconnecter",
+        "My Profile":"Mon profil",
+        "Home":"Domicile",
+        "Call":"Appel",
+        "Live Location":"Localisation en direct",
+        "help":"aider",
+        "My Safety Network":"Mon réseau de sécurité",
+        "There Is No Pending Request":"Il n'y a pas de demande en attente",
+        "Send Invitation":"Envoyer une invitation",
+        "Full Name":"Nom et prénom",
+        "Email":"E-mail",
+        "There Is No Any Security User":"Il n'y a aucun utilisateur de sécurité",
+        "Save":"Sauvegarder",
+        "Edit":"Éditer",
+        "Phone":"Téléphoner",
+        "Notify All contacts":"Notifier tous les contacts",
+        "Notify specific contacts":"Notifier des contacts spécifiques",
+        "Cancel":"Annuler",
+        "Add Contact":"Ajouter le contact",
+        "There Is No Invitations":"Il n'y a pas d'invitations",
+        "Online paid":"Payé en ligne",
+        "Invitations from Friends":"Invitations d'amis",
+        "Accept":"J'accepte",
+        "Reject":"Rejeter",
+        "Hire Now":"Embauchez maintenant",
+        "Charges":"Des charges",
+        "Chat":"Discuter",
+        "He is":"Il est",
+        "Km away from you":"Km de toi",
+        "Pay Online":"Payer en ligne",
+        "Pay OnCash":"Payer en espèces",
+        "Confirm you want to pay cash":"Confirmez que vous voulez payer en espèces",
+        "Confirm":"Confirmer",
+        "Confirm you want to pay online":"Confirmez que vous voulez payer en ligne",
+        "Langauge":"Langue",
+        "Please Select Language":"Veuillez sélectionner la langue"
+
+
+
+    }
+}

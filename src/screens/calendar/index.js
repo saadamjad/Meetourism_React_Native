@@ -1,12 +1,12 @@
-import React, {Component, useState, useEffect, useRef} from 'react';
-import {View, Image, TouchableOpacity, Text} from 'react-native';
+import React, { Component, useState, useEffect, useRef } from 'react';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
-import {Item, Icon} from 'native-base';
-import {CalendarList} from 'react-native-calendars';
+import { Item, Icon } from 'native-base';
+import { CalendarList } from 'react-native-calendars';
 const Calendar = (props) => {
   const [selectedDay, setSelectedDay] = useState({});
 
@@ -29,13 +29,13 @@ const Calendar = (props) => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <LongHeader
         navigation={props.navigation}
         leftArrow={true}
         searchIcon={true}
         backgroundColor={theme.primaryColor}
-        headerText="Location"
+        headerText="Calender"
       />
       {
         <CalendarList
@@ -90,13 +90,13 @@ const Calendar = (props) => {
               if (isFound) {
                 delete anotherData[va.dateString];
               } else {
-                anotherData[va.dateString] = {selected: true, marked: true};
+                anotherData[va.dateString] = { selected: true, marked: true };
               }
-              setSelectedDay({...anotherData});
+              setSelectedDay({ ...anotherData });
             } else {
               setSelectedDay({
                 ...selectedDay,
-                [va.dateString]: {selected: true, marked: true},
+                [va.dateString]: { selected: true, marked: true },
               });
             }
             console.log('This now i got this is', selectedDay);
