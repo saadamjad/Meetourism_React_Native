@@ -1,20 +1,20 @@
 import React from 'react';
-import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 
 import DrawerContent from '../screens/customdrawer';
 
-import {ProfileStack} from './stacknavigation';
+import { ProfileStack } from './stacknavigation';
 import Match from '../screens/matches';
 import matchprofile from '../screens/matches/matchedprofile';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import allchat from '../screens/chat/innerchat';
 import dashborad from '../screens/dashboard';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import Calender from '../screens/calendar';
 import Search from '../screens/search';
 import profilePreivew from '../screens/profile';
 import Home from '../screens/home';
-import {theme} from '../constants/theme';
+import { theme } from '../constants/theme';
 import Langauge from '../screens/language';
 
 // console.log('App====', Homes);
@@ -33,7 +33,7 @@ function MyDrawer(props) {
       }}
       drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
+        options={{ headerShown: false, drawerLabel: false }}
         name="profilestack"
         component={ProfileStack}
       />
@@ -46,23 +46,23 @@ function MyDrawer(props) {
       /> */}
 
       <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
+        options={{ headerShown: false, drawerLabel: false }}
         name="Calender"
         component={Calender}
       />
       <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
+        options={{ headerShown: false, drawerLabel: false }}
         name="Match"
         component={Matches}
       />
       <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
+        options={{ headerShown: false, drawerLabel: false }}
         name="Langauge"
         component={Langauge}
       />
 
       <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
+        options={{ headerShown: false, drawerLabel: false }}
         name="search"
         component={Search}
       />
@@ -72,7 +72,7 @@ function MyDrawer(props) {
         component={AlloffersStack}
       /> */}
       <Drawer.Screen
-        options={{headerShown: false, drawerLabel: false}}
+        options={{ headerShown: false, drawerLabel: false }}
         name="adminscreens"
         component={adminscreens}
       />
@@ -85,17 +85,17 @@ function Matches(props) {
       <Stack.Screen
         name="Match"
         component={Match}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="matchprofile"
         component={matchprofile}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="allchat"
         component={allchat}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -106,7 +106,7 @@ function adminscreens(props) {
       <Stack.Screen
         name="dashborad"
         component={dashborad}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

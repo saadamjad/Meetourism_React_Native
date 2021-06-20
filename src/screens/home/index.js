@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -15,10 +15,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Actions} from '../../redux/actions/index';
-import {connect} from 'react-redux';
+import { Actions } from '../../redux/actions/index';
+import { connect } from 'react-redux';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const App = (props) => {
@@ -44,14 +44,14 @@ const App = (props) => {
     },
   ]);
   const UpdateProfile = async (param) => {
-    setUserData({...userData, edit: !userData.edit});
+    setUserData({ ...userData, edit: !userData.edit });
     if (userData.changeTextInput) {
       let formData = new FormData();
       formData.append('data[description]', userData?.data?.description);
       formData.append('data[username]', userData?.data?.username);
       formData.append('type', 'profile');
       props.UpdateUserProfileData(formData, token, userData, props.navigation);
-      setUserData({...userData, edit: false, changeTextInput: false});
+      setUserData({ ...userData, edit: false, changeTextInput: false });
     } else {
       console.log('else not change');
     }
@@ -59,7 +59,7 @@ const App = (props) => {
 
   const _GetLoggedInUserData = async () => {
     let value = await props.GetLoggedInUserData(props?.userData?.id, token);
-    setState({...state, loader: false});
+    setState({ ...state, loader: false });
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const App = (props) => {
   }, []);
   useEffect(() => {
     let data = props?.userData;
-    setUserData({...userData, data});
+    setUserData({ ...userData, data });
   }, [props.userData]);
 
   return (
@@ -87,8 +87,8 @@ const App = (props) => {
         backgroundColor: theme.primaryColor,
       }}>
       <ScrollView
-        style={{flex: 1}}
-        contentContainerStyle={{flexGrow: 1}}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -100,10 +100,10 @@ const App = (props) => {
           <ImageBackground
             source={
               props?.image[0]
-                ? {uri: props.image[0]}
+                ? { uri: props.image[0] }
                 : require('../../assets/icons/girls.png')
             }
-            style={{height: '100%', width: '100%', borderBottomLeftRadius: 80}}
+            style={{ height: '100%', width: '100%', borderBottomLeftRadius: 80 }}
             resizeMode="cover">
             <View
               style={{
@@ -129,14 +129,14 @@ const App = (props) => {
                 onPress={() => props.navigation.openDrawer()}>
                 <Image
                   source={require('../../assets/icons/drawer.png')}
-                  style={{height: 30, width: 30, tintColor: '#ED1C24'}}
+                  style={{ height: 30, width: 30, tintColor: '#ED1C24' }}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
               {/* {
                 console.log(" props.image[0] props.image[0]", props.image[0])
               } */}
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 {allStatus.map((item, i) => {
                   return (
                     <View
@@ -164,7 +164,7 @@ const App = (props) => {
                           item.navigation &&
                             props.navigation.navigate('statusstack', {
                               screen: 'selectstatus',
-                              params: {comeFromProfileStatus: true},
+                              params: { comeFromProfileStatus: true },
                             });
                         }}>
 
@@ -173,10 +173,10 @@ const App = (props) => {
                             // source={  item.image}
                             source={
                               props?.image[0]
-                                ? {uri: props.image[0]}
+                                ? { uri: props.image[0] }
                                 : item.image
                             }
-                            style={{height: '100%', width: '100%'}}
+                            style={{ height: '100%', width: '100%' }}
                             resizeMode="cover"
                           />
                         ) : (
@@ -250,9 +250,9 @@ const App = (props) => {
                 // paddingRight: 5,
                 paddingLeft: 20,
               }}>
-              <View style={{flex: 1, borderWidth: 0}}>
+              <View style={{ flex: 1, borderWidth: 0 }}>
                 <Text
-                  style={{fontSize: 10, color: 'white', fontWeight: 'bold'}}>
+                  style={{ fontSize: 10, color: 'white', fontWeight: 'bold' }}>
                   0 meetups
                 </Text>
 
@@ -263,7 +263,7 @@ const App = (props) => {
                       ...userData,
                       changeTextInput: true,
 
-                      data: {...userData.data, username: text},
+                      data: { ...userData.data, username: text },
                     });
                   }}
                   editable={userData.edit}
@@ -300,7 +300,7 @@ const App = (props) => {
                 onPress={() => {
                   userData.edit
                     ? UpdateProfile()
-                    : setUserData({...userData, edit: !userData.edit});
+                    : setUserData({ ...userData, edit: !userData.edit });
                 }}>
                 <View
                   style={{
@@ -324,7 +324,7 @@ const App = (props) => {
             </View>
           </ImageBackground>
         </View>
-        <View style={{flex: 0.6, borderWidth: 0}}>
+        <View style={{ flex: 0.6, borderWidth: 0 }}>
           <View
             style={{
               height: 120,
@@ -358,7 +358,7 @@ const App = (props) => {
                   alignItems: 'center',
                 }}>
                 <Feather name="mail" size={40} color={'white'} />
-                <Text style={{color: 'white', fontSize: 10, marginTop: 5}}>
+                <Text style={{ color: 'white', fontSize: 10, marginTop: 5 }}>
                   Messages
                 </Text>
               </View>
@@ -374,10 +374,10 @@ const App = (props) => {
               {/* <Feather name="mail" size={40} color={'white'}/> */}
               <Image
                 source={require('../../assets/icons/alerts.png')}
-                style={{height: 40, width: 40}}
+                style={{ height: 40, width: 40 }}
                 resizeMode="contain"
               />
-              <Text style={{color: 'white', fontSize: 10, marginTop: 5}}>
+              <Text style={{ color: 'white', fontSize: 10, marginTop: 5 }}>
                 {' '}
                 Notifications{' '}
               </Text>
@@ -399,36 +399,47 @@ const App = (props) => {
               borderLeftWidth: 1,
               paddingLeft: 20,
             }}>
-            <View>
-              <Text style={{color: 'white', fontSize: 15}}>About Me</Text>
+            <View
+              style={{ flex: 1 }}
+            >
+              <Text style={{ color: 'white', fontSize: 15 }}>About Me</Text>
               {/* <Text style={{color: '#9599B3', fontSize: 12, marginTop: 2}}>
                 {userData?.data?.description}
               </Text> */}
+
               <TextInput
                 editable={userData.edit}
                 multiline={true}
+                maxLength={100}
+
                 value={userData?.data?.description}
                 onChangeText={(text) =>
                   setUserData({
                     ...userData,
                     changeTextInput: true,
-                    data: {...userData.data, description: text},
+                    data: { ...userData.data, description: text },
                   })
                 }
                 style={{
                   color: '#9599B3',
                   padding: 0,
+                  paddingBottom: 10,
                   margin: 0,
                   fontSize: 12,
+                  width: '100%',
                   marginTop: 2,
-                  borderBottomWidth: userData.edit ? 1 : 0,
+
+                  // width: '100%',
+
+                  borderBottomWidth: userData.edit ? 3 : 0,
                   borderColor: userData.edit ? 'white' : theme.secondaryColor,
                 }}
               />
+
             </View>
           </View>
 
-          <View style={{paddingHorizontal: 15, marginVertical: 10}}>
+          <View style={{ paddingHorizontal: 15, marginVertical: 10 }}>
             <Text
               style={{
                 color: 'white',
@@ -438,7 +449,7 @@ const App = (props) => {
               Langauge
             </Text>
 
-            <View style={{marginBottom: 20}}>
+            <View style={{ marginBottom: 20 }}>
               <Slider color="white" />
             </View>
           </View>
@@ -574,7 +585,7 @@ const App = (props) => {
       <AnimatedLoader
         status={state.loader}
         loaderStyle={true}
-        // loaderMessage={`Signing ${loaderMessage}`}
+      // loaderMessage={`Signing ${loaderMessage}`}
       />
     </View>
   );
