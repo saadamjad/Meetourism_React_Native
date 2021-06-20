@@ -1,8 +1,18 @@
-!**/*.xcodeproj
-!**/*.pbxproj
-!**/*.xcworkspacedata
-!**/*.xcsettings
-!**/*.xcscheme
+# OSX
+#
+.DS_Store
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+
+# Xcode
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -20,134 +30,53 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# Gradle
-/build/
-/packages/react-native-codegen/android/build/
-/packages/react-native-codegen/android/gradlePlugin-build/gradlePlugin/build
-/packages/rn-tester/android/app/.cxx/
-/packages/rn-tester/android/app/build/
-/packages/rn-tester/android/app/gradle/
-/packages/rn-tester/android/app/gradlew
-/packages/rn-tester/android/app/gradlew.bat
-/ReactAndroid/build/
-/ReactAndroid/gradle/
-/ReactAndroid/gradlew
-/ReactAndroid/gradlew.bat
-
-# Buck
-.buckd
-buck-out
-/.lsp.buckd
-/.lsp-buck-out
-/ReactAndroid/src/main/jni/prebuilt/lib/
-/ReactAndroid/src/main/gen
-
-# Android Studio
-.project
-.settings
-.classpath
-
-# Watchman
-.watchmanconfig
-
-# Android
+# Android/IntelliJ
+#
+build/
 .idea
 .gradle
 local.properties
 *.iml
-/android/
 
-# Node
-node_modules
-*.log
-.nvm
-/bots/node_modules/
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn.lock
 package-lock.json
 
-# OS X
-.DS_Store
 
-# Test generated files
-/ReactAndroid/src/androidTest/assets/AndroidTestBundle.js
-*.js.meta
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+!debug.keystore
 
-/coverage
-/third-party
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
 
-# Root dir shouldn't have Xcode project
-/*.xcodeproj
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
 
-# ReactCommon subdir shouldn't have Xcode project
-/ReactCommon/**/*.xcodeproj
-/packages/rn-tester/build
-/packages/rn-tester/android/app/build/*
-
-# Libs that shouldn't have Xcode project
-/Libraries/FBLazyVector/**/*.xcodeproj
-/Libraries/FBReactNativeSpec/**/*.xcodeproj
-/Libraries/RCTRequired/**/*.xcodeproj
-/React/CoreModules/**/*.xcodeproj
-/packages/react-native-codegen/**/*.xcodeproj
+# Bundle artifact
+*.jsbundle
 
 # CocoaPods
 /ios/Pods/
-/ios/Podfile.lock
-/packages/rn-tester/Gemfile.lock
-
-# Ignore RNTester specific Pods, but keep the __offline_mirrors__ here.
-/packages/rn-tester/Pods/*
-!/packages/rn-tester/Pods/__offline_mirrors__
-
-# react-native-codegen
-/Libraries/FBReactNativeSpec/FBReactNativeSpec
-/packages/react-native-codegen/lib
-/ReactCommon/fabric/components/rncore/
-/schema-rncore.json
-
-# Visual studio
-.vscode
-.vs
-
-# Android memory profiler files
-*.hprof
+android/.gradle/6.2/executionHistory/executionHistory.bin
+android/.gradle/6.2/executionHistory/executionHistory.lock
 *.bin
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.bin
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.bin
-*.bin
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.bin
-*.lock
-*.bin
-*.lock
+android/.gradle/6.2/fileHashes/fileHashes.lock
+android/.gradle/6.2/fileHashes/resourceHashesCache.bin
+android/.gradle/6.2/javaCompile/classAnalysis.bin
+android/.gradle/6.2/javaCompile/javaCompile.lock
+android/.gradle/6.2/javaCompile/taskHistory.bin
+android/.gradle/buildOutputCleanup/buildOutputCleanup.lock
 android/.gradle/buildOutputCleanup/outputFiles.bin
-*.lock
-*.bin
-*.bin
+android/.gradle/checksums/checksums.lock
+android/.gradle/checksums/md5-checksums.bin
