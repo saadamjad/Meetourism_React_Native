@@ -117,7 +117,7 @@ function SelectOffer(props) {
   const _DeleteOffer = async (data) => {
     console.log('gello');
     setState({...state, loader: true});
-    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+    const base_url = 'https://meetourism.com/api/v1//offers';
 
     let formData = new FormData();
 
@@ -155,7 +155,7 @@ function SelectOffer(props) {
 
   const UpdateOfferData = (param) => {
     console.log(param?.id);
-    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+    const base_url = 'https://meetourism.com/api/v1//offers';
 
     let formData = new FormData();
 
@@ -311,20 +311,19 @@ function SelectOffer(props) {
                       borderRadius: 40,
                       overflow: 'hidden',
                       // borderWidth: ,
-                      elevation:1,
-                      backgroundColor:'white',
-
+                      elevation: 1,
+                      backgroundColor: 'white',
                     }}>
-                      {/* val.user.profile_url
+                    {/* val.user.profile_url
                           ? {uri: val.user.profile_url}
                           : */}
                     <Image
                       style={{height: '100%', width: '100%'}}
                       resizeMode="cover"
                       source={
-                          props?.image[0]
+                        props?.image[0]
                           ? {uri: props.image[0]}
-                          :  require('../../../assets/images/avatar.png')
+                          : require('../../../assets/images/avatar.png')
                       }
                     />
                   </View>
@@ -611,7 +610,6 @@ const mapStateToProps = (state) => ({
   orderData: state.reducers.orderData,
   userData: state.reducers.userData,
   image: state.reducers.images_Interests,
-
 });
 const mapDispatchToProps = {
   // Signup: Actions.Signup,

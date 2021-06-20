@@ -1,5 +1,5 @@
-import {Form, Icon} from 'native-base';
-import React, {useState, useEffect} from 'react';
+import { Form, Icon } from 'native-base';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,20 +7,20 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import {ScrollView, TextInput} from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import GlobalButton from '../../../components/buttons/generalbutton';
 // import CustomView from '../../../components/customView';
 // import App from '../../../../components/header';
 import Header from '../../../components/header';
 
-import {theme} from '../../../constants/theme';
-import {Actions} from '../../../redux/actions/index';
+import { theme } from '../../../constants/theme';
+import { Actions } from '../../../redux/actions/index';
 import ImagePicker from '../../../globalfunctions/imagepicker';
 
-import {connect} from 'react-redux';
-import {ProfileStack} from '../../../navigations/stacknavigation';
+import { connect } from 'react-redux';
+import { ProfileStack } from '../../../navigations/stacknavigation';
 import Toast from '../../../components/toastmessage';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import axios from 'axios';
 import AnimatedLoader from '../../../components/loader';
 
@@ -53,14 +53,14 @@ function CreateOffer(props) {
   };
 
   const _ImageUploadApiCall = async () => {
-    setState({...state, loader: true});
-    const base_url = 'https://meetourism.deviyoinc.com/api/v1/offers';
+    setState({ ...state, loader: true });
+    const base_url = 'https://meetourism.com/api/v1//offers';
     console.log('res.fileName', state.imageData);
     let path = state.imageData.uri;
 
     let formData = new FormData();
 
-    formData.append('image', {...state.imageData, name: path});
+    formData.append('image', { ...state.imageData, name: path });
     formData.append('title', state.title);
     formData.append('description', state.offerDescription);
     formData.append('price', Number(state.price));
@@ -87,7 +87,7 @@ function CreateOffer(props) {
       })
       .catch((err) => {
         console.log('Error', err?.response?.data);
-        setState({...state, loader: false});
+        setState({ ...state, loader: false });
       });
   };
 
@@ -105,7 +105,7 @@ function CreateOffer(props) {
       } else if (res.error) {
         console.log('Camera Error: ');
       } else {
-        setState({...state, imageData: res});
+        setState({ ...state, imageData: res });
         // console.log('res', res);
         // imageUpload(res);
       }
@@ -116,7 +116,7 @@ function CreateOffer(props) {
     return (
       <ImageBackground
         source={require('../../../assets/images/statusbg.png')}
-        style={{height: '100%', width: '100%'}}>
+        style={{ height: '100%', width: '100%' }}>
         <View
           style={{
             flex: 1,
@@ -202,10 +202,10 @@ function CreateOffer(props) {
           status={state.loader}
           loaderMessage={state.loaderMessage}
         />
-        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ImageBackground
             source={require('../../../assets/images/statusbg.png')}
-            style={{height: '100%', width: '100%'}}>
+            style={{ height: '100%', width: '100%' }}>
             <View
               style={{
                 backgroundColor: 'rgba(00,00,00, 0.7)',
@@ -249,7 +249,7 @@ function CreateOffer(props) {
                     alignItems: 'center',
                   }}>
                   <ImageBackground
-                    source={{uri: state.imageData.uri}}
+                    source={{ uri: state.imageData.uri }}
                     style={{
                       height: '100%',
                       width: '100%',
@@ -292,8 +292,8 @@ function CreateOffer(props) {
                   borderWidth: 1,
                 }}></TouchableOpacity> */}
                 </View>
-                <View style={{width: '80%'}}>
-                  <View style={{width: '100%', height: 40, marginVertical: 10}}>
+                <View style={{ width: '80%' }}>
+                  <View style={{ width: '100%', height: 40, marginVertical: 10 }}>
                     <TextInput
                       style={{
                         width: '100%',
@@ -306,10 +306,10 @@ function CreateOffer(props) {
                       }}
                       placeholder="Title here"
                       placeholderTextColor="black"
-                      onChangeText={(text) => setState({...state, title: text})}
+                      onChangeText={(text) => setState({ ...state, title: text })}
                     />
                   </View>
-                  <View style={{width: '100%', height: 40, marginVertical: 10}}>
+                  <View style={{ width: '100%', height: 40, marginVertical: 10 }}>
                     <TextInput
                       style={{
                         width: '100%',
@@ -323,11 +323,11 @@ function CreateOffer(props) {
                       placeholder="Write Description Here"
                       placeholderTextColor="black"
                       onChangeText={(text) =>
-                        setState({...state, offerDescription: text})
+                        setState({ ...state, offerDescription: text })
                       }
                     />
                   </View>
-                  <View style={{width: '60%', height: 40, marginVertical: 10}}>
+                  <View style={{ width: '60%', height: 40, marginVertical: 10 }}>
                     <TextInput
                       style={{
                         width: '100%',
@@ -339,7 +339,7 @@ function CreateOffer(props) {
                         borderStyle: 'solid',
                       }}
                       placeholder="Enter Price here"
-                      onChangeText={(text) => setState({...state, price: text})}
+                      onChangeText={(text) => setState({ ...state, price: text })}
                       placeholderTextColor="black"
                     />
                   </View>
