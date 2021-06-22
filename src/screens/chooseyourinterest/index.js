@@ -22,6 +22,7 @@ import Geolocation from '@react-native-community/geolocation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from '../../redux/actions/index';
+import Entypo from 'react-native-vector-icons/Entypo'
 import Geocoder from 'react-native-geocoding';
 Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
 
@@ -146,60 +147,51 @@ const Status = (props) => {
         console.log('res', res);
         let temp = state.images;
         temp.push(res.uri);
-        await setState({ ...state, images: temp });
-        ImageUploadingFunc()
+        setState({ ...state, images: temp });
+        ImageUploadingFunc(res)
       }
     });
 
   };
 
-  const ImageUploadingFunc = (param) => {
+  const ImageUploadingFunc = async (param) => {
+
+    console.log("API RUNNING")
+
+
+
+    props.ImageUploading(param, props.token)
+
     // let formData = new FormData();
-    // formData.append('images', param);
+    // formData.append('image', { ...param, name: param.fileName });
     // formData.append('image_type', 'user');
-
-
-
-    // // console.log("form dataaaa", formData)
-
-
     // props.ImageUploading(formData, props.token)
-
-
-
-
-    let formData = new FormData();
-    let array = ["file:///data/user/0/com.meetourism/cache/rn_image_picker_lib_temp_0478767e-e778-468d-91d5-f57758121138.jpg", "file:///data/user/0/com.meetourism/cache/rn_image_picker_lib_temp_0478767e-e778-468d-91d5-f57758121138.jpg"]
-    formData.append('image', array);
-    formData.append('image_type', 'user');
-    props.ImageUploading(formData, props.token)
-    // 
 
 
 
   }
 
-  const _GetInterests = async () => {
-    console.log('all interests');
-    let url = 'https://meetourism.deviyoinc.com/api/v1/interests';
+  // const _GetInterests = async () => {
+  //   console.log('all interests');
+  //   let url = 'https://meetourism.deviyoinc.com/api/v1/interests';
 
-    await axios
-      .get(url)
-      .then((res) => {
-        if (res.data.status_type === 'success') {
-          let interest = res?.data?.data;
+  //   await axios
+  //     .get(url)
+  //     .then((res) => {
+  //       if (res.data.status_type === 'success') {
+  //         let interest = res?.data?.data;
 
-          props.GetInterests(interest);
-        } else {
-          console.log('else');
+  //         props.GetInterests(interest);
+  //       } else {
+  //         console.log('else');
 
-          props.GetInterests([]);
-        }
-      })
-      .catch((error) => {
-        console.log('error in catch _GetInterests', error);
-      });
-  };
+  //         props.GetInterests([]);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log('error in catch _GetInterests', error);
+  //     });
+  // };
 
   const _Buttons = () => {
 
@@ -223,6 +215,9 @@ const Status = (props) => {
               state.description == "") {
 
               Toast('Error', ' Please fill all inputs correctly', 'error');
+              props.navigation.navigate('yourinterests', {
+                profileData: state,
+              });
 
             }
 
@@ -235,7 +230,7 @@ const Status = (props) => {
 
             }
             else {
-              props.StoreData(state.images);
+              // props.StoreData(state.images);
               props.navigation.navigate('yourinterests', {
                 profileData: state,
               });
@@ -304,57 +299,86 @@ const Status = (props) => {
                 }}>
                 Subscribe
               </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: '100%',
+              <ScrollView
 
-                  justifyContent: 'center',
-                  // alignItems: 'space-around',
-                }}>
-                {state.images &&
-                  state.images.map((val, i) => (
-                    console.log("valeee", val),
-                    <View
-                      key={i}
-                      style={{
-                        width: 50,
-                        marginLeft: 5,
-                        height: 50,
-                        overflow: 'hidden',
-                        borderRadius: 50,
-                      }}>
-                      <Image
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                        }}
-                        resizeMode="cover"
-                        source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
-                      // source={ val.image_path
-                      //   ? {uri: val.image_path}
-                      //   : require('../../assets/icons/girls.png')}
+                horizontal={true}
+              >
 
-                      />
-                    </View>
-                  ))}
-                <TouchableOpacity
+                <View
                   style={{
-                    backgroundColor: '#998FA2',
+                    flexDirection: 'row',
+                    width: '100%',
+
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 50,
-                    marginLeft: 10,
-                    height: 50,
-                    overflow: 'hidden',
-                    borderRadius: 50,
-                  }}
-                  onPress={() => {
-                    _Imageupload();
+
                   }}>
-                  <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
-                </TouchableOpacity>
-              </View>
+
+
+                  {state.images &&
+                    state.images.map((val, i) => (
+                      console.log("valeee", val),
+                      <View
+
+
+                      >
+                        <TouchableOpacity
+                          style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
+
+                          onPress={() => {
+                            let array = state.images.filter((item, ind) => i != ind)
+                            console.log("array", array)
+                            setState({
+                              ...state, images: array
+                            })
+                          }}
+                        >
+                          <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
+                        </TouchableOpacity>
+                        <View
+                          key={i}
+                          style={{
+                            width: 50,
+                            marginLeft: 5,
+                            height: 50,
+                            overflow: 'hidden',
+                            borderRadius: 50,
+                          }}>
+                          <Image
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
+                            resizeMode="cover"
+                            source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
+                          // source={ val.image_path
+                          //   ? {uri: val.image_path}
+                          //   : require('../../assets/icons/girls.png')}
+
+                          />
+                        </View>
+
+                      </View>
+
+                    ))}
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: '#998FA2',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 50,
+                      marginLeft: 10,
+                      height: 50,
+                      overflow: 'hidden',
+                      borderRadius: 50,
+                    }}
+                    onPress={() => {
+                      _Imageupload();
+                    }}>
+                    <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
+                  </TouchableOpacity>
+                </View>
+              </ScrollView>
+
               <View
                 style={{
                   width: '100%',
@@ -705,7 +729,6 @@ const Status = (props) => {
           </View>
         </View>
       </ImageBackground>
-
     </ScrollView>
   );
 };
@@ -717,6 +740,7 @@ const mapStateToProp = (state) => ({
   editSetting: state.reducers.editSetting,
   allCountries: state.reducers.allCountries,
   token: state.reducers.token,
+  userRegisterationImages: state.reducers.userRegisterationImages,
 
   reverseGeoCodeData: state.reducers.reverseGeoCodeData,
 });

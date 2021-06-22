@@ -27,9 +27,12 @@ const App = (props) => {
   const [state, setState] = useState({
     loader: true,
   });
+  const [image, setImages] = useState('')
   const [userData, setUserData] = useState({
     edit: false,
     changeTextInput: false,
+    data: {},
+    index: 0
   });
 
   const [allStatus, setStatus] = useState([
@@ -58,19 +61,23 @@ const App = (props) => {
   };
 
   const _GetLoggedInUserData = async () => {
+
     let value = await props.GetLoggedInUserData(props?.userData?.id, token);
     setState({ ...state, loader: false });
   };
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
-      // The screen is focused
-      // Call any action
+
       _GetLoggedInUserData();
     });
+
+    let data = props?.userData;
+    console.log("data", data?.images[0]?.image_path)
+    // setUserData({ ...userData, data });
+    setImages(data?.images[0]?.image_path)
     _GetLoggedInUserData();
-    // let data = props?.userData;
-    // setUserData({...userData, data});
+
 
     // console.log('userData', userData);
     return unsubscribe;
@@ -86,6 +93,7 @@ const App = (props) => {
         flex: 1,
         backgroundColor: theme.primaryColor,
       }}>
+
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{ flexGrow: 1 }}
@@ -98,9 +106,12 @@ const App = (props) => {
             overflow: 'hidden',
           }}>
           <ImageBackground
+
             source={
-              props?.image[0]
-                ? { uri: props.image[0] }
+              image
+                ? {
+                  uri: image
+                }
                 : require('../../assets/icons/girls.png')
             }
             style={{ height: '100%', width: '100%', borderBottomLeftRadius: 80 }}
@@ -133,9 +144,7 @@ const App = (props) => {
                   resizeMode="contain"
                 />
               </TouchableOpacity>
-              {/* {
-                console.log(" props.image[0] props.image[0]", props.image[0])
-              } */}
+
               <View style={{ flexDirection: 'row' }}>
                 {allStatus.map((item, i) => {
                   return (
@@ -170,10 +179,10 @@ const App = (props) => {
 
                         {i == 0 ? (
                           <Image
-                            // source={  item.image}
+
                             source={
-                              props?.image[0]
-                                ? { uri: props.image[0] }
+                              image
+                                ? { uri: image }
                                 : item.image
                             }
                             style={{ height: '100%', width: '100%' }}

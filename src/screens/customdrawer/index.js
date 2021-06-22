@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,10 @@ import { connect } from 'react-redux';
 import { Actions } from '../../redux/actions/index';
 
 const DrawerContent = (props) => {
+  const [state, setState] = useState({
+    userData: props.userData
+  })
+  // const profileImage = props.userData ? props?.userData?.images[0]?.image_path : null;
   let array;
   return (
     <View
@@ -57,8 +61,8 @@ const DrawerContent = (props) => {
                 borderColor: '#D47FA6',
               }}>
               <Image
-                source={props?.image[0]
-                  ? { uri: props.image[0] }
+                source={state.userData?.images[0]?.image_path
+                  ? { uri: state.userData?.images[0]?.image_path }
                   : require('../../assets/icons/row.png')}
                 style={{ height: '100%', width: '100%' }}
                 resizeMode="cover"></Image>

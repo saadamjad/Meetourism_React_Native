@@ -22,6 +22,10 @@ import AnimatedLoader from '../../../components/loader';
 import moment from 'moment';
 import axios from 'axios';
 function SelectOffer(props) {
+  // const profileImage = props.userData
+  //   ? props?.userData?.images[0]?.image_path
+  //   : null;
+
   const token = props?.token;
   const status = props?.status;
   const orderData = props?.orderData;
@@ -32,6 +36,7 @@ function SelectOffer(props) {
     allOffers: [],
     index: 0,
     loader: true,
+    // profileImage: userData?.images[0]?.image_path,
     minimumPrice: '',
     maximumPrice: '',
     showFilter: false,
@@ -321,8 +326,8 @@ function SelectOffer(props) {
                       style={{height: '100%', width: '100%'}}
                       resizeMode="cover"
                       source={
-                        props?.image[0]
-                          ? {uri: props.image[0]}
+                        state.profileImage
+                          ? {uri: state.profileImage}
                           : require('../../../assets/images/avatar.png')
                       }
                     />

@@ -16,7 +16,6 @@ import Header from '../../components/header';
 import {connect} from 'react-redux';
 
 import * as Actions from '../../redux/actions/index';
-// import { useFocusEffect } from '@react-navigation/native';
 
 const Profile = (props) => {
   const [userType, setUserType] = useState('0');
@@ -33,17 +32,6 @@ const Profile = (props) => {
     setUserData({...userData, data});
   }, [props.userData]);
 
-  const _GetUserType = async () => {
-    try {
-      const value = await AsyncStorage.getItem('userType');
-      if (value !== null) {
-        // We have data!!
-        setUserType(value);
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
   return (
     <CustomView scroll>
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
@@ -51,8 +39,8 @@ const Profile = (props) => {
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
           source={
-            props?.image[0]
-              ? {uri: props.image[0]}
+            userData?.images[0]?.image_path
+              ? {uri: userData?.images[0]?.image_path}
               : require('../../assets/images/profile.png')
           }>
           <Header

@@ -14,7 +14,8 @@ const initialState = {
   allInterests: [],
   orderData: {},
   personalChatData: [],
-  reverseGeoCodeData:{}
+  reverseGeoCodeData: {},
+  userRegisterationImages: [],
 };
 
 export default function (state = initialState, action) {
@@ -36,7 +37,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loader: false,
-        signupData: {...signupData, ...action.payload},
+        signupData: { ...signupData, ...action.payload },
       };
     case actionTypes.LOGINSUCCESS:
       console.log('LOGINSUCCESS data', action.payload);
@@ -71,18 +72,18 @@ export default function (state = initialState, action) {
       };
 
     case actionTypes.GETALLOFFERS:
-      return {...state, alloffers: action.payload, loader: false};
+      return { ...state, alloffers: action.payload, loader: false };
     case actionTypes.EDITSETTING:
-      return {...state, loader: false, editSetting: action.payload};
+      return { ...state, loader: false, editSetting: action.payload };
 
     case actionTypes.GETUSERPROFILEDATA:
-      return {...state, loader: false};
+      return { ...state, loader: false };
     case actionTypes.GETALLCRUSHES:
-      return {...state, loader: false, allCrushes: action.payload};
+      return { ...state, loader: false, allCrushes: action.payload };
     case actionTypes.GETCOUNTRIES:
-      return {...state, loader: false, allCountries: action.payload};
+      return { ...state, loader: false, allCountries: action.payload };
     case actionTypes.GETINTERESTS:
-      return {...state, loader: false, allInterests: action.payload};
+      return { ...state, loader: false, allInterests: action.payload };
     case actionTypes.UPDATECOMPLETEPROFILE:
       console.log('action.payloadaction.payload', action.payload);
       return {
@@ -127,12 +128,21 @@ export default function (state = initialState, action) {
     case actionTypes.REVERSEGEOCODEDATA:
       return {
         ...state,
-        reverseGeoCodeData:action.payload,
+        reverseGeoCodeData: action.payload,
+        loader: false,
+      };
+    case actionTypes.USERREGISTERATIONIMAGES:
+      return {
+        ...state,
+        userRegisterationImages: [...state.userRegisterationImages, action.payload],
         loader: false,
       };
 
     case actionTypes.LOGOUT:
-      return {...state, ...initialState};
+      // navigation.navigate('Auth', {
+      //   screen: 'signin',
+      // });
+      return { ...state, ...initialState };
     default:
       return state;
   }

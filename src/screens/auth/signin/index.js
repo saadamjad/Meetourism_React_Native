@@ -48,7 +48,7 @@ const App = (props) => {
   }
 
   const [signupValues, setSignvalues] = useState({
-    name: 'sajdnindddu',
+    name: 'sitgoride',
     email: 'sitgo@gmail.com',
     password: '123456789',
     confirmPassword: '123456789',
@@ -58,8 +58,8 @@ const App = (props) => {
     // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'saad.amjad434@gmail.com',
-    password: 'saad@12345',
+    email: 'sitgo2@gmail.com',
+    password: '123456789',
 
     // email: '',
     // password: '',
