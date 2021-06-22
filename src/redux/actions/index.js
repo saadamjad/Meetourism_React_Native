@@ -64,7 +64,7 @@ class Actions {
     };
   };
   static Signup = (data, navigation, status) => {
-    console.log('data', data, 'status', status);
+    // console.log('data', data, 'status', status);
 
     return async (dispatch) => {
       return await Post('auth/register', data)
@@ -296,7 +296,7 @@ class Actions {
     console.log('Logout');
 
     return async (dispatch) => {
-      dispatch({ type: actionTypes.LOGOUT });
+      dispatch({ type: actionTypes.LOGOUT, });
       navigation.navigate('Auth', {
         screen: 'signin',
       });
@@ -818,19 +818,21 @@ class Actions {
         });
     };
   };
-  static ImageUploading = (data, token) => {
+  static ImageUploading = (param, token) => {
 
-    console.log("REDUX DATA", data)
+    let formData = new FormData();
+    formData.append('image', { ...param, name: param.fileName });
+    formData.append('image_type', 'user');
 
     return async (dispatch) => {
       dispatch({ type: actionTypes.STARTLOADER });
-      return Post("images", data, token)
+      return Post("images", formData, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
 
-            console.log('ImageUploading', response);
-            dispatch({ type: actionTypes.STOPLOADER });
+            console.log('ImageUploading', response.url);
+            dispatch({ type: actionTypes.USERREGISTERATIONIMAGES, payload: response.url });
 
             return true;
           } else {

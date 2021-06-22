@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -10,31 +10,25 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-// import {Icon} from 'native-base';
-// import Style from './style';
-import Toast from '../../components/toastmessage';
 
-import {theme} from '../../constants/theme';
 
-import {Icon} from 'native-base';
-import {Button, Overlay} from 'react-native-elements';
-import {CheckBox} from 'react-native-elements';
-import axios from 'axios';
+import { theme } from '../../constants/theme';
+
+import { Icon } from 'native-base';
+import { Button, Overlay } from 'react-native-elements';
+import { CheckBox } from 'react-native-elements';
 import AnimatedLoader from 'react-native-animated-loader';
-import {Actions} from '../../redux/actions/index';
+import { Actions } from '../../redux/actions/index';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {ScrollView} from 'react-native-gesture-handler';
-let statusValue = 0;
+import { ScrollView } from 'react-native-gesture-handler';
 const Status = (props) => {
   //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
-  // console.log('Dataaa=====', data);
   const token = props?.token;
 
   const [loader, setLoader] = useState(false);
-  // console.log('ALL DATA ==>.', data);
   const company_name = data?.status == 'partner' ? true : false;
 
   const [state, setState] = useState({
@@ -52,7 +46,7 @@ const Status = (props) => {
   useEffect(() => {
     if (props.editSetting) {
       let value = props?.userData?.interests.map((item, i) => {
-        return {...item, selected: true};
+        return { ...item, selected: true };
       });
       setState({
         ...state,
@@ -62,97 +56,97 @@ const Status = (props) => {
     }
   }, []);
   useEffect(() => {
-      setState({...state, interests: props.allInterests, loader: false});
+    setState({ ...state, interests: props.allInterests, loader: false });
   }, [props.allInterests]);
 
   const _UserRegister = async (value) => {
     console.log('company_name,', company_name);
     let data2 = company_name
       ? {
-          // company_name: data.company_name,
-          // first_name: 'First Name',
-          // last_name: 'Last Name',
-          // username:
-          //   'usersskskskksksksssjsjsjssadshshhsjdjdsjsjsdjsjddsfdasdsfkjjjjsname',
-          // email:
-          //   'emassdddskskskskasssdfsksksksdjdjxnnxanajajjanxdjdkdsaddil@yosssspmail.com',
-          // phone: '12345ssdskskksasdsssksjsjsjsshsjsjsjshshjssjsjssssasdsdddds6',
-          // password: 'password12',
-          // password_confirmation: 'password12',
-          // description: 'ssssssssssssssssssssssssssssss',
-          // age: 20,
-          // country_id: 1,
-          // city: 'City',
-          // weight: 40,
-          // height: 6.2,
-          // eye_color: 'green',
-          // status: data?.status,
-          // interests: [1, 2],
-          // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+        // company_name: data.company_name,
+        // first_name: 'First Name',
+        // last_name: 'Last Name',
+        // username:
+        //   'usersskskskksksksssjsjsjssadshshhsjdjdsjsjsdjsjddsfdasdsfkjjjjsname',
+        // email:
+        //   'emassdddskskskskasssdfsksksksdjdjxnnxanajajjanxdjdkdsaddil@yosssspmail.com',
+        // phone: '12345ssdskskksasdsssksjsjsjsshsjsjsjshshjssjsjssssasdsdddds6',
+        // password: 'password12',
+        // password_confirmation: 'password12',
+        // description: 'ssssssssssssssssssssssssssssss',
+        // age: 20,
+        // country_id: 1,
+        // city: 'City',
+        // weight: 40,
+        // height: 6.2,
+        // eye_color: 'green',
+        // status: data?.status,
+        // interests: [1, 2],
+        // images: ['user_images/user-image-608de193434244-74625999.jpg'],
 
-          company_name: data?.company_name,
-          first_name: data?.firstName,
-          last_name: data?.lastName,
-          username: data?.userName,
-          email: data?.email,
-          phone: data?.contact,
-          password: data?.password,
-          password_confirmation: data?.confirmPassword,
-          age: Number(data?.age),
-          country_id: data?.countryId,
-          city: data?.city,
-          weight: Number(data?.weight),
-          height: Number(data?.height),
-          eye_color: data?.eyeColor,
-          status: data?.status,
-          interests: state.interests,
-          images: data?.images,
-          description: data?.description,
-          latitude: data?.latitude,
-          longitude: data?.longitude,
-          address: 'Test Address',
-        }
+        company_name: data?.company_name,
+        first_name: data?.firstName,
+        last_name: data?.lastName,
+        username: data?.userName,
+        email: data?.email,
+        phone: data?.contact,
+        password: data?.password,
+        password_confirmation: data?.confirmPassword,
+        age: Number(data?.age),
+        country_id: data?.countryId,
+        city: data?.city,
+        weight: Number(data?.weight),
+        height: Number(data?.height),
+        eye_color: data?.eyeColor,
+        status: data?.status,
+        interests: state.interests,
+        images: data?.images,
+        description: data?.description,
+        latitude: data?.latitude,
+        longitude: data?.longitude,
+        address: 'Test Address',
+      }
       : {
-          first_name: data?.firstName,
-          last_name: data?.lastName,
-          username: data?.userName,
-          email: data?.email,
-          phone: data?.contact,
-          password: data?.password,
-          password_confirmation: data?.confirmPassword,
-          age: Number(data?.age),
-          country_id: data?.countryId,
-          city: data?.city,
-          weight: Number(data?.weight),
-          height: Number(data?.height),
-          eye_color: data?.eyeColor,
-          status: data?.status,
+        first_name: data?.firstName,
+        last_name: data?.lastName,
+        username: data?.userName,
+        email: data?.email,
+        phone: data?.contact,
+        password: data?.password,
+        password_confirmation: data?.confirmPassword,
+        age: Number(data?.age),
+        country_id: data?.countryId,
+        city: data?.city,
+        weight: Number(data?.weight),
+        height: Number(data?.height),
+        eye_color: data?.eyeColor,
+        status: data?.status,
 
-          interests: state?.interests,
-          images: data?.images,
-          description: data?.description,
-          latitude: '24.123244',
-          longitude: '87.839483',
-          address: 'Test Address',
+        interests: state?.interests,
+        images: data?.images,
+        description: data?.description,
+        latitude: '24.123244',
+        longitude: '87.839483',
+        address: 'Test Address',
 
-          // first_name: 'First Name',
-          // last_name: 'Last Name',
-          // username: 'userssksssadsfdasdsfkjjjjsname',
-          // email: 'emassdddasssdfdsaddil@yosssspmail.com',
-          // phone: '12345ssdasdsssssasdsdddds6',
-          // password: 'password12',
-          // password_confirmation: 'password12',
-          // description: 'ssssssssssssssssssssssssssssss',
-          // age: 20,
-          // country_id: 1,
-          // city: 'City',
-          // weight: 40,
-          // height: 6.2,
-          // eye_color: 'green',
-          // status: 'single',
-          // interests: [1, 2],
-          // images: ['user_images/user-image-608de193434244-74625999.jpg'],
-        };
+        // first_name: 'First Name',
+        // last_name: 'Last Name',
+        // username: 'userssksssadsfdasdsfkjjjjsname',
+        // email: 'emassdddasssdfdsaddil@yosssspmail.com',
+        // phone: '12345ssdasdsssssasdsdddds6',
+        // password: 'password12',
+        // password_confirmation: 'password12',
+        // description: 'ssssssssssssssssssssssssssssss',
+        // age: 20,
+        // country_id: 1,
+        // city: 'City',
+        // weight: 40,
+        // height: 6.2,
+        // eye_color: 'green',
+        // status: 'single',
+        // interests: [1, 2],
+        // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+      };
     setLoader(true);
 
     // images: data?.images,
@@ -188,8 +182,8 @@ const Status = (props) => {
       );
       setLoader(false);
     } else {
-      let testingValue = {...data2, interests: value};
-
+      let testingValue = { ...data2, interests: value, images: props.userRegisterationImages };
+      console.log("testingValuetestingValue", testingValue)
       await props.Signup(testingValue, props.navigation, company_name);
 
       setLoader(false);
@@ -232,7 +226,7 @@ const Status = (props) => {
               <Icon
                 type="AntDesign"
                 name="arrowleft"
-                style={{color: 'white', fontSize: 20}}
+                style={{ color: 'white', fontSize: 20 }}
               />
             </TouchableOpacity>
           </View>
@@ -273,64 +267,64 @@ const Status = (props) => {
                 }}>
                 {state.interests?.length > 0
                   ? state.interests.map((val, i) =>
-                      val.selected || props.editSetting   ? (
-                        <TouchableOpacity
+                    val.selected || props.editSetting ? (
+                      <TouchableOpacity
+                        style={{
+                          width: '80%',
+                          flexDirection: 'row',
+                          marginTop: 20,
+                          // borderWidth: 1,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                        key={i}>
+                        <View
                           style={{
-                            width: '80%',
-                            flexDirection: 'row',
-                            marginTop: 20,
+                            // height: '100%',
+                            width: '30%',
                             // borderWidth: 1,
                             alignItems: 'center',
                             justifyContent: 'center',
-                          }}
-                          key={i}>
+                          }}>
                           <View
                             style={{
-                              // height: '100%',
-                              width: '30%',
+                              height: 36,
+                              width: 36,
+                              borderRadius: 36,
                               // borderWidth: 1,
-                              alignItems: 'center',
-                              justifyContent: 'center',
                             }}>
-                            <View
-                              style={{
-                                height: 36,
-                                width: 36,
-                                borderRadius: 36,
-                                // borderWidth: 1,
-                              }}>
-                              <Image
-                                resizeMode="contain"
-                                style={{height: '100%', width: '100%'}}
-                                source={require('../../assets/images/girl.png')}
-                              />
-                            </View>
+                            <Image
+                              resizeMode="contain"
+                              style={{ height: '100%', width: '100%' }}
+                              source={require('../../assets/images/girl.png')}
+                            />
                           </View>
-                          <View
+                        </View>
+                        <View
+                          style={{
+                            width: '70%',
+                            borderWidth: 0,
+                            paddingLeft: 10,
+                          }}>
+                          <Text
                             style={{
-                              width: '70%',
-                              borderWidth: 0,
-                              paddingLeft: 10,
+                              color:
+                                theme.textColor[
+                                state.selected == i
+                                  ? 'blackColor'
+                                  : 'greyColor'
+                                ],
+                              fontWeight: '700',
+                              // marginLeft: 30,
+                              fontSize: 20,
+                              // width: '85%',
                             }}>
-                            <Text
-                              style={{
-                                color:
-                                  theme.textColor[
-                                    state.selected == i
-                                      ? 'blackColor'
-                                      : 'greyColor'
-                                  ],
-                                fontWeight: '700',
-                                // marginLeft: 30,
-                                fontSize: 20,
-                                // width: '85%',
-                              }}>
-                              {val.name}
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      ) : null,
-                    )
+                            {val.name}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    ) : null,
+                  )
                   : null}
                 {state.selectedInterests?.length === 0 ? (
                   <Text> No Interest Selected </Text>
@@ -368,7 +362,7 @@ const Status = (props) => {
                     verifySelection: true,
                   })
                 }>
-                <Icon style={{fontSize: 20}} type="AntDesign" name="plus" />
+                <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
               </TouchableOpacity>
             </View>
           </View>
@@ -383,10 +377,13 @@ const Status = (props) => {
               //   alert('time editig profiel');
               // }
               else {
-                let value = state.interests.map((item, i) => {
-                  return item.id;
-                });
-                _UserRegister(value);
+                let value = state.interests.filter((item) => item.selected == true)
+                let testarray = value.map((val, index) => {
+                  return val.id
+                })
+                console.log("testarray", testarray)
+                _UserRegister(testarray);
+                // _UserRegister(value);
               }
             }}
             style={{
@@ -401,14 +398,14 @@ const Status = (props) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 15, color: 'white'}}> Done</Text>
+            <Text style={{ fontSize: 15, color: 'white' }}> Done</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
-
+      {/* {console.log("props.allInterests======", props.allInterests)} */}
       <Overlay
         isVisible={state.isVisible}
-        onBackdropPress={() => setState({...state, isVisible: false})}
+        onBackdropPress={() => setState({ ...state, isVisible: false })}
         overlayStyle={{
           // borderRadius: 50,
           alignItems: 'center',
@@ -419,7 +416,7 @@ const Status = (props) => {
           margin: 0,
           height: '86%',
         }}>
-        <View style={{height: '100%', width: '100%', alignItems: 'center'}}>
+        <View style={{ height: '100%', width: '100%', alignItems: 'center' }}>
           <Text
             style={{
               color: theme.secondaryColor,
@@ -443,7 +440,7 @@ const Status = (props) => {
                             selected: !item.selected,
                           };
                         } else {
-                          return {...item};
+                          return { ...item };
                         }
                       });
 
@@ -478,7 +475,7 @@ const Status = (props) => {
                                 selected: !item.selected,
                               };
                             } else {
-                              return {...item};
+                              return { ...item };
                             }
                           });
 
@@ -511,7 +508,7 @@ const Status = (props) => {
                         }}>
                         <Image
                           resizeMode="contain"
-                          style={{height: '100%', width: '100%'}}
+                          style={{ height: '100%', width: '100%' }}
                           source={require('../../assets/images/girl.png')}
                         />
                       </View>
@@ -528,7 +525,7 @@ const Status = (props) => {
                         style={{
                           color:
                             theme.textColor[
-                              val.selected ? 'blackColor' : 'greyColor'
+                            val.selected ? 'blackColor' : 'greyColor'
                             ],
                           fontWeight: '700',
                           // marginLeft: 30,
@@ -548,7 +545,7 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => {
-              setState({...state, isVisible: false, verifySelection: false});
+              setState({ ...state, isVisible: false, verifySelection: false });
             }}
             style={{
               height: 40,
@@ -562,7 +559,7 @@ const Status = (props) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 15, color: 'white'}}> Done</Text>
+            <Text style={{ fontSize: 15, color: 'white' }}> Done</Text>
           </TouchableOpacity>
         </View>
       </Overlay>
@@ -581,7 +578,7 @@ const Status = (props) => {
           }}>
           Creating Profile Please Wait
         </Text>
-        
+
       </AnimatedLoader>
     </>
   );
@@ -593,6 +590,7 @@ const mapStateToProp = (state) => ({
   editSetting: state.reducers.editSetting,
   loader: state.reducers.loader,
   allInterests: state.reducers.allInterests,
+  userRegisterationImages: state.reducers.userRegisterationImages,
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
