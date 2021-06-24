@@ -155,8 +155,9 @@ const Status = (props) => {
           let formData = new FormData();
           formData.append('type', 'profile');
           // formData.append('data[first_name]', "THE QUEEEN PRINCESS");
+          // formData.append('images', { ...res, name: 'https://meetourism.com/storage/offers/1624564601Tq4KC.jpg' });
 
-          formData.append(`data[images]${['https://meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg']}`);
+          formData.append(`data[images]${[{ ...res, image: 'https://meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg' }]}`);
           let header = {
             headers: {
               'Content-Type': 'application/json',
@@ -165,7 +166,7 @@ const Status = (props) => {
           };
 
           axios.post('https://meetourism.com/api/v1/me', formData, header).then((res) => {
-            console.log("res==", res.data.data.images)
+            console.log("res==", res.data.data)
           }).catch((err) => {
             console.log("err", err.response)
             console.log("err only", err)

@@ -18,7 +18,7 @@ import { Actions } from '../../../redux/actions/index';
 import ImagePicker from '../../../globalfunctions/imagepicker';
 
 import { connect } from 'react-redux';
-import { ProfileStack } from '../../../navigations/stacknavigation';
+// import { ProfileStack } from '../../../navigations/stacknavigation';
 import Toast from '../../../components/toastmessage';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import axios from 'axios';
@@ -35,6 +35,7 @@ function CreateOffer(props) {
     price: '20',
     imageData: {},
     loader: false,
+    returnUrl: '',
     secondComponentCall: false,
     loaderMessage: 'Uploading...',
   });
@@ -54,13 +55,13 @@ function CreateOffer(props) {
 
   const _ImageUploadApiCall = async () => {
     setState({ ...state, loader: true });
-    const base_url = 'https://meetourism.com/api/v1//offers';
+    const base_url = 'https://meetourism.com/api/v1/offers';
     console.log('res.fileName', state.imageData);
-    let path = state.imageData.uri;
+    let path = state?.imageData?.uri;
 
     let formData = new FormData();
 
-    formData.append('image', { ...state.imageData, name: path });
+    formData.append('image', { ...state.imageData, name: state.returnUrl });
     formData.append('title', state.title);
     formData.append('description', state.offerDescription);
     formData.append('price', Number(state.price));
@@ -99,15 +100,20 @@ function CreateOffer(props) {
       noData: false,
       quality: 0.1,
     };
-    let value = launchImageLibrary(options, (res) => {
+    let value = launchImageLibrary(options, async (res) => {
       if (res.didCancel) {
         console.log('User cancelled');
       } else if (res.error) {
         console.log('Camera Error: ');
       } else {
-        setState({ ...state, imageData: res });
-        // console.log('res', res);
-        // imageUpload(res);
+        // setState({ ...state, imageData: res });
+        let returnUrl = await props.ImageUploadingGeneral(res)
+        console.log("return url", returnUrl)
+        setState({
+          ...state, imageData: res,
+          returnUrl: returnUrl,
+        })
+
       }
     });
     return value;
@@ -249,7 +255,7 @@ function CreateOffer(props) {
                     alignItems: 'center',
                   }}>
                   <ImageBackground
-                    source={{ uri: state.imageData.uri }}
+                    source={{ uri: state?.imageData?.uri }}
                     style={{
                       height: '100%',
                       width: '100%',
@@ -387,6 +393,7 @@ const mapStateToProp = (state) => ({
 });
 const mapDispatchToProps = {
   AddOffers: Actions.AddOffers,
+  ImageUploadingGeneral: Actions.ImageUploadingGeneral,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(CreateOffer);
