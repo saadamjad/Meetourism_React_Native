@@ -41,11 +41,15 @@ const Status = (props) => {
     noValues: true,
     loader: true,
     verifySelection: false,
+    testInterests: []
   });
 
   useEffect(() => {
+    // console.log("helo", props.userData.in)
+
     if (props.editSetting) {
       let value = props?.userData?.interests.map((item, i) => {
+        console.log("helo", item)
         return { ...item, selected: true };
       });
       setState({
@@ -56,7 +60,8 @@ const Status = (props) => {
     }
   }, []);
   useEffect(() => {
-    setState({ ...state, interests: props.allInterests, loader: false });
+    setState({ ...state, testInterests: props.allInterests, loader: false });
+    // console.log("update USER DATAAAAA ", props.userData)
   }, [props.allInterests]);
 
   const _UserRegister = async (value) => {
@@ -156,7 +161,8 @@ const Status = (props) => {
       // console.log('userrrrr', user);
       // console.log('userrrrr', data2?.company_name);
       let formData = new FormData();
-      formData.append('data[company_name]', data2?.company_name);
+      company_name ? formData.append('data[company_name]', data2?.company_name) : null;
+      // formData.append('data[images]', props.userRegisterationImages);
 
       formData.append('data[username]', user);
       formData.append('data[description]', data2?.description);
@@ -165,7 +171,7 @@ const Status = (props) => {
       // formData.append('data[interests]', [1]);
       formData.append('data[status]', data2?.status);
       formData.append('data[city]', data?.city);
-      // formData.append('data[phone]', data2?.phone);
+      formData.append('data[phone]', data2?.phone);
       formData.append('data[age]', data?.age);
       // formData.append('data[country_id]', data2?.country_id);
       formData.append('data[weight]', data2?.weight);
@@ -173,7 +179,8 @@ const Status = (props) => {
       formData.append('data[eye_color]', data2?.eye_color);
       formData.append('type', 'profile');
 
-      console.log('formData', formData);
+      // console.log('formData', formData, "AND =====", data2);
+      // console.log('formData==', props.userRegisterationImages);
       await props.UpdateCompleteProfile(
         formData,
         props.navigation,
@@ -181,9 +188,9 @@ const Status = (props) => {
         token,
       );
       setLoader(false);
+
     } else {
       let testingValue = { ...data2, interests: value, images: props.userRegisterationImages };
-      console.log("testingValuetestingValue", testingValue)
       await props.Signup(testingValue, props.navigation, company_name);
 
       setLoader(false);
@@ -267,63 +274,63 @@ const Status = (props) => {
                 }}>
                 {state.interests?.length > 0
                   ? state.interests.map((val, i) =>
-                    val.selected || props.editSetting ? (
-                      <TouchableOpacity
+                    // val.selected || props.editSetting ? (
+                    <TouchableOpacity
+                      style={{
+                        width: '80%',
+                        flexDirection: 'row',
+                        marginTop: 20,
+                        // borderWidth: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      key={i}>
+                      <View
                         style={{
-                          width: '80%',
-                          flexDirection: 'row',
-                          marginTop: 20,
+                          // height: '100%',
+                          width: '30%',
                           // borderWidth: 1,
                           alignItems: 'center',
                           justifyContent: 'center',
-                        }}
-                        key={i}>
+                        }}>
                         <View
                           style={{
-                            // height: '100%',
-                            width: '30%',
+                            height: 36,
+                            width: 36,
+                            borderRadius: 36,
                             // borderWidth: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
                           }}>
-                          <View
-                            style={{
-                              height: 36,
-                              width: 36,
-                              borderRadius: 36,
-                              // borderWidth: 1,
-                            }}>
-                            <Image
-                              resizeMode="contain"
-                              style={{ height: '100%', width: '100%' }}
-                              source={require('../../assets/images/girl.png')}
-                            />
-                          </View>
+                          <Image
+                            resizeMode="contain"
+                            style={{ height: '100%', width: '100%' }}
+                            source={require('../../assets/images/girl.png')}
+                          />
                         </View>
-                        <View
+                      </View>
+                      <View
+                        style={{
+                          width: '70%',
+                          borderWidth: 0,
+                          paddingLeft: 10,
+                        }}>
+                        <Text
                           style={{
-                            width: '70%',
-                            borderWidth: 0,
-                            paddingLeft: 10,
+                            color:
+                              theme.textColor[
+                              state.selected == i
+                                ? 'blackColor'
+                                : 'greyColor'
+                              ],
+                            fontWeight: '700',
+                            // marginLeft: 30,
+                            fontSize: 20,
+                            // width: '85%',
                           }}>
-                          <Text
-                            style={{
-                              color:
-                                theme.textColor[
-                                state.selected == i
-                                  ? 'blackColor'
-                                  : 'greyColor'
-                                ],
-                              fontWeight: '700',
-                              // marginLeft: 30,
-                              fontSize: 20,
-                              // width: '85%',
-                            }}>
-                            {val.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    ) : null,
+                          {val.name}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    // ) : null,
                   )
                   : null}
                 {state.selectedInterests?.length === 0 ? (
@@ -427,13 +434,13 @@ const Status = (props) => {
             Select Your Interests
           </Text>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {state.interests &&
-              state.interests.map((val, i) => {
+            {state.testInterests &&
+              state.testInterests.map((val, i) => {
                 return (
                   <TouchableOpacity
                     key={i}
                     onPress={() => {
-                      let value = state.interests.map((item, index) => {
+                      let value = state.testInterests.map((item, index) => {
                         if (index == i) {
                           return {
                             ...item,
@@ -449,7 +456,9 @@ const Status = (props) => {
                         interests: value,
                         noValues: false,
                         selectedInterests: value,
+                        testInterests: value
                       });
+
                     }}
                     style={{
                       width: '100%',
@@ -468,7 +477,7 @@ const Status = (props) => {
                         checkedColor={theme.secondaryColor}
                         checked={val.selected}
                         onPress={() => {
-                          let value = state.interests?.map((item, index) => {
+                          let value = state.testInterests?.map((item, index) => {
                             if (index == i) {
                               return {
                                 ...item,

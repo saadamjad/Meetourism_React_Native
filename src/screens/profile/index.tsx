@@ -20,14 +20,14 @@ import * as Actions from '../../redux/actions/index';
 const Profile = (props) => {
   const [userType, setUserType] = useState('0');
   const [userData, setUserData] = useState({});
+  // useEffect(() => {
+  //   // _GetUserType();
+  //   let data = props?.userData;
+  //   setUserData({...userData, data});
+  // }, []);
   useEffect(() => {
     // _GetUserType();
-    let data = props?.userData;
-    setUserData({...userData, data});
-  }, []);
-  useEffect(() => {
-    // _GetUserType();
-    let data = props?.userData;
+    let data = props.editSetting ? props.userData.data : props?.userData;
     // setUserData(data);
     setUserData({...userData, data});
   }, [props.userData]);
@@ -39,8 +39,8 @@ const Profile = (props) => {
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
           source={
-            userData?.images[0]?.image_path
-              ? {uri: userData?.images[0]?.image_path}
+            props.userData?.images[0]?.image_path
+              ? {uri: props.userData.images[0].image_path}
               : require('../../assets/images/profile.png')
           }>
           <Header
@@ -73,6 +73,7 @@ const Profile = (props) => {
               fontWeight: '700',
               paddingBottom: 5,
             }}>
+            {/* {console.log('TESTING', props.userData?.data?.first_name)} */}
             {userData?.data?.first_name + ' ' + ' ' + userData?.data?.last_name}
 
             {/* patric pulso */}
@@ -164,7 +165,7 @@ const Profile = (props) => {
 
             {userType == '2' || props?.route?.params?.status == 1 ? (
               <GlobalButton
-                buttonText="Dashboard "
+                buttonText="Dashboard"
                 width="70%"
                 onPress={() => props.navigation.navigate('drawer')}
               />
@@ -200,6 +201,7 @@ const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   image: state.reducers.images_Interests,
   loader: state.reducers.loader,
+  editSetting: state.reducers.editSetting,
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,

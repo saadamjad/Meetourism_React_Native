@@ -242,6 +242,8 @@ class Actions {
               type: actionTypes.GETLOGGEDINUSERDATA,
               payload: response,
             });
+
+            return response
           } else {
             console.log('ELSE in GetLoggedInUserData', res);
             dispatch({ type: actionTypes.GETLOGGEDINUSERDATA });
@@ -605,29 +607,28 @@ class Actions {
     };
   };
   static UpdateCompleteProfile = (data, navigation, status, token) => {
-    console.log('UpdateCompleteProfile', data);
+    // console.log('UpdateCompleteProfile', data);
     return async (dispatch) => {
       return Post('me', data, token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res;
-            console.log('resss========', response);
+            console.log('resss========>>>>', response.data);
             dispatch({
               type: actionTypes.UPDATECOMPLETEPROFILE,
-              payload: data,
+              payload: response,
             });
 
             navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
-          } else {
-            console.log('ELSE in UpdateCompleteProfile', res);
           }
         })
         .catch((err) => {
-          let errResponse = err?.response?.data;
+          // let errResponse = err?.response?.data;
+          let errResponse = err;
           let type = 'UpdateCompleteProfile';
           console.log('ELSE in UpdateCompleteProfile', errResponse);
 
-          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
     };
 
@@ -637,39 +638,39 @@ class Actions {
     //     payload: data,
     //   });
   };
-  static UpdateCompleteProfile = (data, navigation, status, token) => {
-    console.log('UpdateCompleteProfile', data);
-    return async (dispatch) => {
-      return Post('me', data, token)
-        .then((res) => {
-          if (res.status_type === 'success') {
-            let response = res;
-            console.log('resss========', response);
-            dispatch({
-              type: actionTypes.UPDATECOMPLETEPROFILE,
-              payload: data,
-            });
+  // static UpdateCompleteProfile = (data, navigation, status, token) => {
+  //   console.log('UpdateCompleteProfile', data);
+  //   return async (dispatch) => {
+  //     return Post('me', data, token)
+  //       .then((res) => {
+  //         if (res.status_type === 'success') {
+  //           let response = res;
+  //           console.log('resss========', response);
+  //           dispatch({
+  //             type: actionTypes.UPDATECOMPLETEPROFILE,
+  //             payload: data,
+  //           });
 
-            navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
-          } else {
-            console.log('ELSE in UpdateCompleteProfile', res);
-          }
-        })
-        .catch((err) => {
-          let errResponse = err?.response?.data;
-          let type = 'UpdateCompleteProfile';
-          console.log('ELSE in UpdateCompleteProfile', errResponse);
+  //           navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
+  //         } else {
+  //           console.log('ELSE in UpdateCompleteProfile', res);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         let errResponse = err?.response?.data;
+  //         let type = 'UpdateCompleteProfile';
+  //         console.log('ELSE in UpdateCompleteProfile', errResponse);
 
-          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
-        });
-    };
+  //         dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+  //       });
+  //   };
 
-    // return async (dispatch) => {
-    //   dispatch({
-    //     type: actionTypes.UPDATECOMPLETEPROFILE,
-    //     payload: data,
-    //   });
-  };
+  //   // return async (dispatch) => {
+  //   //   dispatch({
+  //   //     type: actionTypes.UPDATECOMPLETEPROFILE,
+  //   //     payload: data,
+  //   //   });
+  // };
 
   static GetNotificaitons = (token, searchKey, navigation) => {
     console.log('GetNotificaitons', searchKey);
@@ -820,6 +821,7 @@ class Actions {
   };
   static ImageUploading = (param, token) => {
 
+
     let formData = new FormData();
     formData.append('image', { ...param, name: param.fileName });
     formData.append('image_type', 'user');
@@ -834,7 +836,7 @@ class Actions {
             console.log('ImageUploading', response.url);
             dispatch({ type: actionTypes.USERREGISTERATIONIMAGES, payload: response.url });
 
-            return true;
+            return response.url;
           } else {
             console.log('ELSE in ImageUploading', res);
             dispatch({ type: actionTypes.STOPLOADER });

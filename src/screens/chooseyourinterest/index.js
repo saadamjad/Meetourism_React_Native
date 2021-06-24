@@ -85,7 +85,9 @@ const Status = (props) => {
         ...state,
         interests: dataRedux?.interests,
         selectCountry: dataRedux?.selectCountry,
-        images: props.images,
+        images: dataRedux?.images && dataRedux.images.map((item, i) => {
+          return item.image_path
+        }),
         userName: dataRedux?.username,
         email: dataRedux?.email,
         height: Number(dataRedux?.height),
@@ -148,7 +150,37 @@ const Status = (props) => {
         let temp = state.images;
         temp.push(res.uri);
         setState({ ...state, images: temp });
-        ImageUploadingFunc(res)
+        if (props.editSetting) {
+          console.log("===============EDITING==========")
+          let formData = new FormData();
+          formData.append('type', 'profile');
+          // formData.append('data[first_name]', "THE QUEEEN PRINCESS");
+
+          formData.append(`data[images]${['https://meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg']}`);
+          let header = {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${props.token}`,
+            },
+          };
+
+          axios.post('https://meetourism.com/api/v1/me', formData, header).then((res) => {
+            console.log("res==", res.data.data.images)
+          }).catch((err) => {
+            console.log("err", err.response)
+            console.log("err only", err)
+          })
+
+          // await props.UpdateCompleteProfile(
+          //   formData,
+          //   props.navigation,
+          //   props.token,
+          // );
+        }
+        else {
+
+          ImageUploadingFunc(res)
+        }
       }
     });
 
@@ -156,7 +188,6 @@ const Status = (props) => {
 
   const ImageUploadingFunc = async (param) => {
 
-    console.log("API RUNNING")
 
 
 
@@ -747,6 +778,8 @@ const mapStateToProp = (state) => ({
 const mapDispatchToProps = {
   Signup: Actions.Signup,
   Logout: Actions.Logout,
+  UpdateCompleteProfile: Actions.UpdateCompleteProfile,
+
   StoreData: Actions.StoreData,
   GetCounties: Actions.GetCounties,
   GetInterests: Actions.GetInterests,

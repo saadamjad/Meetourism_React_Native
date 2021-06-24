@@ -60,12 +60,12 @@ const DrawerContent = (props) => {
                 overflow: 'hidden',
                 borderColor: '#D47FA6',
               }}>
-              <Image
+              {/* <Image
                 source={state.userData?.images[0]?.image_path
                   ? { uri: state.userData?.images[0]?.image_path }
                   : require('../../assets/icons/row.png')}
                 style={{ height: '100%', width: '100%' }}
-                resizeMode="cover"></Image>
+                resizeMode="cover"></Image> */}
             </TouchableOpacity>
             <View style={{ flex: 1, borderWidth: 0, alignItems: 'flex-end' }}>
               <TouchableOpacity
