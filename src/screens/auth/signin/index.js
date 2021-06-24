@@ -68,13 +68,15 @@ const App = (props) => {
 
 
   useEffect(() => {
-
+    // console.log("1")
 
 
     ref.current?.setAddressText('Some Text blue');
 
     // _getCurrentLocation();
   }, []);
+
+
 
   const _getCurrentLocation = () => {
     Geolocation.getCurrentPosition((info) =>

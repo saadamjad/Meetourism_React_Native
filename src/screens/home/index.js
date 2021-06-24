@@ -26,13 +26,16 @@ const App = (props) => {
   const [select, setSelected] = useState(3);
   const [state, setState] = useState({
     loader: true,
+
   });
   const [image, setImages] = useState('')
   const [userData, setUserData] = useState({
     edit: false,
     changeTextInput: false,
     data: {},
-    index: 0
+    index: 0,
+    loader: true,
+
   });
 
   const [allStatus, setStatus] = useState([
@@ -63,19 +66,24 @@ const App = (props) => {
   const _GetLoggedInUserData = async () => {
 
     let value = await props.GetLoggedInUserData(props?.userData?.id, token);
-    setState({ ...state, loader: false });
+
+
+
+    setUserData({ ...userData, data: props.userData, loader: false });
+
   };
 
   useEffect(() => {
+
     const unsubscribe = props.navigation.addListener('focus', () => {
 
       _GetLoggedInUserData();
     });
 
-    let data = props?.userData;
-    console.log("data", data?.images[0]?.image_path)
+    // let data = props?.userData;
+    // console.log("data====", data?.images)
     // setUserData({ ...userData, data });
-    setImages(data?.images[0]?.image_path)
+
     _GetLoggedInUserData();
 
 
@@ -84,7 +92,7 @@ const App = (props) => {
   }, []);
   useEffect(() => {
     let data = props?.userData;
-    setUserData({ ...userData, data });
+    setUserData({ ...userData, data, loader: false });
   }, [props.userData]);
 
   return (
@@ -105,12 +113,13 @@ const App = (props) => {
             borderBottomLeftRadius: 75,
             overflow: 'hidden',
           }}>
+          {/* {console.log("data", userData?.data?.images && userData.data.images[0].image_path)} */}
           <ImageBackground
 
             source={
-              image
+              userData?.data?.images && userData?.data?.images[0]?.image_path
                 ? {
-                  uri: image
+                  uri: userData.data?.images[0]?.image_path
                 }
                 : require('../../assets/icons/girls.png')
             }
@@ -180,11 +189,11 @@ const App = (props) => {
                         {i == 0 ? (
                           <Image
 
-                            source={
-                              image
-                                ? { uri: image }
-                                : item.image
-                            }
+                            // source={
+                            //   image
+                            //     ? { uri: image }
+                            //     : item.image
+                            // }
                             style={{ height: '100%', width: '100%' }}
                             resizeMode="cover"
                           />
@@ -592,7 +601,7 @@ const App = (props) => {
         ))}
       </View>
       <AnimatedLoader
-        status={state.loader}
+        status={userData.loader}
         loaderStyle={true}
       // loaderMessage={`Signing ${loaderMessage}`}
       />

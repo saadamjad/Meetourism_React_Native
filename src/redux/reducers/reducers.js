@@ -85,29 +85,29 @@ export default function (state = initialState, action) {
     case actionTypes.GETINTERESTS:
       return { ...state, loader: false, allInterests: action.payload };
     case actionTypes.UPDATECOMPLETEPROFILE:
-      console.log('action.payloadaction.payload', action.payload);
+      // console.log('action.payloadaction.payload', action.payload);
       return {
         ...state,
         loader: false,
-        // userData: {...state.userData, ...action.payload},
+        userData: { ...state.userData, ...action.payload },
         // editSetting: false,
       };
     case actionTypes.SAVEORDERDATA:
-      console.log('action.payloadaction.payload', action.payload);
+      // console.log('action.payloadaction.payload', action.payload);
       return {
         ...state,
         loader: false,
         orderData: action.payload,
       };
     case actionTypes.CREATEORDER:
-      console.log('action.payloadaction.payload', action.payload);
+      // console.log('action.payloadaction.payload', action.payload);
       return {
         ...state,
         loader: false,
         orderData: {},
       };
     case actionTypes.UPDATEPROFILEDATA:
-      console.log('action.payloadaction.payload', action.payload);
+      // console.log('action.payloadaction.payload', action.payload);
       return {
         ...state,
         loader: false,
