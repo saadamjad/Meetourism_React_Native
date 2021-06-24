@@ -598,6 +598,13 @@ class Actions {
         });
     };
   };
+  static UpdateInterests = (data) => {
+
+    return async (dispatch) => {
+      dispatch({ type: actionTypes.SAVEINTERESTS, payload: data });
+
+    };
+  };
   static EditSetting = (data) => {
     return async (dispatch) => {
       dispatch({
@@ -619,7 +626,7 @@ class Actions {
               payload: response,
             });
 
-            navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
+            // navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
           }
         })
         .catch((err) => {
@@ -839,6 +846,42 @@ class Actions {
             return response.url;
           } else {
             console.log('ELSE in ImageUploading', res);
+            dispatch({ type: actionTypes.STOPLOADER });
+            return false;
+          }
+        })
+        .catch((err) => {
+          dispatch({ type: actionTypes.STOPLOADER });
+
+          let errResponse = err?.response;
+          let type = 'ImageUploading';
+
+          console.log('errResponse', errResponse);
+          console.log('errrrr', err);
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
+  static ImageUploadingGeneral = (param, token) => {
+
+
+    let formData = new FormData();
+    formData.append('image', { ...param, name: param.fileName });
+    formData.append('image_type', 'user');
+
+    return async (dispatch) => {
+      dispatch({ type: actionTypes.STARTLOADER });
+      return Post("images", formData, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+
+            console.log('ImageUploadingGeneral', response.url);
+            dispatch({ type: actionTypes.STOPLOADER, });
+
+            return response.url;
+          } else {
+            console.log('ELSE in ImageUploadingGeneral', res);
             dispatch({ type: actionTypes.STOPLOADER });
             return false;
           }

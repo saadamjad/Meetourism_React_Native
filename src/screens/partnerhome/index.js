@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,10 +12,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
-import {Actions} from '../../redux/actions/index';
-import {connect} from 'react-redux';
-import {TextInput} from 'react-native-gesture-handler';
-import {theme} from '../../constants/theme';
+import { Actions } from '../../redux/actions/index';
+import { connect } from 'react-redux';
+import { TextInput } from 'react-native-gesture-handler';
+import { theme } from '../../constants/theme';
 import AnimatedLoader from '../../components/loader';
 
 import axios from 'axios';
@@ -33,7 +33,7 @@ const App = (props) => {
 
     console.log('props.userData.id', props?.userData?.id);
     let value = await props.GetLoggedInUserData(props?.userData?.id, token);
-    setState({...state, loader: false});
+    setState({ ...state, loader: false });
   };
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const App = (props) => {
   }, []);
   useEffect(() => {
     let data = props?.userData;
-    setUserData({...userData, data});
+    setUserData({ ...userData, data });
   }, [props.userData]);
   const [allStatus, setStatus] = useState([
     // {
@@ -80,7 +80,7 @@ const App = (props) => {
   });
 
   const UpdateProfile = async (param) => {
-    setUserData({...userData, edit: !userData.edit});
+    setUserData({ ...userData, edit: !userData.edit });
     if (userData.changeTextInput) {
       let formData = new FormData();
       formData.append('data[company_name]', userData?.data?.company_name);
@@ -92,7 +92,7 @@ const App = (props) => {
         userData,
         props.navigation,
       );
-      setUserData({...userData, edit: false, changeTextInput: false});
+      setUserData({ ...userData, edit: false, changeTextInput: false });
     } else {
       console.log('else not change');
     }
@@ -103,9 +103,10 @@ const App = (props) => {
         flex: 1,
         backgroundColor: '#241332',
       }}>
+
       <ScrollView
-        style={{flex: 1}}
-        contentContainerStyle={{flexGrow: 1}}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -120,10 +121,10 @@ const App = (props) => {
             // source={require('../../../src/assets/images/r3.png')}
             source={
               props?.image?.length > 0
-                ? {uri: props.image[0]}
+                ? { uri: props.image[0] }
                 : require('../../../src/assets/images/r3.png')
             }
-            style={{height: '100%', width: '100%'}}
+            style={{ height: '100%', width: '100%' }}
             resizeMode="cover">
             <View
               style={{
@@ -174,10 +175,14 @@ const App = (props) => {
                         {i == 0 ? (
                           <Image
                             // source={item.image}
+
                             source={
-                              item.image
+                              userData?.data?.images
+                                ? { uri: userData?.data?.images[0]?.image_path } :
+
+                                item.image
                             }
-                            style={{height: '100%', width: '100%'}}
+                            style={{ height: '100%', width: '100%' }}
                             resizeMode="cover"
                           />
                         ) : (
@@ -235,7 +240,7 @@ const App = (props) => {
                         ...userData,
                         changeTextInput: true,
 
-                        data: {...userData.data, company_name: text},
+                        data: { ...userData.data, company_name: text },
                       });
                     }}
                     editable={userData.edit}
@@ -262,7 +267,7 @@ const App = (props) => {
                   onPress={() => {
                     userData.edit
                       ? UpdateProfile()
-                      : setUserData({...userData, edit: !userData.edit});
+                      : setUserData({ ...userData, edit: !userData.edit });
                   }}>
                   <View
                     style={{
@@ -299,7 +304,7 @@ const App = (props) => {
             </View>
           </ImageBackground>
         </View>
-        <View style={{flex: 0.6, borderWidth: 0}}>
+        <View style={{ flex: 0.6, borderWidth: 0 }}>
           <View
             style={{
               height: 150,
@@ -333,7 +338,7 @@ const App = (props) => {
                   alignItems: 'center',
                 }}>
                 <Feather name="mail" size={35} color={'white'} />
-                <Text style={{color: 'white', fontSize: 10, marginTop: 10}}>
+                <Text style={{ color: 'white', fontSize: 10, marginTop: 10 }}>
                   Messages
                 </Text>
               </View>
@@ -349,10 +354,10 @@ const App = (props) => {
               {/* <Feather name="mail" size={40} color={'white'}/> */}
               <Image
                 source={require('../../assets/icons/alerts.png')}
-                style={{height: 40, width: 40}}
+                style={{ height: 40, width: 40 }}
                 resizeMode="contain"
               />
-              <Text style={{color: 'white', fontSize: 10, marginTop: 10}}>
+              <Text style={{ color: 'white', fontSize: 10, marginTop: 10 }}>
                 {' '}
                 Notifications{' '}
               </Text>
@@ -375,7 +380,7 @@ const App = (props) => {
               paddingLeft: 20,
             }}>
             <View>
-              <Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
+              <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>
                 About the Bussiness
               </Text>
               <TextInput
@@ -386,7 +391,7 @@ const App = (props) => {
                   setUserData({
                     ...userData,
                     changeTextInput: true,
-                    data: {...userData.data, description: text},
+                    data: { ...userData.data, description: text },
                   })
                 }
                 style={{
@@ -400,7 +405,7 @@ const App = (props) => {
                 }}
               />
             </View>
-            <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
+            <View style={{ flex: 1, borderWidth: 0, alignItems: 'flex-end' }}>
               {/* <Image
                 source={require('../../assets/icons/edit.png')}
                 resizeMode="contain"

@@ -41,28 +41,34 @@ const Status = (props) => {
     noValues: true,
     loader: true,
     verifySelection: false,
-    testInterests: []
+    yourInterest: []
   });
 
   useEffect(() => {
-    // console.log("helo", props.userData.in)
-
+    console.log("p", props.userData.interests)
     if (props.editSetting) {
       let value = props?.userData?.interests.map((item, i) => {
         console.log("helo", item)
-        return { ...item, selected: true };
+        return { ...item, selected: true, dataYes: true };
       });
+
+      // console.log("valuevalue", value)
       setState({
         ...state,
-        interests: value,
+        yourInterest: value,
         loader: false,
+        interests: value,
       });
     }
+    else {
+      setState({ ...state, interests: props.allInterests, loader: false });
+
+    }
   }, []);
-  useEffect(() => {
-    setState({ ...state, testInterests: props.allInterests, loader: false });
-    // console.log("update USER DATAAAAA ", props.userData)
-  }, [props.allInterests]);
+  // useEffect(() => {
+  //   // setState({ ...state, interests: props.allInterests, loader: false });
+  //   // console.log("update USER DATAAAAA ", props.userData)
+  // }, [props.allInterests, props.userData]);
 
   const _UserRegister = async (value) => {
     console.log('company_name,', company_name);
@@ -153,7 +159,24 @@ const Status = (props) => {
         // images: ['user_images/user-image-608de193434244-74625999.jpg'],
       };
     setLoader(true);
+    const _data = [
+      {
+        id: 1,
+        name: "Learning",
+        path: "https://meetourism.com/storage/user_images/user-image-60d4f629d5a344-10359664.gif"
+      },
+      {
+        id: 2,
+        name: "",
+        path: "https://meetourism.com/storage/user_images/user-image-60d4f629d5a344-10359664.gif"
 
+      },
+      {
+        id: 4,
+        path: "https://meetourism.com/storage/user_images/user-image-60d4f629d5a344-10359664.gif",
+        name: "Health",
+      },
+    ]
     // images: data?.images,
 
     if (props?.editSetting) {
@@ -162,25 +185,36 @@ const Status = (props) => {
       // console.log('userrrrr', data2?.company_name);
       let formData = new FormData();
       company_name ? formData.append('data[company_name]', data2?.company_name) : null;
-      // formData.append('data[images]', props.userRegisterationImages);
+      _data.map((item) => {
 
-      formData.append('data[username]', user);
-      formData.append('data[description]', data2?.description);
-      formData.append('data[first_name]', data?.firstName);
-      formData.append('data[last_name]', data?.lastName);
-      // formData.append('data[interests]', [1]);
-      formData.append('data[status]', data2?.status);
-      formData.append('data[city]', data?.city);
-      formData.append('data[phone]', data2?.phone);
-      formData.append('data[age]', data?.age);
+        formData.append('data[images][]', item.path);
+      })
+
+
+      // formData.append('data[username]', user);
+      // formData.append('data[description]', data2?.description);
+      // formData.append('data[first_name]', data?.firstName);
+      // formData.append('data[last_name]', data?.lastName);
+      // formData.append(`data[interests][]`, 1);
+      // _data.map((item, i) => formData.append(`data[interests][]`, item.id))
+
+      // var selectedValues  = [1, 2, 4];
+      // let value= selectedValues.map(v => formData.append(`data[interests][]`, v));
+
+
+
+      // formData.append('data[status]', data2?.status);
+      // formData.append('data[city]', data?.city);
+      // formData.append('data[phone]', data2?.phone);
+      // formData.append('data[age]', data?.age);
       // formData.append('data[country_id]', data2?.country_id);
-      formData.append('data[weight]', data2?.weight);
-      formData.append('data[height]', data2?.height);
-      formData.append('data[eye_color]', data2?.eye_color);
+      // formData.append('data[weight]', data2?.weight);
+      // formData.append('data[height]', data2?.height);
+      // formData.append('data[eye_color]', data2?.eye_color);
       formData.append('type', 'profile');
 
       // console.log('formData', formData, "AND =====", data2);
-      // console.log('formData==', props.userRegisterationImages);
+      console.log('formData=============', formData);
       await props.UpdateCompleteProfile(
         formData,
         props.navigation,
@@ -197,6 +231,25 @@ const Status = (props) => {
     }
     setLoader(false);
   };
+  const _SelectInterests = (item, i) => {
+    let value = state.interests.map((item, index) => {
+      if (index == i) {
+        return {
+          ...item,
+          selected: !item.selected,
+        };
+      } else {
+        return { ...item };
+      }
+    })
+    setState({
+      ...state,
+      interests: value,
+      noValues: false,
+      selectedInterests: value,
+    });
+
+  }
 
   return (
     <>
@@ -272,65 +325,66 @@ const Status = (props) => {
                   // borderWidth: 1,
                   paddingHorizontal: 25,
                 }}>
+                {/* {console.log("interests", state.interests)} */}
                 {state.interests?.length > 0
                   ? state.interests.map((val, i) =>
-                    // val.selected || props.editSetting ? (
-                    <TouchableOpacity
-                      style={{
-                        width: '80%',
-                        flexDirection: 'row',
-                        marginTop: 20,
-                        // borderWidth: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                      key={i}>
-                      <View
+                    val.selected ? (
+                      <TouchableOpacity
                         style={{
-                          // height: '100%',
-                          width: '30%',
+                          width: '80%',
+                          flexDirection: 'row',
+                          marginTop: 20,
                           // borderWidth: 1,
                           alignItems: 'center',
                           justifyContent: 'center',
-                        }}>
+                        }}
+                        key={i}>
                         <View
                           style={{
-                            height: 36,
-                            width: 36,
-                            borderRadius: 36,
+                            // height: '100%',
+                            width: '30%',
                             // borderWidth: 1,
+                            alignItems: 'center',
+                            justifyContent: 'center',
                           }}>
-                          <Image
-                            resizeMode="contain"
-                            style={{ height: '100%', width: '100%' }}
-                            source={require('../../assets/images/girl.png')}
-                          />
+                          <View
+                            style={{
+                              height: 36,
+                              width: 36,
+                              borderRadius: 36,
+                              // borderWidth: 1,
+                            }}>
+                            <Image
+                              resizeMode="contain"
+                              style={{ height: '100%', width: '100%' }}
+                              source={require('../../assets/images/girl.png')}
+                            />
+                          </View>
                         </View>
-                      </View>
-                      <View
-                        style={{
-                          width: '70%',
-                          borderWidth: 0,
-                          paddingLeft: 10,
-                        }}>
-                        <Text
+                        <View
                           style={{
-                            color:
-                              theme.textColor[
-                              state.selected == i
-                                ? 'blackColor'
-                                : 'greyColor'
-                              ],
-                            fontWeight: '700',
-                            // marginLeft: 30,
-                            fontSize: 20,
-                            // width: '85%',
+                            width: '70%',
+                            borderWidth: 0,
+                            paddingLeft: 10,
                           }}>
-                          {val.name}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                    // ) : null,
+                          <Text
+                            style={{
+                              color:
+                                theme.textColor[
+                                state.selected == i
+                                  ? 'blackColor'
+                                  : 'greyColor'
+                                ],
+                              fontWeight: '700',
+                              // marginLeft: 30,
+                              fontSize: 20,
+                              // width: '85%',
+                            }}>
+                            {val.name}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    ) : null,
                   )
                   : null}
                 {state.selectedInterests?.length === 0 ? (
@@ -358,17 +412,32 @@ const Status = (props) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
-                onPress={() =>
+                onPress={() => {
+                  let value = props.allInterests.map((item, i) => {
+                    if (item.id == props.userData?.interests[i]?.id) {
+                      return { ...item, selected: true }
+                    }
+                    else {
+                      return { ...item }
+                    }
+
+
+                  })
+                  console.log("CHECKING", value)
                   setState({
                     ...state,
                     isVisible: true,
                     // interests: props?.allInterests,
                     loader: false,
-                    interests: state.interests,
+                    interests: value,
 
                     verifySelection: true,
                   })
-                }>
+
+                }
+
+                }
+              >
                 <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
               </TouchableOpacity>
             </View>
@@ -380,15 +449,12 @@ const Status = (props) => {
               if (!state.interests?.length > 0) {
                 alert('please select Interests');
               }
-              // else if (props?.userData && props.editSetting) {
-              //   alert('time editig profiel');
-              // }
               else {
                 let value = state.interests.filter((item) => item.selected == true)
                 let testarray = value.map((val, index) => {
                   return val.id
                 })
-                console.log("testarray", testarray)
+                // console.log("testarray", testarray)
                 _UserRegister(testarray);
                 // _UserRegister(value);
               }
@@ -434,13 +500,21 @@ const Status = (props) => {
             Select Your Interests
           </Text>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {state.testInterests &&
-              state.testInterests.map((val, i) => {
+            {state.interests &&
+              state.interests.map((val, i) => {
+
+                // console.log("Vakue===", val)
+                // console.log("Vakue==", state.yourInterest[i]?.id)
+
+
+                let checked = state.yourInterest[i]?.id == val.id ? true : false
                 return (
                   <TouchableOpacity
                     key={i}
                     onPress={() => {
-                      let value = state.testInterests.map((item, index) => {
+                      // checked || val.selected ? null :
+                      // _SelectInterests(val, i)
+                      let value = state.interests.map((item, index) => {
                         if (index == i) {
                           return {
                             ...item,
@@ -449,15 +523,14 @@ const Status = (props) => {
                         } else {
                           return { ...item };
                         }
-                      });
-
+                      })
                       setState({
                         ...state,
                         interests: value,
                         noValues: false,
                         selectedInterests: value,
-                        testInterests: value
                       });
+
 
                     }}
                     style={{
@@ -475,9 +548,10 @@ const Status = (props) => {
                       }}>
                       <CheckBox
                         checkedColor={theme.secondaryColor}
+                        // checked={val.selected || checked}
                         checked={val.selected}
                         onPress={() => {
-                          let value = state.testInterests?.map((item, index) => {
+                          let value = state.interests?.map((item, index) => {
                             if (index == i) {
                               return {
                                 ...item,
@@ -545,7 +619,7 @@ const Status = (props) => {
                       </Text>
                     </View>
                   </TouchableOpacity>
-                );
+                )
               })}
             {!state.interests?.length > 0 && !state.loader ? (
               <Text> No Interest selected </Text>
@@ -554,7 +628,19 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => {
-              setState({ ...state, isVisible: false, verifySelection: false });
+              // console.log("state", state.interests)
+
+              props.UpdateInterests(state.interests)
+              // console.log("state", state.interests.filter((item) => item.selected == true))
+              let value = state.interests.filter((item) => item.selected == true)
+              let concat = [...state.yourInterest, ...value]
+              console.log(concat)
+              setState({
+                ...state,
+                // yourInterest: concat,
+
+                isVisible: false, verifySelection: false
+              });
             }}
             style={{
               height: 40,
@@ -604,6 +690,7 @@ const mapStateToProp = (state) => ({
 const mapDispatchToProps = {
   Signup: Actions.Signup,
   UpdateCompleteProfile: Actions.UpdateCompleteProfile,
+  UpdateInterests: Actions.UpdateInterests,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(Status);

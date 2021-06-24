@@ -84,6 +84,8 @@ export default function (state = initialState, action) {
       return { ...state, loader: false, allCountries: action.payload };
     case actionTypes.GETINTERESTS:
       return { ...state, loader: false, allInterests: action.payload };
+    case actionTypes.SAVEINTERESTS:
+      return { ...state, loader: false, allInterests: action.payload };
     case actionTypes.UPDATECOMPLETEPROFILE:
       // console.log('action.payloadaction.payload', action.payload);
       return {
@@ -134,7 +136,7 @@ export default function (state = initialState, action) {
     case actionTypes.USERREGISTERATIONIMAGES:
       return {
         ...state,
-        userRegisterationImages: [...state.userRegisterationImages, action.payload],
+        // userRegisterationImages: [...state.userRegisterationImages, action.payload],
         loader: false,
       };
 

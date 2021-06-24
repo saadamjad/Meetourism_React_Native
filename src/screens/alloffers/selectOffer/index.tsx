@@ -192,7 +192,7 @@ function SelectOffer(props) {
       loader={state?.loader}
       UpdateOfferData={(data) => UpdateOfferData(data)}
       status={status}
-      propss={{...props}}
+      props={{...props}}
       DeleteOffer={(data) => _DeleteOffer(data)}
       token={token}
       SaveOrderData={(data) => props.SaveOrderData(data, props.navigation)}
@@ -220,6 +220,7 @@ function SelectOffer(props) {
           }}>
           {state.allOffers &&
             state.allOffers.map((val, i) => (
+              // console.log('profile_url', val?.user?.profile_url),
               <TouchableOpacity
                 onPress={() => {
                   setState({...state, showOfferDetails: true, index: i});
@@ -246,7 +247,9 @@ function SelectOffer(props) {
                     }}
                     source={
                       val.image_path
-                        ? {uri: val.image_path}
+                        ? {
+                            uri: `${val.image_path}`,
+                          }
                         : require('../../../assets/images/download.jpg')
                     }>
                     {/* <View
@@ -319,15 +322,12 @@ function SelectOffer(props) {
                       elevation: 1,
                       backgroundColor: 'white',
                     }}>
-                    {/* val.user.profile_url
-                          ? {uri: val.user.profile_url}
-                          : */}
                     <Image
                       style={{height: '100%', width: '100%'}}
                       resizeMode="cover"
                       source={
-                        state.profileImage
-                          ? {uri: state.profileImage}
+                        val?.user?.profile_url
+                          ? {uri: val?.user?.profile_url}
                           : require('../../../assets/images/avatar.png')
                       }
                     />

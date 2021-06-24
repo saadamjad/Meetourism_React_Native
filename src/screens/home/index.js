@@ -189,11 +189,12 @@ const App = (props) => {
                         {i == 0 ? (
                           <Image
 
-                            // source={
-                            //   image
-                            //     ? { uri: image }
-                            //     : item.image
-                            // }
+                            source={
+                              userData?.data?.images?.length > 0 ?
+                                { uri: userData?.data?.images[0]?.image_path }
+                                : item.image
+                            }
+
                             style={{ height: '100%', width: '100%' }}
                             resizeMode="cover"
                           />
