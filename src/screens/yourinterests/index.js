@@ -27,7 +27,6 @@ const Status = (props) => {
   //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
   const editImages = props?.route?.params?.editImages;
-  console.log("Sssssss==", editImages)
   const token = props?.token;
 
   const [loader, setLoader] = useState(false);
@@ -46,30 +45,122 @@ const Status = (props) => {
     yourInterest: []
   });
 
-  useEffect(() => {
-    if (props.editSetting) {
-      let value = props?.userData?.interests.map((item, i) => {
-        console.log("helo", item)
-        return { ...item, selected: true, dataYes: true };
-      });
-
-      // console.log("valuevalue", value)
-      setState({
-        ...state,
-        yourInterest: value,
-        loader: false,
-        interests: value,
-      });
-    }
-    else {
-      setState({ ...state, interests: props.allInterests, loader: false });
-
-    }
-  }, []);
   // useEffect(() => {
   //   // setState({ ...state, interests: props.allInterests, loader: false });
-  //   // console.log("update USER DATAAAAA ", props.userData)
-  // }, [props.allInterests, props.userData]);
+
+  //   // if (props.editSetting) {
+  //   //   let value = props?.userData?.interests.map((item, i) => {
+  //   //     // console.log("helo", item)
+  //   //     return { ...item, selected: true, dataYes: true };
+  //   //   });
+
+  //   //   setState({
+  //   //     ...state,
+  //   //     yourInterest: value,
+  //   //     loader: false,
+  //   //     interests: value,
+  //   //   });
+  //   // }
+  //   // else {
+  //   //   setState({ ...state, interests: props.allInterests, loader: false });
+
+  //   // }
+
+
+  //   // if (props.editSetting) {
+
+  //   //   let value = props?.allInterests.map((item, i) => {
+  //   //     console.log("item", item.id)
+
+  //   //     if (item.id == props?.userData?.interests.filter((item) => item.id)) {
+  //   //       console.log("YHAN AYA")
+
+  //   //       return { ...item, selected: true };
+
+  //   //     }
+  //   //     else {
+
+  //   //       return { ...item, selected: false, }
+
+  //   //     }
+
+  //   //   });
+
+  //   //   console.log("avalueeeeeeeeeee", value)
+  //   //   setState({
+  //   //     ...state,
+  //   //     yourInterest: value,
+  //   //     loader: false,
+  //   //     interests: value,
+  //   //   });
+  //   // }
+  //   // else {
+  //   //   setState({ ...state, interests: props.allInterests, loader: false });
+
+  //   // }
+
+
+  // }, []);
+  useEffect(() => {
+    _Tesinting()
+
+  }, []);
+  // useEffect(() => {
+  //   if (props.editSetting) {
+
+  //     let value = props.allInterests.map((item, i) => {
+  //       if (item?.id == props.userData?.interests[i]?.id) {
+  //         return { ...item, selected: true }
+  //       }
+  //       else {
+  //         return { ...item }
+  //       }
+
+
+  //     })
+  //     setState({
+  //       ...state,
+  //       // isVisible: true,
+  //       loader: false,
+  //       interests: value,
+
+  //       verifySelection: true,
+  //     })
+  //   }
+
+  // }, [props.editSetting]);
+  const _Tesinting = () => {
+
+    if (props.editSetting) {
+
+      let value = props.allInterests.map((item, i) => {
+        if (item?.id == props.userData?.interests[i]?.id) {
+          return { ...item, selected: true }
+        }
+        else {
+          return { ...item }
+        }
+
+
+      })
+      setState({
+        ...state,
+        // isVisible: true,
+        loader: false,
+        interests: value,
+
+        verifySelection: true,
+      })
+    }
+    else {
+      // console.log(" props.allInterest", props.allInterests)
+      setState({
+        loader: false, interests: props.allInterests
+      })
+    }
+
+
+  }
 
   const _UserRegister = async (value) => {
     console.log('company_name,', company_name);
@@ -160,30 +251,10 @@ const Status = (props) => {
         // images: ['user_images/user-image-608de193434244-74625999.jpg'],
       };
     setLoader(true);
-    const _data = [
-      {
-        id: 1,
-        name: "Learning",
-        path: "https://meetourism.com/storage/user_images/user-image-60d4f629d5a344-10359664.gif"
-      },
-      {
-        id: 2,
-        name: "",
-        path: "https://meetourism.com/storage/user_images/user-image-60d4f629d5a344-10359664.gif"
 
-      },
-      {
-        id: 4,
-        path: "https://meetourism.com/storage/user_images/user-image-60d4f629d5a344-10359664.gif",
-        name: "Health",
-      },
-    ]
-    // images: data?.images,
 
     if (props?.editSetting) {
       let user = data.userName.replace(/^\s+|.\s+$/gm, '');
-      // console.log('userrrrr', user);
-      // console.log('userrrrr', data2?.company_name);
       let formData = new FormData();
       company_name ? formData.append('data[company_name]', data2?.company_name) : null;
       editImages.length > 0 ? editImages.map((item) => {
@@ -191,14 +262,12 @@ const Status = (props) => {
         formData.append('data[images][]', item);
       })
         : null
-
-
       formData.append('data[username]', user);
       formData.append('data[description]', data2?.description);
       formData.append('data[first_name]', data?.firstName);
       formData.append('data[last_name]', data?.lastName);
-      // formData.append(`data[interests][]`, 1);
-      // _data.map((item, i) => formData.append(`data[interests][]`, item.id))
+
+      state.interests.filter((item, i) => item.selected == true ? formData.append(`data[interests][]`, item.id) : null)
 
       formData.append('data[status]', data2?.status);
       formData.append('data[city]', data?.city);
@@ -209,6 +278,7 @@ const Status = (props) => {
       formData.append('data[height]', data2?.height);
       formData.append('data[eye_color]', data2?.eye_color);
       formData.append('type', 'profile');
+      // console.log("formdata", formData)
 
       await props.UpdateCompleteProfile(
         formData,
@@ -232,7 +302,7 @@ const Status = (props) => {
       if (index == i) {
         return {
           ...item,
-          selected: !item.selected,
+          selected: !item?.selected,
         };
       } else {
         return { ...item };
@@ -246,10 +316,12 @@ const Status = (props) => {
     });
 
   }
+  let filter = state?.interests?.filter((item, i) => item?.selected == true)
+  console.log("filter", filter)
 
   return (
-    <>
 
+    <>
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
         style={{
@@ -322,10 +394,10 @@ const Status = (props) => {
                   // borderWidth: 1,
                   paddingHorizontal: 25,
                 }}>
-                {/* {console.log("interests", state.interests)} */}
-                {state.interests?.length > 0
-                  ? state.interests.map((val, i) =>
-                    val.selected ? (
+
+                {state.interests &&
+                  state.interests.map((val, i) =>
+                    val?.selected ? (
                       <TouchableOpacity
                         style={{
                           width: '80%',
@@ -383,10 +455,13 @@ const Status = (props) => {
                       </TouchableOpacity>
                     ) : null,
                   )
-                  : null}
-                {state.selectedInterests?.length === 0 ? (
-                  <Text> No Interest Selected </Text>
-                ) : null}
+                }
+                {
+                  filter?.length > 0 ? null :
+                    <Text> No Interest Selected </Text>
+
+                }
+
               </View>
             </View>
             <View
@@ -410,27 +485,40 @@ const Status = (props) => {
                   alignItems: 'center',
                 }}
                 onPress={() => {
-                  let value = props.allInterests.map((item, i) => {
-                    if (item.id == props.userData?.interests[i]?.id) {
-                      return { ...item, selected: true }
-                    }
-                    else {
-                      return { ...item }
-                    }
+                  if (props.editSetting) {
+
+                    let value = props.allInterests.map((item, i) => {
+                      if (item.id == props.userData?.interests[i]?.id) {
+                        return { ...item, selected: true }
+                      }
+                      else {
+                        return { ...item }
+                      }
 
 
-                  })
-                  console.log("CHECKING", value)
-                  setState({
-                    ...state,
-                    isVisible: true,
-                    // interests: props?.allInterests,
-                    loader: false,
-                    interests: value,
+                    })
+                    setState({
+                      ...state,
+                      isVisible: true,
+                      // interests: props?.allInterests,
+                      loader: false,
+                      // interests: value,
 
-                    verifySelection: true,
-                  })
+                      verifySelection: true,
+                    })
+                  }
 
+                  else {
+                    setState({
+                      ...state,
+                      isVisible: true,
+                      // interests: props?.allInterests,
+                      loader: false,
+                      // interests: value,
+
+                      verifySelection: true,
+                    })
+                  }
                 }
 
                 }
@@ -447,7 +535,7 @@ const Status = (props) => {
                 alert('please select Interests');
               }
               else {
-                let value = state.interests.filter((item) => item.selected == true)
+                let value = state.interests.filter((item) => item?.selected == true)
                 let testarray = value.map((val, index) => {
                   return val.id
                 })
@@ -499,23 +587,22 @@ const Status = (props) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {state.interests &&
               state.interests.map((val, i) => {
-
-                // console.log("Vakue===", val)
-                // console.log("Vakue==", state.yourInterest[i]?.id)
+                console.log("Vaal===", val)
 
 
-                let checked = state.yourInterest[i]?.id == val.id ? true : false
+
+
+                // let checked = state.yourInterest[i]?.id == val.id ? true : false
                 return (
                   <TouchableOpacity
                     key={i}
                     onPress={() => {
-                      // checked || val.selected ? null :
-                      // _SelectInterests(val, i)
+
                       let value = state.interests.map((item, index) => {
                         if (index == i) {
                           return {
                             ...item,
-                            selected: !item.selected,
+                            selected: !item?.selected,
                           };
                         } else {
                           return { ...item };
@@ -545,14 +632,13 @@ const Status = (props) => {
                       }}>
                       <CheckBox
                         checkedColor={theme.secondaryColor}
-                        // checked={val.selected || checked}
-                        checked={val.selected}
+                        checked={val?.selected}
                         onPress={() => {
                           let value = state.interests?.map((item, index) => {
                             if (index == i) {
                               return {
                                 ...item,
-                                selected: !item.selected,
+                                selected: !item?.selected,
                               };
                             } else {
                               return { ...item };
@@ -605,7 +691,7 @@ const Status = (props) => {
                         style={{
                           color:
                             theme.textColor[
-                            val.selected ? 'blackColor' : 'greyColor'
+                            val?.selected ? 'blackColor' : 'greyColor'
                             ],
                           fontWeight: '700',
                           // marginLeft: 30,
@@ -619,7 +705,7 @@ const Status = (props) => {
                 )
               })}
             {!state.interests?.length > 0 && !state.loader ? (
-              <Text> No Interest selected </Text>
+              <Text> Not Found </Text>
             ) : null}
           </ScrollView>
           <TouchableOpacity
@@ -628,10 +714,10 @@ const Status = (props) => {
               // console.log("state", state.interests)
 
               props.UpdateInterests(state.interests)
-              // console.log("state", state.interests.filter((item) => item.selected == true))
-              let value = state.interests.filter((item) => item.selected == true)
-              let concat = [...state.yourInterest, ...value]
-              console.log(concat)
+              // console.log("state", state.interests.filter((item) => item?.selected == true))
+              let value = state.interests.filter((item) => item?.selected == true)
+              // let concat = [...state.yourInterest, ...value]
+              // console.log(concat)
               setState({
                 ...state,
                 // yourInterest: concat,

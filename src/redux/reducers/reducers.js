@@ -136,7 +136,7 @@ export default function (state = initialState, action) {
     case actionTypes.USERREGISTERATIONIMAGES:
       return {
         ...state,
-        // userRegisterationImages: [...state.userRegisterationImages, action.payload],
+        userRegisterationImages: [...state.userRegisterationImages, action.payload],
         loader: false,
       };
 

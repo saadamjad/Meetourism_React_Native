@@ -623,7 +623,7 @@ class Actions {
             console.log('resss========>>>>', response.data);
             dispatch({
               type: actionTypes.UPDATECOMPLETEPROFILE,
-              payload: response,
+              // payload: response,
             });
             dispatch(this.GetLoggedInUserData(userId, token))
 
