@@ -38,6 +38,7 @@ function DetailOffer1({
   const [state, setState] = useState({
     edit: false,
     offerData: {},
+    loader: true,
   });
   const [test, setTest] = useState();
   let userStatus = status == 'partner' ? true : false;
@@ -45,17 +46,20 @@ function DetailOffer1({
   let userLongitute = data?.user?.longitude;
   let username = data?.user?.username;
   let description = data?.user?.description;
-  console.log('user===', userLatitude, userLongitute, username, description);
 
   useEffect(() => {
-    // console.log('Dataaaaa', data.user.latitude);longitude
-
     setTest(data);
+    let timer = setTimeout(() => {
+      setState({...state, loader: false});
+    }, 1500);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   const _UpdateOfferData = (data) => {
     UpdateOfferData(data);
-    setState({...state, edit: !state.edit});
+    setState({...state, edit: !state.edit, loader: false});
   };
   const _OpenGoogleMaps = () => {
     const lat = test?.user?.latitude;
@@ -109,6 +113,8 @@ function DetailOffer1({
       source={require('../../../assets/images/statusbg.png')}
       style={{height: '100%', width: '100%'}}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        {console.log('S', test?.image_path)}
+        {/* {console.log('S', test?.user)} */}
         <View
           style={{
             flex: 1,
@@ -269,11 +275,11 @@ function DetailOffer1({
                   paddingVertical: 20,
                 }}>
                 <Image
-                  resizeMode="contain"
-                  style={{height: '100%', width: '100%'}}
+                  resizeMode="cover"
+                  style={{height: '100%', width: '90%'}}
                   source={
-                    state.offerData?.image_path
-                      ? {uri: state.offerData?.image_path}
+                    test?.image_path
+                      ? {uri: test?.image_path}
                       : require('../../../assets/images/burgerDrink.png')
                   }
                 />
@@ -338,6 +344,7 @@ function DetailOffer1({
       </ScrollView>
 
       <AnimatedLoader status={loader} loaderMessage={'Deleting...'} />
+      <AnimatedLoader status={state.loader} />
     </ImageBackground>
   );
 }

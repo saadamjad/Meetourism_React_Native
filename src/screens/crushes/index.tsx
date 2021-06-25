@@ -72,7 +72,13 @@ const Crushes = (props) => {
         />
         {state.CrushesArray &&
           state.CrushesArray.map((val, i) => {
-            console.log('valueeee', val.id);
+            // console.log('valueeee', val?.follower?.profile_url);
+            let valUrl = val?.follower?.profile_url;
+            var checkUrl = valUrl?.search('https://meetourism.com');
+            let image1WithUrl = `https://meetourism.com/storage/${valUrl}`;
+            let image2 = valUrl;
+            checkUrl == -1 ? true : false;
+
             return (
               <TouchableOpacity
                 key={i}
@@ -119,11 +125,23 @@ const Crushes = (props) => {
                       alignItems: 'center',
                     }}>
                     <View style={{alignItems: 'center', width: '0%'}}>
-                      <View style={{height: 40, width: 40}}>
+                      <View
+                        style={{
+                          height: 40,
+                          width: 40,
+                          borderRadius: 40,
+                          overflow: 'hidden',
+                        }}>
                         <Image
                           style={{height: '100%', width: '100%'}}
                           resizeMode="cover"
-                          source={require('../../assets/images/ava.png')}
+                          source={
+                            val?.follower?.profile_url
+                              ? {
+                                  uri: checkUrl ? image1WithUrl : image2,
+                                }
+                              : require('../../assets/images/ava.png')
+                          }
                         />
                       </View>
                       {/* </View> */}
@@ -155,6 +173,7 @@ const Crushes = (props) => {
                             ? null
                             : props.navigation.navigate('followandBlock', {
                                 data: val.follower,
+                                image: checkUrl ? image1WithUrl : image2,
                               });
                         }}
                         style={{

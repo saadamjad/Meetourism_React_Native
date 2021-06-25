@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import Header from '../../components/header';
 import Button from '../../components/buttons/generalbutton';
-import {Item} from 'native-base';
+import { Item } from 'native-base';
 // import * as Actions from '../../redux/actions/index';
-import {Actions} from '../../redux/actions/index';
+import { Actions } from '../../redux/actions/index';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 const App = (props) => {
   const [userData, setUserData] = useState({});
@@ -23,13 +23,13 @@ const App = (props) => {
   useEffect(() => {
     // _GetUserType();
     let data = props?.userData;
-    setUserData({...userData, data});
+    setUserData({ ...userData, data });
     // console.log('userData++', userData?.data);
   }, []);
   useEffect(() => {
     // _GetUserType();
     let data = props?.userData;
-    setUserData({...userData, data});
+    setUserData({ ...userData, data });
   }, [props.userData]);
   const Food = [
     {
@@ -46,11 +46,11 @@ const App = (props) => {
     },
   ];
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#423050'}}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}} style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#423050' }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={{ flex: 1 }}>
         <ImageBackground
           source={require('../../assets/images/statusbg.png')}
-          style={{height: '100%', width: '100%'}}>
+          style={{ height: '100%', width: '100%' }}>
           <View
             style={{
               backgroundColor: 'rgba(00,00,00, 0.8)',
@@ -63,6 +63,13 @@ const App = (props) => {
               navigation={props.navigation}
             />
             {Food.map((item, i) => {
+              console.log("item==", userData?.data?.profile_url)
+              let imageUrl = userData?.data?.profile_url
+              var checkUrl = imageUrl?.search('https://meetourism.com');
+              let image1WithUrl = `https://meetourism.com/storage/${imageUrl}`;
+              let image2 = imageUrl;
+              checkUrl === -1 ? true : false;
+              console.log(checkUrl)
               return (
                 <View
                   style={{
@@ -98,9 +105,12 @@ const App = (props) => {
                         justifyContent: 'flex-start',
                       }}>
                       <Image
+
                         source={
-                          props?.image?.length > 0
-                            ? {uri: props.image[0]}
+                          imageUrl
+                            ? {
+                              uri: checkUrl ? image1WithUrl : image2,
+                            }
                             : require('../../assets/images/statusbg.png')
                         }
                         style={{
@@ -112,7 +122,7 @@ const App = (props) => {
                     </View>
                   </View>
                   <View
-                    style={{flex: 1, borderWidth: 0, paddingHorizontal: 12}}>
+                    style={{ flex: 1, borderWidth: 0, paddingHorizontal: 12 }}>
                     <View
                       style={{
                         alignItems: 'center',
@@ -129,7 +139,7 @@ const App = (props) => {
                         {userData?.data?.company_name}
                       </Text>
                     </View>
-                    <Text style={{fontSize: 18, color: 'black'}}>
+                    <Text style={{ fontSize: 18, color: 'black' }}>
                       Interests
                     </Text>
                     <View
@@ -150,7 +160,7 @@ const App = (props) => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                               }}>
-                              <Text style={{fontSize: 10}}>{value.name}</Text>
+                              <Text style={{ fontSize: 10 }}>{value.name}</Text>
                             </View>
                           );
                         })}
@@ -169,7 +179,7 @@ const App = (props) => {
 
                           justifyContent: 'center',
                         }}>
-                        <Text style={{fontSize: 18}}>Contact </Text>
+                        <Text style={{ fontSize: 18 }}>Contact </Text>
                         <Text
                           style={{
                             fontSize: 12,
@@ -186,17 +196,17 @@ const App = (props) => {
                           alignItems: 'flex-start',
                           justifyContent: 'center',
                         }}>
-                        <Text style={{fontSize: 18}}>City </Text>
-                        <Text style={{fontSize: 15, marginVertical: 5}}>
+                        <Text style={{ fontSize: 18 }}>City </Text>
+                        <Text style={{ fontSize: 15, marginVertical: 5 }}>
                           {' '}
                           {userData?.data?.city}{' '}
                         </Text>
                       </View>
                     </View>
 
-                    <Text style={{fontSize: 14}}>Description </Text>
-                    <View style={{marginVertical: 10}}>
-                      <Text style={{fontSize: 10, lineHeight: 15}}>
+                    <Text style={{ fontSize: 14 }}>Description </Text>
+                    <View style={{ marginVertical: 10 }}>
+                      <Text style={{ fontSize: 10, lineHeight: 15 }}>
                         {' '}
                         {userData?.data?.description}{' '}
                       </Text>
@@ -208,33 +218,30 @@ const App = (props) => {
                         justifyContent: 'center',
                         marginVertical: 10,
                       }}>
-                      <View
-                        style={{
-                          height: 70,
-                          width: 75,
-                          elevation: 1,
 
-                          marginHorizontal: 10,
-                        }}>
-                        <Image
-                          source={require('../../assets/images/r1.png')}
-                          style={{height: '100%', width: '100%'}}
-                          resizeMode="cover"
-                        />
-                      </View>
-                      <View
-                        style={{
-                          height: 70,
-                          width: 75,
-                          elevation: 1,
-                          marginHorizontal: 10,
-                        }}>
-                        <Image
-                          source={require('../../assets/images/r1.png')}
-                          style={{height: '100%', width: '100%'}}
-                          resizeMode="cover"
-                        />
-                      </View>
+                      {userData?.data?.images &&
+                        userData?.data.images.map((value, i) => {
+                          console.log('values', value?.name);
+                          return (
+                            <View
+                              style={{
+                                height: 70,
+                                width: 75,
+                                elevation: 1,
+
+                                marginHorizontal: 10,
+                              }}>
+                              <Image
+                                source={value?.image_path ? { uri: value?.image_path } : require('../../assets/images/r1.png')}
+                                style={{ height: '100%', width: '100%' }}
+                                resizeMode="cover"
+                              />
+
+                            </View>
+                          );
+                        })}
+
+
                     </View>
                     <View
                       style={{
