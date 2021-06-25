@@ -613,7 +613,7 @@ class Actions {
       });
     };
   };
-  static UpdateCompleteProfile = (data, navigation, status, token) => {
+  static UpdateCompleteProfile = (data, navigation, userId, status, token) => {
     // console.log('UpdateCompleteProfile', data);
     return async (dispatch) => {
       return Post('me', data, token)
@@ -625,8 +625,9 @@ class Actions {
               type: actionTypes.UPDATECOMPLETEPROFILE,
               payload: response,
             });
+            dispatch(this.GetLoggedInUserData(userId, token))
 
-            // navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
+            navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
           }
         })
         .catch((err) => {

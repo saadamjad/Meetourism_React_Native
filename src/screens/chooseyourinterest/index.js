@@ -74,6 +74,7 @@ const Status = (props) => {
     geoCodeData: props.reverseGeoCodeData,
     latitude: '24.9180',
     longitude: '67.0971',
+    editImages: []
   });
 
   const [open, setOpen] = useState(false);
@@ -150,38 +151,46 @@ const Status = (props) => {
         let temp = state.images;
         temp.push(res.uri);
         setState({ ...state, images: temp });
-        if (props.editSetting) {
-          console.log("===============EDITING==========")
-          let formData = new FormData();
-          formData.append('type', 'profile');
-          // formData.append('data[first_name]', "THE QUEEEN PRINCESS");
-          // formData.append('images', { ...res, name: 'https://meetourism.com/storage/offers/1624564601Tq4KC.jpg' });
+        ImageUploadingFunc(res)
 
-          formData.append(`data[images]${[{ ...res, image: 'https://meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg' }]}`);
-          let header = {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${props.token}`,
-            },
-          };
+        // if (props.editSetting) {
+        //   console.log("===============EDITING==========")
+        //   let _tempEditImages = state.editImages
+        //   let value = [..._tempEditImages, res.uri]
+        //   console.log("value", value)
 
-          axios.post('https://meetourism.com/api/v1/me', formData, header).then((res) => {
-            console.log("res==", res.data.data)
-          }).catch((err) => {
-            console.log("err", err.response)
-            console.log("err only", err)
-          })
+        //   setState({ ...state, editImages: value })
 
-          // await props.UpdateCompleteProfile(
-          //   formData,
-          //   props.navigation,
-          //   props.token,
-          // );
-        }
-        else {
+        //   // let formData = new FormData();
+        //   // formData.append('type', 'profile');
+        //   // formData.append('data[first_name]', "THE QUEEEN PRINCESS");
+        //   // formData.append('images', { ...res, name: 'https://meetourism.com/storage/offers/1624564601Tq4KC.jpg' });
 
-          ImageUploadingFunc(res)
-        }
+        //   // formData.append(`data[images]${[{ ...res, image: 'https://meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg' }]}`);
+        //   // let header = {
+        //   //   headers: {
+        //   //     'Content-Type': 'application/json',
+        //   //     Authorization: `Bearer ${props.token}`,
+        //   //   },
+        //   // };
+
+        //   // axios.post('https://meetourism.com/api/v1/me', formData, header).then((res) => {
+        //   //   console.log("res==", res.data.data)
+        //   // }).catch((err) => {
+        //   //   console.log("err", err.response)
+        //   //   console.log("err only", err)
+        //   // })
+
+        //   // await props.UpdateCompleteProfile(
+        //   //   formData,
+        //   //   props.navigation,
+        //   //   props.token,
+        //   // );
+        // }
+        // else {
+
+        //   ImageUploadingFunc(res)
+        // }
       }
     });
 
@@ -189,15 +198,18 @@ const Status = (props) => {
 
   const ImageUploadingFunc = async (param) => {
 
+    let responseReturlUrl = await props.ImageUploading(param, props.token)
 
 
+    if (props.editSetting) {
+      let _tempEditImages = state.editImages
+      let value = [..._tempEditImages, responseReturlUrl]
+      console.log("value====", value)
 
-    props.ImageUploading(param, props.token)
+      setState({ ...state, editImages: value })
 
-    // let formData = new FormData();
-    // formData.append('image', { ...param, name: param.fileName });
-    // formData.append('image_type', 'user');
-    // props.ImageUploading(formData, props.token)
+
+    }
 
 
 
@@ -265,6 +277,7 @@ const Status = (props) => {
               // props.StoreData(state.images);
               props.navigation.navigate('yourinterests', {
                 profileData: state,
+                editImages: state.editImages
               });
             }
 
@@ -277,7 +290,6 @@ const Status = (props) => {
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
         style={{ height: '100%', width: '100%' }}
@@ -348,11 +360,7 @@ const Status = (props) => {
 
                   {state.images &&
                     state.images.map((val, i) => (
-                      console.log("valeee", val),
-                      <View
-
-
-                      >
+                      <View>
                         <TouchableOpacity
                           style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
 
@@ -382,9 +390,7 @@ const Status = (props) => {
                             }}
                             resizeMode="cover"
                             source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
-                          // source={ val.image_path
-                          //   ? {uri: val.image_path}
-                          //   : require('../../assets/icons/girls.png')}
+
 
                           />
                         </View>
@@ -392,22 +398,41 @@ const Status = (props) => {
                       </View>
 
                     ))}
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: '#998FA2',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      width: 50,
-                      marginLeft: 10,
-                      height: 50,
-                      overflow: 'hidden',
-                      borderRadius: 50,
-                    }}
-                    onPress={() => {
-                      _Imageupload();
-                    }}>
-                    <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
-                  </TouchableOpacity>
+                  {
+                    state.images?.length >= 5 ? null :
+                      <>
+                        {/* <TouchableOpacity
+                          style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
+
+                          onPress={() => {
+                            let array = state.images.filter((item, ind) => i != ind)
+                            console.log("array", array)
+                            setState({
+                              ...state, images: array
+                            })
+                          }}
+                        >
+                          <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
+                        </TouchableOpacity> */}
+                        <TouchableOpacity
+                          style={{
+                            backgroundColor: '#998FA2',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            width: 50,
+                            marginLeft: 10,
+                            marginTop: 30,
+                            height: 50,
+                            overflow: 'hidden',
+                            borderRadius: 50,
+                          }}
+                          onPress={() => {
+                            _Imageupload();
+                          }}>
+                          <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
+                        </TouchableOpacity>
+                      </>
+                  }
                 </View>
               </ScrollView>
 
