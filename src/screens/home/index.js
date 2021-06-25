@@ -113,13 +113,12 @@ const App = (props) => {
             borderBottomLeftRadius: 75,
             overflow: 'hidden',
           }}>
-          {/* {console.log("data", userData?.data?.images && userData.data.images[0].image_path)} */}
           <ImageBackground
 
             source={
-              userData?.data?.images && userData?.data?.images[0]?.image_path
+              userData?.data?.profile_url
                 ? {
-                  uri: userData.data?.images[0]?.image_path
+                  uri: userData?.data?.profile_url
                 }
                 : require('../../assets/icons/girls.png')
             }
@@ -190,8 +189,8 @@ const App = (props) => {
                           <Image
 
                             source={
-                              userData?.data?.images?.length > 0 ?
-                                { uri: userData?.data?.images[0]?.image_path }
+                              userData?.data?.profile_url ?
+                                { uri: userData?.data?.profile_url }
                                 : item.image
                             }
 

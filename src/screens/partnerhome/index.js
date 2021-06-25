@@ -177,8 +177,8 @@ const App = (props) => {
                             // source={item.image}
 
                             source={
-                              userData?.data?.images
-                                ? { uri: userData?.data?.images[0]?.image_path } :
+                              userData?.data?.profile_url
+                                ? { uri: userData?.data?.profile_url } :
 
                                 item.image
                             }

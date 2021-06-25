@@ -17,7 +17,6 @@ import Header from '../../../components/header';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Gallery from '../../../components/gallery';
-import {Icon} from 'native-base';
 
 import {connect} from 'react-redux';
 
@@ -25,7 +24,8 @@ import {Actions} from '../../../redux/actions/index';
 const Profile = (props) => {
   const token = props.token;
   const data = props?.route?.params?.data;
-  console.log('=========', data.id);
+  const image = props?.route?.params?.image;
+  console.log('image', image);
   const [state, setState] = useState({
     follow: false,
     loader: true,
@@ -79,7 +79,9 @@ const Profile = (props) => {
         <ImageBackground
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
-          source={require('../../../assets/images/profile.png')}>
+          source={
+            image ? {uri: image} : require('../../../assets/images/profile.png')
+          }>
           <Header
             navigation={props.navigation}
             leftArrow={true}
@@ -330,14 +332,10 @@ const Profile = (props) => {
                   <GlobalButton
                     buttonText="Dashboard"
                     width="70%"
-                    onPress={() => 
-
-                  {   
-
-                     props.navigation.replace('drawer')
-                     props.EditSetting(false);
-                    }
-                    }
+                    onPress={() => {
+                      props.navigation.replace('drawer');
+                      props.EditSetting(false);
+                    }}
                   />
                 </View>
               </View>

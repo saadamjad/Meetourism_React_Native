@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -16,12 +16,13 @@ import Header from '../../components/header';
 // import {TextInput} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {Actions} from '../../redux/actions/index';
+import { Actions } from '../../redux/actions/index';
 const Profile = (props) => {
   const token = props.token;
   const data = props?.route?.params?.data;
+  const image = props?.route?.params?.image;
   const [state, setState] = useState({
     follow: false,
     loader: true,
@@ -32,8 +33,8 @@ const Profile = (props) => {
     state.data?.weight < 50
       ? 'slim'
       : state.data?.weight >= 50 && state.data?.weight <= 65
-      ? 'smart'
-      : 'fat';
+        ? 'smart'
+        : 'fat';
 
   const _Gallery = () => {
     // return <Gallery />;
@@ -50,9 +51,9 @@ const Profile = (props) => {
     console.log('value==', value.latitude);
     console.log('value==', value.longitude);
     if (value) {
-      setState({...state, loader: false, data: value});
+      setState({ ...state, loader: false, data: value });
     } else {
-      setState({...state, loader: false});
+      setState({ ...state, loader: false });
     }
   };
 
@@ -61,7 +62,7 @@ const Profile = (props) => {
 
     await setState({
       ...state,
-      data: {...state.data, am_following: !state.data.am_following},
+      data: { ...state.data, am_following: !state.data.am_following },
     });
 
     if (!state.data?.am_following) {
@@ -73,11 +74,11 @@ const Profile = (props) => {
   };
   return (
     <CustomView scroll>
-      <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
+      <View style={{ flex: 1, alignItems: 'center', width: '100%' }}>
         <ImageBackground
-          style={{width: '100%', height: 400}}
+          style={{ width: '100%', height: 400 }}
           resizeMode="stretch"
-          source={require('../../assets/images/profile.png')}>
+          source={image ? { uri: image } : require('../../assets/images/profile.png')}>
           <Header
             leftArrow={true}
             isTransparent={true}
@@ -117,13 +118,13 @@ const Profile = (props) => {
                   </Text>
                   {state.data?.country?.name ||
                     (state.data?.city && (
-                      <Text style={{fontSize: 15, color: '#998FA2'}}>
+                      <Text style={{ fontSize: 15, color: '#998FA2' }}>
                         {state.data?.country?.name}
                         {state.data?.city}
                       </Text>
                     ))}
 
-                  <Text style={{fontSize: 13, color: '#9E94A6'}}>
+                  <Text style={{ fontSize: 13, color: '#9E94A6' }}>
                     {' '}
                     {state.data?.age}{' '}
                   </Text>
@@ -160,7 +161,7 @@ const Profile = (props) => {
                     backgroundColor: '#8A56AC',
                     paddingVertical: 10,
                   }}>
-                  <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  <Text style={{ color: 'white', fontWeight: 'bold' }}>
                     {state.data?.am_following ? 'unfollow' : 'Follow'}
                   </Text>
                 </TouchableOpacity>
@@ -189,10 +190,10 @@ const Profile = (props) => {
                   onPress={() => props.navigation.navigate('innerchat')}>
                   <Image
                     source={require('../../assets/images/path.png')}
-                    style={{height: 20, width: 20, tintColor: 'purple'}}
+                    style={{ height: 20, width: 20, tintColor: 'purple' }}
                     resizeMode="contain"
                   />
-                  <Text style={{fontSize: 12, marginTop: 5}}>Chat </Text>
+                  <Text style={{ fontSize: 12, marginTop: 5 }}>Chat </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -210,10 +211,10 @@ const Profile = (props) => {
                   }>
                   <Image
                     source={require('../../assets/icons/singleuser.png')}
-                    style={{height: 20, width: 20, tintColor: 'purple'}}
+                    style={{ height: 20, width: 20, tintColor: 'purple' }}
                     resizeMode="contain"
                   />
-                  <Text style={{fontSize: 12, marginTop: 5}}>Friends </Text>
+                  <Text style={{ fontSize: 12, marginTop: 5 }}>Friends </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{
@@ -231,7 +232,7 @@ const Profile = (props) => {
                   }>
                   <Entypo name="location" size={15} color={'purple'} />
 
-                  <Text style={{fontSize: 12, marginTop: 5}}>Location </Text>
+                  <Text style={{ fontSize: 12, marginTop: 5 }}>Location </Text>
                 </TouchableOpacity>
               </View>
               <View
@@ -244,10 +245,10 @@ const Profile = (props) => {
                   backgroundColor: 'white',
                 }}>
                 <View
-                  style={{flex: 1, paddingHorizontal: 30, paddingVertical: 20}}>
+                  style={{ flex: 1, paddingHorizontal: 30, paddingVertical: 20 }}>
                   {state.data?.interests?.length > 0 ? (
                     <Text
-                      style={{fontSize: 15, color: 'black', marginVertical: 5}}>
+                      style={{ fontSize: 15, color: 'black', marginVertical: 5 }}>
                       Interests
                     </Text>
                   ) : null}
@@ -264,19 +265,19 @@ const Profile = (props) => {
                     }}>
                     {state.data?.interests?.length > 0
                       ? state.data?.interests.map((val, i) => (
-                          <View
-                            style={{
-                              width: '20%',
-                              alignItems: 'center',
-                              // borderWidth: 1,
-                              paddingVertical: 10,
-                            }}
-                            key={i}>
-                            <Text style={{fontSize: 13, color: 'black'}}>
-                              {val.name}{' '}
-                            </Text>
-                          </View>
-                        ))
+                        <View
+                          style={{
+                            width: '20%',
+                            alignItems: 'center',
+                            // borderWidth: 1,
+                            paddingVertical: 10,
+                          }}
+                          key={i}>
+                          <Text style={{ fontSize: 13, color: 'black' }}>
+                            {val.name}{' '}
+                          </Text>
+                        </View>
+                      ))
                       : null}
                   </View>
                   <View
@@ -288,12 +289,12 @@ const Profile = (props) => {
                       marginTop: 15,
                     }}>
                     {[
-                      {name: 'AGE', value: state.data?.age},
-                      {name: 'Contact', value: state.data?.phone},
-                      {name: 'City', value: state.data?.city},
+                      { name: 'AGE', value: state.data?.age },
+                      { name: 'Contact', value: state.data?.phone },
+                      { name: 'City', value: state.data?.city },
                     ].map((val, i) => (
                       <View
-                        style={{width: '25%', alignItems: 'center'}}
+                        style={{ width: '25%', alignItems: 'center' }}
                         key={i}>
                         <Text
                           style={{
@@ -303,7 +304,7 @@ const Profile = (props) => {
                           }}>
                           {val.name}
                         </Text>
-                        <Text style={{fontSize: 13, marginTop: 10}}>
+                        <Text style={{ fontSize: 13, marginTop: 10 }}>
                           {val.value}
                         </Text>
                       </View>
@@ -319,12 +320,12 @@ const Profile = (props) => {
                       marginTop: 15,
                     }}>
                     {[
-                      {name: 'Height', value: state.data?.height},
-                      {name: 'Shape', value: shape},
-                      {name: 'EyeColor', value: state.data?.eye_color},
+                      { name: 'Height', value: state.data?.height },
+                      { name: 'Shape', value: shape },
+                      { name: 'EyeColor', value: state.data?.eye_color },
                     ].map((val, i) => (
                       <View
-                        style={{width: '25%', alignItems: 'center'}}
+                        style={{ width: '25%', alignItems: 'center' }}
                         key={i}>
                         <Text
                           style={{
@@ -334,20 +335,20 @@ const Profile = (props) => {
                           }}>
                           {val.name}
                         </Text>
-                        <Text style={{fontSize: 13, marginTop: 10}}>
+                        <Text style={{ fontSize: 13, marginTop: 10 }}>
                           {val.value}
                         </Text>
                       </View>
                     ))}
                   </View>
 
-                  <Text style={{fontSize: 15, paddingVertical: 10}}>
+                  <Text style={{ fontSize: 15, paddingVertical: 10 }}>
                     Description
                   </Text>
-                  <Text style={{lineHeight: 20, color: 'gray', fontSize: 11}}>
+                  <Text style={{ lineHeight: 20, color: 'gray', fontSize: 11 }}>
                     {state.data?.description}
                   </Text>
-                  <Text style={{fontSize: 18, paddingVertical: 10}}>
+                  <Text style={{ fontSize: 18, paddingVertical: 10 }}>
                     Language
                   </Text>
                   <SliderCom trackStyle="black" />

@@ -115,6 +115,11 @@ const App = (props) => {
 
         {state?.matches?.length > 0 ? (
           state.matches.map((item, i) => {
+            var checkUrl = item?.profile_url?.search('https://meetourism.com');
+            let image1WithUrl = `https://meetourism.com/storage/${item?.profile_url}`;
+            let image2 = item?.profile_url;
+            checkUrl == -1 ? true : false;
+
             return (
               <View
                 key={i}
@@ -169,7 +174,13 @@ const App = (props) => {
 
                   <View style={{borderWidth: 0, width: '100%'}}>
                     <Image
-                      source={require('../../assets/icons/group.png')}
+                      source={
+                        item.profile_url
+                          ? {
+                              uri: checkUrl ? image1WithUrl : image2,
+                            }
+                          : require('../../assets/icons/group.png')
+                      }
                       style={{height: 240, width: '100%'}}
                       resizeMode="cover"
                     />
@@ -208,6 +219,7 @@ const App = (props) => {
                       onPress={() =>
                         props.navigation.navigate('matchprofile', {
                           data: item,
+                          image: checkUrl ? image1WithUrl : image2,
                         })
                       }
                       width="48%"
