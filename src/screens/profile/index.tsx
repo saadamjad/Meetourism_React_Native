@@ -27,7 +27,8 @@ const Profile = (props) => {
   // }, []);
   useEffect(() => {
     // _GetUserType();
-    let data = props.editSetting ? props.userData.data : props?.userData;
+    // let data = props.editSetting ? props.userData.data : props?.userData;
+    let data = props?.userData;
     // setUserData(data);
     setUserData({...userData, data});
   }, [props.userData]);
@@ -39,8 +40,8 @@ const Profile = (props) => {
           style={{width: '100%', height: 400}}
           resizeMode="stretch"
           source={
-            props.userData?.images[0]?.image_path
-              ? {uri: props.userData.images[0].image_path}
+            props.userData?.profile_url
+              ? {uri: props.userData?.profile_url}
               : require('../../assets/images/profile.png')
           }>
           <Header

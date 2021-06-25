@@ -253,6 +253,7 @@ function CreateOffer(props) {
                     borderRadius: 20,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    overflow: 'hidden'
                   }}>
                   <ImageBackground
                     source={{ uri: state?.imageData?.uri }}
