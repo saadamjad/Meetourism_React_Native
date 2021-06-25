@@ -299,7 +299,7 @@ class Actions {
 
     return async (dispatch) => {
       dispatch({ type: actionTypes.LOGOUT, });
-      navigation.navigate('Auth', {
+      navigation.replace('Auth', {
         screen: 'signin',
       });
     };

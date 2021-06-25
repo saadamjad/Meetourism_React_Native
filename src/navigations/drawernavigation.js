@@ -9,11 +9,8 @@ import matchprofile from '../screens/matches/matchedprofile';
 import { createStackNavigator } from '@react-navigation/stack';
 import allchat from '../screens/chat/innerchat';
 import dashborad from '../screens/dashboard';
-import { NavigationContainer } from '@react-navigation/native';
 import Calender from '../screens/calendar';
 import Search from '../screens/search';
-import profilePreivew from '../screens/profile';
-import Home from '../screens/home';
 import { theme } from '../constants/theme';
 import Langauge from '../screens/language';
 
@@ -71,11 +68,11 @@ function MyDrawer(props) {
         name="offers"
         component={AlloffersStack}
       /> */}
-      <Drawer.Screen
+      {/* <Drawer.Screen
         options={{ headerShown: false, drawerLabel: false }}
         name="adminscreens"
         component={adminscreens}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 }

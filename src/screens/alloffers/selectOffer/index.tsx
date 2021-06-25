@@ -251,57 +251,7 @@ function SelectOffer(props) {
                             uri: `${val.image_path}`,
                           }
                         : require('../../../assets/images/download.jpg')
-                    }>
-                    {/* <View
-                  style={{
-                    flexDirection: 'row',
-                    height: '25%',
-                    paddingLeft: 35,
-                  }}>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Text
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 14,
-                      }}>
-                      256
-                    </Text>
-                    <Icon
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 18,
-                        marginLeft: 10,
-                      }}
-                      type="MaterialIcons"
-                      name="chat-bubble-outline"
-                    />
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginLeft: 20,
-                    }}>
-                    <Text
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 14,
-                      }}>
-                      256
-                    </Text>
-                    <Icon
-                      style={{
-                        color: theme.textColor.whiteColor,
-                        fontSize: 18,
-                        marginLeft: 10,
-                      }}
-                      type="AntDesign"
-                      name="hearto"
-                    />
-                  </View>
-                </View>
-            */}
-                  </ImageBackground>
+                    }></ImageBackground>
                 </View>
 
                 <View
