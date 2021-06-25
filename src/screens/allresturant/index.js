@@ -63,7 +63,7 @@ const App = (props) => {
               navigation={props.navigation}
             />
             {Food.map((item, i) => {
-              console.log("item==", userData?.data?.profile_url)
+              // console.log("item==", userData?.data?.profile_url)
               let imageUrl = userData?.data?.profile_url
               var checkUrl = imageUrl?.search('https://meetourism.com');
               let image1WithUrl = `https://meetourism.com/storage/${imageUrl}`;
@@ -150,7 +150,7 @@ const App = (props) => {
                       }}>
                       {userData?.data?.interests &&
                         userData?.data.interests.map((value, i) => {
-                          console.log('values', value.name);
+                          // console.log('values====', value.image_path);
                           return (
                             <View
                               style={{
@@ -211,38 +211,49 @@ const App = (props) => {
                         {userData?.data?.description}{' '}
                       </Text>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginVertical: 10,
-                      }}>
+                    <ScrollView
+                      horizontal={true}
+                      nestedScrollEnabled={true}
+                    // style={{ backgroundColor: 'blue' }}
+                    // showsHorizontalScrollIndicator={false}
+                    >
 
-                      {userData?.data?.images &&
-                        userData?.data.images.map((value, i) => {
-                          console.log('values', value?.name);
-                          return (
-                            <View
-                              style={{
-                                height: 70,
-                                width: 75,
-                                elevation: 1,
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginVertical: 10,
+                        }}>
 
-                                marginHorizontal: 10,
-                              }}>
-                              <Image
-                                source={value?.image_path ? { uri: value?.image_path } : require('../../assets/images/r1.png')}
-                                style={{ height: '100%', width: '100%' }}
-                                resizeMode="cover"
-                              />
+                        {userData?.data?.images &&
+                          userData?.data?.images.map((value, i) => {
+                            console.log('values====', value?.image_path);
 
-                            </View>
-                          );
-                        })}
+                            return (
+                              <TouchableOpacity
+                                style={{
+                                  height: 70,
+                                  width: 75,
+                                  elevation: 1,
+
+                                  marginHorizontal: 10,
+                                }}>
+                                <Image
+                                  source={value?.image_path ? { uri: value?.image_path } : require('../../assets/images/r1.png')}
+                                  style={{ height: '100%', width: '100%' }}
+                                  resizeMode="cover"
+                                />
+
+                              </TouchableOpacity>
+                            );
+                          })}
 
 
-                    </View>
+                      </View>
+                    </ScrollView>
+
+
                     <View
                       style={{
                         overflow: 'hidden',

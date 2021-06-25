@@ -26,6 +26,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Status = (props) => {
   //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
+  const editImages = props?.route?.params?.editImages;
+  console.log("Sssssss==", editImages)
   const token = props?.token;
 
   const [loader, setLoader] = useState(false);
@@ -45,7 +47,6 @@ const Status = (props) => {
   });
 
   useEffect(() => {
-    console.log("p", props.userData.interests)
     if (props.editSetting) {
       let value = props?.userData?.interests.map((item, i) => {
         console.log("helo", item)
@@ -185,39 +186,34 @@ const Status = (props) => {
       // console.log('userrrrr', data2?.company_name);
       let formData = new FormData();
       company_name ? formData.append('data[company_name]', data2?.company_name) : null;
-      _data.map((item) => {
+      editImages.length > 0 ? editImages.map((item) => {
 
-        formData.append('data[images][]', item.path);
+        formData.append('data[images][]', item);
       })
+        : null
 
 
-      // formData.append('data[username]', user);
-      // formData.append('data[description]', data2?.description);
-      // formData.append('data[first_name]', data?.firstName);
-      // formData.append('data[last_name]', data?.lastName);
+      formData.append('data[username]', user);
+      formData.append('data[description]', data2?.description);
+      formData.append('data[first_name]', data?.firstName);
+      formData.append('data[last_name]', data?.lastName);
       // formData.append(`data[interests][]`, 1);
       // _data.map((item, i) => formData.append(`data[interests][]`, item.id))
 
-      // var selectedValues  = [1, 2, 4];
-      // let value= selectedValues.map(v => formData.append(`data[interests][]`, v));
-
-
-
-      // formData.append('data[status]', data2?.status);
-      // formData.append('data[city]', data?.city);
-      // formData.append('data[phone]', data2?.phone);
-      // formData.append('data[age]', data?.age);
-      // formData.append('data[country_id]', data2?.country_id);
-      // formData.append('data[weight]', data2?.weight);
-      // formData.append('data[height]', data2?.height);
-      // formData.append('data[eye_color]', data2?.eye_color);
+      formData.append('data[status]', data2?.status);
+      formData.append('data[city]', data?.city);
+      formData.append('data[phone]', data2?.phone);
+      formData.append('data[age]', data?.age);
+      formData.append('data[country_id]', data2?.country_id);
+      formData.append('data[weight]', data2?.weight);
+      formData.append('data[height]', data2?.height);
+      formData.append('data[eye_color]', data2?.eye_color);
       formData.append('type', 'profile');
 
-      // console.log('formData', formData, "AND =====", data2);
-      console.log('formData=============', formData);
       await props.UpdateCompleteProfile(
         formData,
         props.navigation,
+        props?.userData?.id,
         company_name,
         token,
       );
@@ -253,6 +249,7 @@ const Status = (props) => {
 
   return (
     <>
+
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
         style={{
