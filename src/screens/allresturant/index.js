@@ -282,7 +282,7 @@ const App = (props) => {
                         width={'80%'}
                         buttonText="Dashboard"
                         height={40}
-                        onPress={() => props.navigation.navigate('partnerhome')}
+                        onPress={() => props.navigation.replace('partnerhome')}
                       />
                     </View>
                   </View>

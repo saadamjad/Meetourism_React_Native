@@ -1,8 +1,8 @@
-import {View} from 'native-base';
-import React, {useEffect, useState} from 'react';
-import {Image} from 'react-native';
+import { View } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { Image } from 'react-native';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import * as Actions from '../../../redux/actions/index';
 const App = (props) => {
@@ -15,12 +15,11 @@ const App = (props) => {
     );
 
     setTimeout(() => {
-      // props.navigation.replace('profilePreview');
 
       if (props.token) {
         if (props.status === 'partner') {
           console.log('if');
-          props.navigation.navigate('PartnerStack', {
+          props.navigation.replace('PartnerStack', {
             screen: 'partnerhome',
           });
         } else {
@@ -43,7 +42,7 @@ const App = (props) => {
       }}>
       <Image
         source={require('../../../assets/images/logo.png')}
-        style={{resizeMode: 'contain', height: 150, width: 150}}
+        style={{ resizeMode: 'contain', height: 150, width: 150 }}
       />
     </View>
   );

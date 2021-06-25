@@ -41,7 +41,7 @@ const Calendar = (props) => {
         <CalendarList
           style={{
             // flex: 1,
-            backgroundColor: theme.primaryColor, x
+            backgroundColor: theme.primaryColor,
             // color: 'white',
             // height: '100%',
             // width: '100%',
