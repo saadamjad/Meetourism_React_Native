@@ -12,6 +12,8 @@ import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
 import {Item} from 'native-base';
+import {FastImageComponent} from '../../components/fastimage';
+
 import {Actions} from '../../redux/actions/index';
 import {connect} from 'react-redux';
 const Crushes = (props) => {
@@ -132,7 +134,18 @@ const Crushes = (props) => {
                           borderRadius: 40,
                           overflow: 'hidden',
                         }}>
-                        <Image
+                        {/* <Image
+                          style={{height: '100%', width: '100%'}}
+                          resizeMode="cover"
+                          source={
+                            val?.follower?.profile_url
+                              ? {
+                                  uri: checkUrl ? image1WithUrl : image2,
+                                }
+                              : require('../../assets/images/ava.png')
+                          }
+                        /> */}
+                        <FastImageComponent
                           style={{height: '100%', width: '100%'}}
                           resizeMode="cover"
                           source={

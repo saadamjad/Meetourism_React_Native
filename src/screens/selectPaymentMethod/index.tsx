@@ -7,6 +7,7 @@ import CustomView from '../../components/customView';
 import App from '../../components/header';
 import {theme} from '../../constants/theme';
 import Overlay from '../../components/overlays';
+import {FastImageComponent} from '../../components/fastimage';
 function SelectPaymentMethod(props) {
   const [state, setState] = useState({selected: 0});
   return (
@@ -56,7 +57,7 @@ function SelectPaymentMethod(props) {
                 onPress={() =>
                   props.navigation.navigate('selectPaymentmethod')
                 }>
-                <Image
+                <FastImageComponent
                   style={{width: '100%', height: '100%'}}
                   resizeMode="contain"
                   source={val}

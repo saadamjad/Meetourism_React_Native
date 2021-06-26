@@ -9,6 +9,8 @@ import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import moment from 'moment';
+import {FastImageComponent} from '../../../components/fastimage';
+
 import AnimatedLoader from '../../../components/loader';
 const Messages = (props) => {
   const token = props.token;
@@ -105,7 +107,12 @@ const Messages = (props) => {
                           height: 50,
                           overflow: 'hidden',
                         }}>
-                        <Image
+                        {/* <Image
+                          resizeMode="cover"
+                          style={{height: '100%', width: '100%'}}
+                          source={{uri: val?.user?.profile_url}}
+                        /> */}
+                        <FastImageComponent
                           resizeMode="cover"
                           style={{height: '100%', width: '100%'}}
                           source={{uri: val?.user?.profile_url}}

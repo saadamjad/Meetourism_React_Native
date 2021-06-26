@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, Image, TouchableOpacity, Linking} from 'react-native';
-import {theme} from '../../../constants/theme';
+import { Text, Image, TouchableOpacity, Linking } from 'react-native';
+import { theme } from '../../../constants/theme';
+import { FastImageComponent } from '../../fastimage';
 
 const App = () => {
   return (
@@ -16,9 +17,10 @@ const App = () => {
         borderRadius: 25,
         elevation: 5,
       }}>
-      <Image
+      <FastImageComponent
         source={require('../../../assets/icons/f.png')}
-        style={{height: 30, width: 25, resizeMode: 'contain'}}
+        style={{ height: 30, width: 25 }}
+        resizeMode={'contain'}
       />
 
       <Text

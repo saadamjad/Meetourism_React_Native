@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -9,13 +9,14 @@ import {
 } from 'react-native';
 // import {Icon} from 'native-base';
 // import Style from './style';
-import {Button, Overlay} from 'react-native-elements';
+import { Button, Overlay } from 'react-native-elements';
 
 import CustomView from '../../components/customView';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
-import {Actions} from '../../redux/actions/index';
-import {connect} from 'react-redux';
+import { Actions } from '../../redux/actions/index';
+import { connect } from 'react-redux';
+import { FastImageComponent } from '../../components/fastimage';
 const Crushes = (props) => {
   const token = props?.token;
   const [state, setState] = useState({
@@ -37,7 +38,7 @@ const Crushes = (props) => {
     });
   }, [props.allCrushes]);
   const _GetCrushes = async (param) => {
-    setState({...state, loader: param});
+    setState({ ...state, loader: param });
     let data = 'followings';
     props.GetAllCrushes(data, token);
   };
@@ -54,7 +55,7 @@ const Crushes = (props) => {
     return (
       <Overlay
         isVisible={state.isVisible}
-        onBackdropPress={() => setState({...state, isVisible: false})}
+        onBackdropPress={() => setState({ ...state, isVisible: false })}
         overlayStyle={{
           // borderRadius: 50,
           alignItems: 'center',
@@ -65,7 +66,7 @@ const Crushes = (props) => {
           margin: 0,
           height: '86%',
         }}>
-        <View style={{height: '100%', width: '100%', alignItems: 'center'}}>
+        <View style={{ height: '100%', width: '100%', alignItems: 'center' }}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
@@ -88,7 +89,7 @@ const Crushes = (props) => {
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => {
-              setState({...state, isVisible: false});
+              setState({ ...state, isVisible: false });
             }}
             style={{
               height: 40,
@@ -102,7 +103,7 @@ const Crushes = (props) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 15, color: 'white'}}> Done</Text>
+            <Text style={{ fontSize: 15, color: 'white' }}> Done</Text>
           </TouchableOpacity>
         </View>
       </Overlay>
@@ -110,7 +111,7 @@ const Crushes = (props) => {
   };
   return (
     <CustomView bg={theme.primaryColor} scroll>
-      <View style={{backgroundColor: theme.primaryColor, flex: 1}}>
+      <View style={{ backgroundColor: theme.primaryColor, flex: 1 }}>
         <LongHeader
           if={props?.route?.params?.blockListNotOpen}
           navigation={props.navigation}
@@ -134,9 +135,9 @@ const Crushes = (props) => {
                     isVisible: true,
                     allOrders: state.allOrders.map((value, ind) => {
                       if (i == ind) {
-                        return {...value, selected: true};
+                        return { ...value, selected: true };
                       } else {
-                        return {...value, selected: false};
+                        return { ...value, selected: false };
                       }
                     }),
                   });
@@ -170,17 +171,17 @@ const Crushes = (props) => {
                       flexDirection: 'row',
                       alignItems: 'center',
                     }}>
-                    <View style={{alignItems: 'center', width: '0%'}}>
-                      <View style={{height: 40, width: 40}}>
-                        <Image
-                          style={{height: '100%', width: '100%'}}
+                    <View style={{ alignItems: 'center', width: '0%' }}>
+                      <View style={{ height: 40, width: 40 }}>
+                        <FastImageComponent
+                          style={{ height: '100%', width: '100%' }}
                           resizeMode="cover"
                           source={require('../../assets/images/ava.png')}
                         />
                       </View>
                       {/* </View> */}
                     </View>
-                    <View style={{width: '70%'}}>
+                    <View style={{ width: '70%' }}>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
@@ -207,7 +208,7 @@ const Crushes = (props) => {
             No Crushes Available{' '}
           </Text>
         ) : state.loader ? (
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <ActivityIndicator size={'small'} color="red" />
           </View>
         ) : null}

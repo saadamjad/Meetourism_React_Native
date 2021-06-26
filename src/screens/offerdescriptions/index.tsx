@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {Actions} from '../../redux/actions/index';
+import {FastImageComponent} from '../../components/fastimage';
 
 import {connect} from 'react-redux';
 
@@ -180,7 +181,7 @@ function App(props) {
                   //   borderWidth: 1,
                   overflow: 'hidden',
                 }}>
-                <Image
+                <FastImageComponent
                   resizeMode="contain"
                   style={{height: '100%', width: '100%'}}
                   source={
@@ -200,7 +201,7 @@ function App(props) {
                   overflow: 'hidden',
                   //   borderWidth: 1,
                 }}>
-                <Image
+                <FastImageComponent
                   source={require('../../assets/images/map.jpg')}
                   style={{height: '100%', width: '100%'}}
                   resizeMode="cover"

@@ -7,6 +7,8 @@ import CustomView from '../../../components/customView';
 import App from '../../../components/header';
 import {theme} from '../../../constants/theme';
 import Overlay from '../../../components/overlays';
+import {FastImageComponent} from '../../../components/fastimage';
+
 function DealOffer(props) {
   return (
     // <Overlay toggleOverlay={props.toggleOverlay} visible={props.visible}>
@@ -59,7 +61,13 @@ function DealOffer(props) {
                 alignItems: 'center',
                 // marginTop: 80,
               }}>
-              <Image
+              {/* <Image
+                resizeMode="contain"
+                source={require('../../../assets/images/qr.png')}
+                style={{height: 150, width: 200}}
+              /> */}
+
+              <FastImageComponent
                 resizeMode="contain"
                 source={require('../../../assets/images/qr.png')}
                 style={{height: 150, width: 200}}
@@ -74,7 +82,12 @@ function DealOffer(props) {
                 alignItems: 'center',
                 marginTop: 30,
               }}>
-              <Image
+              {/* <Image
+                resizeMode="contain"
+                style={{height: 150, width: 200}}
+                source={require('../../../assets/images/map.jpg')}
+              /> */}
+              <FastImageComponent
                 resizeMode="contain"
                 style={{height: 150, width: 200}}
                 source={require('../../../assets/images/map.jpg')}

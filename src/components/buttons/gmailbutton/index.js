@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text, Image, TouchableOpacity, Linking} from 'react-native';
-import {theme} from '../../../constants/theme';
-
+import { Text, Image, TouchableOpacity, Linking } from 'react-native';
+import { theme } from '../../../constants/theme';
+import { FastImageComponent } from '../../../components/fastimage'
 const App = () => {
   return (
     <TouchableOpacity
-    onPress={()=>Linking.openURL('https://www.google.com/')}
+      onPress={() => Linking.openURL('https://www.google.com/')}
       style={{
         width: '45%',
         height: 45,
@@ -16,10 +16,20 @@ const App = () => {
         borderRadius: 25,
         elevation: 5,
       }}>
-      <Image
+      {/* <Image
         source={require('../../../assets/icons/google.png')}
-        style={{height: 25, width: 20, resizeMode: 'contain'}}
+        style={{ height: 25, width: 20, resizeMode: 'contain' }}
+      /> */}
+
+      <FastImageComponent
+        source={require('../../../assets/icons/google.png')}
+
+        resizeMode={'contain'}
+        style={{ height: 25, width: 20, }}
+
+
       />
+
       <Text
         style={{
           fontWeight: '600',

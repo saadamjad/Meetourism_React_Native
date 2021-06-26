@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import Toast from '../../components/toastmessage';
 
+import { FastImageComponent } from '../../components/fastimage'
+
 
 import { theme } from '../../constants/theme';
 import { Icon } from 'native-base';
@@ -27,6 +29,7 @@ import Geocoder from 'react-native-geocoding';
 Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
 
 import axios from 'axios';
+import FastImage from 'react-native-fast-image';
 const Status = (props) => {
   let dataRedux = props?.userData;
 
@@ -288,6 +291,7 @@ const Status = (props) => {
   };
 
 
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <ImageBackground
@@ -360,30 +364,36 @@ const Status = (props) => {
 
                   {state.images &&
                     state.images.map((val, i) => (
-                      <View>
-                        <TouchableOpacity
-                          style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
+                      // console.log("V====", val),
+                      // const normalisedSource = val && typeof val === 'string' && (val.split('https://')[1] || val.split('http://')[1]) ? val : null
+                      // val === 'undefined' ? console.log("undefine") : console.log("not")
+                      val !== "undefined" ?
 
-                          onPress={() => {
-                            let array = state.images.filter((item, ind) => i != ind)
-                            console.log("array", array)
-                            setState({
-                              ...state, images: array
-                            })
-                          }}
-                        >
-                          <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
-                        </TouchableOpacity>
-                        <View
-                          key={i}
-                          style={{
-                            width: 50,
-                            marginLeft: 5,
-                            height: 50,
-                            overflow: 'hidden',
-                            borderRadius: 50,
-                          }}>
-                          <Image
+                        < View >
+                          {console.log("Va", val)}
+                          <TouchableOpacity
+                            style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
+
+                            onPress={() => {
+                              let array = state.images.filter((item, ind) => i != ind)
+                              console.log("array", array)
+                              setState({
+                                ...state, images: array
+                              })
+                            }}
+                          >
+                            <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
+                          </TouchableOpacity>
+                          <View
+                            key={i}
+                            style={{
+                              width: 50,
+                              marginLeft: 5,
+                              height: 50,
+                              overflow: 'hidden',
+                              borderRadius: 50,
+                            }}>
+                            {/* <Image
                             style={{
                               width: '100%',
                               height: '100%',
@@ -392,11 +402,31 @@ const Status = (props) => {
                             source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
 
 
-                          />
+                          /> */}
+                            {/* 
+                          <FastImage
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
+                            source={val && typeof val === 'string' && (val.split('https://')[1] || val.split('http://')[1]) ? val : null}
+                          /> */}
+                            <FastImageComponent
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                              }}
+                              resizeMode="cover"
+                              // source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
+                              source={val ? { uri: val } : require('../../assets/icons/girls.png')}
+
+
+
+                            />
+                          </View>
+
                         </View>
-
-                      </View>
-
+                        : null
                     ))}
                   {
                     state.images?.length >= 5 ? null :
@@ -786,7 +816,7 @@ const Status = (props) => {
           </View>
         </View>
       </ImageBackground>
-    </ScrollView>
+    </ScrollView >
   );
 };
 

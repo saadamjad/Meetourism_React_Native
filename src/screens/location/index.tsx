@@ -8,6 +8,8 @@ import LongHeader from '../../components/header/longheader';
 import {Item, Icon} from 'native-base';
 import {SwipeablePanel} from 'rn-swipeable-panel';
 import MapComponent from '../../components/googlemap';
+import {FastImageComponent} from '../../components/fastimage';
+
 const Location = (props) => {
   const data = props?.route?.params?.data;
   let userLatitude = data?.latitude;
@@ -37,71 +39,50 @@ const Location = (props) => {
       {
         // name: 'Meditation',
         time: '9:00 (25 min)',
-        icon: (
-          <Image
-            resizeMode="contain"
-            source={require('../../assets/images/share.png')}
-          />
-        ),
+        icon: require('../../assets/images/share.png'),
+
+        // icon: (
+        // <FastImageComponent
+        //   resizeMode="contain"
+        //   source={require('../../assets/images/share.png')}
+        //   style={{height: 30, width: 30}}
+        // />
+        // ),
         an: false,
       },
       {
         // name: 'Running',
         time: '9:25 (47 min)',
-        icon: (
-          <Image
-            resizeMode="contain"
-            source={require('../../assets/images/heartCircle.png')}
-          />
-        ),
+        icon: require('../../assets/images/heartCircle.png'),
+
+        // icon: (
+
+        //   // <FastImageComponent
+        //   //   resizeMode="contain"
+        //   //   source={require('../../assets/images/heartCircle.png')}
+        //   // />
+        //   // <FastImageComponent
+        //   //   source={require('../../assets/images/heartCircle.png')}
+        //   //   resizeMode={'cover'}
+        //   //   // tintColor={'#ED1C24'}
+
+        //   //   style={{height: 30, width: 30}}
+        //   // />
+        // ),
         an: false,
       },
 
       {
         // name: 'Yoga practice',
         time: '10:02 (1:16 hour)',
-        icon: (
-          <Image
-            resizeMode="contain"
-            source={require('../../assets/images/signal.png')}
-          />
-        ),
-        an: true,
-      },
-    ],
-    dummy: [
-      {
-        name: 'Meditation',
-        time: '9:00 (25 min)',
-        icon: (
-          <Image
-            resizeMode="contain"
-            source={require('../../assets/images/share.png')}
-          />
-        ),
-        an: false,
-      },
-      {
-        name: 'Running',
-        time: '9:25 (47 min)',
-        icon: (
-          <Image
-            resizeMode="contain"
-            source={require('../../assets/images/heartCircle.png')}
-          />
-        ),
-        an: false,
-      },
+        icon: require('../../assets/images/signal.png'),
 
-      {
-        name: 'Yoga practice',
-        time: '10:02 (1:16 hour)',
-        icon: (
-          <Image
-            resizeMode="contain"
-            source={require('../../assets/images/signal.png')}
-          />
-        ),
+        // icon: (
+        //   <FastImageComponent
+        //     resizeMode="contain"
+        //     source={require('../../assets/images/signal.png')}
+        //   />
+        // ),
         an: true,
       },
     ],
@@ -157,7 +138,12 @@ const Location = (props) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  {val?.icon}
+                  {/* {val?.icon} */}
+                  <FastImageComponent
+                    resizeMode="contain"
+                    source={val?.icon}
+                    style={{height: 30, width: 30}}
+                  />
                 </View>
                 <View
                   style={{
@@ -176,19 +162,25 @@ const Location = (props) => {
                     {val?.name}
                   </Text>
                   {val?.an && (
-                    <Image
+                    <FastImageComponent
                       resizeMode="contain"
                       style={{marginTop: 10}}
                       source={require('../../assets/images/peoples.png')}
                     />
+                    //   <FastImageComponent
+                    //   resizeMode="contain"
+                    //   source={val?.icon}
+                    //   style={{height: 30, width: 30}}
+                    // />
                   )}
                 </View>
               </View>
 
               {!val?.an ? (
-                <Image
+                <FastImageComponent
                   source={require('../../assets/images/Avatars.png')}
                   resizeMode="contain"
+                  style={{height: 60, width: 60}}
                 />
               ) : (
                 <View style={{width: '100%', alignItems: 'center'}}></View>

@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 import {Actions} from '../../redux/actions/index';
 import AnimatedLoader from '../../components/loader';
 import moment from 'moment';
+import {FastImageComponent} from '../../components/fastimage';
 
 const Messages = (props) => {
   const token = props.token;
@@ -127,7 +128,7 @@ const Messages = (props) => {
                             borderRadius: 35,
                             overflow: 'hidden',
                           }}>
-                          <Image
+                          <FastImageComponent
                             source={
                               item?.user?.profile_url
                                 ? {uri: item?.user?.profile_url}

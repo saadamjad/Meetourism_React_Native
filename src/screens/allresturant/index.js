@@ -14,6 +14,8 @@ import Button from '../../components/buttons/generalbutton';
 import { Item } from 'native-base';
 // import * as Actions from '../../redux/actions/index';
 import { Actions } from '../../redux/actions/index';
+import { FastImageComponent } from '../../components/fastimage'
+
 
 import { connect } from 'react-redux';
 
@@ -104,7 +106,7 @@ const App = (props) => {
                         borderBottomRightRadius: 30,
                         justifyContent: 'flex-start',
                       }}>
-                      <Image
+                      {/* <Image
 
                         source={
                           imageUrl
@@ -118,6 +120,21 @@ const App = (props) => {
                           height: '100%',
                         }}
                         resizeMode="cover"
+                      /> */}
+                      <FastImageComponent
+                        source={
+                          imageUrl
+                            ? {
+                              uri: checkUrl ? image1WithUrl : image2,
+                            }
+                            : require('../../assets/images/statusbg.png')
+                        }
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                        }}
+                        resizeMode="cover"
+
                       />
                     </View>
                   </View>
@@ -239,11 +256,18 @@ const App = (props) => {
 
                                   marginHorizontal: 10,
                                 }}>
-                                <Image
+                                {/* <Image
                                   source={value?.image_path ? { uri: value?.image_path } : require('../../assets/images/r1.png')}
                                   style={{ height: '100%', width: '100%' }}
                                   resizeMode="cover"
+                                /> */}
+                                <FastImageComponent
+                                  source={value?.image_path ? { uri: value?.image_path } : require('../../assets/images/r1.png')}
+                                  style={{ height: '100%', width: '100%' }}
+                                  resizeMode="cover"
+
                                 />
+
 
                               </TouchableOpacity>
                             );

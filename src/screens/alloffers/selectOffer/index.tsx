@@ -21,6 +21,7 @@ import {connect} from 'react-redux';
 import AnimatedLoader from '../../../components/loader';
 import moment from 'moment';
 import axios from 'axios';
+import {FastImageComponent} from '../../../components/fastimage';
 function SelectOffer(props) {
   // const profileImage = props.userData
   //   ? props?.userData?.images[0]?.image_path
@@ -238,7 +239,7 @@ function SelectOffer(props) {
                     backgroundColor: 'white',
                     elevation: 2,
                   }}>
-                  <ImageBackground
+                  <FastImageComponent
                     resizeMode="cover"
                     style={{
                       height: '100%',
@@ -251,7 +252,10 @@ function SelectOffer(props) {
                             uri: `${val.image_path}`,
                           }
                         : require('../../../assets/images/download.jpg')
-                    }></ImageBackground>
+                    }
+                  />
+
+                  {/* </ImageBackground> */}
                 </View>
 
                 <View
@@ -272,7 +276,17 @@ function SelectOffer(props) {
                       elevation: 1,
                       backgroundColor: 'white',
                     }}>
-                    <Image
+                    {/* <Image
+                      style={{height: '100%', width: '100%'}}
+                      resizeMode="cover"
+                      source={
+                        val?.user?.profile_url
+                          ? {uri: val?.user?.profile_url}
+                          : require('../../../assets/images/avatar.png')
+                      }
+                    /> */}
+
+                    <FastImageComponent
                       style={{height: '100%', width: '100%'}}
                       resizeMode="cover"
                       source={

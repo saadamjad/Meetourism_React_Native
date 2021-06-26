@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
+import { FastImageComponent } from '../../components/fastimage';
 import { Actions } from '../../redux/actions/index';
 
 const DrawerContent = (props) => {
@@ -60,12 +61,12 @@ const DrawerContent = (props) => {
                 overflow: 'hidden',
                 borderColor: '#D47FA6',
               }}>
-              <Image
+              <FastImageComponent
                 source={state.userData?.images?.length > 0
                   ? { uri: state.userData?.images[0]?.image_path }
                   : require('../../assets/icons/row.png')}
                 style={{ height: '100%', width: '100%' }}
-                resizeMode="cover"></Image>
+                resizeMode="cover" />
             </TouchableOpacity>
             <View style={{ flex: 1, borderWidth: 0, alignItems: 'flex-end' }}>
               <TouchableOpacity
@@ -76,10 +77,10 @@ const DrawerContent = (props) => {
                   alignItems: 'center',
                 }}
                 onPress={() => props.navigation.closeDrawer()}>
-                <Image
+                <FastImageComponent
                   source={require('../../assets/icons/drawer.png')}
                   style={{ height: 30, width: 50 }}
-                  resizeMode="contain"></Image>
+                  resizeMode="contain" />
               </TouchableOpacity>
             </View>
           </View>
@@ -223,7 +224,7 @@ const DrawerContent = (props) => {
                   alignSelf: 'center',
                   borderColor: '#dc92a2',
                 }}>
-                <Image
+                <FastImageComponent
                   source={val.icon}
                   style={{ height: 15, width: 15, marginRight: 15 }}
                   resizeMode="contain"

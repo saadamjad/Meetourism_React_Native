@@ -20,6 +20,7 @@ import AnimatedLoader from '../../components/loader';
 
 import axios from 'axios';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import { FastImageComponent } from '../../components/fastimage';
 const App = (props) => {
   const token = props.token;
   const [userData, setUserData] = useState({
@@ -173,7 +174,7 @@ const App = (props) => {
                             props.navigation.navigate(item.navigation);
                         }}>
                         {i == 0 ? (
-                          <Image
+                          <FastImageComponent
                             // source={item.image}
 
                             source={
@@ -352,7 +353,7 @@ const App = (props) => {
               }}
               onPress={() => props.navigation.navigate('Notification')}>
               {/* <Feather name="mail" size={40} color={'white'}/> */}
-              <Image
+              <FastImageComponent
                 source={require('../../assets/icons/alerts.png')}
                 style={{ height: 40, width: 40 }}
                 resizeMode="contain"
@@ -436,7 +437,7 @@ const App = (props) => {
             navigateTo: 'SelectOffer',
             color: 'black',
             icons: (
-              <Image
+              <FastImageComponent
                 source={require('../../assets/icons/path.png')}
                 style={{
                   height: 18,
@@ -463,7 +464,7 @@ const App = (props) => {
             color: 'black',
 
             icons: (
-              <Image
+              <FastImageComponent
                 source={require('../../assets/icons/Chat.png')}
                 style={{
                   height: 18,

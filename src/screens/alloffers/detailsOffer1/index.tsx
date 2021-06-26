@@ -21,6 +21,7 @@ import {ImageBackground} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
 import AnimatedLoader from '../../../components/loader';
+import {FastImageComponent} from '../../../components/fastimage';
 
 let statusValue = 0;
 
@@ -274,7 +275,16 @@ function DetailOffer1({
                   height: 200,
                   paddingVertical: 20,
                 }}>
-                <Image
+                {/* <Image
+                  resizeMode="cover"
+                  style={{height: '100%', width: '90%'}}
+                  source={
+                    test?.image_path
+                      ? {uri: test?.image_path}
+                      : require('../../../assets/images/burgerDrink.png')
+                  }
+                /> */}
+                <FastImageComponent
                   resizeMode="cover"
                   style={{height: '100%', width: '90%'}}
                   source={

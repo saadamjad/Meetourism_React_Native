@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -8,13 +8,14 @@ import {
   Image,
   Text,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
+import { FastImageComponent } from '../../components/fastimage'
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Longheader from '../../components/header/longheader';
 
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 import * as Actions from '../../redux/actions/index';
 const App = (props) => {
   const [state, setState] = useState({});
@@ -22,9 +23,9 @@ const App = (props) => {
     const param = props?.route?.params?.data;
 
     if (param) {
-      setState({...state, filterResults: param});
+      setState({ ...state, filterResults: param });
     } else {
-      setState({...state, filterResults: []});
+      setState({ ...state, filterResults: [] });
     }
   }, []);
   return (
@@ -37,7 +38,7 @@ const App = (props) => {
       <Longheader
         headerText="Offers"
         filterIcon
-        OpenFilter={() => setState({...state, showFilter: true})}
+        OpenFilter={() => setState({ ...state, showFilter: true })}
         alignItemsText="center"
         backgroundColor={theme.textColor.whiteColor}
         leftArrow={true}
@@ -51,10 +52,10 @@ const App = (props) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    setState({...state, showOfferDetails: true, index: i});
+                    setState({ ...state, showOfferDetails: true, index: i });
                   }}
                   activeOpacity={1}
-                  style={{width: '100%', marginVertical: 10}}>
+                  style={{ width: '100%', marginVertical: 10 }}>
                   <View
                     style={{
                       height: 200,
@@ -66,7 +67,7 @@ const App = (props) => {
                       backgroundColor: 'white',
                       elevation: 2,
                     }}>
-                    <ImageBackground
+                    <FastImageComponent
                       resizeMode="cover"
                       style={{
                         height: '100%',
@@ -75,9 +76,11 @@ const App = (props) => {
                       }}
                       source={
                         val.image_path
-                          ? {uri: val.image_path}
+                          ? { uri: val.image_path }
                           : require('../../assets/images/download.jpg')
-                      }></ImageBackground>
+                      } />
+
+                    {/* </ImageBackground> */}
                   </View>
 
                   <View
@@ -96,17 +99,27 @@ const App = (props) => {
                         overflow: 'hidden',
                         borderWidth: 1,
                       }}>
-                      <Image
-                        style={{height: '100%', width: '100%'}}
+                      {/* <Image
+                        style={{ height: '100%', width: '100%' }}
                         resizeMode="cover"
                         source={
                           val.user.profile_url
-                            ? {uri: val.user.profile_url}
+                            ? { uri: val.user.profile_url }
                             : require('../../assets/images/avatar.png')
                         }
+                      /> */}
+                      <FastImageComponent
+                        style={{ height: '100%', width: '100%' }}
+                        resizeMode="cover"
+                        source={
+                          val.user.profile_url
+                            ? { uri: val.user.profile_url }
+                            : require('../../assets/images/avatar.png')
+                        }
+
                       />
                     </View>
-                    <View style={{marginLeft: 20}}>
+                    <View style={{ marginLeft: 20 }}>
                       <Text
                         style={{
                           color: theme.textColor.blackColor,

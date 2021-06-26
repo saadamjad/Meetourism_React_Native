@@ -2,6 +2,9 @@ import { View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 
+import { FastImageComponent } from '../../../components/fastimage'
+
+
 import { connect } from 'react-redux';
 
 import * as Actions from '../../../redux/actions/index';
@@ -40,9 +43,14 @@ const App = (props) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Image
+      {/* <Image
         source={require('../../../assets/images/logo.png')}
         style={{ resizeMode: 'contain', height: 150, width: 150 }}
+      /> */}
+      <FastImageComponent
+        source={require('../../../assets/images/logo.png')}
+        style={{ resizeMode: 'contain', height: 150, width: 150 }}
+
       />
     </View>
   );

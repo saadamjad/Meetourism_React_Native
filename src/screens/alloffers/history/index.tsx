@@ -5,8 +5,9 @@ import {TextInput} from 'react-native-gesture-handler';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import App from '../../../components/header';
+import {FastImageComponent} from '../../../components/fastimage';
+
 import {theme} from '../../../constants/theme';
-import Overlay from '../../../components/overlays';
 function History(props) {
   const [state, setState] = useState({selected: 0});
   return (
@@ -53,7 +54,12 @@ function History(props) {
                 type="AntDesign"
               />
               <View style={{height: 210, width: '90%'}}>
-                <Image
+                {/* <Image
+                  resizeMode="contain"
+                  style={{width: '100%', height: '100%'}}
+                  source={require('../../../assets/images/history.png')}
+                /> */}
+                <FastImageComponent
                   resizeMode="contain"
                   style={{width: '100%', height: '100%'}}
                   source={require('../../../assets/images/history.png')}

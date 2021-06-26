@@ -23,6 +23,7 @@ import { Actions } from '../../redux/actions/index';
 import { connect } from 'react-redux';
 
 import { ScrollView } from 'react-native-gesture-handler';
+import { FastImageComponent } from '../../components/fastimage';
 const Status = (props) => {
   //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
@@ -423,7 +424,7 @@ const Status = (props) => {
                               borderRadius: 36,
                               // borderWidth: 1,
                             }}>
-                            <Image
+                            <FastImageComponent
                               resizeMode="contain"
                               style={{ height: '100%', width: '100%' }}
                               source={require('../../assets/images/girl.png')}
@@ -672,7 +673,7 @@ const Status = (props) => {
                           overflow: 'hidden',
                           borderWidth: 1,
                         }}>
-                        <Image
+                        <FastImageComponent
                           resizeMode="contain"
                           style={{ height: '100%', width: '100%' }}
                           source={require('../../assets/images/girl.png')}

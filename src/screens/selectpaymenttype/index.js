@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -9,13 +9,14 @@ import {
 // import {Icon} from 'native-base';
 // import Style from './style';
 import CustomView from '../../components/customView';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
 // import {TextInput} from 'react-native-gesture-handler';
 // import Icon from 'react-native-vector-icons/Feather';
 // import DropDownPicker from 'react-native-dropdown-picker';
 // import Button from '../../components/buttons/generalbutton';
-import {Item} from 'native-base';
+import { Item } from 'native-base';
+import { FastImageComponent } from '../../components/fastimage';
 const Messages = (props) => {
   const [state, setState] = useState({
     messages: [
@@ -88,7 +89,7 @@ const Messages = (props) => {
         // searchIcon={true}
         headerText="Select Payment Account"
       />
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         {cards.map((item, i) => {
           return (
             <TouchableOpacity
@@ -112,9 +113,9 @@ const Messages = (props) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Image
+                <FastImageComponent
                   source={item.image}
-                  style={{height: '100%', width: '100%'}}
+                  style={{ height: '100%', width: '100%' }}
                   resizeMode="cover"
                 />
               </View>

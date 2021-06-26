@@ -23,6 +23,7 @@ import Toast from '../../../components/toastmessage';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import axios from 'axios';
 import AnimatedLoader from '../../../components/loader';
+import { FastImageComponent } from '../../../components/fastimage';
 
 // import { error } from 'react-native-gifted-chat/lib/utils';
 function CreateOffer(props) {
@@ -255,15 +256,16 @@ function CreateOffer(props) {
                     alignItems: 'center',
                     overflow: 'hidden'
                   }}>
-                  <ImageBackground
+                  <FastImageComponent
                     source={{ uri: state?.imageData?.uri }}
+                    resizeMode={"cover"}
                     style={{
                       height: '100%',
                       width: '100%',
                       alignItems: 'center',
                       justifyContent: 'center',
-                    }}>
-                    <Text
+                    }} />
+                  {/* <Text
                       style={{
                         fontSize: 30,
                         fontWeight: '700',
@@ -271,8 +273,8 @@ function CreateOffer(props) {
                         opacity: 0.4,
                       }}>
                       Image
-                    </Text>
-                  </ImageBackground>
+                    </Text> */}
+                  {/* </ImageBackground> */}
                 </View>
                 <View
                   style={{
