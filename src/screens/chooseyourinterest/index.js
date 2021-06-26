@@ -259,9 +259,9 @@ const Status = (props) => {
               state.description == "") {
 
               Toast('Error', ' Please fill all inputs correctly', 'error');
-              props.navigation.navigate('yourinterests', {
-                profileData: state,
-              });
+              // props.navigation.navigate('yourinterests', {
+              //   profileData: state,
+              // });
 
             }
 
