@@ -19,6 +19,7 @@ import { theme } from '../../constants/theme';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { Actions } from '../../redux/actions/index';
 import { connect } from 'react-redux';
+import { FastImageComponent } from '../../components/fastimage'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const App = (props) => {
@@ -122,6 +123,8 @@ const App = (props) => {
                 }
                 : require('../../assets/icons/girls.png')
             }
+
+
             style={{ height: '100%', width: '100%', borderBottomLeftRadius: 80 }}
             resizeMode="cover">
             <View
@@ -146,10 +149,18 @@ const App = (props) => {
                   justifyContent: 'center',
                 }}
                 onPress={() => props.navigation.openDrawer()}>
-                <Image
+                {/* <Image
                   source={require('../../assets/icons/drawer.png')}
                   style={{ height: 30, width: 30, tintColor: '#ED1C24' }}
                   resizeMode="contain"
+                /> */}
+                <FastImageComponent
+                  source={require('../../assets/icons/drawer.png')}
+                  resizeMode={'cover'}
+                  tintColor={'#ED1C24'}
+
+                  style={{ height: 30, width: 30 }}
+
                 />
               </TouchableOpacity>
 
@@ -186,16 +197,25 @@ const App = (props) => {
                         }}>
 
                         {i == 0 ? (
-                          <Image
+                          // <Image
 
-                            source={
-                              userData?.data?.profile_url ?
-                                { uri: userData?.data?.profile_url }
-                                : item.image
-                            }
+                          //   source={
+                          //     userData?.data?.profile_url ?
+                          //       { uri: userData?.data?.profile_url }
+                          //       : item.image
+                          //   }
+
+                          //   style={{ height: '100%', width: '100%' }}
+                          //   resizeMode="cover"
+                          // />
+                          <FastImageComponent
+                            source={userData?.data?.profile_url ?
+                              { uri: userData?.data?.profile_url }
+                              : item.image}
+                            resizeMode={'cover'}
+
 
                             style={{ height: '100%', width: '100%' }}
-                            resizeMode="cover"
                           />
                         ) : (
                           item.image
@@ -390,10 +410,19 @@ const App = (props) => {
               }}
               onPress={() => props.navigation.navigate('Notification')}>
               {/* <Feather name="mail" size={40} color={'white'}/> */}
-              <Image
+              {/* <Image
                 source={require('../../assets/icons/alerts.png')}
                 style={{ height: 40, width: 40 }}
                 resizeMode="contain"
+              /> */}
+              <FastImageComponent
+                source={require('../../assets/icons/alerts.png')}
+                resizeMode="contain"
+
+
+
+                style={{ height: 40, width: 40 }}
+
               />
               <Text style={{ color: 'white', fontSize: 10, marginTop: 5 }}>
                 {' '}
@@ -488,14 +517,27 @@ const App = (props) => {
             color: 'black',
 
             icons: (
-              <Image
+              // <Image
+              //   source={require('../../assets/icons/path.png')}
+              //   style={{
+              //     height: 18,
+              //     width: 18,
+              //     tintColor: select == 0 ? 'black' : 'black',
+              //   }}
+              //   resizeMode="contain"
+              // />
+              <FastImageComponent
                 source={require('../../assets/icons/path.png')}
+                resizeMode="contain"
+
+                tintColor={select == 0 ? 'black' : 'black'}
+
+
                 style={{
                   height: 18,
                   width: 18,
-                  tintColor: select == 0 ? 'black' : 'black',
                 }}
-                resizeMode="contain"
+
               />
             ),
           },
@@ -517,14 +559,19 @@ const App = (props) => {
             color: 'black',
 
             icons: (
-              <Image
+
+              <FastImageComponent
                 source={require('../../assets/icons/Chat.png')}
+                resizeMode="contain"
+
+                tintColor={select == 2 ? 'black' : 'black'}
+
+
                 style={{
                   height: 18,
                   width: 18,
-                  tintColor: select == 2 ? 'black' : 'black',
                 }}
-                resizeMode="contain"
+
               />
             ),
           },

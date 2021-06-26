@@ -5,6 +5,7 @@ import {View, Image, TouchableOpacity, Text} from 'react-native';
 import CustomView from '../../../components/customView';
 import {theme} from '../../../constants/theme';
 import LongHeader from '../../../components/header/longheader';
+import {FastImageComponent} from '../../../components/fastimage';
 const AllProfiles = (props) => {
   const [state, setState] = useState({
     messages: [
@@ -128,7 +129,7 @@ const AllProfiles = (props) => {
                   }}>
                   <View style={{alignItems: 'center', width: '0%'}}>
                     <View style={{height: 60, width: 60}}>
-                      <Image
+                      <FastImageComponent
                         style={{height: '100%', width: '100%'}}
                         resizeMode="cover"
                         source={require('../../../assets/images/ava.png')}

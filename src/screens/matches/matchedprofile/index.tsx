@@ -17,6 +17,7 @@ import Header from '../../../components/header';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Gallery from '../../../components/gallery';
+import {FastImageComponent} from '../../../components/fastimage';
 
 import {connect} from 'react-redux';
 
@@ -162,9 +163,10 @@ const Profile = (props) => {
                     // console.log('StartChat')
                     //  props.navigation.navigate('innerchat')
                   }>
-                  <Image
+                  <FastImageComponent
                     source={require('../../../assets/images/path.png')}
-                    style={{height: 20, width: 20, tintColor: '#9E94A6'}}
+                    tintColor={'#9E94A6'}
+                    style={{height: 20, width: 20}}
                     resizeMode="contain"
                   />
                   <Text style={{fontSize: 12, marginTop: 7, color: '#8F989D'}}>

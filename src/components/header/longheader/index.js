@@ -1,11 +1,11 @@
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 // import {theme} from '../../constants/';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {theme} from '../../../constants/theme';
+import { theme } from '../../../constants/theme';
 
 // allPRops
 // leftArrow={true}
@@ -77,19 +77,19 @@ const App = (props) => {
                   data: props.screenName,
                 })
               }
-              style={{paddingRight: 25, borderWidth: 0}}>
+              style={{ paddingRight: 25, borderWidth: 0 }}>
               <Ionicons name="search" size={20} color={'#241332'} />
             </TouchableOpacity>
           )}
 
           {props.filterIcon && (
             <TouchableOpacity
-              style={{paddingRight: 25, borderWidth: 0}}
+              style={{ paddingRight: 25, borderWidth: 0 }}
               onPress={() => props.OpenFilter()}>
               <Icon
                 type="AntDesign"
                 name="filter"
-                style={{fontSize: 20, color: '#241332'}}
+                style={{ fontSize: 20, color: '#241332' }}
               />
             </TouchableOpacity>
           )}

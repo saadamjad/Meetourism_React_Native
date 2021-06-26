@@ -9,12 +9,13 @@ import {
   AsyncStorage,
   ImageBackground,
 } from 'react-native';
-import axios from 'axios'
+import axios from 'axios';
 import {theme} from '../../../constants/theme';
 import {Icon} from 'native-base';
 import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions';
 import Geolocation from '@react-native-community/geolocation';
+import {FastImageComponent} from '../../../components/fastimage';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Geocoder from 'react-native-geocoding';
@@ -23,14 +24,13 @@ Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // u
 const App = (props) => {
   const data = props?.route?.params?.profileData;
   const [state, setState] = useState({
-  locationData:{}
+    locationData: {},
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     // _ReverseGeoCode()
     // _GetCities()
-
-  },[])
+  }, []);
   const comeFromProfileStatus = props?.route?.params?.comeFromProfileStatus;
 
   const [allStatus, setAllStatus] = useState(
@@ -62,13 +62,10 @@ const App = (props) => {
         ],
   );
 
-  
-  
   const _GetCities = async () => {
-    props.GetCounties()
+    props.GetCounties();
   };
   const toggleOverlay = async (i, item) => {
-
     const data2 = {...data, status: i == 1 ? 'in-relation' : item};
 
     props.navigation.navigate('chooseyourinterest', {
@@ -99,7 +96,12 @@ const App = (props) => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Image
+            {/* <Image
+              resizeMode="contain"
+              source={require('../../../assets/images/logo.png')}
+              style={{height: 120, width: 130}}
+            /> */}
+            <FastImageComponent
               resizeMode="contain"
               source={require('../../../assets/images/logo.png')}
               style={{height: 120, width: 130}}
@@ -190,8 +192,6 @@ const mapDispatchToProps = {
   profileData: Actions.profileData,
   GetCounties: Actions.GetCounties,
   ReverseGeoCode: Actions.ReverseGeoCode,
-  
-
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 // export default Status;

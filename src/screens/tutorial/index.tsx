@@ -6,6 +6,7 @@ import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import Header from '../../components/header/longheader';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import {FastImageComponent} from '../../components/fastimage';
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
   let node = useRef();
@@ -178,7 +179,7 @@ const Tutorial = (props) => {
                 // backgroundColor: 'red',
               }}>
               <View style={{height: 150, borderWidth: 0, width: 150}}>
-                <Image
+                <FastImageComponent
                   source={require('../../assets/images/logo.png')}
                   resizeMode="contain"
                   style={{height: '100%', width: '100%'}}

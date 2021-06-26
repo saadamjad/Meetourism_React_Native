@@ -133,7 +133,7 @@ const Friends = (props) => {
                   }}>
                   <View style={{alignItems: 'center', width: '0%'}}>
                     <View style={{height: 40, width: 40}}>
-                      <Image
+                      <FastImageComponent
                         style={{height: '100%', width: '100%'}}
                         resizeMode="cover"
                         source={require('../../assets/images/ava.png')}

@@ -1,36 +1,59 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { FastImageComponent } from '../../components/fastimage'
+
 const App = () => {
   return (
     <Swiper
       style={styles.wrapper}
       showsPagination={false}
       showsButtons={true}
-      // color={'red'}
-      // ={{color: 'red'}}
+    // color={'red'}
+    // ={{color: 'red'}}
     >
       {/* <View style={styles.slide1}> */}
-      <Image
+      {/* <Image
         source={require('../../assets/images/profile.png')}
-        style={{height: '100%', width: '100%'}}
+        style={{ height: '100%', width: '100%' }}
         resizeMode="cover"
+      /> */}
+
+      <FastImageComponent
+        resizeMode={'cover'}
+
+        source={require('../../assets/images/profile.png')}
+        style={{ height: '100%', width: '100%' }}
+
       />
       {/* <Text style={styles.text}>Hello Swiper</Text> */}
       {/* </View> */}
       <View style={styles.slide2}>
-        <Image
+        {/* <Image
           source={require('../../assets/images/background.png')}
-          style={{height: '100%', width: '100%'}}
+          style={{ height: '100%', width: '100%' }}
+        /> */}
+
+        <FastImageComponent
+          resizeMode={'cover'}
+          source={require('../../assets/images/background.png')}
+          style={{ height: '100%', width: '100%' }}
+
         />
         {/* <Text style={styles.text}>Beautiful</Text> */}
       </View>
       <View style={styles.slide3}>
-        <Image
+        {/* <Image
           source={require('../../assets/images/profile.png')}
-          style={{height: '100%', width: '100%'}}
+          style={{ height: '100%', width: '100%' }}
+        /> */}
+        <FastImageComponent
+          resizeMode={'cover'}
+          source={require('../../assets/images/profile.png')}
+          style={{ height: '100%', width: '100%' }}
         />
         {/* <Text style={styles.text}>And simple</Text> */}
+
       </View>
     </Swiper>
   );

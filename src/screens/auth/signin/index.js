@@ -19,6 +19,8 @@ import { connect } from 'react-redux';
 import { Actions } from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
+import { FastImageComponent } from '../../../components/fastimage'
+
 
 import Geolocation from '@react-native-community/geolocation';
 import { initReactI18next } from 'react-i18next'
@@ -229,12 +231,20 @@ const App = (props) => {
           require('../../../assets/images/instagram.png'),
           require('../../../assets/images/facebook.png'),
         ].map((val, ind) => (
-          <Image
+          // <Image
+          //   resizeMode="contain"
+          //   source={val}
+          //   style={{ height: 30, width: 30 }}
+          //   resizeMode="contain"
+          //   key={ind}
+          // />
+          <FastImageComponent
             resizeMode="contain"
             source={val}
             style={{ height: 30, width: 30 }}
             resizeMode="contain"
             key={ind}
+
           />
         ))}
       </View>

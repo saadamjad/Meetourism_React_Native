@@ -19,6 +19,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { connect } from 'react-redux';
 
 import { Actions } from '../../redux/actions/index';
+import { FastImageComponent } from '../../components/fastimage';
 const Profile = (props) => {
   const token = props.token;
   const data = props?.route?.params?.data;
@@ -188,7 +189,7 @@ const Profile = (props) => {
                     justifyContent: 'center',
                   }}
                   onPress={() => props.navigation.navigate('innerchat')}>
-                  <Image
+                  <FastImageComponent
                     source={require('../../assets/images/path.png')}
                     style={{ height: 20, width: 20, tintColor: 'purple' }}
                     resizeMode="contain"
@@ -209,7 +210,7 @@ const Profile = (props) => {
                       blockListNotOpen: true,
                     })
                   }>
-                  <Image
+                  <FastImageComponent
                     source={require('../../assets/icons/singleuser.png')}
                     style={{ height: 20, width: 20, tintColor: 'purple' }}
                     resizeMode="contain"
@@ -391,11 +392,11 @@ const Profile = (props) => {
                     borderRadius: 40,
                     elevation: 1,
                   }}>
-                  <Image
-                    style={{width: '100%', height: 400}}
-                    resizeMode="stretch"
-                    source={require('../../assets/images/profile.png')}
-                  />
+                  // <Image
+                  //   style={{width: '100%', height: 400}}
+                  //   resizeMode="stretch"
+                  //   source={require('../../assets/images/profile.png')}
+                  // />
                 </View>
                 <View>
                   <Text

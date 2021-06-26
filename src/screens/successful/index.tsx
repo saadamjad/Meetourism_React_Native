@@ -7,6 +7,7 @@ import CustomView from '../../components/customView';
 import App from '../../components/header';
 import {theme} from '../../constants/theme';
 import {Overlay} from 'react-native-elements';
+import {FastImageComponent} from '../../components/fastimage';
 // import Overlay from '../../components/overlays';
 function Successful(props) {
   return (
@@ -75,7 +76,7 @@ function Successful(props) {
               alignItems: 'center',
               marginTop: 60,
             }}>
-            <Image
+            <FastImageComponent
               resizeMode="contain"
               source={require('../../assets/images/burgerDrink.png')}
             />
@@ -86,7 +87,7 @@ function Successful(props) {
               alignItems: 'center',
               marginTop: 30,
             }}>
-            <Image
+            <FastImageComponent
               resizeMode="cover"
               style={{width: '100%', height: 200}}
               source={require('../../assets/images/map.jpg')}

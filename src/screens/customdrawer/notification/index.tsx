@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
+import {FastImageComponent} from '../../../components/fastimage';
 const Notification = (props) => {
   const token = props.token;
   useEffect(() => {
@@ -143,9 +144,13 @@ const Notification = (props) => {
                         // borderWidth: 1,
                         backgroundColor: 'white',
                       }}> */}
-                    <Image
+                    <FastImageComponent
                       resizeMode="contain"
                       source={require('../../../assets/images/ava.png')}
+                      style={{
+                        width: 50,
+                        height: 50,
+                      }}
                     />
                     {/* </View> */}
                   </View>

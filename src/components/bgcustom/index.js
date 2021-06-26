@@ -1,18 +1,19 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import { View, Text, Image } from 'react-native';
 import Header from '../header';
-import {theme} from '../../constants/theme';
+import { theme } from '../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { FastImageComponent } from '../../components/fastimage'
 
 const App = (props) => {
   return (
-    <View style={{flex: 1, backgroundColor: theme.secondaryColor}}>
+    <View style={{ flex: 1, backgroundColor: theme.secondaryColor }}>
       <Header
         text={true}
         isTransparent={true}
         isVisibleIcon={true}
         navigation={props.navigation}
-        //   drawerIcon={true}
+      //   drawerIcon={true}
       />
       <View
         style={{
@@ -32,7 +33,7 @@ const App = (props) => {
             alignItems: 'center',
             // backgroundColor: 'red',
           }}>
-          <View style={{width: '74%'}}>
+          <View style={{ width: '74%' }}>
             {props.icon ? (
               <AntDesign
                 name={'checkcircleo'}
@@ -65,9 +66,14 @@ const App = (props) => {
               </>
             )}
           </View>
-          <Image
-            source={require('../../assets/icons/logo-white.png')}
-            style={{height: 80, width: 80, resizeMode: 'contain'}}
+
+          <FastImageComponent
+            // source={require('../../assets/icons/logo-white.png')}
+
+            style={{ height: 80, width: 80, }}
+
+
+
           />
         </View>
         {/* <View style={{flex: 1, justifyContent: 'flex-end'}}> */}

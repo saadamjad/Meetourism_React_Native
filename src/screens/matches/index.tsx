@@ -5,6 +5,7 @@ import Header from '../../components/header';
 import GlobalButton from '../../components/buttons/generalbutton';
 import {theme} from '../../constants/theme';
 import AnimatedLoader from '../../components/loader';
+import {FastImageComponent} from '../../components/fastimage';
 
 import {connect} from 'react-redux';
 
@@ -88,7 +89,7 @@ const App = (props) => {
                         borderColor: 'red',
                         backgroundColor: 'white',
                       }}>
-                      <Image
+                      <FastImageComponent
                         source={
                           item.image_path
                             ? {uri: item.image_path}
@@ -173,7 +174,7 @@ const App = (props) => {
                   </Text>
 
                   <View style={{borderWidth: 0, width: '100%'}}>
-                    <Image
+                    <FastImageComponent
                       source={
                         item.profile_url
                           ? {
