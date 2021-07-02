@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Meetourism</string>
+    <string name="server_client_id">631241702922-pqn95r82fmfuthu5btrus4ufgfa1naur.apps.googleusercontent.com</string>
       <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDFo66PRlfuR4AFipOk_SRSY_KG6-2FUTM</string>
 </resources>

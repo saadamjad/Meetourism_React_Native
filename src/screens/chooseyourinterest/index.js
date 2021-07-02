@@ -493,7 +493,7 @@ const Status = (props) => {
                     placeholder={'Enter Company Name'}
                   />
                 ) : null}
-                {/* {company_name ? (
+                {company_name ? (
                   <View
                     style={{
                       width: '100%',
@@ -555,7 +555,7 @@ const Status = (props) => {
                       </TouchableOpacity>
                     </TouchableOpacity>
                   </View>
-                ) : null} */}
+                ) : null}
 
                 <TextInput
                   style={{
