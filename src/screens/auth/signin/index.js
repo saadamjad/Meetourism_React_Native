@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Dimensions,
@@ -11,22 +11,15 @@ import {
   Linking,
 } from 'react-native';
 
-import {theme} from '../../../constants/theme';
-import InstagramLogin from 'react-native-instagram-login';
+import { theme } from '../../../constants/theme';
 // import styles from './styles';
 import CustomView from '../../../components/customView';
 import HoldOn from '../../holdOn';
-import {connect} from 'react-redux';
-import {Actions} from '../../../redux/actions/index';
+import { connect } from 'react-redux';
+import { Actions } from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
-import {
-  LoginManager,
-  Settings,
-  AccessToken,
-  AuthenticationToken,
-} from 'react-native-fbsdk-next';
-import {FastImageComponent} from '../../../components/fastimage';
+import { FastImageComponent } from '../../../components/fastimage'
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -36,8 +29,7 @@ import {
 GoogleSignin.configure({
   // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
 
-  webClientId:
-    '631241702922-pqn95r82fmfuthu5btrus4ufgfa1naur.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+  webClientId: '631241702922-pqn95r82fmfuthu5btrus4ufgfa1naur.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
   // hostedDomain: '', // specifies a hosted domain restriction
   // loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
@@ -47,19 +39,22 @@ GoogleSignin.configure({
 });
 
 import Geolocation from '@react-native-community/geolocation';
-import {initReactI18next} from 'react-i18next';
+import { initReactI18next } from 'react-i18next'
+
+
+
 
 const App = (props) => {
   // const { t, i18n } = useTranslation()
-  const [instagramLogin, setInstagramLogin] = useState(useRef());
+
 
   signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       // console.log("userinfo===", userInfo)
-      let user = userInfo?.user;
-      setSignvalues({...signupValues, name: user?.name, email: user?.email});
+      let user = userInfo?.user
+      setSignvalues({ ...signupValues, name: user?.name, email: user?.email })
       // this.setState({ userInfo });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -74,38 +69,21 @@ const App = (props) => {
     }
   };
 
-  const fbSignin = async () => {
-    try {
-      const result = await LoginManager.logInWithPermissions(
-        ['public_profile', 'email'],
-        'limited',
-        'my_nonce',
-      );
-      console.log(result);
-
-      if (Platform.OS === 'ios') {
-        const result = await AuthenticationToken.getAuthenticationTokenIOS();
-        console.log(result?.authenticationToken);
-      } else {
-        const result = await AccessToken.getCurrentAccessToken();
-        console.log(result?.accessToken);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   // console.log("t", t, i18n)
   const getLanguage = (language) => {
     if (language === 0) {
-      console.log('English');
-      return i18n.changeLanguage('en');
-    } else if (language === 1) {
-      return i18n.changeLanguage('zh');
-    } else if (language === 2) {
-      return i18n.changeLanguage('fr');
+      console.log("English")
+      return i18n.changeLanguage('en')
     }
-  };
+    else if (language === 1) {
+      return i18n.changeLanguage('zh')
+
+    }
+    else if (language === 2) {
+      return i18n.changeLanguage('fr')
+    }
+  }
 
   const [signupValues, setSignvalues] = useState({
     name: '',
@@ -126,14 +104,17 @@ const App = (props) => {
   });
   const ref = useRef();
 
+
   useEffect(() => {
     // console.log("1")
-    Settings.initializeSDK();
+
 
     ref.current?.setAddressText('Some Text blue');
 
     // _getCurrentLocation();
   }, []);
+
+
 
   const _getCurrentLocation = () => {
     Geolocation.getCurrentPosition((info) =>
@@ -145,8 +126,8 @@ const App = (props) => {
     visible: false,
 
     routes: [
-      {key: 'first', title: 'SignIn'},
-      {key: 'second', title: 'SignUp'},
+      { key: 'first', title: 'SignIn' },
+      { key: 'second', title: 'SignUp' },
     ],
   });
 
@@ -154,7 +135,7 @@ const App = (props) => {
   const [loaderMessage, setLoaderMessage] = useState('');
 
   const toggleOverlay = (data) => {
-    setState({...state, visible: !state.visible, data: data});
+    setState({ ...state, visible: !state.visible, data: data });
   };
 
   const [elements, setElemtns] = useState([
@@ -163,7 +144,7 @@ const App = (props) => {
       isSecure: false,
       keyboardType: 'email-address',
     },
-    {placeholder: 'Password', isSecure: true, keyboardType: 'default'},
+    { placeholder: 'Password', isSecure: true, keyboardType: 'default' },
   ]);
   const _SignIn = async () => {
     if (signInValues.email == '' || signInValues.password == '') {
@@ -187,8 +168,8 @@ const App = (props) => {
   };
 
   const signInRoute = () => (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{alignItems: 'center'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ alignItems: 'center' }}>
         {elements.map((val, i) => {
           return (
             <View
@@ -197,8 +178,8 @@ const App = (props) => {
                   i == 0 && signInValues.email.length > 0
                     ? theme.borderColor.activeBorderColor
                     : i == 1 && signInValues.password.length > 0
-                    ? theme.borderColor.activeBorderColor
-                    : theme.borderColor.inActiveBorderColor,
+                      ? theme.borderColor.activeBorderColor
+                      : theme.borderColor.inActiveBorderColor,
                 borderBottomWidth: 1,
                 width: '80%',
                 height: 40,
@@ -213,8 +194,8 @@ const App = (props) => {
                 }}
                 onChangeText={(text) =>
                   i == 0
-                    ? setSignINvalues({...signInValues, email: text})
-                    : setSignINvalues({...signInValues, password: text})
+                    ? setSignINvalues({ ...signInValues, email: text })
+                    : setSignINvalues({ ...signInValues, password: text })
                 }
                 placeholder={val.placeholder}
                 keyboardType={val.keyboardType}
@@ -249,7 +230,7 @@ const App = (props) => {
             // props.navigation.replace('drawer')
           }
           activeOpacity={0.75}>
-          <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+          <Text style={{ color: theme.textColor.whiteColor }}>CONTINUE</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -276,11 +257,11 @@ const App = (props) => {
     </View>
   );
   const _onChangeText = (text, key) => {
-    setSignvalues({...signupValues, [key]: text});
+    setSignvalues({ ...signupValues, [key]: text });
   };
   const _SocialIcons = () => {
     return (
-      <View style={{flexDirection: 'row', marginTop: 20, borderWidth: 0}}>
+      <View style={{ flexDirection: 'row', marginTop: 20, borderWidth: 0 }}>
         {[
           require('../../../assets/images/gmail.png'),
           require('../../../assets/images/instagram.png'),
@@ -297,29 +278,28 @@ const App = (props) => {
             key={ind}
             // style={{}}
             onPress={() => {
-              ind == 1
-                ? instagramLogin.show()
-                : ind == 2
-                ? fbSignin()
-                : signIn();
-            }}>
+              signIn()
+            }}
+          >
+
             <FastImageComponent
               resizeMode="contain"
               source={val}
-              style={{height: 30, width: 30}}
+              style={{ height: 30, width: 30 }}
               resizeMode="contain"
               key={ind}
+
             />
           </TouchableOpacity>
+
         ))}
       </View>
     );
   };
   const _Signup = async () => {
-    let value =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        signupValues.email,
-      );
+    let value = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+      signupValues.email,
+    );
     if (
       signupValues.name == '' ||
       signupValues.password == '' ||
@@ -369,7 +349,7 @@ const App = (props) => {
 
   const signUpRoute = () => (
     <>
-      <View style={{alignItems: 'center'}}>
+      <View style={{ alignItems: 'center' }}>
         <View
           style={{
             backgroundColor: 'white',
@@ -487,20 +467,25 @@ const App = (props) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{color: theme.textColor.whiteColor}}>CONTINUE</Text>
+          <Text style={{ color: theme.textColor.whiteColor }}>CONTINUE</Text>
         </TouchableOpacity>
       </View>
     </>
   );
   // const { t, i18n } = useTranslation()
 
+
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
+
       <TouchableOpacity
         onPress={() => signIn()}
-        style={{height: 40, width: 100, borderWidth: 1}}>
+        style={{ height: 40, width: 100, borderWidth: 1 }}
+      >
         <Text> LGOIN </Text>
       </TouchableOpacity>
+
+
 
       {/* <Text> {state?.test?.city} </Text>
       <Text> {state?.test?.regionName} </Text> */}
@@ -541,7 +526,7 @@ const App = (props) => {
         }}>
         {['SIGN IN', 'SIGN UP'].map((val, i) => (
           <TouchableOpacity
-            onPress={() => setState({...state, selectedIndex: i})}
+            onPress={() => setState({ ...state, selectedIndex: i })}
             key={i}
             activeOpacity={0.7}
             style={{
@@ -568,17 +553,6 @@ const App = (props) => {
           </TouchableOpacity>
         ))}
       </View>
-      <InstagramLogin
-        ref={(ref) => setInstagramLogin(ref)}
-        appId="523961712184118"
-        appSecret="faccaeb4a22f85b66af116ab98823bd6"
-        redirectUrl="https://kindlelover.com/"
-        scopes={['user_profile', 'user_media']}
-        onLoginSuccess={(data) => {
-          console.log('GOT THE TOKEN!!', data);
-        }}
-        onLoginFailure={(data) => console.log(data)}
-      />
 
       {state.selectedIndex == '0' ? signInRoute() : signUpRoute()}
       <AnimatedLoader
