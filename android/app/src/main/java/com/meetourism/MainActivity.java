@@ -1,4 +1,4 @@
-package com.meetourism;
+package com.meetourismapp;
 
 import com.facebook.react.ReactActivity;
 

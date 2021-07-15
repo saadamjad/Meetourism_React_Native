@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
   View,
   Image,
@@ -10,23 +10,23 @@ import {
 } from 'react-native';
 import Toast from '../../components/toastmessage';
 
-import { FastImageComponent } from '../../components/fastimage'
+import {FastImageComponent} from '../../components/fastimage';
 
-
-import { theme } from '../../constants/theme';
-import { Icon } from 'native-base';
+import {theme} from '../../constants/theme';
+import {Icon} from 'native-base';
 import GlobalButton from '../../components/buttons/generalbutton';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
 // import * as Actions from '../../redux/actions/index';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Actions } from '../../redux/actions/index';
-import Entypo from 'react-native-vector-icons/Entypo'
+import {Actions} from '../../redux/actions/index';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Geocoder from 'react-native-geocoding';
-Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
+Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // use a valid API key
 
 import axios from 'axios';
 import FastImage from 'react-native-fast-image';
@@ -77,21 +77,22 @@ const Status = (props) => {
     geoCodeData: props.reverseGeoCodeData,
     latitude: '24.9180',
     longitude: '67.0971',
-    editImages: []
+    editImages: [],
   });
 
   const [open, setOpen] = useState(false);
   useEffect(() => {
-
     // console.log("props?.userDataprops?.userData", props?.userData.selectCountry)
     if (props?.userData && props.editSetting) {
       setState({
         ...state,
         interests: dataRedux?.interests,
         selectCountry: dataRedux?.selectCountry,
-        images: dataRedux?.images && dataRedux.images.map((item, i) => {
-          return item.image_path
-        }),
+        images:
+          dataRedux?.images &&
+          dataRedux.images.map((item, i) => {
+            return item.image_path;
+          }),
         userName: dataRedux?.username,
         email: dataRedux?.email,
         height: Number(dataRedux?.height),
@@ -105,8 +106,7 @@ const Status = (props) => {
         status: data?.status || dataRedux.status,
         description: dataRedux?.description,
         company_name: dataRedux?.company_name,
-        Location: true
-
+        Location: true,
       });
     } else {
       setState({
@@ -118,13 +118,10 @@ const Status = (props) => {
         password: data?.password,
       });
     }
-    props.GetCounties()
-    props.ReverseGeoCode()
-    props.GetInterests()
-
+    props.GetCounties();
+    props.ReverseGeoCode();
+    props.GetInterests();
   }, []);
-
-
 
   const _getCurrentLocation = () => {
     Geolocation.getCurrentPosition((info) => {
@@ -153,8 +150,8 @@ const Status = (props) => {
         console.log('res', res);
         let temp = state.images;
         temp.push(res.uri);
-        setState({ ...state, images: temp });
-        ImageUploadingFunc(res)
+        setState({...state, images: temp});
+        ImageUploadingFunc(res);
 
         // if (props.editSetting) {
         //   console.log("===============EDITING==========")
@@ -196,27 +193,19 @@ const Status = (props) => {
         // }
       }
     });
-
   };
 
   const ImageUploadingFunc = async (param) => {
-
-    let responseReturlUrl = await props.ImageUploading(param, props.token)
-
+    let responseReturlUrl = await props.ImageUploading(param, props.token);
 
     if (props.editSetting) {
-      let _tempEditImages = state.editImages
-      let value = [..._tempEditImages, responseReturlUrl]
-      console.log("value====", value)
+      let _tempEditImages = state.editImages;
+      let value = [..._tempEditImages, responseReturlUrl];
+      console.log('value====', value);
 
-      setState({ ...state, editImages: value })
-
-
+      setState({...state, editImages: value});
     }
-
-
-
-  }
+  };
 
   // const _GetInterests = async () => {
   //   console.log('all interests');
@@ -241,67 +230,59 @@ const Status = (props) => {
   // };
 
   const _Buttons = () => {
-
     return (
-
-
-      <View style={{ overflow: 'hidden', marginVertical: 5 }}>
+      <View style={{overflow: 'hidden', marginVertical: 5}}>
         <GlobalButton
           buttonText="Choose Your Interest"
           onPress={async () => {
             if (
-              state.userName == "" ||
-              state.height == "" ||
-              state.weight == "" ||
-              state.eyeColor == "" ||
-              state.contact == "" ||
-              state.age == "" ||
-              state.firstName == "" ||
-              state.lastName == "" ||
-              state.city == "" ||
-              state.description == "") {
-
+              state.userName == '' ||
+              state.height == '' ||
+              state.weight == '' ||
+              state.eyeColor == '' ||
+              state.contact == '' ||
+              state.age == '' ||
+              state.firstName == '' ||
+              state.lastName == '' ||
+              state.city == '' ||
+              state.description == ''
+            ) {
               Toast('Error', ' Please fill all inputs correctly', 'error');
               // props.navigation.navigate('yourinterests', {
               //   profileData: state,
               // });
-
-            }
-
-            else if (company_name && state.company_name == "") {
+            } else if (company_name && state.company_name == '') {
               Toast('Error', ' Please fill Company Name', 'error');
-
-            }
-            else if ((state.countryId == "" || state.selectCountry == '') && !props.editSetting) {
+            } else if (
+              (state.countryId == '' || state.selectCountry == '') &&
+              !props.editSetting
+            ) {
               Toast('Error', ' Please Select Country', 'error');
-
-            }
-            else {
+            } else {
               // props.StoreData(state.images);
               props.navigation.navigate('yourinterests', {
                 profileData: state,
-                editImages: state.editImages
+                editImages: state.editImages,
               });
             }
-
           }}
         />
       </View>
     );
   };
 
-
-
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView
+      style={{flex: 1}}
+      keyboardShouldPersistTaps="always"
+      contentContainerStyle={{flexGrow: 1}}>
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
-        style={{ height: '100%', width: '100%' }}
+        style={{height: '100%', width: '100%', flex: 1}}
         resizeMode="cover">
-        <View style={{ flex: 1, backgroundColor: 'rgba(00,00,00,0.8)' }}>
+        <View style={{flex: 1, backgroundColor: 'rgba(00,00,00,0.8)'}}>
           <View
             style={{
-
               paddingVertical: 10,
               paddingLeft: 20,
             }}>
@@ -315,7 +296,7 @@ const Status = (props) => {
               <Icon
                 type="AntDesign"
                 name="arrowleft"
-                style={{ color: 'white', fontSize: 17 }}
+                style={{color: 'white', fontSize: 17}}
               />
             </TouchableOpacity>
           </View>
@@ -347,42 +328,45 @@ const Status = (props) => {
                 }}>
                 Subscribe
               </Text>
-              <ScrollView
-
-                horizontal={true}
-              >
-
+              <ScrollView horizontal={true}>
                 <View
                   style={{
                     flexDirection: 'row',
                     width: '100%',
 
                     justifyContent: 'center',
-
                   }}>
-
-
                   {state.images &&
-                    state.images.map((val, i) => (
+                    state.images.map((val, i) =>
                       // console.log("V====", val),
                       // const normalisedSource = val && typeof val === 'string' && (val.split('https://')[1] || val.split('http://')[1]) ? val : null
                       // val === 'undefined' ? console.log("undefine") : console.log("not")
-                      val !== "undefined" ?
-
-                        < View >
-                          {console.log("Va", val)}
+                      val !== 'undefined' ? (
+                        <View>
+                          {console.log('Va', val)}
                           <TouchableOpacity
-                            style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
-
-                            onPress={() => {
-                              let array = state.images.filter((item, ind) => i != ind)
-                              console.log("array", array)
-                              setState({
-                                ...state, images: array
-                              })
+                            style={{
+                              height: 30,
+                              width: 30,
+                              alignItems: 'flex-start',
+                              justifyContent: 'flex-end',
+                              borderWidth: 0,
                             }}
-                          >
-                            <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
+                            onPress={() => {
+                              let array = state.images.filter(
+                                (item, ind) => i != ind,
+                              );
+                              console.log('array', array);
+                              setState({
+                                ...state,
+                                images: array,
+                              });
+                            }}>
+                            <Entypo
+                              name="circle-with-cross"
+                              size={20}
+                              color={theme.secondaryColor}
+                            />
                           </TouchableOpacity>
                           <View
                             key={i}
@@ -418,20 +402,19 @@ const Status = (props) => {
                               }}
                               resizeMode="cover"
                               // source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
-                              source={val ? { uri: val } : require('../../assets/icons/girls.png')}
-
-
-
+                              source={
+                                val
+                                  ? {uri: val}
+                                  : require('../../assets/icons/girls.png')
+                              }
                             />
                           </View>
-
                         </View>
-                        : null
-                    ))}
-                  {
-                    state.images?.length >= 5 ? null :
-                      <>
-                        {/* <TouchableOpacity
+                      ) : null,
+                    )}
+                  {state.images?.length >= 5 ? null : (
+                    <>
+                      {/* <TouchableOpacity
                           style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
 
                           onPress={() => {
@@ -444,25 +427,29 @@ const Status = (props) => {
                         >
                           <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
                         </TouchableOpacity> */}
-                        <TouchableOpacity
-                          style={{
-                            backgroundColor: '#998FA2',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            width: 50,
-                            marginLeft: 10,
-                            marginTop: 30,
-                            height: 50,
-                            overflow: 'hidden',
-                            borderRadius: 50,
-                          }}
-                          onPress={() => {
-                            _Imageupload();
-                          }}>
-                          <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
-                        </TouchableOpacity>
-                      </>
-                  }
+                      <TouchableOpacity
+                        style={{
+                          backgroundColor: '#998FA2',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: 50,
+                          marginLeft: 10,
+                          marginTop: 30,
+                          height: 50,
+                          overflow: 'hidden',
+                          borderRadius: 50,
+                        }}
+                        onPress={() => {
+                          _Imageupload();
+                        }}>
+                        <Icon
+                          style={{fontSize: 20}}
+                          type="AntDesign"
+                          name="plus"
+                        />
+                      </TouchableOpacity>
+                    </>
+                  )}
                 </View>
               </ScrollView>
 
@@ -487,7 +474,7 @@ const Status = (props) => {
                     }}
                     value={state.company_name}
                     onChangeText={(text) =>
-                      setState({ ...state, company_name: text })
+                      setState({...state, company_name: text})
                     }
                     placeholderTextColor={theme.borderColor.inActiveBorderColor}
                     placeholder={'Enter Company Name'}
@@ -502,7 +489,7 @@ const Status = (props) => {
                       overflow: 'hidden',
                       borderColor: theme.borderColor.inActiveBorderColor,
                     }}
-                  // editable={false}
+                    // editable={false}
                   >
                     <TouchableOpacity
                       onPress={() => _getCurrentLocation()}
@@ -524,7 +511,7 @@ const Status = (props) => {
                           borderWidth: 0,
                           flex: 1,
                         }}>
-                        {state.Location && state.geoCodeData ? (
+                        {/* {state.Location && state.geoCodeData ? (
 
                           <Text>
                             {' '}
@@ -535,11 +522,30 @@ const Status = (props) => {
                               props.reverseGeoCodeData?.countryCode +
                               '  ,  ' +
                               props.reverseGeoCodeData?.regionName}
-                          </Text>
-                        ) : null}
+                          </Text> 
+                        ) : null} */}
+                        <GooglePlacesAutocomplete
+                          listViewDisplayed={false}
+                          fetchDetails={true}
+                          keyboardShouldPersistTaps={'always'}
+                          placeholder="Search"
+                          onPress={(data, details) => {
+                            // 'details' is provided when fetchDetails = true
+                            setState({
+                              ...state,
+                              longitude: details?.geometry?.location?.lat,
+                              latitude: details?.geometry?.location?.lat,
+                            });
+                            console.log(data, details);
+                          }}
+                          query={{
+                            key: 'AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA',
+                            language: 'en',
+                          }}
+                        />
                       </View>
                       <TouchableOpacity
-                        onPress={() => _getCurrentLocation()}
+                        // onPress={() => _getCurrentLocation()}
                         style={{
                           height: '100%',
                           width: 100,
@@ -583,7 +589,7 @@ const Status = (props) => {
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   value={state.firstName}
-                  onChangeText={(text) => setState({ ...state, firstName: text })}
+                  onChangeText={(text) => setState({...state, firstName: text})}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="First Name"
                 />
@@ -596,7 +602,7 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
-                  onChangeText={(text) => setState({ ...state, lastName: text })}
+                  onChangeText={(text) => setState({...state, lastName: text})}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Last Name"
                 />
@@ -614,7 +620,7 @@ const Status = (props) => {
                   placeholder="Email"
                 />
                 <TextInput
-                  onChangeText={(text) => setState({ ...state, contact: text })}
+                  onChangeText={(text) => setState({...state, contact: text})}
                   value={state.contact}
                   style={{
                     width: '100%',
@@ -627,7 +633,7 @@ const Status = (props) => {
                   placeholder="Contact"
                 />
                 <TextInput
-                  onChangeText={(text) => setState({ ...state, age: text })}
+                  onChangeText={(text) => setState({...state, age: text})}
                   value={String(state.age)}
                   style={{
                     width: '100%',
@@ -642,7 +648,7 @@ const Status = (props) => {
                 />
                 <TextInput
                   value={String(state.city)}
-                  onChangeText={(text) => setState({ ...state, city: text })}
+                  onChangeText={(text) => setState({...state, city: text})}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -664,7 +670,7 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}>
-                  <View style={{ width: '80%', justifyContent: 'center' }}>
+                  <View style={{width: '80%', justifyContent: 'center'}}>
                     <Text>
                       {state.selectCountry
                         ? state.selectCountry
@@ -694,8 +700,7 @@ const Status = (props) => {
                       borderRightWidth: 1,
                       // paddingVertical: 5,
                     }}>
-
-                    {props?.allCountries?.length > 0 ?
+                    {props?.allCountries?.length > 0 ? (
                       props.allCountries.map((item, i) => {
                         return (
                           <TouchableOpacity
@@ -716,20 +721,19 @@ const Status = (props) => {
                             <Text> {item.name}</Text>
                           </TouchableOpacity>
                         );
-                      }) : (<View
+                      })
+                    ) : (
+                      <View
                         style={{
                           borderBottomWidth: 1,
                           justifyContent: 'center',
                           height: 50,
-                          alignItems: 'center'
+                          alignItems: 'center',
                           // paddingVertical: 6,
                         }}>
-
-
-
-                        <Text>  No cities found  </Text>
-                      </View>)}
-
+                        <Text> No cities found </Text>
+                      </View>
+                    )}
                   </View>
                 ) : null}
 
@@ -745,7 +749,7 @@ const Status = (props) => {
                     ) : null} */}
                 <TextInput
                   onChangeText={(text) =>
-                    setState({ ...state, description: text })
+                    setState({...state, description: text})
                   }
                   value={state.description}
                   maxLength={100}
@@ -767,7 +771,7 @@ const Status = (props) => {
                     // borderWidth: 1,
                   }}>
                   <TextInput
-                    onChangeText={(text) => setState({ ...state, height: text })}
+                    onChangeText={(text) => setState({...state, height: text})}
                     value={String(state.height)}
                     style={{
                       // width: '20%',
@@ -781,7 +785,7 @@ const Status = (props) => {
                     keyboardType="number-pad"
                   />
                   <TextInput
-                    onChangeText={(text) => setState({ ...state, weight: text })}
+                    onChangeText={(text) => setState({...state, weight: text})}
                     value={String(state.weight)}
                     style={{
                       // width: '20%',
@@ -796,7 +800,7 @@ const Status = (props) => {
                   />
                   <TextInput
                     onChangeText={(text) =>
-                      setState({ ...state, eyeColor: text })
+                      setState({...state, eyeColor: text})
                     }
                     value={state.eyeColor}
                     style={{
@@ -816,7 +820,7 @@ const Status = (props) => {
           </View>
         </View>
       </ImageBackground>
-    </ScrollView >
+    </ScrollView>
   );
 };
 
