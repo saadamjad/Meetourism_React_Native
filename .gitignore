@@ -8,7 +8,6 @@
 .Spotlight-V100
 .TemporaryItems
 .Trashes
-.bin
 .VolumeIcon.icns
 
 
@@ -69,15 +68,18 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-android/.gradle/6.2/executionHistory/executionHistory.bin
-android/.gradle/6.2/executionHistory/executionHistory.lock
 *.bin
-android/.gradle/6.2/fileHashes/fileHashes.lock
-android/.gradle/6.2/fileHashes/resourceHashesCache.bin
-android/.gradle/6.2/javaCompile/classAnalysis.bin
-android/.gradle/6.2/javaCompile/javaCompile.lock
-android/.gradle/6.2/javaCompile/taskHistory.bin
-android/.gradle/buildOutputCleanup/buildOutputCleanup.lock
-android/.gradle/buildOutputCleanup/outputFiles.bin
-android/.gradle/checksums/checksums.lock
+*.lock
+*.bin
+*.lock
+*.bin
+*.bin
+*.bin
+*.lock
+*.bin
+*.lock
+*.bin
+*.lock
 android/.gradle/checksums/md5-checksums.bin
+*.bin
+android/.gradle/checksums/sha1-checksums.bin
