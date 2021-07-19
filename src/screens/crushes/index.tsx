@@ -6,12 +6,11 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-// import {Icon} from 'native-base';
+// import Icon from 'react-native-vector-icons/Feather';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
-import {Item} from 'native-base';
 import {FastImageComponent} from '../../components/fastimage';
 
 import {Actions} from '../../redux/actions/index';

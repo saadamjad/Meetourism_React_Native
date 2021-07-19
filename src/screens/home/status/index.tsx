@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {theme} from '../../../constants/theme';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions';
 import Geolocation from '@react-native-community/geolocation';

@@ -1,4 +1,3 @@
-import { Form, Icon } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {
   View,

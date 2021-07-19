@@ -1,6 +1,5 @@
-import { View } from 'native-base';
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 
 import { FastImageComponent } from '../../../components/fastimage'
 

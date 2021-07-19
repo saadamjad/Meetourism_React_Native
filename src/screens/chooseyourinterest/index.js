@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   View,
   Image,
@@ -10,23 +10,23 @@ import {
 } from 'react-native';
 import Toast from '../../components/toastmessage';
 
-import {FastImageComponent} from '../../components/fastimage';
+import { FastImageComponent } from '../../components/fastimage';
 
-import {theme} from '../../constants/theme';
-import {Icon} from 'native-base';
+import { theme } from '../../constants/theme';
+import Icon from 'react-native-vector-icons/Feather';
 import GlobalButton from '../../components/buttons/generalbutton';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Feather from 'react-native-vector-icons/Feather';
 // import * as Actions from '../../redux/actions/index';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Actions} from '../../redux/actions/index';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import { Actions } from '../../redux/actions/index';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Geocoder from 'react-native-geocoding';
-Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', {language: 'en'}); // use a valid API key
+Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
 
 import axios from 'axios';
 import FastImage from 'react-native-fast-image';
@@ -150,7 +150,7 @@ const Status = (props) => {
         console.log('res', res);
         let temp = state.images;
         temp.push(res.uri);
-        setState({...state, images: temp});
+        setState({ ...state, images: temp });
         ImageUploadingFunc(res);
 
         // if (props.editSetting) {
@@ -203,7 +203,7 @@ const Status = (props) => {
       let value = [..._tempEditImages, responseReturlUrl];
       console.log('value====', value);
 
-      setState({...state, editImages: value});
+      setState({ ...state, editImages: value });
     }
   };
 
@@ -231,7 +231,7 @@ const Status = (props) => {
 
   const _Buttons = () => {
     return (
-      <View style={{overflow: 'hidden', marginVertical: 5}}>
+      <View style={{ overflow: 'hidden', marginVertical: 5 }}>
         <GlobalButton
           buttonText="Choose Your Interest"
           onPress={async () => {
@@ -273,14 +273,14 @@ const Status = (props) => {
 
   return (
     <ScrollView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       keyboardShouldPersistTaps="always"
-      contentContainerStyle={{flexGrow: 1}}>
+      contentContainerStyle={{ flexGrow: 1 }}>
       <ImageBackground
         source={require('../../assets/images/statusbg.png')}
-        style={{height: '100%', width: '100%', flex: 1}}
+        style={{ height: '100%', width: '100%', flex: 1 }}
         resizeMode="cover">
-        <View style={{flex: 1, backgroundColor: 'rgba(00,00,00,0.8)'}}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(00,00,00,0.8)' }}>
           <View
             style={{
               paddingVertical: 10,
@@ -296,7 +296,7 @@ const Status = (props) => {
               <Icon
                 type="AntDesign"
                 name="arrowleft"
-                style={{color: 'white', fontSize: 17}}
+                style={{ color: 'white', fontSize: 17 }}
               />
             </TouchableOpacity>
           </View>
@@ -404,7 +404,7 @@ const Status = (props) => {
                               // source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
                               source={
                                 val
-                                  ? {uri: val}
+                                  ? { uri: val }
                                   : require('../../assets/icons/girls.png')
                               }
                             />
@@ -443,7 +443,7 @@ const Status = (props) => {
                           _Imageupload();
                         }}>
                         <Icon
-                          style={{fontSize: 20}}
+                          style={{ fontSize: 20 }}
                           type="AntDesign"
                           name="plus"
                         />
@@ -474,7 +474,7 @@ const Status = (props) => {
                     }}
                     value={state.company_name}
                     onChangeText={(text) =>
-                      setState({...state, company_name: text})
+                      setState({ ...state, company_name: text })
                     }
                     placeholderTextColor={theme.borderColor.inActiveBorderColor}
                     placeholder={'Enter Company Name'}
@@ -489,7 +489,7 @@ const Status = (props) => {
                       overflow: 'hidden',
                       borderColor: theme.borderColor.inActiveBorderColor,
                     }}
-                    // editable={false}
+                  // editable={false}
                   >
                     <TouchableOpacity
                       onPress={() => _getCurrentLocation()}
@@ -589,7 +589,7 @@ const Status = (props) => {
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   value={state.firstName}
-                  onChangeText={(text) => setState({...state, firstName: text})}
+                  onChangeText={(text) => setState({ ...state, firstName: text })}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="First Name"
                 />
@@ -602,7 +602,7 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
-                  onChangeText={(text) => setState({...state, lastName: text})}
+                  onChangeText={(text) => setState({ ...state, lastName: text })}
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Last Name"
                 />
@@ -620,7 +620,7 @@ const Status = (props) => {
                   placeholder="Email"
                 />
                 <TextInput
-                  onChangeText={(text) => setState({...state, contact: text})}
+                  onChangeText={(text) => setState({ ...state, contact: text })}
                   value={state.contact}
                   style={{
                     width: '100%',
@@ -633,7 +633,7 @@ const Status = (props) => {
                   placeholder="Contact"
                 />
                 <TextInput
-                  onChangeText={(text) => setState({...state, age: text})}
+                  onChangeText={(text) => setState({ ...state, age: text })}
                   value={String(state.age)}
                   style={{
                     width: '100%',
@@ -648,7 +648,7 @@ const Status = (props) => {
                 />
                 <TextInput
                   value={String(state.city)}
-                  onChangeText={(text) => setState({...state, city: text})}
+                  onChangeText={(text) => setState({ ...state, city: text })}
                   style={{
                     width: '100%',
                     borderBottomWidth: 1,
@@ -670,7 +670,7 @@ const Status = (props) => {
 
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}>
-                  <View style={{width: '80%', justifyContent: 'center'}}>
+                  <View style={{ width: '80%', justifyContent: 'center' }}>
                     <Text>
                       {state.selectCountry
                         ? state.selectCountry
@@ -749,7 +749,7 @@ const Status = (props) => {
                     ) : null} */}
                 <TextInput
                   onChangeText={(text) =>
-                    setState({...state, description: text})
+                    setState({ ...state, description: text })
                   }
                   value={state.description}
                   maxLength={100}
@@ -771,7 +771,7 @@ const Status = (props) => {
                     // borderWidth: 1,
                   }}>
                   <TextInput
-                    onChangeText={(text) => setState({...state, height: text})}
+                    onChangeText={(text) => setState({ ...state, height: text })}
                     value={String(state.height)}
                     style={{
                       // width: '20%',
@@ -785,7 +785,7 @@ const Status = (props) => {
                     keyboardType="number-pad"
                   />
                   <TextInput
-                    onChangeText={(text) => setState({...state, weight: text})}
+                    onChangeText={(text) => setState({ ...state, weight: text })}
                     value={String(state.weight)}
                     style={{
                       // width: '20%',
@@ -800,7 +800,7 @@ const Status = (props) => {
                   />
                   <TextInput
                     onChangeText={(text) =>
-                      setState({...state, eyeColor: text})
+                      setState({ ...state, eyeColor: text })
                     }
                     value={state.eyeColor}
                     style={{

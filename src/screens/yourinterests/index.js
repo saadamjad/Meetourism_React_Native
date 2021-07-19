@@ -14,7 +14,6 @@ import {
 
 import { theme } from '../../constants/theme';
 
-import { Icon } from 'native-base';
 import { Button, Overlay } from 'react-native-elements';
 import { CheckBox } from 'react-native-elements';
 import AnimatedLoader from 'react-native-animated-loader';
@@ -353,11 +352,11 @@ const Status = (props) => {
                 alignSelf: 'flex-start',
               }}
               onPress={() => props.navigation.goBack()}>
-              <Icon
+              {/* <Icon
                 type="AntDesign"
                 name="arrowleft"
                 style={{ color: 'white', fontSize: 20 }}
-              />
+              /> */}
             </TouchableOpacity>
           </View>
           <View
@@ -524,7 +523,7 @@ const Status = (props) => {
 
                 }
               >
-                <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" />
+                {/* <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" /> */}
               </TouchableOpacity>
             </View>
           </View>

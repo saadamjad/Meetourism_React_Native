@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button} from 'react-native-elements';
+import React, { useState } from 'react';
+import { Button } from 'react-native-elements';
 import {
   View,
   Text,
@@ -10,24 +10,24 @@ import {
 import ModalDropdown from 'react-native-modal-dropdown';
 import LinearGradient from 'react-native-linear-gradient';
 import GlobalHeader from '../../components/header';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import { useTranslation } from 'react-i18next';
 const App = (props) => {
-  const {t,i18n}= useTranslation()
+  const { t, i18n } = useTranslation()
   const [ismyState, setmyState] = useState({
     picker2: false,
   });
 
-  const getLanguage = (language)=>{
-    if(language === 0){
+  const getLanguage = (language) => {
+    if (language === 0) {
       console.log("English")
       return i18n.changeLanguage('en')
     }
-    else if(language === 1){
+    else if (language === 1) {
       return i18n.changeLanguage('zh')
 
     }
-    else if(language === 2){
+    else if (language === 2) {
       return i18n.changeLanguage('fr')
     }
   }
@@ -38,8 +38,8 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
-      <SafeAreaView style={{flex: 1, marginTop: 20}}>
-      {/* <StatusBar
+      <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+        {/* <StatusBar
           animated={true}
           backgroundColor={'transparent'}
           translucent={true}
@@ -52,8 +52,8 @@ const App = (props) => {
           isBack={true}
           navigation={props.navigation}
         />
-     
-        <View style={{width: '90%', alignSelf: 'center'}}>
+
+        <View style={{ width: '90%', alignSelf: 'center' }}>
           <View
             style={{
               alignItems: 'center',
@@ -86,7 +86,7 @@ const App = (props) => {
                 <Icon
                   name={ismyState.picker2 ? 'up' : 'down'}
                   type={'AntDesign'}
-                  style={{fontSize: 13, color: '#FFF'}}
+                  style={{ fontSize: 13, color: '#FFF' }}
                 />
               )}
               style={{
@@ -110,12 +110,12 @@ const App = (props) => {
               }}
               dropdownListProps={{}}
               onDropdownWillShow={() =>
-                setmyState({...ismyState, picker2: true})
+                setmyState({ ...ismyState, picker2: true })
               }
               onDropdownWillHide={() =>
-                setmyState({...ismyState, picker2: false})
+                setmyState({ ...ismyState, picker2: false })
               }
-              dropdownTextHighlightStyle={{color: '#DE2516'}}
+              dropdownTextHighlightStyle={{ color: '#DE2516' }}
               dropdownStyle={{
                 height: 130,
                 width: '90%',
@@ -133,9 +133,9 @@ const App = (props) => {
                 'Chinese',
                 'French',
               ]}
-              
-              onSelect={(s)=>getLanguage(s)}
-              ></ModalDropdown>
+
+              onSelect={(s) => getLanguage(s)}
+            ></ModalDropdown>
           </View>
 
           <View

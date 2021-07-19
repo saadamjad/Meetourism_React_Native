@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect, useCallback} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
-// import {Icon} from 'native-base';
+// import Icon from 'react-native-vector-icons/Feather';
 // import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
@@ -8,7 +8,7 @@ import {GiftedChat} from 'react-native-gifted-chat';
 import LongHeader from '../../components/header/longheader';
 import {TextInput} from 'react-native';
 import {SafeAreaView} from 'react-native';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons//Fontisto';
 import Feather from 'react-native-vector-icons//Feather';
 import {connect} from 'react-redux';

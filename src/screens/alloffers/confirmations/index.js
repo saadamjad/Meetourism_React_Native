@@ -1,11 +1,11 @@
-import {Icon} from 'native-base';
-import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Feather';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import GlobalButton from '../../../components/buttons/generalbutton';
 import CustomView from '../../../components/customView';
 import App from '../../../components/header';
-import {theme} from '../../../constants/theme';
+import { theme } from '../../../constants/theme';
 import Overlay from '../../../components/overlays';
 
 function CreateOffer(props) {
@@ -13,7 +13,7 @@ function CreateOffer(props) {
   return (
     <ImageBackground
       source={require('../../../assets/images/notificationbg.png')}
-      style={{height: '100%', width: '100%'}}>
+      style={{ height: '100%', width: '100%' }}>
       <View
         style={{
           flex: 1,

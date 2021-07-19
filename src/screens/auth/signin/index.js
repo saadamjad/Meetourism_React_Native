@@ -68,7 +68,7 @@ const App = (props) => {
       console.log("userinfo===", userInfo)
       let user = userInfo?.user;
       // setSignvalues({ ...signupValues, name: user?.name, email: user?.email });
-      _SignIn()
+      // _SignIn()
 
       // this.setState({ userInfo });
     } catch (error) {
@@ -106,11 +106,11 @@ const App = (props) => {
         console.log(result?.authenticationToken);
       } else {
         const result = await AccessToken.getCurrentAccessToken();
-        console.log(result?.accessToken);
+        console.log(result);
         // navigation.replace(
         //   response?.status == 'partner' ? 'PartnerStack' : 'drawer',
         // );
-        _SignIn()
+        // _SignIn()
         // props.navigation.replace('drawer');
 
 

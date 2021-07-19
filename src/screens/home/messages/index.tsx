@@ -1,6 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
-// import {Icon} from 'native-base';
+// import Icon from 'react-native-vector-icons/Feather';
 // import Style from './style';
 import CustomView from '../../../components/customView';
 import {theme} from '../../../constants/theme';

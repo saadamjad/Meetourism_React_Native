@@ -1,4 +1,4 @@
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {FlatList, TextInput} from 'react-native-gesture-handler';

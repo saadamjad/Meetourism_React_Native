@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {theme} from '../../constants/theme';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { theme } from '../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 
 // allPRops
 //   // textAlign={'flex-end'}
@@ -41,8 +41,8 @@ const App = ({
         backgroundColor: isTransparent
           ? 'transparent'
           : bgColor
-          ? bgColor
-          : 'white',
+            ? bgColor
+            : 'white',
       }}>
       {leftArrow && (
         <TouchableOpacity
@@ -96,7 +96,7 @@ const App = ({
         </TouchableOpacity>
         {filterIcon && (
           <TouchableOpacity
-            style={{paddingRight: 25, borderWidth: 0}}
+            style={{ paddingRight: 25, borderWidth: 0 }}
             onPress={() => OpenFilter()}>
             <Icon
               type="AntDesign"
