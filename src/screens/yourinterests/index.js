@@ -163,7 +163,7 @@ const Status = (props) => {
   }
 
   const _UserRegister = async (value) => {
-    console.log('company_name,', company_name);
+    // console.log('company_name,', data);
     let data2 = company_name
       ? {
         // company_name: data.company_name,
@@ -209,7 +209,7 @@ const Status = (props) => {
         longitude: data?.longitude,
         address: 'Test Address',
       }
-      : {
+      : props.socialLogin ? {
         first_name: data?.firstName,
         last_name: data?.lastName,
         username: data?.userName,
@@ -224,31 +224,35 @@ const Status = (props) => {
         height: Number(data?.height),
         eye_color: data?.eyeColor,
         status: data?.status,
-
         interests: state?.interests,
         images: data?.images,
         description: data?.description,
         latitude: '24.123244',
         longitude: '87.839483',
         address: 'Test Address',
-
-        // first_name: 'First Name',
-        // last_name: 'Last Name',
-        // username: 'userssksssadsfdasdsfkjjjjsname',
-        // email: 'emassdddasssdfdsaddil@yosssspmail.com',
-        // phone: '12345ssdasdsssssasdsdddds6',
-        // password: 'password12',
-        // password_confirmation: 'password12',
-        // description: 'ssssssssssssssssssssssssssssss',
-        // age: 20,
-        // country_id: 1,
-        // city: 'City',
-        // weight: 40,
-        // height: 6.2,
-        // eye_color: 'green',
-        // status: 'single',
-        // interests: [1, 2],
-        // images: ['user_images/user-image-608de193434244-74625999.jpg'],
+        is_social_register: 1,
+        user_id: props?.userData?.id,
+      } : {
+        first_name: data?.firstName,
+        last_name: data?.lastName,
+        username: data?.userName,
+        email: data?.email,
+        phone: data?.contact,
+        password: data?.password,
+        password_confirmation: data?.confirmPassword,
+        age: Number(data?.age),
+        country_id: data?.countryId,
+        city: data?.city,
+        weight: Number(data?.weight),
+        height: Number(data?.height),
+        eye_color: data?.eyeColor,
+        status: data?.status,
+        interests: state?.interests,
+        images: data?.images,
+        description: data?.description,
+        latitude: '24.123244',
+        longitude: '87.839483',
+        address: 'Test Address',
       };
     setLoader(true);
 
@@ -291,33 +295,15 @@ const Status = (props) => {
 
     } else {
       let testingValue = { ...data2, interests: value, images: props.userRegisterationImages };
+      console.log("testing value", testingValue, "SOCIAL LOGIN ", props.socialLogin)
       await props.Signup(testingValue, props.navigation, company_name);
 
       setLoader(false);
     }
     setLoader(false);
   };
-  const _SelectInterests = (item, i) => {
-    let value = state.interests.map((item, index) => {
-      if (index == i) {
-        return {
-          ...item,
-          selected: !item?.selected,
-        };
-      } else {
-        return { ...item };
-      }
-    })
-    setState({
-      ...state,
-      interests: value,
-      noValues: false,
-      selectedInterests: value,
-    });
 
-  }
   let filter = state?.interests?.filter((item, i) => item?.selected == true)
-  console.log("filter", filter)
 
   return (
 
@@ -587,7 +573,6 @@ const Status = (props) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {state.interests &&
               state.interests.map((val, i) => {
-                console.log("Vaal===", val)
 
 
 
@@ -741,7 +726,7 @@ const Status = (props) => {
           </TouchableOpacity>
         </View>
       </Overlay>
-
+      {console.log("socialLogin", props.socialLogin)}
       <AnimatedLoader
         visible={loader}
         overlayColor="rgba(255,255,255,0.6)"
@@ -769,6 +754,8 @@ const mapStateToProp = (state) => ({
   loader: state.reducers.loader,
   allInterests: state.reducers.allInterests,
   userRegisterationImages: state.reducers.userRegisterationImages,
+  socialLogin: state.reducers.socialLogin,
+
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,

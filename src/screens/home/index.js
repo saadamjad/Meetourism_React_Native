@@ -95,6 +95,9 @@ const App = (props) => {
     let data = props?.userData;
     setUserData({ ...userData, data, loader: false });
   }, [props.userData]);
+  var checkUrl = typeof userData?.data?.profile_url === 'string' && userData?.data?.profile_url?.search('https://meetourism.com')
+  var image1WithUrl = `https://meetourism.com/storage/${userData?.data?.profile_url}`
+  checkUrl == -1 ? true : false
 
   return (
     <View
@@ -116,13 +119,16 @@ const App = (props) => {
           }}>
           <ImageBackground
 
-            source={
-              userData?.data?.profile_url
-                ? {
-                  uri: userData?.data?.profile_url
-                }
-                : require('../../assets/icons/girls.png')
-            }
+            // source={
+            //   userData?.data?.profile_url
+            //     ? {
+            //       uri: userData?.data?.profile_url
+            //     }
+            //     : require('../../assets/icons/girls.png')
+            // }
+            source={userData?.data?.profile_url
+              ? { uri: checkUrl ? image1WithUrl : userData?.data?.profile_url }
+              : require('../../assets/icons/girls.png')}
 
 
             style={{ height: '100%', width: '100%', borderBottomLeftRadius: 80 }}
@@ -166,6 +172,14 @@ const App = (props) => {
 
               <View style={{ flexDirection: 'row' }}>
                 {allStatus.map((item, i) => {
+                  // var str = item?.profile_url;
+                  // var httpsAvailable = str?.search('//meetourism.com');
+                  // console.log('final output', httpsAvailable);
+
+
+
+
+
                   return (
                     <View
                       key={i}
@@ -208,15 +222,32 @@ const App = (props) => {
                           //   style={{ height: '100%', width: '100%' }}
                           //   resizeMode="cover"
                           // />
+                          console.log("userData?.data?.profile_url", image1WithUrl),
                           <FastImageComponent
-                            source={userData?.data?.profile_url ?
-                              { uri: userData?.data?.profile_url }
-                              : item.image}
-                            resizeMode={'cover'}
-
-
+                            source={userData?.data?.profile_url
+                              ? { uri: checkUrl ? image1WithUrl : userData?.data?.profile_url }
+                              : require('../../assets/icons/row.png')}
                             style={{ height: '100%', width: '100%' }}
-                          />
+                            resizeMode="cover" />
+                          // <FastImageComponent
+                          //   // source={
+                          //   //   userData?.data?.profile_url
+                          //   //     ? {
+                          //   //       uri:
+                          //   //         httpsAvailable == -1
+                          //   //           ? `https://www.haosaudi.com/img/profile_url/${userData?.data?.profile_url}`
+                          //   //           : userData?.data?.profile_url,
+                          //   //     }
+                          //   //     : item.image
+                          //   // }
+                          //   source={userData?.data?.profile_url ?
+                          //     { uri: userData?.data?.profile_url }
+                          //     : item.image}
+                          //   resizeMode={'cover'}
+
+
+                          //   style={{ height: '100%', width: '100%' }}
+                          // />
                         ) : (
                           item.image
                         )}

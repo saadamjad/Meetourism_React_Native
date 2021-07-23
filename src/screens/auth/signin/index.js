@@ -65,12 +65,26 @@ const App = (props) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log("userinfo===", userInfo)
-      let user = userInfo?.user;
       // setSignvalues({ ...signupValues, name: user?.name, email: user?.email });
-      // _SignIn()
+      let _user = userInfo?.user;
+      console.log("=====user", _user.name)
+      let data = {
 
-      // this.setState({ userInfo });
+        medium: "facebook",
+        social_id: _user.id,
+        email: _user.email,
+        first_name: _user.givenName,
+        last_name: _user.familyName,
+        userName: _user.name,
+
+        device_type: "android",
+        device_token: "fcm_token"
+
+      }
+      console.log("data", data)
+      props.SocialLoginAction(data, props.navigation)
+
+
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log("userinfo===", error)
@@ -92,6 +106,8 @@ const App = (props) => {
     }
   };
 
+
+
   const fbSignin = async () => {
     try {
       const result = await LoginManager.logInWithPermissions(
@@ -106,17 +122,31 @@ const App = (props) => {
         console.log(result?.authenticationToken);
       } else {
         const result = await AccessToken.getCurrentAccessToken();
-        console.log(result);
-        // navigation.replace(
-        //   response?.status == 'partner' ? 'PartnerStack' : 'drawer',
-        // );
-        // _SignIn()
-        // props.navigation.replace('drawer');
+        console.log("result", result);
+
+        // let _user = result?.user;
+
+
+        // let data = {
+
+        //   medium: "facebook",
+        //   social_id: _user.userID,
+        //   email: _user.email,
+        //   first_name: _user.givenName,
+        //   last_name: _user.familyName,
+        //   userName: _user.name,
+
+        //   device_type: "android",
+        //   device_token: "fcm_token"
+
+        // }
+        // console.log("data", data)
+        // props.SocialLoginAction(data, props.navigation)
 
 
       }
     } catch (error) {
-      console.log(error);
+      console.log("eroror", error);
     }
   };
 
@@ -143,7 +173,7 @@ const App = (props) => {
     // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'sitgo4@gmail.com',
+    email: 'projectskahoodigitals@gmail.com',
     password: '123456789',
 
     // email: '',
@@ -190,12 +220,12 @@ const App = (props) => {
     },
     { placeholder: 'Password', isSecure: true, keyboardType: 'default' },
   ]);
-  const _SignIn = async () => {
+  const _SignIn = async (socialLogin) => {
     if (signInValues.email == '' || signInValues.password == '') {
       Toast('Error', 'Please both inputs', 'error');
     } else {
       setLoaderMessage('In');
-      setLoader(true);
+      setLoader(socialLogin ? false : true);
 
       let data = {
         email: signInValues.email,
@@ -205,11 +235,14 @@ const App = (props) => {
         longitude: '67.9034',
         address: 'Test Address',
       };
+      await props.Login(data, props.navigation, socialLogin);
 
-      let value = await props.Login(data, props.navigation);
       setLoader(false);
+      // toggleOverlay(socialLogin)
     }
   };
+
+
 
   const signInRoute = () => (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -385,7 +418,7 @@ const App = (props) => {
     if (!value) {
       setLoader(false);
     } else {
-      console.log('resturn else');
+      console.log('resturn else', value);
       setLoader(false);
 
       toggleOverlay(value);
@@ -635,6 +668,7 @@ const mapStateToProp = (state) => ({
 const mapDispatchToProps = {
   CheckUser: Actions.CheckUser,
   Login: Actions.Login,
+  SocialLoginAction: Actions.SocialLogin,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

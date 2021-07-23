@@ -120,7 +120,7 @@ const App = (props) => {
                         }}
                         resizeMode="cover"
                       /> */}
-                      <FastImageComponent
+                      {/* <FastImageComponent
                         source={
                           imageUrl
                             ? {
@@ -134,7 +134,7 @@ const App = (props) => {
                         }}
                         resizeMode="cover"
 
-                      />
+                      /> */}
                     </View>
                   </View>
                   <View

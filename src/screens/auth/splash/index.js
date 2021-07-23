@@ -18,7 +18,8 @@ const App = (props) => {
 
     setTimeout(() => {
 
-      if (props.token) {
+      if (props.token && props?.userData?.status) {
+
         if (props.status === 'partner') {
           console.log('if');
           props.navigation.replace('PartnerStack', {

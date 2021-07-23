@@ -175,7 +175,7 @@ const App = (props) => {
                         }}>
                         {i == 0 ? (
                           <FastImageComponent
-                            // source={item.image}
+                            source={item.image}
 
                             source={
                               userData?.data?.profile_url

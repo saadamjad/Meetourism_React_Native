@@ -34,11 +34,12 @@ const App = (props) => {
     }
   };
   const _ApiCallForgotPassword = () => {
+    console.log("start loader")
     setLoader(true);
     let header = {
       headers: { 'Content-Type': 'application/json' },
     };
-    let url = 'https://meetourism.com/api/v1//auth/forgot';
+    let url = 'https://meetourism.com/api/v1/auth/forgot';
 
     let data = {
       email: email,
@@ -61,6 +62,7 @@ const App = (props) => {
         }
       })
       .catch((err) => {
+        console.log("error in catch ", err.response)
         setLoader(false);
 
         let errResponse = err?.response?.data?.errors;

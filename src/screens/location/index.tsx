@@ -40,13 +40,6 @@ const Location = (props) => {
         time: '9:00 (25 min)',
         icon: require('../../assets/images/share.png'),
 
-        // icon: (
-        // <FastImageComponent
-        //   resizeMode="contain"
-        //   source={require('../../assets/images/share.png')}
-        //   style={{height: 30, width: 30}}
-        // />
-        // ),
         an: false,
       },
       {
@@ -54,20 +47,6 @@ const Location = (props) => {
         time: '9:25 (47 min)',
         icon: require('../../assets/images/heartCircle.png'),
 
-        // icon: (
-
-        //   // <FastImageComponent
-        //   //   resizeMode="contain"
-        //   //   source={require('../../assets/images/heartCircle.png')}
-        //   // />
-        //   // <FastImageComponent
-        //   //   source={require('../../assets/images/heartCircle.png')}
-        //   //   resizeMode={'cover'}
-        //   //   // tintColor={'#ED1C24'}
-
-        //   //   style={{height: 30, width: 30}}
-        //   // />
-        // ),
         an: false,
       },
 
@@ -166,11 +145,6 @@ const Location = (props) => {
                       style={{marginTop: 10}}
                       source={require('../../assets/images/peoples.png')}
                     />
-                    //   <FastImageComponent
-                    //   resizeMode="contain"
-                    //   source={val?.icon}
-                    //   style={{height: 30, width: 30}}
-                    // />
                   )}
                 </View>
               </View>

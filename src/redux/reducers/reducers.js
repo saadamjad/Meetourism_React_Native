@@ -16,6 +16,7 @@ const initialState = {
   personalChatData: [],
   reverseGeoCodeData: {},
   userRegisterationImages: [],
+  socialLogin: false
 };
 
 export default function (state = initialState, action) {
@@ -47,6 +48,7 @@ export default function (state = initialState, action) {
         userData: action.payload,
         token: action.token,
         status: action.status,
+        socialLogin: action.socialLogin
       };
     case actionTypes.SIGNUPUPSUCCESS:
       // console.log('reducer data', action.status);

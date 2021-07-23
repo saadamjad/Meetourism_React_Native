@@ -38,7 +38,7 @@ const Status = (props) => {
     : dataRedux;
 
   const company_name = data?.status == 'partner' ? true : false;
-  console.log('Data  your interets>>.=========', company_name);
+  // console.log('Data  your interets>>.=========', company_name);
   const [state, setState] = useState({
     // interests: [1, 2],
     // selectCountry: '',
@@ -107,8 +107,11 @@ const Status = (props) => {
         description: dataRedux?.description,
         company_name: dataRedux?.company_name,
         Location: true,
+        id: dataRedux.id
+
       });
     } else {
+
       setState({
         ...state,
         status: data?.status,
@@ -116,6 +119,8 @@ const Status = (props) => {
         userName: data?.userName,
         confirmPassword: data?.confirmPassword,
         password: data?.password,
+        id: dataRedux.id
+
       });
     }
     props.GetCounties();
@@ -295,7 +300,7 @@ const Status = (props) => {
               onPress={() => props.navigation.goBack()}>
               <Icon
                 type="AntDesign"
-                name="arrowleft"
+                name="arrow-left"
                 style={{ color: 'white', fontSize: 17 }}
               />
             </TouchableOpacity>
@@ -356,7 +361,7 @@ const Status = (props) => {
                               let array = state.images.filter(
                                 (item, ind) => i != ind,
                               );
-                              console.log('array', array);
+                              // console.log('array', array);
                               setState({
                                 ...state,
                                 images: array,
@@ -571,7 +576,7 @@ const Status = (props) => {
                     borderColor: theme.borderColor.inActiveBorderColor,
                   }}
                   // editable={false}
-                  value={state.userName}
+                  value={String(state.userName)}
                   onChangeText={(text) =>
                     setState({
                       ...state,

@@ -10,13 +10,31 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { FastImageComponent } from '../../components/fastimage';
 import { Actions } from '../../redux/actions/index';
-
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 const DrawerContent = (props) => {
   const [state, setState] = useState({
     userData: props.userData
   })
   // const profileImage = props.userData ? props?.userData?.images[0]?.image_path : null;
   let array;
+  var checkUrl = typeof state.userData?.profile_url === 'string' && state?.userData?.profile_url?.search('https://meetourism.com')
+  var image1WithUrl = `https://meetourism.com/storage/${state.userData?.profile_url}`
+  checkUrl == -1 ? true : false
+  // console.log("source", checkUrl)
+
+  const signOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      // this.setState({ user: null }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
   return (
     <View
       style={{
@@ -61,9 +79,10 @@ const DrawerContent = (props) => {
                 overflow: 'hidden',
                 borderColor: '#D47FA6',
               }}>
+
               <FastImageComponent
-                source={state.userData?.images?.length > 0
-                  ? { uri: state.userData?.images[0]?.image_path }
+                source={state.userData?.profile_url
+                  ? { uri: checkUrl ? image1WithUrl : state.userData?.profile_url }
                   : require('../../assets/icons/row.png')}
                 style={{ height: '100%', width: '100%' }}
                 resizeMode="cover" />
@@ -207,6 +226,7 @@ const DrawerContent = (props) => {
                 onPress={() => {
                   if (val.name == 'Auth') {
                     props.Logout(props.navigation);
+                    signOut()
                   } else {
                     val.name && props.navigation.navigate(val.name);
                   }

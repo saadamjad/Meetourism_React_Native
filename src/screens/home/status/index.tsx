@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {theme} from '../../../constants/theme';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions';
 import Geolocation from '@react-native-community/geolocation';
@@ -62,9 +62,6 @@ const App = (props) => {
         ],
   );
 
-  const _GetCities = async () => {
-    props.GetCounties();
-  };
   const toggleOverlay = async (i, item) => {
     const data2 = {...data, status: i == 1 ? 'in-relation' : item};
 

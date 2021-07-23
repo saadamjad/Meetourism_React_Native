@@ -10,6 +10,7 @@ class Actions {
   static CheckUser = (data, navigation, values) => {
     console.log('data', data);
 
+
     return async (dispatch) => {
       return await Post('auth/check-exists', data)
         .then((res) => {
@@ -26,6 +27,8 @@ class Actions {
                 userName: str,
                 password: values.password,
                 confirmPassword: values.confirmPassword,
+                socialLogin: false
+
               };
 
               return value;
@@ -41,7 +44,7 @@ class Actions {
         })
         .catch((err) => {
           let errResponse = err?.response?.data?.errors;
-          console.log('err in catch check CheckUser   ', errResponse);
+          console.log('err in catch check CheckUser', errResponse);
 
           if (errResponse?.email) {
             let email = errResponse?.email[0];
@@ -76,6 +79,8 @@ class Actions {
               payload: res?.data,
               token: res?.data?.token,
               status: res?.data?.status,
+              socialLogin: false
+
             });
             navigation.replace(status ? 'PartnerStack' : 'profilePreivew');
             return true;
@@ -111,6 +116,58 @@ class Actions {
             navigation.replace(
               response?.status == 'partner' ? 'PartnerStack' : 'drawer',
             );
+
+            return true;
+          } else {
+            console.log('ELSE in login', res.message);
+            Toast('Error', 'You Entered Wrong Email or Password', 'error');
+            return false;
+          }
+        })
+        .catch((err) => {
+          let errResponse = err?.response?.data?.errors;
+          let type = 'signup';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          return false;
+        });
+    };
+  };
+  static SocialLogin = (data, navigation, status) => {
+    console.log('data', data, 'status', status);
+
+    return async (dispatch) => {
+      return await Post('auth/login-social', data)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            let _status = response.status
+            console.log('res===== USER DATA===', response);
+            // str = str.replace(/ +/g, '');
+            // let name=response.first_name+response.last_name
+
+            dispatch({
+              type: actionTypes.LOGINSUCCESS,
+              payload: response,
+              token: response?.token,
+              status: response?.status,
+              socialLogin: true
+            });
+            let final_data = {
+
+              type: 'email',
+              value: response.email,
+              userName: response?.full_name?.replace(/ +/g, ''),
+
+            }
+
+            _status ?
+              navigation.replace(
+                _status == 'partner' ? 'PartnerStack' : 'drawer',
+              ) : navigation.replace('statusstack', {
+                screen: 'selectstatus',
+                params: { profileData: final_data },
+              });
+
 
             return true;
           } else {
@@ -634,7 +691,7 @@ class Actions {
           // let errResponse = err?.response?.data;
           let errResponse = err;
           let type = 'UpdateCompleteProfile';
-          console.log('ELSE in UpdateCompleteProfile', errResponse);
+          console.log('ELSE in UpdateCompleteProfile', errResponse.response);
 
           // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
         });
