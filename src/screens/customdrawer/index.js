@@ -10,6 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { FastImageComponent } from '../../components/fastimage';
 import { Actions } from '../../redux/actions/index';
+import { LoginManager, LoginButton } from "react-native-fbsdk-next";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -34,6 +35,25 @@ const DrawerContent = (props) => {
     } catch (error) {
       console.error("error", error);
     }
+  };
+  const FacebookLogout = async () => {
+    <LoginButton
+      onLoginFinished={
+        (error, result) => {
+          if (error) {
+            console.log("login has error: " + result.error);
+          } else if (result.isCancelled) {
+            console.log("login is cancelled.");
+          } else {
+            AccessToken.getCurrentAccessToken().then(
+              (data) => {
+                console.log(data.accessToken.toString())
+              }
+            )
+          }
+        }
+      }
+      onLogoutFinished={() => console.log("logout.")} />
   };
   return (
     <View
@@ -226,7 +246,9 @@ const DrawerContent = (props) => {
                 onPress={() => {
                   if (val.name == 'Auth') {
                     props.Logout(props.navigation);
-                    signOut()
+                    props.socialLogin ? signOut() : props.facebook ?
+                      FacebookLogout() : null
+
                   } else {
                     val.name && props.navigation.navigate(val.name);
                   }
@@ -272,6 +294,8 @@ const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   loader: state.reducers.loader,
   image: state.reducers.images_Interests,
+  socialLogin: state.reducers.socialLogin,
+  facebook: state.reducers.facebook,
 
 });
 

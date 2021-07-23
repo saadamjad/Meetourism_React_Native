@@ -25,6 +25,7 @@ import {
   Settings,
   AccessToken,
   AuthenticationToken,
+  Profile
 } from 'react-native-fbsdk-next';
 import { FastImageComponent } from '../../../components/fastimage';
 import {
@@ -67,10 +68,9 @@ const App = (props) => {
       const userInfo = await GoogleSignin.signIn();
       // setSignvalues({ ...signupValues, name: user?.name, email: user?.email });
       let _user = userInfo?.user;
-      console.log("=====user", _user.name)
       let data = {
 
-        medium: "facebook",
+        medium: "google",
         social_id: _user.id,
         email: _user.email,
         first_name: _user.givenName,
@@ -82,7 +82,7 @@ const App = (props) => {
 
       }
       console.log("data", data)
-      props.SocialLoginAction(data, props.navigation)
+      props.SocialLoginAction(data, props.navigation, null, true, false, false)
 
 
     } catch (error) {
@@ -115,36 +115,40 @@ const App = (props) => {
         'limited',
         'my_nonce',
       );
-      console.log(result);
+      // console.log("resulttttt,", result?.isCancelled);
+      if (!result?.isCancelled) {
 
-      if (Platform.OS === 'ios') {
-        const result = await AuthenticationToken.getAuthenticationTokenIOS();
-        console.log(result?.authenticationToken);
-      } else {
-        const result = await AccessToken.getCurrentAccessToken();
-        console.log("result", result);
+        if (Platform.OS === 'ios') {
+          const result = await AuthenticationToken.getAuthenticationTokenIOS();
+          console.log(result?.authenticationToken);
+        } else {
 
-        // let _user = result?.user;
+          await Profile.getCurrentProfile().then((res) => {
+            console.log("res=====", res)
+            let data = {
+
+              medium: "facebook",
+              social_id: res?.userID,
+              first_name: res?.firstName,
+              last_name: res?.lastName,
+              userName: res?.name,
+              // email: "abc@gmail.com",
+
+              device_type: "android",
+              device_token: "fcm_token"
+
+            }
+            console.log("data", data)
+            props.SocialLoginAction(data, props.navigation, null, false, false, true)
+          }).catch((err) => {
+            console.log("error in catch getCurrentProfile", err)
+          })
 
 
-        // let data = {
-
-        //   medium: "facebook",
-        //   social_id: _user.userID,
-        //   email: _user.email,
-        //   first_name: _user.givenName,
-        //   last_name: _user.familyName,
-        //   userName: _user.name,
-
-        //   device_type: "android",
-        //   device_token: "fcm_token"
-
-        // }
-        // console.log("data", data)
-        // props.SocialLoginAction(data, props.navigation)
-
-
+        }
       }
+
+
     } catch (error) {
       console.log("eroror", error);
     }
@@ -554,11 +558,11 @@ const App = (props) => {
 
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
-      {/* <TouchableOpacity
-        onPress={() => signIn()}
-        style={{ height: 40, width: 100, borderWidth: 1 }}>
-        <Text> LGOIN </Text>
-      </TouchableOpacity> */}
+      <TouchableOpacity
+        // onPress={() => signIn()}
+        style={{ height: 40, width: 100, borderWidth: 0 }}>
+        <Text>. </Text>
+      </TouchableOpacity>
 
       {/* <Text> {state?.test?.city} </Text>
       <Text> {state?.test?.regionName} </Text> */}

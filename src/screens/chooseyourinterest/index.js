@@ -611,19 +611,22 @@ const Status = (props) => {
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Last Name"
                 />
-                <TextInput
-                  value={state.email || data?.value}
-                  editable={false}
-                  style={{
-                    width: '100%',
-                    borderBottomWidth: 1,
-                    height: 40,
+                {console.log("propsssss", props.Facebook)}
+                {props.Facebook ? null :
+                  <TextInput
+                    value={state.email || data?.value}
+                    editable={false}
+                    style={{
+                      width: '100%',
+                      borderBottomWidth: 1,
+                      height: 40,
 
-                    borderColor: theme.borderColor.inActiveBorderColor,
-                  }}
-                  placeholderTextColor={theme.borderColor.inActiveBorderColor}
-                  placeholder="Email"
-                />
+                      borderColor: theme.borderColor.inActiveBorderColor,
+                    }}
+                    placeholderTextColor={theme.borderColor.inActiveBorderColor}
+                    placeholder="Email"
+                  />
+                }
                 <TextInput
                   onChangeText={(text) => setState({ ...state, contact: text })}
                   value={state.contact}
@@ -837,6 +840,7 @@ const mapStateToProp = (state) => ({
   allCountries: state.reducers.allCountries,
   token: state.reducers.token,
   userRegisterationImages: state.reducers.userRegisterationImages,
+  Facebook: state.reducers.facebook,
 
   reverseGeoCodeData: state.reducers.reverseGeoCodeData,
 });

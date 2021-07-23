@@ -16,7 +16,8 @@ const initialState = {
   personalChatData: [],
   reverseGeoCodeData: {},
   userRegisterationImages: [],
-  socialLogin: false
+  socialLogin: false,
+  facebook: false
 };
 
 export default function (state = initialState, action) {
@@ -41,14 +42,15 @@ export default function (state = initialState, action) {
         signupData: { ...signupData, ...action.payload },
       };
     case actionTypes.LOGINSUCCESS:
-      console.log('LOGINSUCCESS data', action.payload);
+      console.log('LOGINSUCCESS dat========================action.facebook++', action.facebook);
       return {
         ...state,
         loader: false,
         userData: action.payload,
         token: action.token,
         status: action.status,
-        socialLogin: action.socialLogin
+        socialLogin: action.socialLogin,
+        facebook: action.facebook
       };
     case actionTypes.SIGNUPUPSUCCESS:
       // console.log('reducer data', action.status);

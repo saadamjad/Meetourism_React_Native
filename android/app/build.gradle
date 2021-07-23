@@ -191,6 +191,10 @@ android {
 }
 
 dependencies {
+   // For animated GIF support
+  implementation 'com.facebook.fresco:animated-gif:2.0.0'
+     implementation project(':react-native-fbsdk-next')
+     
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation project(':react-native-community-geolocation')
        implementation(project(':react-native-maps')){

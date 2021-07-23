@@ -209,7 +209,7 @@ const Status = (props) => {
         longitude: data?.longitude,
         address: 'Test Address',
       }
-      : props.socialLogin ? {
+      : props.socialLogin || props.facebook ? {
         first_name: data?.firstName,
         last_name: data?.lastName,
         username: data?.userName,
@@ -755,6 +755,7 @@ const mapStateToProp = (state) => ({
   allInterests: state.reducers.allInterests,
   userRegisterationImages: state.reducers.userRegisterationImages,
   socialLogin: state.reducers.socialLogin,
+  facebook: state.reducers.facebook,
 
 });
 const mapDispatchToProps = {

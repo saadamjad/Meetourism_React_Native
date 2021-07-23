@@ -2,37 +2,52 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { FastImageComponent } from '../../components/fastimage'
+import FastImage from 'react-native-fast-image'
 
-const App = () => {
+
+const App = (props) => {
+  const images = props?.route?.params.images
+  console.log("images=====", images)
   return (
+
     <Swiper
       style={styles.wrapper}
-      showsPagination={false}
+      // showsPagination={false}
       showsButtons={true}
-    // color={'red'}
-    // ={{color: 'red'}}
+
     >
-      {/* <View style={styles.slide1}> */}
-      {/* <Image
-        source={require('../../assets/images/profile.png')}
-        style={{ height: '100%', width: '100%' }}
-        resizeMode="cover"
-      /> */}
 
-      <FastImageComponent
-        resizeMode={'cover'}
+      {/* {images && images.map((item, i) => {
+        console.log("item===", item)
+        return <FastImageComponent
+          resizeMode={'cover'}
 
-        source={require('../../assets/images/profile.png')}
-        style={{ height: '100%', width: '100%' }}
-
-      />
-      {/* <Text style={styles.text}>Hello Swiper</Text> */}
-      {/* </View> */}
-      <View style={styles.slide2}>
-        {/* <Image
-          source={require('../../assets/images/background.png')}
+          source={`${"https://meetourism.com/storage/" + item.image_path}`}
           style={{ height: '100%', width: '100%' }}
-        /> */}
+
+        />
+
+      })} */}
+      {images && images.map((item, i) => {
+        console.log("item?.image_path", item?.image_path)
+
+        let checkUrl = typeof item?.image_path === 'string' && item?.image_path?.search('https://meetourism.com')
+        let image1WithUrl = `https://meetourism.com/storage/${item?.image_path}`
+        checkUrl == -1 ? true : false
+        // console.log("source===", source)
+
+        return <FastImage
+          style={{ width: '100%', height: '100%' }}
+          source={{
+            uri: checkUrl ? image1WithUrl : item?.image_path,
+            headers: { Authorization: 'someAuthToken' },
+            priority: FastImage.priority.normal,
+          }}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+      })}
+      {/* <View style={styles.slide2}>
+
 
         <FastImageComponent
           resizeMode={'cover'}
@@ -40,21 +55,16 @@ const App = () => {
           style={{ height: '100%', width: '100%' }}
 
         />
-        {/* <Text style={styles.text}>Beautiful</Text> */}
-      </View>
-      <View style={styles.slide3}>
-        {/* <Image
-          source={require('../../assets/images/profile.png')}
-          style={{ height: '100%', width: '100%' }}
-        /> */}
+      </View> */}
+      {/* <View style={styles.slide3}>
+
         <FastImageComponent
           resizeMode={'cover'}
           source={require('../../assets/images/profile.png')}
           style={{ height: '100%', width: '100%' }}
         />
-        {/* <Text style={styles.text}>And simple</Text> */}
 
-      </View>
+      </View> */}
     </Swiper>
   );
 };
@@ -62,12 +72,16 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    // backgroundColor: 'red',
+
+  },
   slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#9DD6EB',
+    // backgroundColor: 'red',
   },
   slide2: {
     flex: 1,

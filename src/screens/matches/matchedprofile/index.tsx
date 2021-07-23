@@ -57,7 +57,10 @@ const Profile = (props) => {
   };
   const _Gallery = () => {
     // return <Gallery />;
-    props.navigation.navigate('Gallery');
+    console.log('dddd', state.data.images);
+    props.navigation.navigate('Gallery', {
+      images: state.data.images,
+    });
   };
   useEffect(() => {
     let id = data?.id;

@@ -74,8 +74,9 @@ const Profile = (props) => {
               fontWeight: '700',
               paddingBottom: 5,
             }}>
-            {/* {console.log('TESTING', props.userData?.data?.first_name)} */}
-            {userData?.data?.first_name + ' ' + ' ' + userData?.data?.last_name}
+            {/* {console.log('TESTING==', userData?.data)} */}
+            {/* {userData?.data?.first_name + ' ' + ' ' + userData?.data?.last_name} */}
+            {userData?.data?.username}
 
             {/* patric pulso */}
           </Text>

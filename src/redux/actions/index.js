@@ -132,8 +132,8 @@ class Actions {
         });
     };
   };
-  static SocialLogin = (data, navigation, status) => {
-    console.log('data', data, 'status', status);
+  static SocialLogin = (data, navigation, status, gmail, insta, fb) => {
+    console.log('data', data, 'status', status, "fb", gmail, insta, fb);
 
     return async (dispatch) => {
       return await Post('auth/login-social', data)
@@ -150,14 +150,16 @@ class Actions {
               payload: response,
               token: response?.token,
               status: response?.status,
-              socialLogin: true
+              socialLogin: gmail, //sociallogin means gmail
+              insta: insta,
+              facebook: fb
+
             });
             let final_data = {
 
               type: 'email',
               value: response.email,
               userName: response?.full_name?.replace(/ +/g, ''),
-
             }
 
             _status ?
