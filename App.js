@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
 import Stack from './src/navigations/stacknavigation';
 // import BGcustom from './src/components/bgcustom';
@@ -13,11 +13,11 @@ import SelectOffer from './src/screens/alloffers/selectOffer';
 import DetailOffer1 from './src/screens/alloffers/detailsOffer1';
 // import History from './src/screens/alloffers/history';
 
-import {PersistGate} from 'redux-persist/integration/react';
-import {store, persistor} from './src/redux/store';
-import {Provider} from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './src/redux/store';
+import { Provider } from 'react-redux';
 // import { translate } from 'react-i18next';
-import {withTranslation} from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import OneSignal from 'react-native-onesignal';
 // import './src/I18n'
 
@@ -29,7 +29,7 @@ const App = (props) => {
     OneSignal.setLogLevel(6, 0);
     OneSignal.setAppId('7d35068c-2c86-4a49-bc6b-b8d38d5c2f05');
     OneSignal.getDeviceState().then((data) => {
-      console.log("GOT THE DATA ! " ,data)
+      console.log("GOT THE DATA ! ", data)
     })
     //END OneSignal Init Code
 

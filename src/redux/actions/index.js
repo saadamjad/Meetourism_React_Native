@@ -8,7 +8,7 @@ import { Get, Post, Put } from '../../apicalls/index';
 
 class Actions {
   static CheckUser = (data, navigation, values) => {
-    console.log('data', data);
+    console.log('data', values.device_token);
 
 
     return async (dispatch) => {
@@ -20,6 +20,11 @@ class Actions {
               var str = values.name;
               str = str.replace(/ +/g, '');
 
+              dispatch({
+                type: actionTypes.SAVEDEVICETOKEN,
+                deviceId: values.device_token
+
+              });
               Toast('Success', ' Successfully Created', 'success');
 
               let value = {
@@ -27,7 +32,7 @@ class Actions {
                 userName: str,
                 password: values.password,
                 confirmPassword: values.confirmPassword,
-                socialLogin: false
+                socialLogin: false,
 
               };
 

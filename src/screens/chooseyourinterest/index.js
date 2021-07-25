@@ -38,7 +38,7 @@ const Status = (props) => {
     : dataRedux;
 
   const company_name = data?.status == 'partner' ? true : false;
-  // console.log('Data  your interets>>.=========', company_name);
+  console.log('Data  your interets>>.=========', props.deviceId);
   const [state, setState] = useState({
     // interests: [1, 2],
     // selectCountry: '',
@@ -611,9 +611,10 @@ const Status = (props) => {
                   placeholderTextColor={theme.borderColor.inActiveBorderColor}
                   placeholder="Last Name"
                 />
-                {console.log("propsssss", props.Facebook)}
+                {/* {console.log("propsssss", props.Facebook,  .email, data?.value)} */}
                 {props.Facebook ? null :
                   <TextInput
+                    // value={state.email || data?.value}
                     value={state.email || data?.value}
                     editable={false}
                     style={{
@@ -841,6 +842,7 @@ const mapStateToProp = (state) => ({
   token: state.reducers.token,
   userRegisterationImages: state.reducers.userRegisterationImages,
   Facebook: state.reducers.facebook,
+  deviceId: state.reducers.deviceId,
 
   reverseGeoCodeData: state.reducers.reverseGeoCodeData,
 });

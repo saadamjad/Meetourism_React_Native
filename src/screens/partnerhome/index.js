@@ -18,6 +18,12 @@ import { TextInput } from 'react-native-gesture-handler';
 import { theme } from '../../constants/theme';
 import AnimatedLoader from '../../components/loader';
 
+import { LoginManager, LoginButton } from "react-native-fbsdk-next";
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import axios from 'axios';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { FastImageComponent } from '../../components/fastimage';
@@ -27,6 +33,35 @@ const App = (props) => {
     edit: false,
     changeTextInput: false, //this state is only   get to know which input data is update or not
   });
+
+  const signOut = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      // this.setState({ user: null }); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
+  const FacebookLogout = async () => {
+    <LoginButton
+      onLoginFinished={
+        (error, result) => {
+          if (error) {
+            console.log("login has error: " + result.error);
+          } else if (result.isCancelled) {
+            console.log("login is cancelled.");
+          } else {
+            AccessToken.getCurrentAccessToken().then(
+              (data) => {
+                console.log(data.accessToken.toString())
+              }
+            )
+          }
+        }
+      }
+      onLogoutFinished={() => console.log("logout.")} />
+  };
 
   const _GetLoggedInUserData = async () => {
     // console.log('props.userData.id', props.userData.id);
@@ -169,6 +204,8 @@ const App = (props) => {
                         onPress={() => {
                           if (item.name === 'Logout') {
                             props.Logout(props.navigation);
+                            props.socialLogin ? signOut() : props.facebook ?
+                              FacebookLogout() : null
                           }
                           item.navigation &&
                             props.navigation.navigate(item.navigation);
@@ -545,6 +582,8 @@ const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   image: state.reducers.images_Interests,
   token: state.reducers.token,
+  socialLogin: state.reducers.socialLogin,
+  facebook: state.reducers.facebook,
 
   loader: state.reducers.loader,
 });

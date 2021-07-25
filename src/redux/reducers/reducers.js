@@ -17,7 +17,8 @@ const initialState = {
   reverseGeoCodeData: {},
   userRegisterationImages: [],
   socialLogin: false,
-  facebook: false
+  facebook: false,
+  deviceId: "hello"
 };
 
 export default function (state = initialState, action) {
@@ -51,6 +52,13 @@ export default function (state = initialState, action) {
         status: action.status,
         socialLogin: action.socialLogin,
         facebook: action.facebook
+      };
+    case actionTypes.SAVEDEVICETOKEN:
+      console.log('SAVEDEVICETOKEN ', action.deviceId);
+      return {
+        ...state,
+        loader: false,
+        deviceId: action.deviceId
       };
     case actionTypes.SIGNUPUPSUCCESS:
       // console.log('reducer data', action.status);

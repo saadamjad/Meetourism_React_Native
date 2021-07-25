@@ -26,6 +26,8 @@ import { FastImageComponent } from '../../components/fastimage';
 const Status = (props) => {
   //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
+
+  console.log("======????", props.deviceId)
   const editImages = props?.route?.params?.editImages;
   const token = props?.token;
 
@@ -164,7 +166,7 @@ const Status = (props) => {
 
   const _UserRegister = async (value) => {
     // console.log('company_name,', data);
-    let data2 = company_name
+    let data2 = (company_name && (props.socialLogin || props.facebook))
       ? {
         // company_name: data.company_name,
         // first_name: 'First Name',
@@ -208,31 +210,12 @@ const Status = (props) => {
         latitude: data?.latitude,
         longitude: data?.longitude,
         address: 'Test Address',
-      }
-      : props.socialLogin || props.facebook ? {
-        first_name: data?.firstName,
-        last_name: data?.lastName,
-        username: data?.userName,
-        email: data?.email,
-        phone: data?.contact,
-        password: data?.password,
-        password_confirmation: data?.confirmPassword,
-        age: Number(data?.age),
-        country_id: data?.countryId,
-        city: data?.city,
-        weight: Number(data?.weight),
-        height: Number(data?.height),
-        eye_color: data?.eyeColor,
-        status: data?.status,
-        interests: state?.interests,
-        images: data?.images,
-        description: data?.description,
-        latitude: '24.123244',
-        longitude: '87.839483',
-        address: 'Test Address',
         is_social_register: 1,
         user_id: props?.userData?.id,
-      } : {
+        device_token: props.deviceId,
+
+      } : company_name ? {
+        company_name: data?.company_name,
         first_name: data?.firstName,
         last_name: data?.lastName,
         username: data?.userName,
@@ -247,13 +230,64 @@ const Status = (props) => {
         height: Number(data?.height),
         eye_color: data?.eyeColor,
         status: data?.status,
-        interests: state?.interests,
+        interests: state.interests,
         images: data?.images,
         description: data?.description,
-        latitude: '24.123244',
-        longitude: '87.839483',
+        latitude: data?.latitude,
+        longitude: data?.longitude,
         address: 'Test Address',
-      };
+        device_token: props.deviceId,
+
+
+      }
+        : props.socialLogin || props.facebook ? {
+          first_name: data?.firstName,
+          last_name: data?.lastName,
+          username: data?.userName,
+          email: data?.email,
+          phone: data?.contact,
+          password: data?.password,
+          password_confirmation: data?.confirmPassword,
+          age: Number(data?.age),
+          country_id: data?.countryId,
+          city: data?.city,
+          weight: Number(data?.weight),
+          height: Number(data?.height),
+          eye_color: data?.eyeColor,
+          status: data?.status,
+          interests: state?.interests,
+          images: data?.images,
+          description: data?.description,
+          latitude: '24.123244',
+          longitude: '87.839483',
+          address: 'Test Address',
+          is_social_register: 1,
+          user_id: props?.userData?.id,
+          device_token: props.deviceId,
+
+        } : {
+          first_name: data?.firstName,
+          last_name: data?.lastName,
+          username: data?.userName,
+          email: data?.email,
+          phone: data?.contact,
+          password: data?.password,
+          password_confirmation: data?.confirmPassword,
+          age: Number(data?.age),
+          country_id: data?.countryId,
+          city: data?.city,
+          weight: Number(data?.weight),
+          height: Number(data?.height),
+          eye_color: data?.eyeColor,
+          status: data?.status,
+          interests: state?.interests,
+          images: data?.images,
+          description: data?.description,
+          latitude: '24.123244',
+          longitude: '87.839483',
+          address: 'Test Address',
+          device_token: props.deviceId,
+        };
     setLoader(true);
 
 
@@ -295,7 +329,7 @@ const Status = (props) => {
 
     } else {
       let testingValue = { ...data2, interests: value, images: props.userRegisterationImages };
-      console.log("testing value", testingValue, "SOCIAL LOGIN ", props.socialLogin)
+      console.log("testing value", testingValue.is_social_register, "SOCIAL LOGIN ", props.socialLogin)
       await props.Signup(testingValue, props.navigation, company_name);
 
       setLoader(false);
@@ -726,7 +760,7 @@ const Status = (props) => {
           </TouchableOpacity>
         </View>
       </Overlay>
-      {console.log("socialLogin", props.socialLogin)}
+      {/* {console.log("socialLogin", props.socialLogin)} */}
       <AnimatedLoader
         visible={loader}
         overlayColor="rgba(255,255,255,0.6)"
@@ -756,6 +790,8 @@ const mapStateToProp = (state) => ({
   userRegisterationImages: state.reducers.userRegisterationImages,
   socialLogin: state.reducers.socialLogin,
   facebook: state.reducers.facebook,
+  deviceId: state.reducers.deviceId,
+
 
 });
 const mapDispatchToProps = {

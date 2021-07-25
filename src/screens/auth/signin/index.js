@@ -20,11 +20,14 @@ import { connect } from 'react-redux';
 import { Actions } from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
+import OneSignal from 'react-native-onesignal';
+
 import {
   LoginManager,
   Settings,
   AccessToken,
   AuthenticationToken,
+  LoginButton,
   Profile
 } from 'react-native-fbsdk-next';
 import { FastImageComponent } from '../../../components/fastimage';
@@ -62,11 +65,12 @@ const App = (props) => {
   // const { t, i18n } = useTranslation()
   const [instagramLogin, setInstagramLogin] = useState(useRef());
 
-  signIn = async () => {
+  const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      // setSignvalues({ ...signupValues, name: user?.name, email: user?.email });
+      setLoader(true)
+
       let _user = userInfo?.user;
       let data = {
 
@@ -78,14 +82,18 @@ const App = (props) => {
         userName: _user.name,
 
         device_type: "android",
-        device_token: "fcm_token"
+        device_token: state.deviceID
 
       }
       console.log("data", data)
-      props.SocialLoginAction(data, props.navigation, null, true, false, false)
+      await props.SocialLoginAction(data, props.navigation, null, true, false, false)
+      setLoader(false)
+
 
 
     } catch (error) {
+      setLoader(false)
+
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log("userinfo===", error)
 
@@ -107,8 +115,46 @@ const App = (props) => {
   };
 
 
+  const _GotDeviceId = () => {
+    OneSignal.setLogLevel(6, 0);
+    OneSignal.setAppId('7d35068c-2c86-4a49-bc6b-b8d38d5c2f05');
+    OneSignal.getDeviceState().then((data) => {
+      console.log("GOT THE DATA ! ", data.userId)
+      setState({
+        ...state, deviceID: data.userId
+      })
+    })
+    //END OneSignal Init Code
+
+    //Prompt for push on iOS
+    // OneSignal.promptForPushNotificationsWithUserResponse((response) => {
+    //   console.log('Prompt response:', response);
+    // });
+
+    //Method for handling notifications received while app in foreground
+    OneSignal.setNotificationWillShowInForegroundHandler(
+      (notificationReceivedEvent) => {
+        console.log(
+          'OneSignal: notification will show in foreground:',
+          notificationReceivedEvent,
+        );
+        let notification = notificationReceivedEvent.getNotification();
+        console.log('notification: ', notification);
+        const data = notification.additionalData;
+        console.log('additionalData: ', data);
+        // Complete with null means don't show a notification.
+        notificationReceivedEvent.complete(notification);
+      },
+    );
+
+    //Method for handling notifications opened
+    OneSignal.setNotificationOpenedHandler((notification) => {
+      console.log('OneSignal: notification opened:', notification);
+    });
+  }
 
   const fbSignin = async () => {
+
     try {
       const result = await LoginManager.logInWithPermissions(
         ['public_profile', 'email'],
@@ -122,39 +168,30 @@ const App = (props) => {
           const result = await AuthenticationToken.getAuthenticationTokenIOS();
           console.log(result?.authenticationToken);
         } else {
+          const result = AccessToken.getCurrentAccessToken().then((res1) => {
+            console.log("res", res1)
+            setLoader(true)
 
-          await Profile.getCurrentProfile().then((res) => {
-            console.log("res=====", res)
-            let data = {
+            _GraphApiGettingFacebookProfile(res1)
 
-              medium: "facebook",
-              social_id: res?.userID,
-              first_name: res?.firstName,
-              last_name: res?.lastName,
-              userName: res?.name,
-              // email: "abc@gmail.com",
 
-              device_type: "android",
-              device_token: "fcm_token"
 
-            }
-            console.log("data", data)
-            props.SocialLoginAction(data, props.navigation, null, false, false, true)
           }).catch((err) => {
-            console.log("error in catch getCurrentProfile", err)
+            console.log("error in getCurrentAccessToken", err)
           })
-
 
         }
       }
-
-
     } catch (error) {
       console.log("eroror", error);
     }
   };
 
-  // console.log("t", t, i18n)
+
+
+
+
+
   const getLanguage = (language) => {
     if (language === 0) {
       console.log('English');
@@ -167,14 +204,14 @@ const App = (props) => {
   };
 
   const [signupValues, setSignvalues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    // name: 'ok',
-    // email: 'ok@gmail.com',
-    // password: '123456789',
-    // confirmPassword: '123456789',
+    // name: '',
+    // email: '',
+    // password: '',
+    // confirmPassword: '',
+    name: 'ok',
+    email: 'ok@gmail.com',
+    password: '123456789',
+    confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
     email: 'projectskahoodigitals@gmail.com',
@@ -188,6 +225,7 @@ const App = (props) => {
   useEffect(() => {
     // console.log("1")
     Settings.initializeSDK();
+    _GotDeviceId()
 
     ref.current?.setAddressText('Some Text blue');
 
@@ -202,6 +240,8 @@ const App = (props) => {
   const [state, setState] = useState({
     selectedIndex: 0,
     visible: false,
+    userId: "",
+    deviceID: "",
 
     routes: [
       { key: 'first', title: 'SignIn' },
@@ -238,11 +278,12 @@ const App = (props) => {
         latitude: '25.0915',
         longitude: '67.9034',
         address: 'Test Address',
+        device_token: state.deviceID
+
       };
       await props.Login(data, props.navigation, socialLogin);
 
       setLoader(false);
-      // toggleOverlay(socialLogin)
     }
   };
 
@@ -417,7 +458,10 @@ const App = (props) => {
       name: signupValues.name,
       password: signupValues.password,
       confirmPassword: signupValues.confirmPassword,
+      device_token: state.deviceID
+
     };
+    console.log("BEFOREEEEEEEEEEEEEEee", values)
     let value = await props.CheckUser(data, props.navigation, values);
     if (!value) {
       setLoader(false);
@@ -555,14 +599,47 @@ const App = (props) => {
     </>
   );
   // const { t, i18n } = useTranslation()
+  const _GraphApiGettingFacebookProfile = (res1) => {
 
+
+    fetch('https://graph.facebook.com/v2.5/me?fields=email,first_name,last_name,friends&access_token=' + res1.accessToken)
+      .then((response) => {
+        response.json().then(async (json) => {
+          console.log("json", json)
+
+          var data = {
+            medium: "facebook",
+            social_id: res1.userID,
+            first_name: json.first_name,
+            last_name: json.last_name,
+            userName: json.first_name + json.last_name,
+            email: json.email,
+
+            device_type: "android",
+            device_token: state.deviceID
+
+          }
+
+
+          console.log("---data--- ", data);
+          // console.log("---data--- " + Object(data));
+          await props.SocialLoginAction(data, props.navigation, null, false, false, true)
+          setLoader(false)
+
+
+        })
+      })
+      .catch(() => {
+        console.log('ERROR GETTING DATA FROM FACEBOOK')
+      })
+  }
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         // onPress={() => signIn()}
         style={{ height: 40, width: 100, borderWidth: 0 }}>
-        <Text>. </Text>
-      </TouchableOpacity>
+        <Text style={{ color: 'white' }} > 1 {state.userId} </Text>
+      </TouchableOpacity> */}
 
       {/* <Text> {state?.test?.city} </Text>
       <Text> {state?.test?.regionName} </Text> */}
@@ -646,6 +723,51 @@ const App = (props) => {
         }}
         onLoginFailure={(data) => console.log(data)}
       />
+      {/* <LoginButton
+        publishPermissions={['publish_actions']}
+        readPermissions={['public_profile']}
+        onLoginFinished={(error, result) => {
+          if (error) {
+            console.log('login has error: ' + result.error);
+          } else if (result.isCancelled) {
+            console.log('login is cancelled.');
+          } else {
+            if (Platform.OS === 'ios') {
+              AuthenticationToken.getAuthenticationTokenIOS().then((data) => {
+                console.log(data?.authenticationToken);
+              });
+            } else {
+              AccessToken.getCurrentAccessToken().then(async (data) => {
+                console.log("response", data)
+                console.log(data?.accessToken.toString());
+
+                Profile.getCurrentProfile().then(res => {
+                  console.log("ress", res)
+                }
+                  // function (currentProfile) {
+                  //   // if (currentProfile) {
+                  //   //   console.log("The current logged user is: " +
+                  //   //     currentProfile.name
+                  //   //     + ". His profile id is: " +
+                  //   //     currentProfile.userID
+                  //   //   );
+                  //   // }
+                  //   // else {
+                  //   //   console.log("dont get it ")
+                  //   // }
+                  // }
+                )
+                // console.log("currentProfile", currentProfile)
+
+              });
+            }
+          }
+        }}
+        onLogoutFinished={() => console.log('logout.')}
+        loginTrackingIOS={'limited'}
+        nonceIOS={'my_nonce'}
+      /> */}
+
 
       {state.selectedIndex == '0' ? signInRoute() : signUpRoute()}
       <AnimatedLoader
