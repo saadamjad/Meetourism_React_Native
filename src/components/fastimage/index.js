@@ -15,7 +15,6 @@ const FastImageComponent = ({ tintColor, source, resizeMode, Children, priority,
     checkUrl = typeof source.uri === 'string' && source?.uri?.search('https://meetourism.com'),
     // image1WithUrl = `https://meetourism.com/storage/${source}`,
     checkUrl == -1 ? false : true,
-    console.log("source===", source),
 
 
     <FastImage

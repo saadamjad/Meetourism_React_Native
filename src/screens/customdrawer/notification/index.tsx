@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import {Actions} from '../../../redux/actions/index';
 import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
+import moment from 'moment';
 import {FastImageComponent} from '../../../components/fastimage';
 const Notification = (props) => {
   const token = props.token;
@@ -88,33 +89,31 @@ const Notification = (props) => {
           navigation={props.navigation}
           leftArrow={true}
           // searchIcon={true}
-          // backgroundColor={theme.secondaryColor}
+          backgroundColor={theme.secondaryColor}
           headerText="Notifications"
         />
         {state?.messages?.map((val, i) => {
+          let data = val.data;
           let l = i - state?.messages?.length;
-          console.log('helo', i == state?.messages?.length - 1);
+          console.log('Valaaaa', val),
+            console.log('helo', i == state?.messages?.length - 1);
           return (
             <View
               style={{
-                height: 300,
+                height: 150,
                 backgroundColor:
-                  i == 0
-                    ? theme.secondaryColor
-                    : i == 1
-                    ? theme.primaryColor1
-                    : theme.primaryColor,
-
-                borderRightWidth: 0,
-                borderWidth: 0.5,
-                borderTopColor: 'transparent',
-                borderRightColor: 'transparent',
-                justifyContent: 'flex-end',
+                  i == 0 ? theme.secondaryColor : theme.primaryColor,
+                // theme.primaryColor1
+                // borderRightWidth: 0,
+                // borderWidth: 0.5,
+                // borderTopColor: 'transparent',
+                // borderRightColor: 'transparent',
+                justifyContent: 'center',
                 borderColor: theme.primaryColor1,
-                marginTop: -150,
-                borderBottomLeftRadius:
-                  i == state?.messages?.length - 1 ? 0 : 100,
-                zIndex: val.l,
+                // marginTop: -150,
+                borderBottomLeftRadius: 100,
+
+                // zIndex: val.l,
                 overflow: 'hidden',
               }}>
               <View
@@ -135,23 +134,28 @@ const Notification = (props) => {
                     alignItems: 'center',
                   }}>
                   <View style={{alignItems: 'center', width: '20%'}}>
-                    {/* <View
+                    <View
                       style={{
                         width: 50,
                         height: 50,
-                        borderRadius: 100,
-                        // borderWidth: 1,
-                        backgroundColor: 'white',
-                      }}> */}
-                    <FastImageComponent
-                      resizeMode="contain"
-                      source={require('../../../assets/images/ava.png')}
-                      style={{
-                        width: 50,
-                        height: 50,
-                      }}
-                    />
-                    {/* </View> */}
+                        borderRadius: 50,
+                        borderWidth: 0.5,
+                        overflow: 'hidden',
+                        // backgroundColor: 'white',
+                      }}>
+                      <FastImageComponent
+                        resizeMode="cover"
+                        source={
+                          data?.profile_url
+                            ? {uri: data?.profile_url}
+                            : require('../../../assets/images/ava.png')
+                        }
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                        }}
+                      />
+                    </View>
                   </View>
                   <View style={{width: '70%'}}>
                     <Text
@@ -160,14 +164,21 @@ const Notification = (props) => {
                         fontWeight: '900',
                         fontSize: 16,
                       }}>
-                      {val.description}
+                      {data?.username}
                     </Text>
                     <Text
                       style={{
                         color: theme.textColor.whiteColor,
                         marginTop: 10,
                       }}>
-                      {val.date}
+                      {data?.message}
+                    </Text>
+                    <Text
+                      style={{
+                        color: theme.textColor.whiteColor,
+                        marginTop: 10,
+                      }}>
+                      {moment(val?.updated_at).format('DD-mm-yy')}
                     </Text>
                   </View>
                 </View>

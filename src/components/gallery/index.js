@@ -34,7 +34,6 @@ const App = (props) => {
         let checkUrl = typeof item?.image_path === 'string' && item?.image_path?.search('https://meetourism.com')
         let image1WithUrl = `https://meetourism.com/storage/${item?.image_path}`
         checkUrl == -1 ? true : false
-        // console.log("source===", source)
 
         return <FastImage
           style={{ width: '100%', height: '100%' }}

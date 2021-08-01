@@ -242,7 +242,6 @@ const App = (props) => {
     visible: false,
     userId: "",
     deviceID: "",
-
     routes: [
       { key: 'first', title: 'SignIn' },
       { key: 'second', title: 'SignUp' },
@@ -635,40 +634,7 @@ const App = (props) => {
   }
   return (
     <CustomView withBg={state.selectedIndex == 1} bg={'white'} scroll>
-      {/* <TouchableOpacity
-        // onPress={() => signIn()}
-        style={{ height: 40, width: 100, borderWidth: 0 }}>
-        <Text style={{ color: 'white' }} > 1 {state.userId} </Text>
-      </TouchableOpacity> */}
 
-      {/* <Text> {state?.test?.city} </Text>
-      <Text> {state?.test?.regionName} </Text> */}
-      {/* <GooglePlacesAutocomplete
-        ref={ref}
-        placeholder="Enter Location"
-        minLength={2}
-        autoFocus={true}
-        // returnKeyType={'default'}
-        fetchDetails={true}
-        onPress={(data, details = null) => {
-          // 'details' is provided when fetchDetails = true
-          console.log('sssss', data, details);
-        }}
-        onChangeText={(text) => console.log('Heo', text)}
-        styles={{
-          textInputContainer: {
-            backgroundColor: 'grey',
-          },
-          textInput: {
-            height: 38,
-            color: '#5d5d5d',
-            fontSize: 16,
-          },
-          predefinedPlacesDescription: {
-            color: '#1faadb',
-          },
-        }}
-      /> */}
       <View
         style={{
           width: '100%',
@@ -784,7 +750,6 @@ const App = (props) => {
     </CustomView>
   );
 
-  //  );
 };
 
 const mapStateToProp = (state) => ({

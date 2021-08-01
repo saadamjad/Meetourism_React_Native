@@ -13,6 +13,8 @@ import {
 
 
 import { theme } from '../../constants/theme';
+import Icon from 'react-native-vector-icons/Feather';
+
 
 import { Button, Overlay } from 'react-native-elements';
 import { CheckBox } from 'react-native-elements';
@@ -27,7 +29,7 @@ const Status = (props) => {
   //yhan data redux se utha loo kafi ha
   const data = props?.route?.params?.profileData;
 
-  console.log("======????", props.deviceId)
+  // console.log("======????", props.deviceId)
   const editImages = props?.route?.params?.editImages;
   const token = props?.token;
 
@@ -47,115 +49,44 @@ const Status = (props) => {
     yourInterest: []
   });
 
-  // useEffect(() => {
-  //   // setState({ ...state, interests: props.allInterests, loader: false });
 
-  //   // if (props.editSetting) {
-  //   //   let value = props?.userData?.interests.map((item, i) => {
-  //   //     // console.log("helo", item)
-  //   //     return { ...item, selected: true, dataYes: true };
-  //   //   });
-
-  //   //   setState({
-  //   //     ...state,
-  //   //     yourInterest: value,
-  //   //     loader: false,
-  //   //     interests: value,
-  //   //   });
-  //   // }
-  //   // else {
-  //   //   setState({ ...state, interests: props.allInterests, loader: false });
-
-  //   // }
-
-
-  //   // if (props.editSetting) {
-
-  //   //   let value = props?.allInterests.map((item, i) => {
-  //   //     console.log("item", item.id)
-
-  //   //     if (item.id == props?.userData?.interests.filter((item) => item.id)) {
-  //   //       console.log("YHAN AYA")
-
-  //   //       return { ...item, selected: true };
-
-  //   //     }
-  //   //     else {
-
-  //   //       return { ...item, selected: false, }
-
-  //   //     }
-
-  //   //   });
-
-  //   //   console.log("avalueeeeeeeeeee", value)
-  //   //   setState({
-  //   //     ...state,
-  //   //     yourInterest: value,
-  //   //     loader: false,
-  //   //     interests: value,
-  //   //   });
-  //   // }
-  //   // else {
-  //   //   setState({ ...state, interests: props.allInterests, loader: false });
-
-  //   // }
-
-
-  // }, []);
   useEffect(() => {
     _Tesinting()
 
   }, []);
-  // useEffect(() => {
-  //   if (props.editSetting) {
+  useEffect(() => {
+    _Tesinting()
 
-  //     let value = props.allInterests.map((item, i) => {
-  //       if (item?.id == props.userData?.interests[i]?.id) {
-  //         return { ...item, selected: true }
-  //       }
-  //       else {
-  //         return { ...item }
-  //       }
+  }, [props.editSetting]);
 
 
-  //     })
-  //     setState({
-  //       ...state,
-  //       // isVisible: true,
-  //       loader: false,
-  //       interests: value,
 
-  //       verifySelection: true,
-  //     })
-  //   }
-
-  // }, [props.editSetting]);
-  const _Tesinting = () => {
+  const _Tesinting = async () => {
 
     if (props.editSetting) {
 
-      let value = props.allInterests.map((item, i) => {
-        if (item?.id == props.userData?.interests[i]?.id) {
-          return { ...item, selected: true }
+      const normalized = props.userData.interests.map(({ id }) => id);
+      const diff = props.allInterests.map(value => {
+        if (normalized.includes(value.id)) {
+          return { ...value, selected: true }
         }
         else {
-          return { ...item }
+          return { ...value, selected: false }
+
         }
+      }
 
-
-      })
+      );
       setState({
         ...state,
         // isVisible: true,
         loader: false,
-        interests: value,
+        interests: diff,
 
         verifySelection: true,
       })
     }
     else {
-      // console.log(" props.allInterest", props.allInterests)
       setState({
         loader: false, interests: props.allInterests
       })
@@ -165,7 +96,6 @@ const Status = (props) => {
   }
 
   const _UserRegister = async (value) => {
-    // console.log('company_name,', data);
     let data2 = (company_name && (props.socialLogin || props.facebook))
       ? {
         // company_name: data.company_name,
@@ -329,7 +259,7 @@ const Status = (props) => {
 
     } else {
       let testingValue = { ...data2, interests: value, images: props.userRegisterationImages };
-      console.log("testing value", testingValue.is_social_register, "SOCIAL LOGIN ", props.socialLogin)
+      // console.log("testing value", testingValue.is_social_register, "SOCIAL LOGIN ", props.socialLogin)
       await props.Signup(testingValue, props.navigation, company_name);
 
       setLoader(false);
@@ -338,6 +268,113 @@ const Status = (props) => {
   };
 
   let filter = state?.interests?.filter((item, i) => item?.selected == true)
+
+  const YourInterest = () => {
+    return <View
+      style={{
+        width: '100%',
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 25,
+      }}>
+      {state.interests &&
+        state.interests.map((val, i) =>
+          val?.selected ? (
+            <TouchableOpacity
+              style={{
+                width: '80%',
+                flexDirection: 'row',
+                marginTop: 20,
+                // borderWidth: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              key={i}>
+              <View
+                style={{
+                  // height: '100%',
+                  width: '30%',
+                  // borderWidth: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <View
+                  style={{
+                    height: 36,
+                    width: 36,
+                    borderRadius: 36,
+                    // borderWidth: 1,
+                  }}>
+                  <FastImageComponent
+                    resizeMode="contain"
+                    style={{ height: '100%', width: '100%' }}
+                    source={require('../../assets/images/girl.png')}
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  width: '70%',
+                  borderWidth: 0,
+                  paddingLeft: 10,
+                }}>
+                <Text
+                  style={{
+                    color:
+                      theme.textColor[
+                      state.selected == i
+                        ? 'blackColor'
+                        : 'greyColor'
+                      ],
+                    fontWeight: '700',
+                    // marginLeft: 30,
+                    fontSize: 20,
+                    // width: '85%',
+                  }}>
+                  {val.name}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ) : null,
+        )
+      }
+      {
+        filter?.length > 0 ? null :
+          <Text> No Interest Selected </Text>
+
+      }
+
+    </View>
+
+  }
+
+  const SelectedInterestDoneFunction = () => {
+    var showpopup = false
+
+
+    props.UpdateInterests(state.interests)
+    let value = state.interests.filter((item) => item?.selected == true)
+    if (!value.length > 0) {
+
+      showpopup = true
+    }
+    else {
+      showpopup = false
+      props.UpdateInterests(state.interests)
+      setState({
+        ...state,
+        isVisible: false,
+        verifySelection: false
+      });
+
+    }
+
+    if (showpopup) {
+      alert("please select interest")
+    }
+
+  }
 
   return (
 
@@ -371,12 +408,16 @@ const Status = (props) => {
                 // paddingVertical: 10,
                 alignSelf: 'flex-start',
               }}
-              onPress={() => props.navigation.goBack()}>
-              {/* <Icon
-                type="AntDesign"
-                name="arrowleft"
+              onPress={() => {
+                SelectedInterestDoneFunction(),
+                  props.navigation.goBack()
+              }
+              }>
+              <Icon
+                type="Feather"
+                name="arrow-left"
                 style={{ color: 'white', fontSize: 20 }}
-              /> */}
+              />
             </TouchableOpacity>
           </View>
           <View
@@ -405,84 +446,8 @@ const Status = (props) => {
                 }}>
                 Your Interests
               </Text>
-              <View
-                style={{
-                  width: '100%',
-                  marginTop: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  // borderWidth: 1,
-                  paddingHorizontal: 25,
-                }}>
+              <YourInterest />
 
-                {state.interests &&
-                  state.interests.map((val, i) =>
-                    val?.selected ? (
-                      <TouchableOpacity
-                        style={{
-                          width: '80%',
-                          flexDirection: 'row',
-                          marginTop: 20,
-                          // borderWidth: 1,
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                        key={i}>
-                        <View
-                          style={{
-                            // height: '100%',
-                            width: '30%',
-                            // borderWidth: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}>
-                          <View
-                            style={{
-                              height: 36,
-                              width: 36,
-                              borderRadius: 36,
-                              // borderWidth: 1,
-                            }}>
-                            <FastImageComponent
-                              resizeMode="contain"
-                              style={{ height: '100%', width: '100%' }}
-                              source={require('../../assets/images/girl.png')}
-                            />
-                          </View>
-                        </View>
-                        <View
-                          style={{
-                            width: '70%',
-                            borderWidth: 0,
-                            paddingLeft: 10,
-                          }}>
-                          <Text
-                            style={{
-                              color:
-                                theme.textColor[
-                                state.selected == i
-                                  ? 'blackColor'
-                                  : 'greyColor'
-                                ],
-                              fontWeight: '700',
-                              // marginLeft: 30,
-                              fontSize: 20,
-                              // width: '85%',
-                            }}>
-                            {val.name}
-                          </Text>
-                        </View>
-                      </TouchableOpacity>
-                    ) : null,
-                  )
-                }
-                {
-                  filter?.length > 0 ? null :
-                    <Text> No Interest Selected </Text>
-
-                }
-
-              </View>
             </View>
             <View
               style={{
@@ -543,7 +508,12 @@ const Status = (props) => {
 
                 }
               >
-                {/* <Icon style={{ fontSize: 20 }} type="AntDesign" name="plus" /> */}
+
+                <Icon
+                  type="AntDesign"
+                  name="plus"
+                  style={{ color: 'white', fontSize: 20 }}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -551,17 +521,19 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => {
-              if (!state.interests?.length > 0) {
+              let value = state.interests.filter((item) => item?.selected == true)
+
+              if (!state.interests?.length > 0 || !value.length > 0) {
                 alert('please select Interests');
               }
               else {
-                let value = state.interests.filter((item) => item?.selected == true)
                 let testarray = value.map((val, index) => {
                   return val.id
                 })
-                // console.log("testarray", testarray)
+                console.log("value", value)
+
                 _UserRegister(testarray);
-                // _UserRegister(value);
+
               }
             }}
             style={{
@@ -580,7 +552,8 @@ const Status = (props) => {
           </TouchableOpacity>
         </View>
       </ImageBackground>
-      {/* {console.log("props.allInterests======", props.allInterests)} */}
+
+
       <Overlay
         isVisible={state.isVisible}
         onBackdropPress={() => setState({ ...state, isVisible: false })}
@@ -607,11 +580,6 @@ const Status = (props) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             {state.interests &&
               state.interests.map((val, i) => {
-
-
-
-
-                // let checked = state.yourInterest[i]?.id == val.id ? true : false
                 return (
                   <TouchableOpacity
                     key={i}
@@ -730,19 +698,8 @@ const Status = (props) => {
           <TouchableOpacity
             activeOpacity={0.75}
             onPress={() => {
-              // console.log("state", state.interests)
+              SelectedInterestDoneFunction()
 
-              props.UpdateInterests(state.interests)
-              // console.log("state", state.interests.filter((item) => item?.selected == true))
-              let value = state.interests.filter((item) => item?.selected == true)
-              // let concat = [...state.yourInterest, ...value]
-              // console.log(concat)
-              setState({
-                ...state,
-                // yourInterest: concat,
-
-                isVisible: false, verifySelection: false
-              });
             }}
             style={{
               height: 40,
@@ -760,7 +717,6 @@ const Status = (props) => {
           </TouchableOpacity>
         </View>
       </Overlay>
-      {/* {console.log("socialLogin", props.socialLogin)} */}
       <AnimatedLoader
         visible={loader}
         overlayColor="rgba(255,255,255,0.6)"

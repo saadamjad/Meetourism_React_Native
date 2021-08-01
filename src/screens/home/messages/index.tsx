@@ -76,8 +76,7 @@ const Messages = (props) => {
               style={{
                 height: 220,
                 backgroundColor: theme.primaryColor,
-                // borderColor: 'orange',
-                // borderBottomWidth: 5,
+
                 borderWidth: 0.2,
                 borderTopColor: 'transparent',
                 borderRightColor: 'transparent',

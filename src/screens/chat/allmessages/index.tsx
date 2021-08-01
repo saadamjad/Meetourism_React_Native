@@ -60,10 +60,7 @@ const Messages = (props) => {
 
                   borderRightWidth: 0,
                   borderWidth: 0.5,
-                  // borderRightWidth: 0,
-                  // borderTopColor: theme.primaryColor,
-                  // borderRightColor: theme.primaryColor,
-                  // borderLeftColor: theme.primaryColor,
+
                   overflow: 'hidden',
                 }}
                 onPress={() => {
@@ -74,21 +71,12 @@ const Messages = (props) => {
                 }}>
                 <View
                   style={{
-                    // flex: 0.55,
-                    // backgroundColor: 'blue',
-                    // backgroundColor: 'blue',
-
                     width: '100%',
                     flexDirection: 'row',
-                    // alignSelf: 'flex-end',
                     justifyContent: 'center',
-
-                    // alignItems: 'space-around',
                   }}>
                   <View
                     style={{
-                      // backgroundColor: 'red',
-
                       height: '100%',
                       width: '80%',
                       justifyContent: 'space-around',
@@ -147,10 +135,6 @@ const Messages = (props) => {
                       alignItems: 'center',
                     }}>
                     <Text style={{color: theme.textColor.whiteColor}}>
-                      {/* {val?.last_message[0]?.moment(updated_at, 'DDMMYY') */}
-                      {/* {moment(val?.last_message[0]?.updated_at, 'DDMMYYYY')} */}
-
-                      {/* {new Date(val?.last_message[0]?.updated_at)} */}
                       {moment(val?.last_message[0]?.updated_at).format(
                         'yy-MM-DD',
                       )}
