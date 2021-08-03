@@ -28,8 +28,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Geocoder from 'react-native-geocoding';
 Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
 
-import axios from 'axios';
-import FastImage from 'react-native-fast-image';
 const Status = (props) => {
   let dataRedux = props?.userData;
 
@@ -38,7 +36,7 @@ const Status = (props) => {
     : dataRedux;
 
   const company_name = data?.status == 'partner' ? true : false;
-  console.log('Data  your interets>>.=========', props.deviceId);
+  // console.log('Data  your interets>>.=========', props.deviceId);
   const [state, setState] = useState({
     // interests: [1, 2],
     // selectCountry: '',
@@ -234,6 +232,35 @@ const Status = (props) => {
   //     });
   // };
 
+  const DeleteImage = (path) => {
+    console.log(path)
+    var axios = require('axios');
+    var data = JSON.stringify({
+      "image_url": path
+    });
+
+    var config = {
+      method: 'delete',
+      url: 'https://meetourism.com/api/v1/images',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${props.token}`,
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+  }
+
   const _Buttons = () => {
     return (
       <View style={{ overflow: 'hidden', marginVertical: 5 }}>
@@ -343,12 +370,10 @@ const Status = (props) => {
                   }}>
                   {state.images &&
                     state.images.map((val, i) =>
-                      // console.log("V====", val),
-                      // const normalisedSource = val && typeof val === 'string' && (val.split('https://')[1] || val.split('http://')[1]) ? val : null
-                      // val === 'undefined' ? console.log("undefine") : console.log("not")
+
                       val !== 'undefined' ? (
                         <View>
-                          {console.log('Va', val)}
+                          {/* {console.log('Va===', val)} */}
                           <TouchableOpacity
                             style={{
                               height: 30,
@@ -361,11 +386,14 @@ const Status = (props) => {
                               let array = state.images.filter(
                                 (item, ind) => i != ind,
                               );
-                              // console.log('array', array);
+
                               setState({
                                 ...state,
                                 images: array,
                               });
+                              DeleteImage(val)
+
+
                             }}>
                             <Entypo
                               name="circle-with-cross"
@@ -419,19 +447,7 @@ const Status = (props) => {
                     )}
                   {state.images?.length >= 5 ? null : (
                     <>
-                      {/* <TouchableOpacity
-                          style={{ height: 30, width: 30, alignItems: 'flex-start', justifyContent: 'flex-end', borderWidth: 0 }}
 
-                          onPress={() => {
-                            let array = state.images.filter((item, ind) => i != ind)
-                            console.log("array", array)
-                            setState({
-                              ...state, images: array
-                            })
-                          }}
-                        >
-                          <Entypo name="circle-with-cross" size={20} color={theme.secondaryColor} />
-                        </TouchableOpacity> */}
                       <TouchableOpacity
                         style={{
                           backgroundColor: '#998FA2',
@@ -850,6 +866,7 @@ const mapDispatchToProps = {
   Signup: Actions.Signup,
   Logout: Actions.Logout,
   UpdateCompleteProfile: Actions.UpdateCompleteProfile,
+  DeleteImages: Actions.DeleteImages,
 
   StoreData: Actions.StoreData,
   GetCounties: Actions.GetCounties,

@@ -60,6 +60,13 @@ export default function (state = initialState, action) {
         loader: false,
         deviceId: action.deviceId
       };
+    // case actionTypes.DELETEIMAGE_SUCCESS:
+    //   console.log('SAVEDEVICETOKEN ', action.deviceId);
+    //   return {
+    //     ...state,
+    //     loader: false,
+    //     deviceId: action.deviceId
+    //   };
     case actionTypes.SIGNUPUPSUCCESS:
       // console.log('reducer data', action.status);
       return {

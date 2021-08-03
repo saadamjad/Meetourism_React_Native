@@ -82,11 +82,6 @@ function DealOffer(props) {
                 alignItems: 'center',
                 marginTop: 30,
               }}>
-              {/* <Image
-                resizeMode="contain"
-                style={{height: 150, width: 200}}
-                source={require('../../../assets/images/map.jpg')}
-              /> */}
               <FastImageComponent
                 resizeMode="contain"
                 style={{height: 150, width: 200}}

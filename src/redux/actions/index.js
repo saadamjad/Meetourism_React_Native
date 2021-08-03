@@ -4,11 +4,11 @@ import * as actionTypes from './types';
 import Axios from 'axios';
 import Toast from '../../components/toastmessage';
 import baseUrl from '../../apis/constant';
-import { Get, Post, Put } from '../../apicalls/index';
+import { Get, Post, Put, Delete } from '../../apicalls/index';
 
 class Actions {
   static CheckUser = (data, navigation, values) => {
-    console.log('data', values.device_token);
+    // console.log('data', values.device_token);
 
 
     return async (dispatch) => {
@@ -356,6 +356,34 @@ class Actions {
       navigation.navigate('payment');
 
       dispatch({ type: actionTypes.SAVEORDERDATA, payload: data });
+    };
+  };
+  static DeleteImages = (path, token) => {
+    let data =
+    {
+      "image_url": path
+    }
+    console.log("SEND DATa=====", data, "TOKEN", token)
+    return async (dispatch) => {
+      // dispatch({ type: actionTypes.STARTLOADER });
+      return Delete('images', data, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('res image deleted', response);
+            return response
+          } else {
+            // console.log('ELSE in DeleteImages', res.res);
+          }
+        })
+        .catch((err) => {
+          dispatch({ type: actionTypes.STOPLOADER });
+
+          let errResponse = err;
+          let type = 'DeleteImages';
+          console.log("errResponse", errResponse.response)
+          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
     };
   };
   static Logout = (navigation, values) => {

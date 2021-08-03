@@ -132,8 +132,8 @@ function DetailOffer1({
             onPress={() => _onPress()}>
             <Icon
               type="AntDesign"
-              name="arrowleft"
-              style={{color: 'white', fontSize: 20}}
+              name="arrow-left"
+              style={{color: 'white', fontSize: 17}}
             />
           </TouchableOpacity>
           <View

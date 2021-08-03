@@ -1,6 +1,6 @@
 import Get from './get';
 import Post from './post';
-// import get from './delete'
+import Delete from './delete'
 import Put from './put';
 
-export {Get, Post, Put};
+export { Get, Post, Put, Delete };

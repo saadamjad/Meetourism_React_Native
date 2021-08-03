@@ -222,7 +222,7 @@ const App = (props) => {
                           //   style={{ height: '100%', width: '100%' }}
                           //   resizeMode="cover"
                           // />
-                          console.log("userData?.data?.profile_url", image1WithUrl),
+                          // console.log("userData?.data?.profile_url", image1WithUrl),
                           <FastImageComponent
                             source={userData?.data?.profile_url
                               ? { uri: checkUrl ? image1WithUrl : userData?.data?.profile_url }

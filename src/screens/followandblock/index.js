@@ -191,8 +191,10 @@ const Profile = (props) => {
                   onPress={() => props.navigation.navigate('innerchat')}>
                   <FastImageComponent
                     source={require('../../assets/images/path.png')}
-                    style={{ height: 20, width: 20, tintColor: 'purple' }}
+                    style={{ height: 20, width: 20, }}
                     resizeMode="contain"
+                    tintColor='purple'
+
                   />
                   <Text style={{ fontSize: 12, marginTop: 5 }}>Chat </Text>
                 </TouchableOpacity>
@@ -212,7 +214,8 @@ const Profile = (props) => {
                   }>
                   <FastImageComponent
                     source={require('../../assets/icons/singleuser.png')}
-                    style={{ height: 20, width: 20, tintColor: 'purple' }}
+                    style={{ height: 20, width: 20, }}
+                    tintColor='purple'
                     resizeMode="contain"
                   />
                   <Text style={{ fontSize: 12, marginTop: 5 }}>Friends </Text>

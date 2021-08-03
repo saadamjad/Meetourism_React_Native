@@ -214,7 +214,7 @@ const App = (props) => {
     confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'projectskahoodigitals@gmail.com',
+    email: 'okok@gmail.com',
     password: '123456789',
 
     // email: '',

@@ -81,6 +81,7 @@ const Notification = (props) => {
     ],
     loader: true,
   });
+  const noData = state?.messages?.length === 0 && !state.loader ? true : false;
   return (
     <CustomView bg={theme.primaryColor} scroll>
       <AnimatedLoader status={state.loader} loaderMessage={'Loading...'} />
@@ -89,7 +90,11 @@ const Notification = (props) => {
           navigation={props.navigation}
           leftArrow={true}
           // searchIcon={true}
-          backgroundColor={theme.secondaryColor}
+          backgroundColor={
+            state?.messages?.length > 0 && !state.loader
+              ? theme.secondaryColor
+              : theme.primaryColor
+          }
           headerText="Notifications"
         />
         {state?.messages?.map((val, i) => {
@@ -178,7 +183,7 @@ const Notification = (props) => {
                         color: theme.textColor.whiteColor,
                         marginTop: 10,
                       }}>
-                      {moment(val?.updated_at).format('DD-mm-yy')}
+                      {moment(val.created_at).format('DD-MM-YYYY')}
                     </Text>
                   </View>
                 </View>
@@ -186,7 +191,7 @@ const Notification = (props) => {
             </View>
           );
         })}
-        {state?.messages?.length === 0 && !state.loader ? (
+        {noData ? (
           <Text
             style={{
               color: 'white',
