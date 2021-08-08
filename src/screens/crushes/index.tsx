@@ -24,13 +24,12 @@ const Crushes = (props) => {
   });
 
   useEffect(() => {
-    // const unsubscribe = props.navigation.addListener('focus', () => {
-    //   // do something
-    //   _GetCrushes(false);
-    // });
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      _GetCrushes(false);
+    });
 
     _GetCrushes(true);
-    // return unsubscribe;
+    return unsubscribe;
   }, [props.navigation]);
   useEffect(() => {
     setState({

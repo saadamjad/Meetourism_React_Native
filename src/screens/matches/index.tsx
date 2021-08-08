@@ -23,8 +23,14 @@ const App = (props) => {
   });
 
   useEffect(() => {
-    _GetMatchesData();
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      _GetMatchesData();
+      props.GetAllOffers(null, token);
 
+      return unsubscribe;
+    });
+
+    _GetMatchesData();
     props.GetAllOffers(null, token);
   }, []);
   useEffect(() => {
@@ -34,11 +40,10 @@ const App = (props) => {
 
   const _GetMatchesData = async () => {
     setState({...state, loader: true});
-    let value = await props.GetMatchesData(token);
-    setState({...state, loader: false});
+    await props.GetMatchesData(token);
+    setState({...state, loader: false, matches: props.matches});
   };
   return (
-    // console.log("state?.matches?.length")
     <View
       style={{
         flex: 1,

@@ -81,14 +81,11 @@ const App = (props) => {
       _GetLoggedInUserData();
     });
 
-    // let data = props?.userData;
-    // console.log("data====", data?.images)
-    // setUserData({ ...userData, data });
+
 
     _GetLoggedInUserData();
 
 
-    // console.log('userData', userData);
     return unsubscribe;
   }, []);
   useEffect(() => {

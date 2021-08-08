@@ -237,12 +237,6 @@ class Actions {
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            // var newData = res?.data?.filter((item) => {
-            //   console.log('valss', item.username);
-
-            //   return item.username == searchKey;
-            // });
-            console.log('newDatanewData ++++', response);
             dispatch({
               type: actionTypes.GETMATCHESDATA,
               payload: response,
@@ -466,16 +460,13 @@ class Actions {
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
-            // var newData = response?.filter((item) => {
-            //   return item.follower.username == searchKey;
-            // });
+
             console.log('response GetAllCrushes', response);
             dispatch({ type: actionTypes.GETALLCRUSHES, payload: response }),
               navigation.goBack();
           } else {
-            console.log('ELSE in login', res);
+            console.log('ELSE in GetAllCrushes', res);
 
-            // dispatch({type: actionTypes.STOPLOADER});
             dispatch({ type: actionTypes.GETALLCRUSHES, payload: [] });
           }
         })
@@ -647,15 +638,7 @@ class Actions {
 
     };
   };
-  // static GetInterests = (data) => {
-  //   console.log('GetInterests', data);
-  //   return async (dispatch) => {
-  //     dispatch({
-  //       type: actionTypes.GETINTERESTS,
-  //       payload: data,
-  //     });
-  //   };
-  // };
+
   static GetInterests = () => {
 
     return async (dispatch) => {
