@@ -68,18 +68,3 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.bin
-*.bin
-*.lock
-*.bin
-*.lock
-*.bin
-*.lock
-android/.gradle/checksums/md5-checksums.bin
-*.bin
-android/.gradle/checksums/sha1-checksums.bin
