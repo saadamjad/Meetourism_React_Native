@@ -57,8 +57,8 @@ function App(props) {
             onPress={() => props.navigation.goBack()}>
             <Icon
               type="AntDesign"
-              name="arrowleft"
-              style={{color: 'white', fontSize: 20}}
+              name="arrow-left"
+              style={{color: 'white', fontSize: 17}}
             />
           </TouchableOpacity>
           <View
@@ -196,10 +196,8 @@ function App(props) {
                   width: '100%',
                   alignItems: 'center',
                   height: 130,
-                  //   elevation: 1,
                   paddingVertical: 5,
                   overflow: 'hidden',
-                  //   borderWidth: 1,
                 }}>
                 <FastImageComponent
                   source={require('../../assets/images/map.jpg')}

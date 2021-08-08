@@ -133,6 +133,11 @@ const App = (props) => {
       console.log('else not change');
     }
   };
+  let imageUrl = userData?.data?.profile_url
+  var checkUrl = imageUrl?.search('https://meetourism.com');
+  let image1WithUrl = `https://meetourism.com/storage/${imageUrl}`;
+  checkUrl === -1 ? true : false;
+  console.log("partner home", checkUrl)
   return (
     <View
       style={{
@@ -153,13 +158,19 @@ const App = (props) => {
             overflow: 'hidden',
           }}>
           <ImageBackground
-            // source={require('../../assets/icons/girls.png')}
-            // source={require('../../../src/assets/images/r3.png')}
             source={
-              props?.image?.length > 0
-                ? { uri: props.image[0] }
-                : require('../../../src/assets/images/r3.png')
+              imageUrl
+                ? {
+                  uri: checkUrl ? image1WithUrl : imageUrl,
+                }
+                : require('../../../src/assets/images/profile.png')
             }
+
+            // source={
+            //   props?.image?.length > 0
+            //     ? { uri: props.image[0] }
+            //     : require('../../../src/assets/images/r3.png')
+            // }
             style={{ height: '100%', width: '100%' }}
             resizeMode="cover">
             <View
@@ -212,14 +223,16 @@ const App = (props) => {
                         }}>
                         {i == 0 ? (
                           <FastImageComponent
-                            source={item.image}
-
+                            // source={item.image}
                             source={
-                              userData?.data?.profile_url
-                                ? { uri: userData?.data?.profile_url } :
-
-                                item.image
+                              imageUrl
+                                ? {
+                                  uri: checkUrl ? image1WithUrl : imageUrl,
+                                }
+                                : require('../../assets/images/profile.png')
                             }
+
+
                             style={{ height: '100%', width: '100%' }}
                             resizeMode="cover"
                           />

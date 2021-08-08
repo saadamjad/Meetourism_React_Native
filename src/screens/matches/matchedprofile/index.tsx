@@ -57,7 +57,7 @@ const Profile = (props) => {
   };
   const _Gallery = () => {
     // return <Gallery />;
-    console.log('dddd', state.data.images);
+    // console.log('dddd', state.data.images?.length);
     props.navigation.navigate('Gallery', {
       images: state.data.images,
     });
@@ -116,17 +116,30 @@ const Profile = (props) => {
             <ActivityIndicator size={'small'} color="red" />
           ) : (
             <>
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 25,
-                  fontWeight: '700',
-                  //   paddingBottom: 10,
-                }}>
-                {/* Peter */}
-                {/* {state.data?.first_name + state.data?.last_name} */}
-                {state.data?.username}
-              </Text>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text
+                  style={{
+                    color: 'black',
+                    fontSize: 25,
+                    fontWeight: '700',
+                    //   paddingBottom: 10,
+                  }}>
+                  {/* Peter */}
+                  {/* {state.data?.first_name + state.data?.last_name} */}
+                  {state.data?.username}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    marginRight: 10,
+                    fontWeight: '700',
+                    color: '#8A56AC',
+                    //   paddingBottom: 10,
+                  }}>
+                  {state.data?.status}
+                </Text>
+              </View>
               <Text style={{fontSize: 15, color: '#9E94A6'}}>
                 {/* San Francisco, CA */}
                 {state.data?.country?.name}
@@ -184,17 +197,7 @@ const Profile = (props) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
-                  //  onPress={()=>props.navigation.navigate('allchat')}
-                  onPress={() =>
-                    // alert('In process ')
-                    // <Gallery />
-                    _Gallery()
-                  }>
-                  {/* <Image
-                source={require('../../../assets/icons/singleuser.png')}
-                style={{height: 20, width: 20, tintColor: 'purple'}}
-                resizeMode="contain"
-              /> */}
+                  onPress={() => _Gallery()}>
                   <Feather name="users" color="#8A56AC" size={20} />
                   <Text style={{fontSize: 12, marginTop: 7, color: '#8F989D'}}>
                     Gallery{' '}

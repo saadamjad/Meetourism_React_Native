@@ -64,11 +64,10 @@ const App = (props) => {
               navigation={props.navigation}
             />
             {Food.map((item, i) => {
-              // console.log("item==", userData?.data?.profile_url)
+              // console.log("item imagges", userData?.data?.profile_url)
               let imageUrl = userData?.data?.profile_url
               var checkUrl = imageUrl?.search('https://meetourism.com');
               let image1WithUrl = `https://meetourism.com/storage/${imageUrl}`;
-              let image2 = imageUrl;
               checkUrl === -1 ? true : false;
               console.log(checkUrl)
               return (
@@ -105,26 +104,12 @@ const App = (props) => {
                         borderBottomRightRadius: 30,
                         justifyContent: 'flex-start',
                       }}>
-                      {/* <Image
 
+                      <FastImageComponent
                         source={
                           imageUrl
                             ? {
-                              uri: checkUrl ? image1WithUrl : image2,
-                            }
-                            : require('../../assets/images/statusbg.png')
-                        }
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                        }}
-                        resizeMode="cover"
-                      /> */}
-                      {/* <FastImageComponent
-                        source={
-                          imageUrl
-                            ? {
-                              uri: checkUrl ? image1WithUrl : image2,
+                              uri: checkUrl ? image1WithUrl : imageUrl,
                             }
                             : require('../../assets/images/statusbg.png')
                         }
@@ -134,7 +119,7 @@ const App = (props) => {
                         }}
                         resizeMode="cover"
 
-                      /> */}
+                      />
                     </View>
                   </View>
                   <View

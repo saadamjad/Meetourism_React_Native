@@ -38,6 +38,7 @@ const App = (props) => {
     setState({...state, loader: false});
   };
   return (
+    // console.log("state?.matches?.length")
     <View
       style={{
         flex: 1,
@@ -47,10 +48,10 @@ const App = (props) => {
         contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <Header
-          // LetIconFucntion={() => {
-          //   props.navigation.navigate('drawer');
-          // }}
-          // functionAllow={true}
+          LetIconFucntion={() => {
+            props.navigation.navigate('drawer');
+          }}
+          functionAllow={true}
           leftArrow={true}
           searchIcon={true}
           sColor={'black'}
