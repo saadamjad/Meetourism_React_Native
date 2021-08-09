@@ -233,10 +233,11 @@ class Actions {
     console.log('serachhhh', searchKey);
     return async (dispatch) => {
       dispatch({ type: actionTypes.STARTLOADER });
-      return Get(searchKey ? `matches?q=${searchKey}` : 'matches', token)
+      return Get(searchKey ? `matches?q=${searchKey}` : 'users', token)
         .then((res) => {
           if (res.status_type === 'success') {
             let response = res?.data;
+            console.log("RESPONSE GET MATCHDATA", response?.length)
             dispatch({
               type: actionTypes.GETMATCHESDATA,
               payload: response,
