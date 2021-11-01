@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Meetourism</string>
     <string name="facebook_app_id">331326585106761</string>
-<string name="fb_login_protocol_scheme">fb331326585106761</string>
+<string name="fb_login_protocol_scheme">331326585106761</string>
 <string name="facebook_client_token">5a54ad8581cbc427bd9fcd11fff14fbe</string>
     <string
     name="server_client_id"

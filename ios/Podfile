@@ -10,6 +10,7 @@ target 'Meetourism' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
 
   target 'MeetourismTests' do
     inherit! :complete

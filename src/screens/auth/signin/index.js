@@ -164,7 +164,7 @@ const App = (props) => {
         'limited',
         'my_nonce',
       );
-      // console.log("resulttttt,", result?.isCancelled);
+      // console.log("resulttttt,", result);
       if (!result?.isCancelled) {
 
         if (Platform.OS === 'ios') {
