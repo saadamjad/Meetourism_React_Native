@@ -1,6 +1,6 @@
 {
   "name": "RNDateTimePicker",
-  "version": "3.0.7",
+  "version": "3.5.2",
   "summary": "DateTimePicker component for React Native",
   "description": "DateTimePicker component for React Native",
   "license": "MIT",
@@ -15,7 +15,7 @@
   },
   "source": {
     "git": "https://github.com/react-native-community/datetimepicker",
-    "tag": "v3.0.7"
+    "tag": "v3.5.2"
   },
   "source_files": "ios/*.{h,m}",
   "requires_arc": true,

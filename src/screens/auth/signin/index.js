@@ -55,8 +55,11 @@ GoogleSignin.configure({
   // loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
   // forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
   // accountName: '', // [Android] specifies an account name on the device that should be used
+  iosClientId: '287091254475-4rs33bt5qfvij0belvlgt7g9rkq3451q.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
   // iosClientId: '631241702922-pqn95r82fmfuthu5btrus4ufgfa1naur.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+
 });
+
 
 import Geolocation from '@react-native-community/geolocation';
 import { initReactI18next } from 'react-i18next';
