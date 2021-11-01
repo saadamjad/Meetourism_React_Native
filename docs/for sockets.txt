@@ -1,0 +1,46 @@
+// global config -- /src/socket.js
+import Echo from 'laravel-echo';
+
+const Pusher = require('pusher-js');
+const _Echo = new Echo({
+    broadcaster: 'pusher',
+  	client: Pusher,
+    key: '1q2w3e4r5t',
+    cluster: 'mt1',
+    wsHost: 'dev.meetourism.com',
+    wssPort: 443,
+    forceTLS: false,
+    disableStats: true,
+});
+
+export default _Echo;
+
+// Listening for events
+import Echo from 'src/socket'
+
+Echo
+    .private(`user-${user.id}-notification`)
+    .listen('.new-notification', function (data) {
+  			let content = data.content;
+  			let event_type = content.event_type; // user_following, user_message...
+				if (event_type == 'user_message') {
+        	var markup = `<div class="row  w-4/5 lg:w-1/4 max-w-screen-md mt-3">
+                      <div class="font-bold pl-6 mb-4 text-white">${.content.name}</div>
+                      <div class="font-normal py-2 px-3 bg-mt-lightpurple-dim text-gray-200 rounded-3xl">
+                      ${content.message}
+                      </div>
+                      <div class="text-xs pl-6 mt-4 text-gray-300">
+                          ${content.date1}<br>
+                          ${content.date2}</div>
+                  </div>`;
+            $('#messages').append(markup);
+
+            scroll_to_bottom();
+          
+        }
+});	
+
+// dev.meetourism.com
+// hasanrazahasrat@yopmail.com:12345678
+
+// https://dev.meetourism.com/admin/dashboard

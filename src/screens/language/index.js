@@ -7,11 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { AsyncStorage } from 'react-native'
 
 // import i18n from 'i18next';
-import i18n from '../../I18n'
+// import i18n from '../../I18n'
 
 const App = (props) => {
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const asyncStorage = async (lang) => {
     console.log("STORED")
     try {
@@ -23,21 +23,8 @@ const App = (props) => {
 
   }
   const getLanguage = (language) => {
-    return language === 0 ? (i18n.changeLanguage('en'), asyncStorage()) : language === 1 ? (i18n.changeLanguage('fe'), asyncStorage()) : language === 2 ? (i18n.changeLanguage('de'), asyncStorage()) : language === 3 ? (i18n.changeLanguage('ar'), asyncStorage()) : null
+    return language === 0 ? (i18n.changeLanguage('en')) : (i18n.changeLanguage('ar'), asyncStorage())
 
-    // if (language === 0) {
-    //   return i18n.changeLanguage('en')
-    // }
-    // else if (language === 1) {
-    //   return i18n.changeLanguage('fe')
-
-    // }
-    // else if (language === 2) {
-    //   return i18n.changeLanguage('de')
-    // }
-    // else if (language === 3) {
-    //   return i18n.changeLanguage('ar')
-    // }
   }
   return (
     <View
@@ -52,7 +39,7 @@ const App = (props) => {
         isVisibleIcon={true}
         navigation={props.navigation}
         //   drawerIcon={true}
-        text={t('Langauges')}
+        // text={t('Langauges')}
         textColor={'white'}
       />
       <View style={{ flex: 1 }}>
@@ -78,7 +65,9 @@ const App = (props) => {
                   backgroundColor: 'white',
                 }}></View>
               <Text style={{ color: 'white', fontSize: 16, marginLeft: 10 }}>
-                {t(item)}
+                {/* {t(item)} */}
+                <p>{t('my translated text')}</p>
+                ssss
               </Text>
             </TouchableOpacity>
           );
