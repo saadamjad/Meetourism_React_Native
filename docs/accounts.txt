@@ -15,3 +15,8 @@ Sarah@kikijuniorneo4
 //google apis ,gmail login etc etc
 
 https://console.cloud.google.com/apis/credentials?pli=1&authuser=4&angularJsUrl=%2Fprojectselector%2Fapis%2Fcredentials%3Fpli%3D1%26authuser%3D4%26supportedpurview%3Dproject&project=meetourismapp-1626342556203&supportedpurview=project
+
+
+//facebook login
+
+https://developers.facebook.com/apps/331326585106761/dashboard/
