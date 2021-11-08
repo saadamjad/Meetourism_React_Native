@@ -22,8 +22,8 @@ const DrawerContent = (props) => {
   })
   // const profileImage = props.userData ? props?.userData?.images[0]?.image_path : null;
   let array;
-  var checkUrl = typeof state.userData?.profile_url === 'string' && state?.userData?.profile_url?.search('https://meetourism.com')
-  var image1WithUrl = `https://meetourism.com/storage/${state.userData?.profile_url}`
+  var checkUrl = typeof state.userData?.profile_url === 'string' && state?.userData?.profile_url?.search('https://dev.meetourism.com')
+  var image1WithUrl = `https://dev.meetourism.com/storage/${state.userData?.profile_url}`
   checkUrl == -1 ? true : false
   // console.log("source", checkUrl)
 
@@ -175,21 +175,21 @@ const DrawerContent = (props) => {
               //   // icon: require('../assets/icons/70.png'),
               //   icon: require('../../assets/icons/userss.png'),
               // },
-              {
-                title: 'Events ',
-                name: 'Calender',
+              // {
+              //   title: 'Events ',
+              //   name: 'Calender',
 
-                type: 'Fontisto',
-                // icon: require('../assets/icons/69.png'),
-                icon: require('../../assets/icons/calendar.png'),
-              },
-              {
-                title: 'Search Location ',
-                name: 'search',
-                type: 'FontAwesome5',
-                // icon: require('../assets/icons/68.png'),
-                icon: require('../../assets/icons/search.png'),
-              },
+              //   type: 'Fontisto',
+              //   // icon: require('../assets/icons/69.png'),
+              //   icon: require('../../assets/icons/calendar.png'),
+              // },
+              // {
+              //   title: 'Search Location ',
+              //   name: 'search',
+              //   type: 'FontAwesome5',
+              //   // icon: require('../assets/icons/68.png'),
+              //   icon: require('../../assets/icons/search.png'),
+              // },
               {
                 title: 'Calender ',
                 name: 'Calender',
@@ -198,26 +198,26 @@ const DrawerContent = (props) => {
                 icon: require('../../assets/icons/search.png'),
               },
 
-              {
-                title: 'Search for Date',
-                name: 'search',
+              // {
+              //   title: 'Search for Date',
+              //   name: 'search',
 
-                type: 'Entypo',
-                // icon: require('../assets/icons/66.png'),
-                icon: require('../../assets/icons/search.png'),
-              },
+              //   type: 'Entypo',
+              //   // icon: require('../assets/icons/66.png'),
+              //   icon: require('../../assets/icons/search.png'),
+              // },
               {
                 title: 'Offers',
                 name: 'Selectoffer',
                 // icon: require('../assets/icons/65.png'),
                 icon: require('../../assets/icons/offers.png'),
               },
-              {
-                title: 'Contact Us',
-                // name: 'Home',
-                // icon: require('../assets/icons/64.png'),
-                icon: require('../../assets/icons/singleuser.png'),
-              },
+              // {
+              //   title: 'Contact Us',
+              //   // name: 'Home',
+              //   // icon: require('../assets/icons/64.png'),
+              //   icon: require('../../assets/icons/singleuser.png'),
+              // },
 
               {
                 title: 'About us ',
@@ -228,7 +228,7 @@ const DrawerContent = (props) => {
                 icon: require('../../assets/icons/info.png'),
               },
               {
-                title: 'Language ',
+                title: 'Language',
 
                 type: 'FontAwesome',
                 name: 'Langauge',

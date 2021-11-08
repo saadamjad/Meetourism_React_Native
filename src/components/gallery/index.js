@@ -40,8 +40,8 @@ const App = (props) => {
         {images && images.map((item, i) => {
           console.log("item?.image_path", item?.image_path)
 
-          let checkUrl = typeof item?.image_path === 'string' && item?.image_path?.search('https://meetourism.com')
-          let image1WithUrl = `https://meetourism.com/storage/${item?.image_path}`
+          let checkUrl = typeof item?.image_path === 'string' && item?.image_path?.search('https://dev.meetourism.com')
+          let image1WithUrl = `https://dev.meetourism.com/storage/${item?.image_path}`
           checkUrl == -1 ? true : false
 
           return <FastImage

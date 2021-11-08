@@ -92,8 +92,8 @@ const App = (props) => {
     let data = props?.userData;
     setUserData({ ...userData, data, loader: false });
   }, [props.userData]);
-  var checkUrl = typeof userData?.data?.profile_url === 'string' && userData?.data?.profile_url?.search('https://meetourism.com')
-  var image1WithUrl = `https://meetourism.com/storage/${userData?.data?.profile_url}`
+  var checkUrl = typeof userData?.data?.profile_url === 'string' && userData?.data?.profile_url?.search('https://dev.meetourism.com')
+  var image1WithUrl = `https://dev.meetourism.com/storage/${userData?.data?.profile_url}`
   checkUrl == -1 ? true : false
 
   return (

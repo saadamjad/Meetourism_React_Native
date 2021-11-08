@@ -134,8 +134,8 @@ const App = (props) => {
     }
   };
   let imageUrl = userData?.data?.profile_url
-  var checkUrl = imageUrl?.search('https://meetourism.com');
-  let image1WithUrl = `https://meetourism.com/storage/${imageUrl}`;
+  var checkUrl = imageUrl?.search('https://dev.meetourism.com');
+  let image1WithUrl = `https://dev.meetourism.com/storage/${imageUrl}`;
   checkUrl === -1 ? true : false;
   console.log("partner home", checkUrl)
   return (

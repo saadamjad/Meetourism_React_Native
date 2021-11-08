@@ -74,8 +74,8 @@ const Crushes = (props) => {
           state.CrushesArray.map((val, i) => {
             // console.log('valueeee', val?.follower?.profile_url);
             let valUrl = val?.follower?.profile_url;
-            var checkUrl = valUrl?.search('https://meetourism.com');
-            let image1WithUrl = `https://meetourism.com/storage/${valUrl}`;
+            var checkUrl = valUrl?.search('https://dev.meetourism.com');
+            let image1WithUrl = `https://dev.meetourism.com/storage/${valUrl}`;
             let image2 = valUrl;
             checkUrl == -1 ? true : false;
 

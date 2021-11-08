@@ -34,7 +34,9 @@ const Profile = (props) => {
   }, [props.userData]);
 
   return (
-    <CustomView scroll>
+    <CustomView scroll
+    bg="white"
+    >
       <View style={{flex: 1, alignItems: 'center', width: '100%'}}>
         <ImageBackground
           style={{width: '100%', height: 400}}
@@ -54,28 +56,31 @@ const Profile = (props) => {
 
         <View
           style={{
-            // height: '80%',
             flex: 1,
-            paddingVertical: 20,
-            // paddingVertical: 10,
+         
             backgroundColor: 'white',
             width: '100%',
             marginTop: -180,
             borderTopLeftRadius: 40,
             borderTopRightRadius: 40,
             alignItems: 'center',
-            paddingHorizontal: 30,
+            overflow:'hidden'
           }}>
+            <View
+            style={{flex:1,
+            paddingVertical: 10,
+           width:'100%',alignSelf:'center'}}
+            >
+
           <Text
             style={{
               color: theme.secondaryColor,
               fontSize: 30,
+              alignSelf:'center',
 
               fontWeight: '700',
               paddingBottom: 5,
             }}>
-            {/* {console.log('TESTING==', userData?.data)} */}
-            {/* {userData?.data?.first_name + ' ' + ' ' + userData?.data?.last_name} */}
             {userData?.data?.username}
 
             {/* patric pulso */}
@@ -84,7 +89,8 @@ const Profile = (props) => {
             <Text style={{fontSize: 15, color: 'black', marginVertical: 5}}>
               Interests
             </Text>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row',
+           flexWrap:'wrap',}}>
               {userData?.data?.interests &&
                 userData?.data.interests.map((value, i) => {
                   console.log('values', value.name);
@@ -93,6 +99,7 @@ const Profile = (props) => {
                       style={{
                         width: '20%',
                         paddingVertical: 10,
+                       
 
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -179,20 +186,10 @@ const Profile = (props) => {
               />
             )}
 
-            {/* {userType == '2' || props?.route?.params?.status == 1 ? (
-              <GlobalButton
-                buttonText="Dashboard "
-                width="70%"
-                onPress={() => props.navigation.navigate('drawer')}
-              />
-            ) : (
-              <GlobalButton
-                buttonText="See Your Matches"
-                width="70%"
-                onPress={() => props.navigation.navigate('SeeYourMatch')}
-              />
-            )} */}
+         
           </View>
+            </View>
+
         </View>
       </View>
     </CustomView>

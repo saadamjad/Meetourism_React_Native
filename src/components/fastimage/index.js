@@ -5,15 +5,15 @@ import FastImage from 'react-native-fast-image'
 var normalisedSource = ""
 var checkUrl = false
 var image1WithUrl = ""
-var image2 = "https://meetourism.com/storage/user_images/194Ua9Rum.png"
+var image2 = "https://dev.meetourism.com/storage/user_images/194Ua9Rum.png"
 var test = false
 
 const FastImageComponent = ({ tintColor, source, resizeMode, Children, priority, style }) =>
 (
     // normalisedSource = source && typeof source.uri === 'string' && !source.uri.split('https://')[1] ? null : source,
 
-    checkUrl = typeof source.uri === 'string' && source?.uri?.search('https://meetourism.com'),
-    // image1WithUrl = `https://meetourism.com/storage/${source}`,
+    checkUrl = typeof source.uri === 'string' && source?.uri?.search('https://dev.meetourism.com'),
+    // image1WithUrl = `https://dev.meetourism.com/storage/${source}`,
     checkUrl == -1 ? false : true,
 
 

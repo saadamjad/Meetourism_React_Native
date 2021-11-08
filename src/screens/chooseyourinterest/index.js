@@ -26,6 +26,8 @@ import { Actions } from '../../redux/actions/index';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Geocoder from 'react-native-geocoding';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 Geocoder.init('AIzaSyBh1a2_r8JqiIx9zpuSeEGcyR7XFfiwKlA', { language: 'en' }); // use a valid API key
 
 const Status = (props) => {
@@ -167,9 +169,9 @@ const Status = (props) => {
         //   // let formData = new FormData();
         //   // formData.append('type', 'profile');
         //   // formData.append('data[first_name]', "THE QUEEEN PRINCESS");
-        //   // formData.append('images', { ...res, name: 'https://meetourism.com/storage/offers/1624564601Tq4KC.jpg' });
+        //   // formData.append('images', { ...res, name: 'https://dev.meetourism.com/storage/offers/1624564601Tq4KC.jpg' });
 
-        //   // formData.append(`data[images]${[{ ...res, image: 'https://meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg' }]}`);
+        //   // formData.append(`data[images]${[{ ...res, image: 'https://dev.meetourism.com/storage/user_images/user-image-60d41a4d3de535-88169505.jpg' }]}`);
         //   // let header = {
         //   //   headers: {
         //   //     'Content-Type': 'application/json',
@@ -177,7 +179,7 @@ const Status = (props) => {
         //   //   },
         //   // };
 
-        //   // axios.post('https://meetourism.com/api/v1/me', formData, header).then((res) => {
+        //   // axios.post('https://dev.meetourism.com/api/v1/me', formData, header).then((res) => {
         //   //   console.log("res==", res.data.data)
         //   // }).catch((err) => {
         //   //   console.log("err", err.response)
@@ -210,27 +212,6 @@ const Status = (props) => {
     }
   };
 
-  // const _GetInterests = async () => {
-  //   console.log('all interests');
-  //   let url = 'https://meetourism.deviyoinc.com/api/v1/interests';
-
-  //   await axios
-  //     .get(url)
-  //     .then((res) => {
-  //       if (res.data.status_type === 'success') {
-  //         let interest = res?.data?.data;
-
-  //         props.GetInterests(interest);
-  //       } else {
-  //         console.log('else');
-
-  //         props.GetInterests([]);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('error in catch _GetInterests', error);
-  //     });
-  // };
 
   const DeleteImage = (path) => {
     console.log(path)
@@ -241,7 +222,7 @@ const Status = (props) => {
 
     var config = {
       method: 'delete',
-      url: 'https://meetourism.com/api/v1/images',
+      url: 'https://dev.meetourism.com/api/v1/images',
       headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${props.token}`,
@@ -304,6 +285,10 @@ const Status = (props) => {
   };
 
   return (
+    <SafeAreaView
+    style={{ flex: 1 }}
+    >
+
     <ScrollView
       style={{ flex: 1 }}
       keyboardShouldPersistTaps="always"
@@ -313,15 +298,16 @@ const Status = (props) => {
         style={{ height: '100%', width: '100%', flex: 1 }}
         resizeMode="cover">
         <View style={{ flex: 1, backgroundColor: 'rgba(00,00,00,0.8)' }}>
-          <View
+          <TouchableOpacity
             style={{
               paddingVertical: 10,
               paddingLeft: 20,
+              
             }}>
             <TouchableOpacity
               style={{
                 borderWidth: 0,
-
+                width:100,
                 alignSelf: 'flex-start',
               }}
               onPress={() => props.navigation.goBack()}>
@@ -331,7 +317,7 @@ const Status = (props) => {
                 style={{ color: 'white', fontSize: 17 }}
               />
             </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
           <View
             style={{
               flex: 1,
@@ -410,24 +396,7 @@ const Status = (props) => {
                               overflow: 'hidden',
                               borderRadius: 50,
                             }}>
-                            {/* <Image
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                            }}
-                            resizeMode="cover"
-                            source={val || val.image_path ? { uri: val } : require('../../assets/icons/girls.png')}
-
-
-                          /> */}
-                            {/* 
-                          <FastImage
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                            }}
-                            source={val && typeof val === 'string' && (val.split('https://')[1] || val.split('http://')[1]) ? val : null}
-                          /> */}
+                          
                             <FastImageComponent
                               style={{
                                 width: '100%',
@@ -846,6 +815,8 @@ const Status = (props) => {
         </View>
       </ImageBackground>
     </ScrollView>
+    </SafeAreaView>
+
   );
 };
 

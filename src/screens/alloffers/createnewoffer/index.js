@@ -55,7 +55,7 @@ function CreateOffer(props) {
 
   const _ImageUploadApiCall = async () => {
     setState({ ...state, loader: true });
-    const base_url = 'https://meetourism.com/api/v1/offers';
+    const base_url = 'https://dev.meetourism.com/api/v1/offers';
     console.log('res.fileName', state.imageData);
     let path = state?.imageData?.uri;
 

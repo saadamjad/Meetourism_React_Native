@@ -122,8 +122,8 @@ const App = (props) => {
 
         {state?.matches?.length > 0 ? (
           state.matches.map((item, i) => {
-            var checkUrl = item?.profile_url?.search('https://meetourism.com');
-            let image1WithUrl = `https://meetourism.com/storage/${item?.profile_url}`;
+            var checkUrl = item?.profile_url?.search('https://dev.meetourism.com');
+            let image1WithUrl = `https://dev.meetourism.com/storage/${item?.profile_url}`;
             let image2 = item?.profile_url;
             checkUrl == -1 ? true : false;
 

@@ -13,9 +13,9 @@ const App = (props) => {
 
   const { t, i18n } = useTranslation();
   const asyncStorage = async (lang) => {
-    console.log("STORED")
+    console.log("STORED",lang)
     try {
-      await AsyncStorage.setItem('@APP:languageCode', lang);
+      await AsyncStorage.setItem('@APP:languageCode', []);
     } catch (error) {
       console.log(` Hi Errorrrr : ${error}`);
     }
@@ -23,7 +23,7 @@ const App = (props) => {
 
   }
   const getLanguage = (language) => {
-    return language === 0 ? (i18n.changeLanguage('en')) : (i18n.changeLanguage('ar'), asyncStorage())
+    return language === 0 ? (i18n.changeLanguage('en')) : (i18n.changeLanguage('ar'))
 
   }
   return (
@@ -65,9 +65,7 @@ const App = (props) => {
                   backgroundColor: 'white',
                 }}></View>
               <Text style={{ color: 'white', fontSize: 16, marginLeft: 10 }}>
-                {/* {t(item)} */}
-                <p>{t('my translated text')}</p>
-                ssss
+                {t(item)}
               </Text>
             </TouchableOpacity>
           );

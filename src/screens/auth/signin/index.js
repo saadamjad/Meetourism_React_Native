@@ -122,7 +122,7 @@ const App = (props) => {
     OneSignal.setLogLevel(6, 0);
     OneSignal.setAppId('7d35068c-2c86-4a49-bc6b-b8d38d5c2f05');
     OneSignal.getDeviceState().then((data) => {
-      console.log("GOT THE DATA ! ", data.userId)
+      console.log("GOT THE DATA ! ====", data.userId)
       setState({
         ...state, deviceID: data.userId
       })
@@ -235,11 +235,7 @@ const App = (props) => {
     // _getCurrentLocation();
   }, []);
 
-  const _getCurrentLocation = () => {
-    Geolocation.getCurrentPosition((info) =>
-      console.log('----', info.coords.latitude),
-    );
-  };
+ 
   const [state, setState] = useState({
     selectedIndex: 0,
     visible: false,

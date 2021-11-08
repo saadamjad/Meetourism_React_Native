@@ -123,7 +123,7 @@ function SelectOffer(props) {
   const _DeleteOffer = async (data) => {
     console.log('gello');
     setState({...state, loader: true});
-    const base_url = 'https://meetourism.com/api/v1//offers';
+    const base_url = 'https://dev.meetourism.com/api/v1//offers';
 
     let formData = new FormData();
 
@@ -161,7 +161,7 @@ function SelectOffer(props) {
 
   const UpdateOfferData = (param) => {
     console.log(param?.id);
-    const base_url = 'https://meetourism.com/api/v1//offers';
+    const base_url = 'https://dev.meetourism.com/api/v1//offers';
 
     let formData = new FormData();
 

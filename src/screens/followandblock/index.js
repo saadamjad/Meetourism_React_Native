@@ -74,7 +74,8 @@ const Profile = (props) => {
     }
   };
   return (
-    <CustomView scroll>
+    <CustomView scroll
+    bg="white">
       <View style={{ flex: 1, alignItems: 'center', width: '100%' }}>
         <ImageBackground
           style={{ width: '100%', height: 400 }}

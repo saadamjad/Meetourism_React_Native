@@ -39,7 +39,7 @@ const App = (props) => {
     let header = {
       headers: { 'Content-Type': 'application/json' },
     };
-    let url = 'https://meetourism.com/api/v1/auth/forgot';
+    let url = 'https://dev.meetourism.com/api/v1/auth/forgot';
 
     let data = {
       email: email,
