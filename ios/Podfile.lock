@@ -59,6 +59,7 @@ PODS:
   - lottie-react-native (4.0.2):
     - lottie-ios (~> 3.1.8)
     - React-Core
+  - OneSignal (3.8.1)
   - OneSignalXCFramework (3.5.3)
   - RCTRequired (0.63.3)
   - RCTTypeSafety (0.63.3):
@@ -357,6 +358,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - GoogleSignIn
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - OneSignal (< 4.0, >= 3.0)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -412,6 +414,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - libwebp
     - lottie-ios
+    - OneSignal
     - OneSignalXCFramework
     - SDWebImage
     - SDWebImageWebPCoder
@@ -527,6 +530,7 @@ SPEC CHECKSUMS:
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   lottie-react-native: 4dff8fe8d10ddef9e7880e770080f4a56121397e
+  OneSignal: b44755cd425704bdef8d8912030ed26619446773
   OneSignalXCFramework: 4e08d8353adec161c3d9174e2572c849e1225c9f
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
@@ -571,6 +575,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
 
-PODFILE CHECKSUM: 6bb691e4e95517b3d86e5096a3e46f890c63399e
+PODFILE CHECKSUM: 18b73dafdb75003bd2a16b0eb905452e35f2aa94
 
 COCOAPODS: 1.11.2

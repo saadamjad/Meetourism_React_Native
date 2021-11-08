@@ -28,11 +28,14 @@
 		83DC81D95E77470896C4CCD3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C12C56707D09407D870D6E33 /* Roboto-Regular.ttf */; };
 		8D54025B9DC34BE9B1C9DBDA /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F55E8E630C645BE89145D7B /* Roboto-Light.ttf */; };
 		8F9E7B3A82F252E647B6A629 /* libPods-Meetourism-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB475273E215E5E4934D088 /* libPods-Meetourism-tvOSTests.a */; };
+		9049ED9BEE77558A5C45F4A8 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDF22B813DD0E9909BC82DF /* libPods-OneSignalNotificationServiceExtension.a */; };
 		95A0BA01C7144F36843BE6DA /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C800414C74444F7EBC913A98 /* Roboto-Black.ttf */; };
 		962C45175929496393A77FB0 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F11F55BB35824E47A1407FF3 /* Roboto-ThinItalic.ttf */; };
 		972733C0F38C46FBBBA901C9 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8C0040E43BD4E83A935B91A /* Roboto-MediumItalic.ttf */; };
 		EC79C6F9BCCD49D98E7855E0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EC02E2753BF4A78BBD77E63 /* Roboto-Medium.ttf */; };
 		FA040B1A27305AE900B6D74F /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA040B1927305AE900B6D74F /* libRNGoogleSignin.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		FA0987032737D841009FF18C /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0987022737D841009FF18C /* NotificationService.m */; };
+		FA0987072737D841009FF18C /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FA0986FF2737D841009FF18C /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +53,28 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "Meetourism-tvOS";
 		};
+		FA0987052737D841009FF18C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA0986FE2737D841009FF18C;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA09870B2737D841009FF18C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FA0987072737D841009FF18C /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -81,6 +105,8 @@
 		433CF9A86302391DDB13FA2D /* libPods-Meetourism-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Meetourism-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		454266954F194ACA9BBB69D2 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		4F8A0BCDD6B1303CA69E62F6 /* Pods-Meetourism-MeetourismTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meetourism-MeetourismTests.debug.xcconfig"; path = "Target Support Files/Pods-Meetourism-MeetourismTests/Pods-Meetourism-MeetourismTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5EDF22B813DD0E9909BC82DF /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6388F2FEA578651AC602E6DA /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		66AE53C07EDE49B1906BB54E /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		6B5DEA4A7D06448FB3726A72 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/roboto/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		6C47749B25D143878AB2F637 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/roboto/Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -90,6 +116,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Meetourism/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		898E8906076A42589804BB50 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		941400A754D00D73499F795B /* Pods-Meetourism-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meetourism-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Meetourism-tvOS/Pods-Meetourism-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		A489E33887C524806EA910E6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		A67814BDE9D4A157EB1A1382 /* Pods-Meetourism.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meetourism.debug.xcconfig"; path = "Target Support Files/Pods-Meetourism/Pods-Meetourism.debug.xcconfig"; sourceTree = "<group>"; };
 		AFF559DA26B54AEE900D783B /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		BF67B47AE3634FD0801D38AA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -109,6 +136,13 @@
 		F974D9483FB3477B98039867 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../src/assets/fonts/roboto/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		FA040B1927305AE900B6D74F /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA040B1B2730750700B6D74F /* Meetourism-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Meetourism-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA0986FA2737D5D4009FF18C /* MeetourismRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MeetourismRelease.entitlements; path = Meetourism/MeetourismRelease.entitlements; sourceTree = "<group>"; };
+		FA0986FF2737D841009FF18C /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0987012737D841009FF18C /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		FA0987022737D841009FF18C /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		FA0987042737D841009FF18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA09870C2737DC2C009FF18C /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		FA09870D2737DD4A009FF18C /* Meetourism.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Meetourism.entitlements; path = Meetourism/Meetourism.entitlements; sourceTree = "<group>"; };
 		FC78EF730C9E4DEEABD254A6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +180,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA0986FC2737D841009FF18C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9049ED9BEE77558A5C45F4A8 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -169,6 +211,8 @@
 		13B07FAE1A68108700A75B9A /* Meetourism */ = {
 			isa = PBXGroup;
 			children = (
+				FA09870D2737DD4A009FF18C /* Meetourism.entitlements */,
+				FA0986FA2737D5D4009FF18C /* MeetourismRelease.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -191,6 +235,7 @@
 				105B189B8D58E185FF524DC2 /* libPods-Meetourism-MeetourismTests.a */,
 				433CF9A86302391DDB13FA2D /* libPods-Meetourism-tvOS.a */,
 				EDB475273E215E5E4934D088 /* libPods-Meetourism-tvOSTests.a */,
+				5EDF22B813DD0E9909BC82DF /* libPods-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -243,6 +288,7 @@
 				13B07FAE1A68108700A75B9A /* Meetourism */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MeetourismTests */,
+				FA0987002737D841009FF18C /* OneSignalNotificationServiceExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				8EF089F4539537F900E8EAA2 /* Pods */,
@@ -260,6 +306,7 @@
 				00E356EE1AD99517003FC87E /* MeetourismTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* Meetourism-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* Meetourism-tvOSTests.xctest */,
+				FA0986FF2737D841009FF18C /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,8 +322,21 @@
 				941400A754D00D73499F795B /* Pods-Meetourism-tvOS.release.xcconfig */,
 				1BB2EB7F0A6BA8947E72E59F /* Pods-Meetourism-tvOSTests.debug.xcconfig */,
 				20FF2399BB029797A1F038B4 /* Pods-Meetourism-tvOSTests.release.xcconfig */,
+				A489E33887C524806EA910E6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				6388F2FEA578651AC602E6DA /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FA0987002737D841009FF18C /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				FA09870C2737DC2C009FF18C /* OneSignalNotificationServiceExtension.entitlements */,
+				FA0987012737D841009FF18C /* NotificationService.h */,
+				FA0987022737D841009FF18C /* NotificationService.m */,
+				FA0987042737D841009FF18C /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,10 +375,12 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				7A8B2C6888ABAE6A9459C922 /* [CP] Copy Pods Resources */,
 				F8F238F311264F58CC7C4E5E /* [CP] Embed Pods Frameworks */,
+				FA09870B2737D841009FF18C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FA0987062737D841009FF18C /* PBXTargetDependency */,
 			);
 			name = Meetourism;
 			productName = Meetourism;
@@ -364,6 +426,24 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* Meetourism-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		FA0986FE2737D841009FF18C /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA0987082737D841009FF18C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				820172E2EE228C9FEE803717 /* [CP] Check Pods Manifest.lock */,
+				FA0986FB2737D841009FF18C /* Sources */,
+				FA0986FC2737D841009FF18C /* Frameworks */,
+				FA0986FD2737D841009FF18C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = FA0986FF2737D841009FF18C /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -377,7 +457,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = G48QTLYCTH;
 						LastSwiftMigration = 1250;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -387,6 +469,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+					FA0986FE2737D841009FF18C = {
+						CreatedOnToolsVersion = 12.5;
+						DevelopmentTeam = G48QTLYCTH;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -407,6 +494,7 @@
 				00E356ED1AD99517003FC87E /* MeetourismTests */,
 				2D02E47A1E0B4A5D006451C7 /* Meetourism-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* Meetourism-tvOSTests */,
+				FA0986FE2737D841009FF18C /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -449,6 +537,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA0986FD2737D841009FF18C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -634,6 +729,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Meetourism/Pods-Meetourism-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		820172E2EE228C9FEE803717 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8593677045CADFE96185191D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -793,6 +910,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA0986FB2737D841009FF18C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA0987032737D841009FF18C /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -805,6 +930,11 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* Meetourism-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+		FA0987062737D841009FF18C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA0986FE2737D841009FF18C /* OneSignalNotificationServiceExtension */;
+			targetProxy = FA0987052737D841009FF18C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -858,7 +988,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Meetourism/Meetourism.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G48QTLYCTH;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Meetourism/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -867,8 +1002,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetourismapplication;
 				PRODUCT_NAME = Meetourism;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Meetourism-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -882,7 +1018,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Meetourism/MeetourismRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G48QTLYCTH;
 				INFOPLIST_FILE = Meetourism/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -890,8 +1031,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetourismapplication;
 				PRODUCT_NAME = Meetourism;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Meetourism-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1096,6 +1238,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1118,6 +1261,66 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA0987092737D841009FF18C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A489E33887C524806EA910E6 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = G48QTLYCTH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetourismapplication.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA09870A2737D841009FF18C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6388F2FEA578651AC602E6DA /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G48QTLYCTH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.meetourismapplication.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1165,6 +1368,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA0987082737D841009FF18C /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA0987092737D841009FF18C /* Debug */,
+				FA09870A2737D841009FF18C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

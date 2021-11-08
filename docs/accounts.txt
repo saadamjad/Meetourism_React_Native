@@ -20,3 +20,15 @@ https://console.cloud.google.com/apis/credentials?pli=1&authuser=4&angularJsUrl=
 //facebook login
 
 https://developers.facebook.com/apps/331326585106761/dashboard/
+
+
+onesignal 
+
+appid 7d35068c-2c86-4a49-bc6b-b8d38d5c2f05
+
+certificate password. (p.12)
+allsadeveloppeur@gmail.com
+Sarah@kikijuniorneo4
+
+
+
