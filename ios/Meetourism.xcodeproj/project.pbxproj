@@ -997,6 +997,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Meetourism/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1026,6 +1027,7 @@
 				DEVELOPMENT_TEAM = G48QTLYCTH;
 				INFOPLIST_FILE = Meetourism/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

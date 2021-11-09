@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import OneSignal from 'react-native-onesignal';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 // import './src/I18n'
 
 const App = (props) => {
@@ -50,6 +51,12 @@ const App = (props) => {
     <SafeAreaView
     style={{flex:1}}
     >
+        <StatusBar
+          // animated={true}
+          backgroundColor={'white'}
+          // translucent={true}
+          barStyle="dark-content"
+        />
 
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

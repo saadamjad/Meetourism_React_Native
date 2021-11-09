@@ -5,7 +5,6 @@ import {
   Text,
   ImageBackground,
   SafeAreaView,
-  StatusBar,
 } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import LinearGradient from 'react-native-linear-gradient';
