@@ -9,12 +9,12 @@ import { connect } from 'react-redux';
 import * as Actions from '../../../redux/actions/index';
 const App = (props) => {
   useEffect(() => {
-    console.log(
-      'tokentokentokentoken===================================',
-      props.token,
-      'statusss',
-      props.status,
-    );
+    // console.log(
+    //   'tokentokentokentoken===================================',
+    //   props.token,
+    //   'statusss',
+    //   props.status,
+    // );
 
     setTimeout(() => {
 

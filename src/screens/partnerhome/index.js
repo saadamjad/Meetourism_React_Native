@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,13 +13,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from '../../../src/components/slider';
-import { Actions } from '../../redux/actions/index';
-import { connect } from 'react-redux';
-import { TextInput } from 'react-native-gesture-handler';
-import { theme } from '../../constants/theme';
+import {Actions} from '../../redux/actions/index';
+import {connect} from 'react-redux';
+import {TextInput} from 'react-native-gesture-handler';
+import {theme} from '../../constants/theme';
 import AnimatedLoader from '../../components/loader';
 
-import { LoginManager, LoginButton } from "react-native-fbsdk-next";
+// import { LoginManager, LoginButton } from "react-native-fbsdk-next";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -26,7 +27,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import axios from 'axios';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { FastImageComponent } from '../../components/fastimage';
+import {FastImageComponent} from '../../components/fastimage';
 const App = (props) => {
   const token = props.token;
   const [userData, setUserData] = useState({
@@ -40,27 +41,24 @@ const App = (props) => {
       await GoogleSignin.signOut();
       // this.setState({ user: null }); // Remember to remove the user from your app's state as well
     } catch (error) {
-      console.error("error", error);
+      console.error('error', error);
     }
   };
   const FacebookLogout = async () => {
     <LoginButton
-      onLoginFinished={
-        (error, result) => {
-          if (error) {
-            console.log("login has error: " + result.error);
-          } else if (result.isCancelled) {
-            console.log("login is cancelled.");
-          } else {
-            AccessToken.getCurrentAccessToken().then(
-              (data) => {
-                console.log(data.accessToken.toString())
-              }
-            )
-          }
+      onLoginFinished={(error, result) => {
+        if (error) {
+          console.log('login has error: ' + result.error);
+        } else if (result.isCancelled) {
+          console.log('login is cancelled.');
+        } else {
+          AccessToken.getCurrentAccessToken().then((data) => {
+            console.log(data.accessToken.toString());
+          });
         }
-      }
-      onLogoutFinished={() => console.log("logout.")} />
+      }}
+      onLogoutFinished={() => console.log('logout.')}
+    />;
   };
 
   const _GetLoggedInUserData = async () => {
@@ -69,7 +67,7 @@ const App = (props) => {
 
     console.log('props.userData.id', props?.userData?.id);
     let value = await props.GetLoggedInUserData(props?.userData?.id, token);
-    setState({ ...state, loader: false });
+    setState({...state, loader: false});
   };
 
   useEffect(() => {
@@ -85,7 +83,7 @@ const App = (props) => {
   }, []);
   useEffect(() => {
     let data = props?.userData;
-    setUserData({ ...userData, data });
+    setUserData({...userData, data});
   }, [props.userData]);
   const [allStatus, setStatus] = useState([
     // {
@@ -116,7 +114,7 @@ const App = (props) => {
   });
 
   const UpdateProfile = async (param) => {
-    setUserData({ ...userData, edit: !userData.edit });
+    setUserData({...userData, edit: !userData.edit});
     if (userData.changeTextInput) {
       let formData = new FormData();
       formData.append('data[company_name]', userData?.data?.company_name);
@@ -128,28 +126,28 @@ const App = (props) => {
         userData,
         props.navigation,
       );
-      setUserData({ ...userData, edit: false, changeTextInput: false });
+      setUserData({...userData, edit: false, changeTextInput: false});
     } else {
       console.log('else not change');
     }
   };
-  let imageUrl = userData?.data?.profile_url
+  let imageUrl = userData?.data?.profile_url;
   var checkUrl = imageUrl?.search('https://dev.meetourism.com');
   let image1WithUrl = `https://dev.meetourism.com/storage/${imageUrl}`;
   checkUrl === -1 ? true : false;
-  console.log("partner home", checkUrl)
+  console.log('partner home', checkUrl);
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: '#241332',
       }}>
-
       <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1 }}
+        style={{flex: 1}}
+        contentContainerStyle={{flexGrow: 1}}
         showsVerticalScrollIndicator={false}>
         <View
+          // eslint-disable-next-line react-native/no-inline-styles
           style={{
             flex: 0.4,
             borderWidth: 1,
@@ -161,17 +159,16 @@ const App = (props) => {
             source={
               imageUrl
                 ? {
-                  uri: checkUrl ? image1WithUrl : imageUrl,
-                }
+                    uri: checkUrl ? image1WithUrl : imageUrl,
+                  }
                 : require('../../../src/assets/images/profile.png')
             }
-
             // source={
             //   props?.image?.length > 0
             //     ? { uri: props.image[0] }
             //     : require('../../../src/assets/images/r3.png')
             // }
-            style={{ height: '100%', width: '100%' }}
+            style={{height: '100%', width: '100%'}}
             resizeMode="cover">
             <View
               style={{
@@ -213,11 +210,11 @@ const App = (props) => {
                           justifyContent: 'center',
                         }}
                         onPress={() => {
-                          if (item.name === 'Logout') {
-                            props.Logout(props.navigation);
-                            props.socialLogin ? signOut() : props.facebook ?
-                              FacebookLogout() : null
-                          }
+                          // if (item.name === 'Logout') {
+                          //   props.Logout(props.navigation);
+                          //   props.socialLogin ? signOut() : props.facebook ?
+                          //     FacebookLogout() : null
+                          // }
                           item.navigation &&
                             props.navigation.navigate(item.navigation);
                         }}>
@@ -227,13 +224,11 @@ const App = (props) => {
                             source={
                               imageUrl
                                 ? {
-                                  uri: checkUrl ? image1WithUrl : imageUrl,
-                                }
+                                    uri: checkUrl ? image1WithUrl : imageUrl,
+                                  }
                                 : require('../../assets/images/profile.png')
                             }
-
-
-                            style={{ height: '100%', width: '100%' }}
+                            style={{height: '100%', width: '100%'}}
                             resizeMode="cover"
                           />
                         ) : (
@@ -291,7 +286,7 @@ const App = (props) => {
                         ...userData,
                         changeTextInput: true,
 
-                        data: { ...userData.data, company_name: text },
+                        data: {...userData.data, company_name: text},
                       });
                     }}
                     editable={userData.edit}
@@ -318,7 +313,7 @@ const App = (props) => {
                   onPress={() => {
                     userData.edit
                       ? UpdateProfile()
-                      : setUserData({ ...userData, edit: !userData.edit });
+                      : setUserData({...userData, edit: !userData.edit});
                   }}>
                   <View
                     style={{
@@ -355,7 +350,7 @@ const App = (props) => {
             </View>
           </ImageBackground>
         </View>
-        <View style={{ flex: 0.6, borderWidth: 0 }}>
+        <View style={{flex: 0.6, borderWidth: 0}}>
           <View
             style={{
               height: 150,
@@ -389,7 +384,7 @@ const App = (props) => {
                   alignItems: 'center',
                 }}>
                 <Feather name="mail" size={35} color={'white'} />
-                <Text style={{ color: 'white', fontSize: 10, marginTop: 10 }}>
+                <Text style={{color: 'white', fontSize: 10, marginTop: 10}}>
                   Messages
                 </Text>
               </View>
@@ -405,10 +400,10 @@ const App = (props) => {
               {/* <Feather name="mail" size={40} color={'white'}/> */}
               <FastImageComponent
                 source={require('../../assets/icons/alerts.png')}
-                style={{ height: 40, width: 40 }}
+                style={{height: 40, width: 40}}
                 resizeMode="contain"
               />
-              <Text style={{ color: 'white', fontSize: 10, marginTop: 10 }}>
+              <Text style={{color: 'white', fontSize: 10, marginTop: 10}}>
                 {' '}
                 Notifications{' '}
               </Text>
@@ -431,7 +426,7 @@ const App = (props) => {
               paddingLeft: 20,
             }}>
             <View>
-              <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>
+              <Text style={{color: 'white', fontSize: 15, fontWeight: 'bold'}}>
                 About the Bussiness
               </Text>
               <TextInput
@@ -442,7 +437,7 @@ const App = (props) => {
                   setUserData({
                     ...userData,
                     changeTextInput: true,
-                    data: { ...userData.data, description: text },
+                    data: {...userData.data, description: text},
                   })
                 }
                 style={{
@@ -456,7 +451,7 @@ const App = (props) => {
                 }}
               />
             </View>
-            <View style={{ flex: 1, borderWidth: 0, alignItems: 'flex-end' }}>
+            <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
               {/* <Image
                 source={require('../../assets/icons/edit.png')}
                 resizeMode="contain"
@@ -570,13 +565,14 @@ const App = (props) => {
                   settingStatus: true,
                   dashboard: false,
                 });
-              } else
+              } else {
                 props.navigation.navigate(val.navigateTo, {
                   // screen: 'chooseyourinterest',
 
                   settingStatus: true,
                   dashboard: false,
                 });
+              }
             }}
             activeOpacity={1}>
             {val.icons}

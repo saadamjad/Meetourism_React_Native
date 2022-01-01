@@ -12,6 +12,8 @@ target 'Meetourism' do
   pod 'GoogleSignIn'
   pod 'FBSDKLoginKit'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'MeetourismTests' do
     inherit! :complete
     # Pods for testing

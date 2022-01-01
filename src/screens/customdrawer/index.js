@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { FastImageComponent } from '../../components/fastimage';
 import { Actions } from '../../redux/actions/index';
-import { LoginManager, LoginButton } from "react-native-fbsdk-next";
+// import { LoginManager, LoginButton } from "react-native-fbsdk-next";
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -247,7 +247,7 @@ const DrawerContent = (props) => {
                   if (val.name == 'Auth') {
                     props.Logout(props.navigation);
                     props.socialLogin ? signOut() : props.facebook ?
-                      FacebookLogout() : null
+                      null : null
 
                   } else {
                     val.name && props.navigation.navigate(val.name);
