@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import Icon from 'react-native-vector-icons/Feather';
 import React, {useState, useEffect} from 'react';
 import {
@@ -7,6 +8,7 @@ import {
   Image,
   TextInput,
   AsyncStorage,
+  ActivityIndicator,
   ScrollView,
 } from 'react-native';
 import {Actions} from '../../redux/actions/index';
@@ -20,27 +22,102 @@ import {ImageBackground} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import axios from 'axios';
 import AnimatedLoader from '../../components/loader';
+import {Payment} from '../paymentcomp';
+import stripe from 'tipsi-stripe';
+let publishableKey =
+'pk_test_51JuwLLFZA0WXAOtjmYDqmu2ViVArHW7xNUjbhsB1x7ffGhdOPoAdNC9BsYFpEdq0fLJ2mRBeB36GpjlGWvusiNkS00Ku2zpKAS';
+let scretKey =
+'sk_test_51JuwLLFZA0WXAOtjb2zR1RHeT3nNiFDxcwkvMQE502KWOL8UknCQPPcrnv5euCfm5mst9verejrtGK2VZxlwaWzH0062oWbCcw';
 
 function App(props) {
+  const token = props.token;
   const offerDescriptions = props.alloffers;
   const index = props?.route?.params?.index; //ye back se index leke arha ha and iskay according data get kr rha ha
   const [state, setState] = useState({
     edit: false,
     offerDescription: [],
     loader: false,
+    paymentLoader: false,
   });
 
   useEffect(() => {
-    console.log('offerDescriptions', offerDescriptions[index]);
+    // console.log('offerDescriptions', offerDescriptions[index].id);
     let getData = offerDescriptions[index];
     setState({...state, offerDescription: getData});
   }, []);
+
+
+  useEffect(() => {
+    stripeusage();
+  });
+  const stripeusage = async () => {
+    stripe.setOptions({
+      publishableKey: publishableKey,
+      androidPayMode: 'test', // Android only
+    });
+  };
+
+  const PaymentForm = async () => {
+    let {username, city, address, full_name, country_id} = props.userData;
+    const options = {
+      requiredBillingAddressFields: 'full',
+      prefilledInformation: {
+        billingAddress: {
+          name: full_name,
+          line1: address,
+          line2: '3',
+          city: city,
+          state: city,
+          country: 'country_id',
+          postalCode: '31217',
+        },
+      },
+    };
+
+    try {
+      setState({...state, paymentLoader: true});
+      const paymentApiResponse = await stripe.paymentRequestWithCardForm(
+        options,
+      );
+      console.log('pay', paymentApiResponse);
+      const {id} = paymentApiResponse;
+      if (paymentApiResponse) {
+        confirmOrder(id);
+      }
+    } catch (err) {
+      console.log({err});
+      setState({...state, paymentLoader: false});
+    }
+  };
+  const confirmOrder = async (_id) => {
+    // const { id }= state.offerDescription
+    let data = {
+      partner_id: state.offerDescription?.user?.id,
+      order_type: 'delivery',
+      payment_type: 'cash',
+      items: [
+        {
+          id: state.offerDescription?.id, //item id
+          quantity: 1,
+        },
+      ],
+    };
+    console.log({data});
+    try {
+      await props.CreateOrder(data, token, props.navigation);
+      setState({...state, paymentLoader: false});
+    } catch (err) {
+      console.log({err});
+      setState({...state, paymentLoader: false});
+    }
+  };
 
   return (
     <ImageBackground
       source={require('../../assets/images/statusbg.png')}
       style={{height: '100%', width: '100%'}}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
+
         <View
           style={{
             flex: 1,
@@ -222,7 +299,9 @@ function App(props) {
                 buttonText="Pay the Offer"
                 height={50}
                 width="66%"
-                onPress={() => props.navigation.navigate('payment')}
+                loader={state.paymentLoader}
+                // onPress={() => props.navigation.navigate('payment')}
+                onPress={() => PaymentForm()}
               />
             </View>
           </View>
@@ -236,11 +315,13 @@ function App(props) {
 const mapStateToProp = (state) => ({
   userData: state.reducers.userData,
   alloffers: state.reducers.alloffers,
+  token: state.reducers.token,
 
   loader: state.reducers.loader,
 });
 const mapDispatchToProps = {
   Signup: Actions.Signup,
+  CreateOrder: Actions.CreateOrder,
 };
 
 export default connect(mapStateToProp, mapDispatchToProps)(App);

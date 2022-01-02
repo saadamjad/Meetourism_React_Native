@@ -12,6 +12,7 @@ import {withTranslation} from 'react-i18next';
 import OneSignal from 'react-native-onesignal';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StatusBar} from 'react-native';
+import Payment from './payment'
 // import './src/I18n'
 
 const App = (props) => {
@@ -63,6 +64,7 @@ const App = (props) => {
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             {_Stack()}
+            {/* <Payment/> */}
             <Toast ref={(ref) => Toast.setRef(ref)} />
           </PersistGate>
         </Provider>

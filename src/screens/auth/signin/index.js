@@ -370,7 +370,7 @@ const App = (props) => {
       <View style={{flexDirection: 'row', marginTop: 20, borderWidth: 0}}>
         {[
           require('../../../assets/images/gmail.png'),
-          require('../../../assets/images/instagram.png'),
+          // require('../../../assets/images/instagram.png'),
           require('../../../assets/images/facebook.png'),
         ].map((val, ind) => (
           // <Image
@@ -384,11 +384,14 @@ const App = (props) => {
             key={ind}
             // style={{}}
             onPress={() => {
-              ind == 1
-                ? instagramLogin.show()
-                : ind == 2
+              ind == 2
                 ? fbSignin()
                 : signIn();
+              // ind == 1
+              //   ? instagramLogin.show()
+              //   : ind == 2
+              //   ? fbSignin()
+              //   : signIn();
             }}>
             <FastImageComponent
               resizeMode="contain"

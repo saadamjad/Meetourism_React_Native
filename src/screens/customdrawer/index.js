@@ -197,13 +197,13 @@ const DrawerContent = (props) => {
               //   // icon: require('../assets/icons/68.png'),
               //   icon: require('../../assets/icons/search.png'),
               // },
-              {
-                title: 'Calender ',
-                name: 'Calender',
-                type: 'FontAwesome5',
-                // icon: require('../assets/icons/68.png'),
-                icon: require('../../assets/icons/search.png'),
-              },
+              // {
+              //   title: 'Calender ',
+              //   name: 'Calender',
+              //   type: 'FontAwesome5',
+              //   // icon: require('../assets/icons/68.png'),
+              //   icon: require('../../assets/icons/search.png'),
+              // },
 
               // {
               //   title: 'Search for Date',
@@ -219,12 +219,12 @@ const DrawerContent = (props) => {
                 // icon: require('../assets/icons/65.png'),
                 icon: require('../../assets/icons/offers.png'),
               },
-              // {
-              //   title: 'Contact Us',
-              //   // name: 'Home',
-              //   // icon: require('../assets/icons/64.png'),
-              //   icon: require('../../assets/icons/singleuser.png'),
-              // },
+              {
+                title: 'Contact Us',
+                // name: 'Home',
+                // icon: require('../assets/icons/64.png'),
+                icon: require('../../assets/icons/singleuser.png'),
+              },
 
               {
                 title: 'About us ',

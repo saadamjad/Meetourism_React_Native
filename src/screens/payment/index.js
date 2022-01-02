@@ -112,16 +112,18 @@ const Messages = (props) => {
     setState({...state, loader: true});
 
     let data = {
-      partner_id: orderData?.user?.id,
+      // partner_id: orderData?.user?.id,
+      partner_id: '58',
       order_type: 'delivery',
       payment_type: 'cash',
       items: [
         {
-          id: orderData?.id, //item id
+          id: '19', //item id
           quantity: 1,
         },
       ],
     };
+    console.log({data})
     let value = await props.CreateOrder(data, token, props.navigation);
 
     setState({...state, loader: false});

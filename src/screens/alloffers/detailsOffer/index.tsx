@@ -34,7 +34,7 @@ function DealOffer(props) {
             borderRadius: 50,
             elevation: 5,
             borderBottomRightRadius: 0,
-            paddingVertical: 50,
+            paddingVertical: 30,
             // height: '60%',
             alignItems: 'center',
           }}>
@@ -48,8 +48,16 @@ function DealOffer(props) {
           <Text
             style={{
               color: theme.textColor.blackColor,
+              fontSize: 20,
+              fontWeight: '700',
+            }}>
+            Order has been placed
+          </Text>
+          <Text
+            style={{
+              color: theme.textColor.blackColor,
               // paddingBottom: 10,
-              fontSize: 25,
+              fontSize: 16,
               fontWeight: '700',
             }}>
             SAVE THE QR

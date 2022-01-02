@@ -166,6 +166,7 @@ const Crushes = (props) => {
         />
         {state.allOrders &&
           state.allOrders.map((val, i) => {
+            // console.log{val}
             let temp = '';
             return (
               <TouchableOpacity
@@ -234,29 +235,29 @@ const Crushes = (props) => {
                           }}
                         />
                       </View>
-                      {/* </View> */}
                     </View>
                     <View style={{width: '70%'}}>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
-                          fontSize: 15,
+                          fontSize: 14,
                         }}>
-                        {val?.order_type}
+                        {val?.partner?.full_name}
                       </Text>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
                           fontSize: 15,
+                          textAlign:'right'
                         }}>
                         {val?.order_status}
                       </Text>
                       <Text
                         style={{
                           color: theme.textColor.whiteColor,
-                          fontSize: 15,
+                          fontSize: 12,
                         }}>
-                        {val?.total_amount}
+                       Amount {' '} {val?.total_amount}
                       </Text>
                     </View>
                   </View>
