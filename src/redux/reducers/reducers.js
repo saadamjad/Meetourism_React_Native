@@ -18,7 +18,8 @@ const initialState = {
   userRegisterationImages: [],
   socialLogin: false,
   facebook: false,
-  deviceId: "hello"
+  deviceId: "hello",
+  allOrders:[]
 };
 
 export default function (state = initialState, action) {
@@ -126,6 +127,13 @@ export default function (state = initialState, action) {
         ...state,
         loader: false,
         orderData: {},
+      };
+    case actionTypes.GETORDERSUCCESS:
+      // console.log('action.payloadaction.payload', action.payload);
+      return {
+        ...state,
+        loader: false,
+        allOrders: action.payload,
       };
     case actionTypes.UPDATEPROFILEDATA:
       // console.log('action.payloadaction.payload', action.payload);

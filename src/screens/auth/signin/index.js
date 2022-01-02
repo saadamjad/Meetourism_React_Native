@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
@@ -22,21 +23,20 @@ import Toast from '../../../components/toastmessage';
 import AnimatedLoader from '../../../components/loader';
 import OneSignal from 'react-native-onesignal';
 
-// import {
-//   LoginManager,
-//   Settings,
-//   AccessToken,
-//   AuthenticationToken,
-//   LoginButton,
-//   Profile
-// } from 'react-native-fbsdk-next';
+import {
+  LoginManager,
+  Settings,
+  AccessToken,
+  AuthenticationToken,
+  LoginButton,
+  Profile,
+} from 'react-native-fbsdk-next';
 import {FastImageComponent} from '../../../components/fastimage';
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-// GoogleSignin.configure()
 GoogleSignin.configure({
   // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
 
@@ -58,8 +58,7 @@ GoogleSignin.configure({
   // iosClientId: '631241702922-pqn95r82fmfuthu5btrus4ufgfa1naur.apps.googleusercontent.com', // [iOS] optional, if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
 });
 
-import Geolocation from '@react-native-community/geolocation';
-import {initReactI18next} from 'react-i18next';
+// import Geolocation from '@react-native-community/geolocation';
 
 const App = (props) => {
   // const { t, i18n } = useTranslation()
@@ -69,6 +68,7 @@ const App = (props) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
+      console.log('=======', {userInfo});
       setLoader(true);
 
       let _user = userInfo?.user;
@@ -91,25 +91,25 @@ const App = (props) => {
         true,
         false,
         false,
-      );;
-      setLoader(false);;
+      );
+      setLoader(false);
     } catch (error) {
       setLoader(false);
 
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log('userinfo===', error);
+        console.log('error in catch SIGN_IN_CANCELLED', error);
 
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log('userinfo===', error);
+        console.log('error in catch IN_PROGRESS', error);
 
         // operation (e.g. sign in) is in progress already
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log('userinfo===', error);
+        console.log('error in catch PLAY_SERVICES_NOT_AVAILABLE', error);
 
         // play services not available or outdated
       } else {
-        console.log('userinfo===', error);
+        console.log('error in catch', error);
 
         // some other error happened
       }
@@ -170,13 +170,13 @@ const App = (props) => {
         } else {
           const result = AccessToken.getCurrentAccessToken()
             .then((res1) => {
-              console.log('res', res1);;
-              setLoader(true);;
+              console.log('res', res1);
+              setLoader(true);
 
               _GraphApiGettingFacebookProfile(res1);
             })
             .catch((err) => {
-              console.log('error in getCurrentAccessToken', err);;
+              console.log('error in getCurrentAccessToken', err);
             });
         }
       }
@@ -202,12 +202,12 @@ const App = (props) => {
     // password: '',
     // confirmPassword: '',
     name: 'ok',
-    email: 'ok@gmail.com',
+    email: 'saad.amjad@retailo.co',
     password: '123456789',
     confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'ok@gmail.com',
+    email: 'saad.amjad@retailo.co',
     password: '123456789',
 
     // email: '',
@@ -217,7 +217,7 @@ const App = (props) => {
 
   useEffect(() => {
     // console.log("1")
-    // Settings.initializeSDK();
+    Settings.initializeSDK();
     _GotDeviceId();
 
     ref.current?.setAddressText('Some Text blue');
@@ -225,7 +225,7 @@ const App = (props) => {
     // _getCurrentLocation();
   }, []);
 
- const [state, setState] = useState({
+  const [state, setState] = useState({
     selectedIndex: 0,
     visible: false,
     userId: '',
@@ -384,7 +384,11 @@ const App = (props) => {
             key={ind}
             // style={{}}
             onPress={() => {
-              ind == 1 ? instagramLogin.show() : ind == 2 ? signIn() : signIn();
+              ind == 1
+                ? instagramLogin.show()
+                : ind == 2
+                ? fbSignin()
+                : signIn();
             }}>
             <FastImageComponent
               resizeMode="contain"
@@ -597,7 +601,7 @@ const App = (props) => {
 
             device_type: 'android',
             device_token: state.deviceID,
-          };;
+          };
 
           console.log('---data--- ', data);
           // console.log("---data--- " + Object(data));
@@ -608,8 +612,8 @@ const App = (props) => {
             false,
             false,
             true,
-          );;
-          setLoader(false);;
+          );
+          setLoader(false);
         });
       })
       .catch(() => {
@@ -658,17 +662,17 @@ const App = (props) => {
       </View>
       <InstagramLogin
         ref={(ref) => setInstagramLogin(ref)}
-        appId="523961712184118"
-        appSecret="faccaeb4a22f85b66af116ab98823bd6"
+        appId="332617358091458"
+        appSecret="72209974824902fb30ac20e77640fe1e"
         redirectUrl="https://kindlelover.com/"
-        // scopes={['public_profile']}
-        scopes={['user_profile', 'user_media']}
+        scopes={['public_profile']}
+        // scopes={['user_profile', 'user_media']}
         onLoginSuccess={(data) => {
-          // console.log('GOT THE TOKEN!!', data);
+          console.log('GOT THE TOKEN!!', data);
           // props.navigation.replace('drawer');
-          _SignIn();;
+          // _SignIn();
         }}
-        onLoginFailure={(data) => console.log(data)}
+        onLoginFailure={(data) => console.log("error",data)}
       />
       {/* <LoginButton
         publishPermissions={['publish_actions']}

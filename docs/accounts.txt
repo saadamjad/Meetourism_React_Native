@@ -2,6 +2,10 @@ fb
 Allsadeveloppeur@gmail.com
 Sarah@kikijuniorneo1234
 
+Instagram
+Allsadeveloppeur@gmail.com
+Sarah@kikijuniorneo1234
+
 Gmail
 Allsadeveloppeur@gmail.com
 Sarah@kikijuniorneo1234
@@ -38,5 +42,32 @@ for privacy policy
 email: allsa
 password: Sarah@kikijuniorneo4
 link. https://www.privacypolicygenerator.info/live.php?token=7b2Q8GAHXiuSeXcXVL5JbLx6rtSl1DlZ
+
+
+
+
+SHAA 1 KEY ANDROID FOR GMAIL LOGIN
+➜  android git:(main) ✗ keytool -list -v -keystore ~/.android/debug.keystore
+Enter keystore password:  
+Keystore type: PKCS12
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+Alias name: androiddebugkey
+Creation date: Nov 24, 2021
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 1
+Valid from: Wed Nov 24 18:44:16 PKT 2021 until: Fri Nov 17 18:44:16 PKT 2051
+Certificate fingerprints:
+         SHA1: 20:3B:71:90:74:F7:81:EC:3A:B2:2E:6A:9E:E4:0D:44:61:CE:55:8B
+         SHA256: 27:98:0B:7B:73:85:7E:63:1C:82:58:85:F2:F7:46:D6:D0:9A:D2:89:84:50:0E:7B:18:04:05:CF:B1:9D:FA:C8
+Signature algorithm name: SHA1withRSA (weak)
+Subject Public Key Algorithm: 2048-bit RSA key (1)
+Version: {10}
 
 

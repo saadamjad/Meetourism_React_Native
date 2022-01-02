@@ -480,6 +480,33 @@ class Actions {
         });
     };
   };
+  static GettAllOrders = (token) => {
+    return async (dispatch) => {
+      dispatch({ type: actionTypes.STARTLOADER });
+      return Get( `orders`, token)
+        .then((res) => {
+          if (res.status_type === 'success') {
+            let response = res?.data;
+            console.log('response GettAllOrders', response);
+            return response
+            // dispatch({type: actionTypes.GETORDERSUCCESS, payload: response});
+          } else {
+            console.log('ELSE in GetAllCrushes', res);
+
+            return response
+            // dispatch({ type: actionTypes.STOPLOADER, payload: [] });
+
+          }
+        })
+        .catch((err) => {
+          dispatch({ type: actionTypes.STOPLOADER });
+
+          let errResponse = err?.response?.data;
+          let type = 'GettAllOrders';
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+        });
+    };
+  };
   static ApplyFilter = (data, token, navigation) => {
     console.log('offers?', data);
     return async (dispatch) => {

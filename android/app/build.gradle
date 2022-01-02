@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-// apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+// apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
@@ -39,7 +40,7 @@ import com.android.build.OutputFile
  *   // bundleInFreeDebug: true,
  *   // bundleInPaidRelease: true,
  *   // bundleInBeta: true,
- *
+
  *   // whether to disable dev mode in custom build variants (by default only disabled in release)
  *   // for example: to disable dev mode in the staging build type (if configured)
  *   devDisabledInStaging: true,
@@ -196,8 +197,10 @@ android {
 dependencies {
    // For animated GIF support
   implementation 'com.facebook.fresco:animated-gif:2.0.0'
+   implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
-    //  implementation project(':react-native-fbsdk-next')
+     implementation project(':react-native-fbsdk-next')
+     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
      
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     // implementation project(':react-native-community-geolocation')

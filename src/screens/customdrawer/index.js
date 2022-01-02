@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,11 +7,11 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { connect } from 'react-redux';
-import { FastImageComponent } from '../../components/fastimage';
-import { Actions } from '../../redux/actions/index';
-// import { LoginManager, LoginButton } from "react-native-fbsdk-next";
+import {ScrollView} from 'react-native-gesture-handler';
+import {connect} from 'react-redux';
+import {FastImageComponent} from '../../components/fastimage';
+import {Actions} from '../../redux/actions/index';
+import {LoginManager, LoginButton} from 'react-native-fbsdk-next';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -18,13 +19,15 @@ import {
 } from '@react-native-google-signin/google-signin';
 const DrawerContent = (props) => {
   const [state, setState] = useState({
-    userData: props.userData
-  })
+    userData: props.userData,
+  });
   // const profileImage = props.userData ? props?.userData?.images[0]?.image_path : null;
   let array;
-  var checkUrl = typeof state.userData?.profile_url === 'string' && state?.userData?.profile_url?.search('https://dev.meetourism.com')
-  var image1WithUrl = `https://dev.meetourism.com/storage/${state.userData?.profile_url}`
-  checkUrl == -1 ? true : false
+  var checkUrl =
+    typeof state.userData?.profile_url === 'string' &&
+    state?.userData?.profile_url?.search('https://dev.meetourism.com');
+  var image1WithUrl = `https://dev.meetourism.com/storage/${state.userData?.profile_url}`;
+  checkUrl == -1 ? true : false;
   // console.log("source", checkUrl)
 
   const signOut = async () => {
@@ -33,27 +36,24 @@ const DrawerContent = (props) => {
       await GoogleSignin.signOut();
       // this.setState({ user: null }); // Remember to remove the user from your app's state as well
     } catch (error) {
-      console.error("error", error);
+      console.error('error', error);
     }
   };
   const FacebookLogout = async () => {
     <LoginButton
-      onLoginFinished={
-        (error, result) => {
-          if (error) {
-            console.log("login has error: " + result.error);
-          } else if (result.isCancelled) {
-            console.log("login is cancelled.");
-          } else {
-            AccessToken.getCurrentAccessToken().then(
-              (data) => {
-                console.log(data.accessToken.toString())
-              }
-            )
-          }
+      onLoginFinished={(error, result) => {
+        if (error) {
+          console.log('login has error: ' + result.error);
+        } else if (result.isCancelled) {
+          console.log('login is cancelled.');
+        } else {
+          AccessToken.getCurrentAccessToken().then((data) => {
+            console.log(data.accessToken.toString());
+          });
         }
-      }
-      onLogoutFinished={() => console.log("logout.")} />
+      }}
+      onLogoutFinished={() => console.log('logout.')}
+    />;
   };
   return (
     <View
@@ -99,15 +99,21 @@ const DrawerContent = (props) => {
                 overflow: 'hidden',
                 borderColor: '#D47FA6',
               }}>
-
               <FastImageComponent
-                source={state.userData?.profile_url
-                  ? { uri: checkUrl ? image1WithUrl : state.userData?.profile_url }
-                  : require('../../assets/icons/row.png')}
-                style={{ height: '100%', width: '100%' }}
-                resizeMode="cover" />
+                source={
+                  state.userData?.profile_url
+                    ? {
+                        uri: checkUrl
+                          ? image1WithUrl
+                          : state.userData?.profile_url,
+                      }
+                    : require('../../assets/icons/row.png')
+                }
+                style={{height: '100%', width: '100%'}}
+                resizeMode="cover"
+              />
             </TouchableOpacity>
-            <View style={{ flex: 1, borderWidth: 0, alignItems: 'flex-end' }}>
+            <View style={{flex: 1, borderWidth: 0, alignItems: 'flex-end'}}>
               <TouchableOpacity
                 style={{
                   width: 70,
@@ -118,8 +124,9 @@ const DrawerContent = (props) => {
                 onPress={() => props.navigation.closeDrawer()}>
                 <FastImageComponent
                   source={require('../../assets/icons/drawer.png')}
-                  style={{ height: 30, width: 50 }}
-                  resizeMode="contain" />
+                  style={{height: 30, width: 50}}
+                  resizeMode="contain"
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -128,7 +135,7 @@ const DrawerContent = (props) => {
               paddingLeft: 40,
               marginVertical: 5,
             }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
+            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
               {' '}
               {props.userData?.first_name + ' ' + props.userData?.last_name}
             </Text>
@@ -137,14 +144,14 @@ const DrawerContent = (props) => {
             style={{
               paddingLeft: 40,
             }}>
-            <Text style={{ color: 'white', fontSize: 12 }}>
+            <Text style={{color: 'white', fontSize: 12}}>
               {' '}
               @{props.userData?.username}{' '}
             </Text>
           </View>
         </ImageBackground>
       </View>
-      <View style={{ flex: 0.76, paddingVertical: 3 }}>
+      <View style={{flex: 0.76, paddingVertical: 3}}>
         <ScrollView>
           {
             (array = [
@@ -168,13 +175,13 @@ const DrawerContent = (props) => {
                 // icon: require('../assets/icons/70.png'),
                 icon: require('../../assets/icons/userss.png'),
               },
-              // {
-              //   title: 'Orders',
-              //   name: 'userorders',
-              //   type: 'Entypo',
-              //   // icon: require('../assets/icons/70.png'),
-              //   icon: require('../../assets/icons/userss.png'),
-              // },
+              {
+                title: 'Orders',
+                name: 'userorders',
+                type: 'Entypo',
+                // icon: require('../assets/icons/70.png'),
+                icon: require('../../assets/icons/userss.png'),
+              },
               // {
               //   title: 'Events ',
               //   name: 'Calender',
@@ -246,9 +253,11 @@ const DrawerContent = (props) => {
                 onPress={() => {
                   if (val.name == 'Auth') {
                     props.Logout(props.navigation);
-                    props.socialLogin ? signOut() : props.facebook ?
-                      null : null
-
+                    props.socialLogin
+                      ? signOut()
+                      : props.facebook
+                      ? FacebookLogout()
+                      : null;
                   } else {
                     val.name && props.navigation.navigate(val.name);
                   }
@@ -268,7 +277,7 @@ const DrawerContent = (props) => {
                 }}>
                 <FastImageComponent
                   source={val.icon}
-                  style={{ height: 15, width: 15, marginRight: 15 }}
+                  style={{height: 15, width: 15, marginRight: 15}}
                   resizeMode="contain"
                 />
 
@@ -296,7 +305,6 @@ const mapStateToProp = (state) => ({
   image: state.reducers.images_Interests,
   socialLogin: state.reducers.socialLogin,
   facebook: state.reducers.facebook,
-
 });
 
 const mapDispatchToProps = {

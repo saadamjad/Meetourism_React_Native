@@ -16,6 +16,7 @@ import java.util.List;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.facebook.react.bridge.JSIModulePackage; // <- add
 import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // import android.os.Bundle;
 
 public class MainApplication extends Application implements ReactApplication {
