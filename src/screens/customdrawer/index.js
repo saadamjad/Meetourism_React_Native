@@ -155,12 +155,6 @@ const DrawerContent = (props) => {
         <ScrollView>
           {
             (array = [
-              // {
-              //   title: 'Admin screens',
-              //   name: 'adminscreens',
-              //   // icon: require('../assets/icons/64.png'),
-              //   icon: require('../../assets/icons/singleuser.png'),
-              // },
               {
                 title: 'Home',
                 name: 'Home',
@@ -221,14 +215,22 @@ const DrawerContent = (props) => {
               },
               {
                 title: 'Contact Us',
-                // name: 'Home',
+                name: 'ContactUs',
                 // icon: require('../assets/icons/64.png'),
                 icon: require('../../assets/icons/singleuser.png'),
               },
 
               {
                 title: 'About us ',
-                // name: 'visitwebsite',
+                name: 'aboutus',
+
+                type: 'FontAwesome',
+                // icon: require('../assets/icons/67.png'),
+                icon: require('../../assets/icons/info.png'),
+              },
+              {
+                title: 'Privacy Policy',
+                name: 'Privacypolicy',
 
                 type: 'FontAwesome',
                 // icon: require('../assets/icons/67.png'),

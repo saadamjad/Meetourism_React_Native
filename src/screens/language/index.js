@@ -23,8 +23,7 @@ const App = (props) => {
 
   }
   const getLanguage = (language) => {
-    return language === 0 ? (i18n.changeLanguage('en')) : (i18n.changeLanguage('ar'))
-
+    return language === 0 ? (i18n.changeLanguage('en')) : language === 1? (i18n.changeLanguage('fe')):language === 2? (i18n.changeLanguage('de')) : (i18n.changeLanguage('ar'));
   }
   return (
     <View
@@ -39,7 +38,7 @@ const App = (props) => {
         isVisibleIcon={true}
         navigation={props.navigation}
         //   drawerIcon={true}
-        // text={t('Langauges')}
+        text={t('Langauges')}
         textColor={'white'}
       />
       <View style={{ flex: 1 }}>

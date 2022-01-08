@@ -369,7 +369,7 @@ const App = (props) => {
     return (
       <View style={{flexDirection: 'row', marginTop: 20, borderWidth: 0}}>
         {[
-          require('../../../assets/images/gmail.png'),
+          // require('../../../assets/images/gmail.png'),
           // require('../../../assets/images/instagram.png'),
           require('../../../assets/images/facebook.png'),
         ].map((val, ind) => (
@@ -384,9 +384,10 @@ const App = (props) => {
             key={ind}
             // style={{}}
             onPress={() => {
-              ind == 2
-                ? fbSignin()
-                : signIn();
+              fbSignin();
+              // ind == 0
+              //   ? fbSignin()
+              //   : signIn();
               // ind == 1
               //   ? instagramLogin.show()
               //   : ind == 2
@@ -397,7 +398,6 @@ const App = (props) => {
               resizeMode="contain"
               source={val}
               style={{height: 30, width: 30}}
-              resizeMode="contain"
               key={ind}
             />
           </TouchableOpacity>
@@ -675,7 +675,7 @@ const App = (props) => {
           // props.navigation.replace('drawer');
           // _SignIn();
         }}
-        onLoginFailure={(data) => console.log("error",data)}
+        onLoginFailure={(data) => console.log('error', data)}
       />
       {/* <LoginButton
         publishPermissions={['publish_actions']}

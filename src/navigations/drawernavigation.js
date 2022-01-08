@@ -13,6 +13,9 @@ import Calender from '../screens/calendar';
 import Search from '../screens/search';
 import { theme } from '../constants/theme';
 import Langauge from '../screens/language';
+import Aboutus from '../aboutus';
+import ContactUs from '../contactus';
+import Privacypolicy from '../privacypolicy';
 
 // console.log('App====', Homes);
 const Drawer = createDrawerNavigator();
@@ -33,6 +36,11 @@ function MyDrawer(props) {
         options={{ headerShown: false, drawerLabel: false }}
         name="profilestack"
         component={ProfileStack}
+      />
+      <Drawer.Screen
+        options={{ headerShown: false, drawerLabel: false }}
+        name="Privacypolicy"
+        component={Privacypolicy}
       />
 
       {/* <Stack.Screen
@@ -62,6 +70,16 @@ function MyDrawer(props) {
         options={{ headerShown: false, drawerLabel: false }}
         name="search"
         component={Search}
+      />
+      <Drawer.Screen
+        options={{ headerShown: false, drawerLabel: false }}
+        name="aboutus"
+        component={Aboutus}
+      />
+      <Drawer.Screen
+        options={{ headerShown: false, drawerLabel: false }}
+        name="ContactUs"
+        component={ContactUs}
       />
       {/* <Drawer.Screen
         options={{headerShown: false, drawerLabel: false}}
