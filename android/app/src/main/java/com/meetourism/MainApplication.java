@@ -14,8 +14,8 @@ import com.reactnativecommunity.geolocation.GeolocationPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.dylanvann.fastimage.FastImageViewPackage;
-import com.facebook.react.bridge.JSIModulePackage; // <- add
-import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
+// import com.facebook.react.bridge.JSIModulePackage; // <- add
+// import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // import android.os.Bundle;
 
@@ -26,7 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
-    @Override protected JSIModulePackage getJSIModulePackage() { return new ReanimatedJSIModulePackage(); }
+    // @Override protected JSIModulePackage getJSIModulePackage() { return new ReanimatedJSIModulePackage(); }
 
     @Override
     protected List<ReactPackage> getPackages() {

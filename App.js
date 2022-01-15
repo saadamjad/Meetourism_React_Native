@@ -8,11 +8,9 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './src/redux/store';
 import {Provider} from 'react-redux';
 // import { translate } from 'react-i18next';
-import {withTranslation} from 'react-i18next';
 import OneSignal from 'react-native-onesignal';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StatusBar} from 'react-native';
-import Payment from './payment'
 // import './src/I18n'
 
 const App = (props) => {
