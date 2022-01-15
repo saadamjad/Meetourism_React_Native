@@ -197,21 +197,21 @@ const App = (props) => {
   };
 
   const [signupValues, setSignvalues] = useState({
-    // name: '',
-    // email: '',
-    // password: '',
-    // confirmPassword: '',
-    name: 'ok',
-    email: 'saad.amjad@retailo.co',
-    password: '123456789',
-    confirmPassword: '123456789',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    // name: 'ok',
+    // email: 'saad.amjad@retailo.co',
+    // password: '123456789',
+    // confirmPassword: '123456789',
   });
   const [signInValues, setSignINvalues] = useState({
-    email: 'saad.amjad@retailo.co',
-    password: '123456789',
+    // email: 'saad.amjad@retailo.co',
+    // password: '123456789',
 
-    // email: '',
-    // password: '',
+    email: '',
+    password: '',
   });
   const ref = useRef();
 
