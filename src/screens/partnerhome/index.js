@@ -86,10 +86,7 @@ const App = (props) => {
     setUserData({...userData, data});
   }, [props.userData]);
   const [allStatus, setStatus] = useState([
-    // {
-    //   name: 'YOU',
-    //   image: require('../../assets/icons/row.png'),
-    // },
+  
     {
       name: 'My offers ',
       navigation: 'SelectOffer',
@@ -210,13 +207,15 @@ const App = (props) => {
                           justifyContent: 'center',
                         }}
                         onPress={() => {
-                          // if (item.name === 'Logout') {
-                          //   props.Logout(props.navigation);
-                          //   props.socialLogin ? signOut() : props.facebook ?
-                          //     FacebookLogout() : null
-                          // }
-                          item.navigation &&
+                          if (item.name == 'Logout') {
+                            props.Logout(props.navigation);
+                            props.socialLogin ? signOut() : props.facebook ?
+                              FacebookLogout() : null
+                          }
+                          else {
+                            item.navigation &&
                             props.navigation.navigate(item.navigation);
+                          }
                         }}>
                         {i == 0 ? (
                           <FastImageComponent

@@ -931,10 +931,11 @@ class Actions {
     };
   };
   static ImageUploading = (param, token) => {
+    let filterPath = param?.assets[0];
 
 
     let formData = new FormData();
-    formData.append('image', { ...param, name: param.fileName });
+    formData.append('image', { ...filterPath, name: filterPath.fileName });
     formData.append('image_type', 'user');
 
     return async (dispatch) => {
@@ -967,10 +968,10 @@ class Actions {
     };
   };
   static ImageUploadingGeneral = (param, token) => {
-
+    let filterPath = param?.assets[0];
 
     let formData = new FormData();
-    formData.append('image', { ...param, name: param.fileName });
+    formData.append('image', {...filterPath, name: filterPath.fileName});
     formData.append('image_type', 'user');
 
     return async (dispatch) => {
@@ -996,9 +997,11 @@ class Actions {
           let errResponse = err?.response;
           let type = 'ImageUploading';
 
-          console.log('errResponse', errResponse);
-          console.log('errrrr', err);
-          // dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          // console.log('errResponse', errResponse);
+          // console.log('errrrr', err);
+          dispatch(this.ErrorsHandlingFucntion(errResponse, type));
+          return 'Image Not uploading due to error';
+
         });
     };
   };

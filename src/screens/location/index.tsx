@@ -1,5 +1,5 @@
 import React, {Component, useState, useEffect, useRef} from 'react';
-import {View, Image, TouchableOpacity, Text} from 'react-native';
+import {View, Image, TouchableOpacity, Text,ScrollView} from 'react-native';
 // import Icon from 'react-native-vector-icons/Feather';
 // import Style from './style';
 import CustomView from '../../components/customView';
@@ -8,6 +8,7 @@ import LongHeader from '../../components/header/longheader';
 import {SwipeablePanel} from 'rn-swipeable-panel';
 import MapComponent from '../../components/googlemap';
 import {FastImageComponent} from '../../components/fastimage';
+// import { ScrollView } from 'react-native-gesture-handler';
 
 const Location = (props) => {
   const data = props?.route?.params?.data;
@@ -67,20 +68,24 @@ const Location = (props) => {
   });
 
   const openPanel = () => {
+    console.log("runingggg")
     setIsPanelActive(true);
   };
 
   const closePanel = () => {
-    setIsPanelActive(false);
+    // setIsPanelActive(false);
+    setIsPanelActive(true);
+
   };
 
   const _hello = () => {
-    return (
+    return ( <ScrollView>
+
       <View
         style={{
           height: '100%',
           width: '100%',
-          // backgroundColor: 'red',
+          // backgroundColor: 'white',
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50,
           paddingVertical: 20,
@@ -161,19 +166,54 @@ const Location = (props) => {
             </View>
           ))}
       </View>
+      </ScrollView>
     );
   };
+  const MapComponent2=()=>{
+    return  <View
+    style={{flex:0.4}}
+    >
+
+  <SwipeablePanel
+    fullWidth
+    noBackgroundOpacity={true}
+    isActive={  true}
+    noBar ={true}
+    onlySmall={true}
+    onClose={() =>  {}}
+    style={{
+      backgroundColor: theme.primaryColor,
+      height: '80%',
+    }}>
+    <_hello />
+  </SwipeablePanel>
+      </View>
+  }
+
+  const GoogleMapComponent=()=>{
+    return   <View
+    style={{width:'100%',flex:1,overflow:'hidden',position:'absolute',height:'100%'}}
+    >
+    <MapComponent
+      height={'100%'}
+      width={'100%'}
+      // latitude={24.8607} longitude={67.0011}
+      
+      latitude={userLatitude}
+      username={username}
+      description={description}
+      longitude={userLongitute}
+      />
+    
+    
+    
+    
+      </View>
+  }
 
   return (
-    <CustomView bg={'transparent'} scroll>
-      <MapComponent
-        height={'100%'}
-        // latitude={24.8607} longitude={67.0011}
-        latitude={userLatitude}
-        username={username}
-        description={description}
-        longitude={userLongitute}
-      />
+    <CustomView bg={'transparent'} >
+      
       <LongHeader
         navigation={props.navigation}
         leftArrow={true}
@@ -181,18 +221,16 @@ const Location = (props) => {
         backgroundColor={'transparent'}
         headerText="Location"
       />
-      <SwipeablePanel
-        fullWidth
-        isActive={isPanelActive}
-        // openLarge={true}
-        closeOnTouchOutside={true}
-        onClose={() => setIsPanelActive(false)}
-        style={{
-          backgroundColor: theme.primaryColor,
-          height: '100%',
-        }}>
-        <_hello />
-      </SwipeablePanel>
+      {GoogleMapComponent()}
+    <View style={{flex:1,justifyContent:'flex-end'}} >
+
+   <View style={{flex:0.5,borderTopLeftRadius:40,borderTopRightRadius:40,backgroundColor:theme.primaryColor}} >
+         
+
+    <_hello />
+    </View>
+
+       </View> 
     </CustomView>
   );
 };

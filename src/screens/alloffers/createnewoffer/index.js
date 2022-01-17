@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,23 +7,23 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import {ScrollView, TextInput} from 'react-native-gesture-handler';
 import GlobalButton from '../../../components/buttons/generalbutton';
 // import CustomView from '../../../components/customView';
 // import App from '../../../../components/header';
 import Header from '../../../components/header';
 
-import { theme } from '../../../constants/theme';
-import { Actions } from '../../../redux/actions/index';
+import {theme} from '../../../constants/theme';
+import {Actions} from '../../../redux/actions/index';
 import ImagePicker from '../../../globalfunctions/imagepicker';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 // import { ProfileStack } from '../../../navigations/stacknavigation';
 import Toast from '../../../components/toastmessage';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import axios from 'axios';
 import AnimatedLoader from '../../../components/loader';
-import { FastImageComponent } from '../../../components/fastimage';
+import {FastImageComponent} from '../../../components/fastimage';
 
 // import { error } from 'react-native-gifted-chat/lib/utils';
 function CreateOffer(props) {
@@ -47,21 +48,20 @@ function CreateOffer(props) {
       state.price !== ''
     ) {
       // props.AddOffers(data, props.navigation);
-      _ImageUploadApiCall();
+      _OfferCreatedApiCall();
     } else {
       Toast('Error', 'PLease Fill All Required Information', 'error');
     }
   };
 
-  const _ImageUploadApiCall = async () => {
-    setState({ ...state, loader: true });
+  const _OfferCreatedApiCall = async () => {
+    setState({...state, loader: true});
     const base_url = 'https://dev.meetourism.com/api/v1/offers';
-    console.log('res.fileName', state.imageData);
     let path = state?.imageData?.uri;
 
     let formData = new FormData();
 
-    formData.append('image', { ...state.imageData, name: state.returnUrl });
+    formData.append('image', {...state.imageData, name: state.returnUrl});
     formData.append('title', state.title);
     formData.append('description', state.offerDescription);
     formData.append('price', Number(state.price));
@@ -88,7 +88,7 @@ function CreateOffer(props) {
       })
       .catch((err) => {
         console.log('Error', err?.response?.data);
-        setState({ ...state, loader: false });
+        setState({...state, loader: false});
       });
   };
 
@@ -106,14 +106,12 @@ function CreateOffer(props) {
       } else if (res.error) {
         console.log('Camera Error: ');
       } else {
-        // setState({ ...state, imageData: res });
-        let returnUrl = await props.ImageUploadingGeneral(res)
-        console.log("return url", returnUrl)
+        let returnUrl = await props.ImageUploadingGeneral(res);
         setState({
-          ...state, imageData: res,
+          ...state,
+          imageData: res?.assets[0],
           returnUrl: returnUrl,
-        })
-
+        });
       }
     });
     return value;
@@ -122,7 +120,7 @@ function CreateOffer(props) {
     return (
       <ImageBackground
         source={require('../../../assets/images/statusbg.png')}
-        style={{ height: '100%', width: '100%' }}>
+        style={{height: '100%', width: '100%'}}>
         <View
           style={{
             flex: 1,
@@ -164,7 +162,8 @@ function CreateOffer(props) {
             <View
               style={{
                 height: 20,
-              }}></View>
+              }}
+            />
             <GlobalButton
               buttonText="Create new offer"
               height={40}
@@ -178,7 +177,7 @@ function CreateOffer(props) {
                   price: '',
                   imageData: {},
                   loader: false,
-                  secondComponentCall: false,
+                  // secondComponentCall: false,
                   loaderMessage: 'Uploading...',
                 })
               }
@@ -186,7 +185,8 @@ function CreateOffer(props) {
             <View
               style={{
                 height: 20,
-              }}></View>
+              }}
+            />
             <GlobalButton
               buttonText="Dashboard"
               height={40}
@@ -208,10 +208,10 @@ function CreateOffer(props) {
           status={state.loader}
           loaderMessage={state.loaderMessage}
         />
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
           <ImageBackground
             source={require('../../../assets/images/statusbg.png')}
-            style={{ height: '100%', width: '100%' }}>
+            style={{height: '100%', width: '100%'}}>
             <View
               style={{
                 backgroundColor: 'rgba(00,00,00, 0.7)',
@@ -225,6 +225,7 @@ function CreateOffer(props) {
                 navigation={props.navigation}
               />
               <View
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   width: '90%',
                   // height: '80%',
@@ -253,27 +254,19 @@ function CreateOffer(props) {
                     borderRadius: 20,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
                   }}>
                   <FastImageComponent
-                    source={{ uri: state?.imageData?.uri }}
-                    resizeMode={"cover"}
+                    source={{uri: state.returnUrl}}
+                    resizeMode={'cover'}
                     style={{
                       height: '100%',
                       width: '100%',
                       alignItems: 'center',
                       justifyContent: 'center',
-                    }} />
-                  {/* <Text
-                      style={{
-                        fontSize: 30,
-                        fontWeight: '700',
-                        color: theme.textColor.lightWhiteColor,
-                        opacity: 0.4,
-                      }}>
-                      Image
-                    </Text> */}
-                  {/* </ImageBackground> */}
+                    }}
+                  />
+                 
                 </View>
                 <View
                   style={{
@@ -300,8 +293,8 @@ function CreateOffer(props) {
                   borderWidth: 1,
                 }}></TouchableOpacity> */}
                 </View>
-                <View style={{ width: '80%' }}>
-                  <View style={{ width: '100%', height: 40, marginVertical: 10 }}>
+                <View style={{width: '80%'}}>
+                  <View style={{width: '100%', height: 40, marginVertical: 10}}>
                     <TextInput
                       style={{
                         width: '100%',
@@ -314,10 +307,10 @@ function CreateOffer(props) {
                       }}
                       placeholder="Title here"
                       placeholderTextColor="black"
-                      onChangeText={(text) => setState({ ...state, title: text })}
+                      onChangeText={(text) => setState({...state, title: text})}
                     />
                   </View>
-                  <View style={{ width: '100%', height: 40, marginVertical: 10 }}>
+                  <View style={{width: '100%', height: 40, marginVertical: 10}}>
                     <TextInput
                       style={{
                         width: '100%',
@@ -331,11 +324,11 @@ function CreateOffer(props) {
                       placeholder="Write Description Here"
                       placeholderTextColor="black"
                       onChangeText={(text) =>
-                        setState({ ...state, offerDescription: text })
+                        setState({...state, offerDescription: text})
                       }
                     />
                   </View>
-                  <View style={{ width: '60%', height: 40, marginVertical: 10 }}>
+                  <View style={{width: '60%', height: 40, marginVertical: 10}}>
                     <TextInput
                       style={{
                         width: '100%',
@@ -347,7 +340,7 @@ function CreateOffer(props) {
                         borderStyle: 'solid',
                       }}
                       placeholder="Enter Price here"
-                      onChangeText={(text) => setState({ ...state, price: text })}
+                      onChangeText={(text) => setState({...state, price: text})}
                       placeholderTextColor="black"
                     />
                   </View>

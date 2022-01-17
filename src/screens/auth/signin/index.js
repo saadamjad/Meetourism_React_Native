@@ -201,8 +201,8 @@ const App = (props) => {
     email: '',
     password: '',
     confirmPassword: '',
-    // name: 'ok',
-    // email: 'saad.amjad@retailo.co',
+    // name: 'm1',
+    // email: 'm1@retailo.co',
     // password: '123456789',
     // confirmPassword: '123456789',
   });
