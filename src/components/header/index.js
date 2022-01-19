@@ -97,7 +97,8 @@ const App = ({
         {filterIcon && (
           <TouchableOpacity
             style={{ paddingRight: 25, borderWidth: 0 }}
-            onPress={() => OpenFilter()}>
+            onPress={() => OpenFilter()}
+            >
             <Icon
               type="AntDesign"
               name="filter"

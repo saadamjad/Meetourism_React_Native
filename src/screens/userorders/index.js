@@ -165,7 +165,7 @@ const Crushes = (props) => {
           headerText="Orders"
         />
         {state.allOrders &&
-          state.allOrders.map((val, i) => {
+          state.allOrders.reverse().map((val, i) => {
             // console.log{val}
             let temp = '';
             return (

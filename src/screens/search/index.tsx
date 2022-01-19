@@ -8,6 +8,8 @@ import App from '../../components/header';
 import {theme} from '../../constants/theme';
 import Overlay from '../../components/overlays';
 import AnimatedLoader from '../../components/loader';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 import {connect} from 'react-redux';
 
@@ -109,18 +111,15 @@ function Search(props) {
             {state.search.length >= 1 ? (
               <TouchableOpacity
                 onPress={() => setState({...state, search: ''})}>
-                <Icon
-                  name="circle-with-cross"
-                  type="Entypo"
-                  style={{fontSize: 24, color: 'black'}}
-                />
+                            <Text> Clear</Text>
+
               </TouchableOpacity>
             ) : (
-              <Icon
-                name="search1"
-                type="AntDesign"
-                style={{fontSize: 18, color: 'black'}}
-              />
+              <Ionicons
+              type="AntDesign"
+              name="search"
+              style={{ fontSize: 20, color: '#241332' }}
+            />
             )}
           </View>
         </View>

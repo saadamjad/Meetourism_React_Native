@@ -86,11 +86,11 @@ const App = (props) => {
             <TouchableOpacity
               style={{ paddingRight: 25, borderWidth: 0 }}
               onPress={() => props.OpenFilter()}>
-              {/* <Icon
+              <Ionicons
                 type="AntDesign"
                 name="filter"
                 style={{ fontSize: 20, color: '#241332' }}
-              /> */}
+              />
             </TouchableOpacity>
           )}
         </View>

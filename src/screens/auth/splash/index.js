@@ -31,8 +31,8 @@ const App = (props) => {
           props.navigation.replace('drawer');
         }
       } else {
-        props.navigation.replace('signin');
-        // props.navigation.replace('splash');
+        // props.navigation.replace('signin');
+        props.navigation.replace('splash');
       }
     }, 1200);
   }, []);

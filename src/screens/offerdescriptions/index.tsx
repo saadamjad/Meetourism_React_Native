@@ -49,7 +49,7 @@ function App(props) {
 
   useEffect(() => {
     stripeusage();
-  });
+  },[]);
   const stripeusage = async () => {
     stripe.setOptions({
       publishableKey: publishableKey,
@@ -90,7 +90,6 @@ function App(props) {
     }
   };
   const confirmOrder = async (_id) => {
-    // const { id }= state.offerDescription
     let data = {
       partner_id: state.offerDescription?.user?.id,
       order_type: 'delivery',

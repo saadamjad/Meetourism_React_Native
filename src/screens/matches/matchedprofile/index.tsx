@@ -26,7 +26,7 @@ const Profile = (props) => {
   const token = props.token;
   const data = props?.route?.params?.data;
   const image = props?.route?.params?.image;
-  console.log('image', image);
+  console.log('image===', image);
   const [state, setState] = useState({
     follow: false,
     loader: true,
@@ -57,10 +57,10 @@ const Profile = (props) => {
   };
   const _Gallery = () => {
     // return <Gallery />;
-    // console.log('dddd', state.data.images?.length);
-    props.navigation.navigate('Gallery', {
-      images: state.data.images,
-    });
+    console.log('dddd', state.data?.images);
+    // props.navigation.navigate('Gallery', {
+    //   images: state.data.images,
+    // });
   };
   useEffect(() => {
     let id = data?.id;
@@ -92,7 +92,9 @@ const Profile = (props) => {
             isTransparent={true}
             filterIcon={true}
             filterColor={'white'}
-            OpenFilter={() => props.navigation.navigate('Gallery')}
+            OpenFilter={() => props.navigation.navigate('Gallery',{
+              images:state.data?.images
+            })}
 
             // searchIcon={true}
           />

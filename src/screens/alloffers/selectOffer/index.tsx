@@ -22,6 +22,10 @@ import AnimatedLoader from '../../../components/loader';
 import moment from 'moment';
 import axios from 'axios';
 import {FastImageComponent} from '../../../components/fastimage';
+import stripe from 'tipsi-stripe';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+
 function SelectOffer(props) {
   // const profileImage = props.userData
   //   ? props?.userData?.images[0]?.image_path
@@ -95,6 +99,9 @@ function SelectOffer(props) {
       });
     }
   };
+
+ 
+
   const ApplyFilter = async (value, index) => {
     setState({...state, loader: true, loaderMessage: 'searching'});
 
@@ -188,6 +195,79 @@ function SelectOffer(props) {
         console.log('Error', err?.response?.data);
       });
   };
+
+  let publishableKey =
+  'pk_test_51JuwLLFZA0WXAOtjmYDqmu2ViVArHW7xNUjbhsB1x7ffGhdOPoAdNC9BsYFpEdq0fLJ2mRBeB36GpjlGWvusiNkS00Ku2zpKAS';
+  let scretKey =
+  'sk_test_51JuwLLFZA0WXAOtjb2zR1RHeT3nNiFDxcwkvMQE502KWOL8UknCQPPcrnv5euCfm5mst9verejrtGK2VZxlwaWzH0062oWbCcw';
+  
+  const PaymentForm = async () => {
+    let {username, city, address, full_name, country_id} = props.userData;
+    const options = {
+      requiredBillingAddressFields: 'full',
+      prefilledInformation: {
+        billingAddress: {
+          name: full_name,
+          line1: address,
+          line2: '3',
+          city: city,
+          state: city,
+          country: 'country_id',
+          postalCode: '31217',
+        },
+      },
+    };
+
+    try {
+      setState({...state, paymentLoader: true});
+      const paymentApiResponse = await stripe.paymentRequestWithCardForm(
+        options,
+      );
+      console.log('pay', paymentApiResponse);
+      const {id} = paymentApiResponse;
+      if (paymentApiResponse) {
+        confirmOrder(id);
+      }
+    } catch (err) {
+      console.log({err});
+      setState({...state, paymentLoader: false});
+    }
+  };
+  const confirmOrder = async (_id) => {
+    console.log("======testing",state?.allOffers[state.index].user?.id)
+    let data = {
+      partner_id: state?.allOffers[state.index].user?.id,
+      // partner_id: state.offerDescription?.user?.id,
+      order_type: 'delivery',
+      payment_type: 'cash',
+      items: [
+        {
+          id: state?.allOffers[state.index]?.id, //item id
+          // id: state.offerDescription?.id, //item id
+          quantity: 1,
+        },
+      ],
+    };
+    console.log({data});
+    try {
+      await props.CreateOrder(data, token, props.navigation);
+      setState({...state, paymentLoader: false});
+    } catch (err) {
+      console.log({err});
+      setState({...state, paymentLoader: false});
+    }
+  };
+
+  useEffect(() => {
+    stripeusage();
+  },[]);
+  const stripeusage = async () => {
+    stripe.setOptions({
+      publishableKey: publishableKey,
+      androidPayMode: 'test', // Android only
+    });
+  };
+  
   return state.showOfferDetails ? (
     <LatestOffer
       loader={state?.loader}
@@ -196,7 +276,8 @@ function SelectOffer(props) {
       props={{...props}}
       DeleteOffer={(data) => _DeleteOffer(data)}
       token={token}
-      SaveOrderData={(data) => props.SaveOrderData(data, props.navigation)}
+      // SaveOrderData={(data) => props.SaveOrderData(data, props.navigation)}
+      SaveOrderData={(data) => PaymentForm()}
       data={state?.allOffers[state.index]}
       _onPress={() => setState({...state, showOfferDetails: false})}
     />
@@ -204,7 +285,7 @@ function SelectOffer(props) {
     <>
       <Longheader
         headerText="Select Offers"
-        filterIcon
+        filterIcon={true}
         OpenFilter={() => setState({...state, showFilter: true})}
         alignItemsText="center"
         backgroundColor={theme.textColor.whiteColor}
@@ -429,7 +510,7 @@ function SelectOffer(props) {
                               justifyContent: 'center',
                               alignItems: 'flex-end',
                             }}>
-                            <Icon
+                            {/* <Ionicons
                               name={
                                 items.open
                                   ? 'arrow-circle-up'
@@ -437,7 +518,13 @@ function SelectOffer(props) {
                               }
                               type="MaterialIcons"
                               style={{fontSize: 30, color: 'black'}}
-                            />
+                            /> */}
+            <Ionicons name={
+                                items.open
+                                  ? 'arrow-up'
+                                  : 'arrow-down'
+                              } size={20} color={'#423050'} />
+
                           </View>
                         </TouchableOpacity>
                         {items.open ? (
@@ -586,6 +673,8 @@ const mapDispatchToProps = {
   ApplyFilter: Actions.ApplyFilter,
   DeleteOffer: Actions.DeleteOffer,
   SaveOrderData: Actions.SaveOrderData,
+  CreateOrder: Actions.CreateOrder,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectOffer);
