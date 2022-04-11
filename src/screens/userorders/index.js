@@ -10,8 +10,6 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-// import Icon from 'react-native-vector-icons/Feather';
-// import Style from './style';
 import {Button, Overlay} from 'react-native-elements';
 
 import CustomView from '../../components/customView';

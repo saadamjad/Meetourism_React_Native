@@ -43,10 +43,7 @@ const App = (props) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      {/* <Image
-        source={require('../../../assets/images/logo.png')}
-        style={{ resizeMode: 'contain', height: 150, width: 150 }}
-      /> */}
+   
       <FastImageComponent
         source={require('../../../assets/images/logo.png')}
         style={{ resizeMode: 'contain', height: 150, width: 150 }}

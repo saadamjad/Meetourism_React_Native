@@ -1,11 +1,11 @@
 import React, {Component, useState, useEffect, useRef} from 'react';
 import {View, Image, TouchableOpacity, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-// import Style from './style';
 import CustomView from '../../components/customView';
 import {theme} from '../../constants/theme';
-import Header from '../../components/header/longheader';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+
 import {FastImageComponent} from '../../components/fastimage';
 const Tutorial = (props) => {
   const [state, setState] = useState({selectedIndex: 0});
@@ -66,9 +66,8 @@ const Tutorial = (props) => {
             <Text style={{color: 'white', fontWeight: '300', fontSize: 15}}>
               GET STARTED
             </Text>
-            <Icon
+            <AntDesign
               name="arrowright"
-              type="AntDesign"
               style={{fontSize: 15, marginLeft: 10, color: 'white'}}
             />
           </TouchableOpacity>

@@ -205,9 +205,6 @@ const Location = (props) => {
       longitude={userLongitute}
       />
     
-    
-    
-    
       </View>
   }
 

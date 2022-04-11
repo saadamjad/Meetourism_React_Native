@@ -6,15 +6,10 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
-// import Icon from 'react-native-vector-icons/Feather';
-// import Style from './style';
 import CustomView from '../../components/customView';
 import { theme } from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
-// import {TextInput} from 'react-native-gesture-handler';
-// import Icon from 'react-native-vector-icons/Feather';
-// import DropDownPicker from 'react-native-dropdown-picker';
-// import Button from '../../components/buttons/generalbutton';
+
 import { FastImageComponent } from '../../components/fastimage';
 const Messages = (props) => {
   const [state, setState] = useState({

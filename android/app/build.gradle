@@ -215,7 +215,6 @@ dependencies {
    implementation 'androidx.core:core-ktx:1.6.0'
 implementation "androidx.appcompat:appcompat:1.0.2"
    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-//    implementation 'com.facebook.android:facebook-login:[8.1)'
     implementation project(':lottie-react-native')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion

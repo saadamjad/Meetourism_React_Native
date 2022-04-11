@@ -7,7 +7,6 @@ import {theme} from '../../constants/theme';
 import LongHeader from '../../components/header/longheader';
 import {TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
-import DropDownPicker from 'react-native-dropdown-picker';
 
 import {connect} from 'react-redux';
 
